@@ -5,6 +5,14 @@ comment c'est programmé. Format inspiré de
 [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions selon
 [SemVer](https://semver.org/lang/fr/).
 
+## [Non publié]
+
+### Corrigé
+
+- Export PDF : un échec passager de Chrome (constaté sur macOS) est rattrapé
+  par un second essai, et les messages techniques sans conséquence ne sont
+  plus affichés comme cause d'échec.
+
 ## [0.2.0] — 2026-10-08
 
 ### Ajouté
