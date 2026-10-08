@@ -1,0 +1,11 @@
+# EXEMPLE FICTIF — dossier saison d'un club imaginaire (fixture de la CI).
+version_schema: 1
+structure:
+  type: club
+  nom: Les Goélands (club fictif)
+  libelles:
+    groupe: équipe
+    encadrant: entraîneur
+preferences:
+  formats: [a4, telephone]
+  utilise_mca: false

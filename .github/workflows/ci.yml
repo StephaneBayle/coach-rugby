@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            plugin/package-lock.json
       - name: Dépendances
         run: npm run preparer
       - name: Manifestes du plugin et de la marketplace (validate --strict)
@@ -26,6 +29,10 @@ jobs:
           npm run valider
       - name: Tests
         run: npm test
+      - name: Références et exemples fictifs (schémas et cohérence)
+        run: |
+          node plugin/scripts/coach-rugby.mjs valider plugin/references
+          node plugin/scripts/coach-rugby.mjs valider plugin/exemples
 
   lint:
     name: Lint Markdown

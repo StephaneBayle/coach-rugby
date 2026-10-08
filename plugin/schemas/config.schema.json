@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:config",
+  "title": "Configuration du dossier saison (.coach-rugby.yaml)",
+  "type": "object",
+  "required": ["version_schema", "structure"],
+  "additionalProperties": false,
+  "properties": {
+    "version_schema": { "const": 1 },
+    "structure": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "$ref": "cr:communs#/$defs/typeStructure" },
+        "nom": { "type": "string", "description": "Nom de la structure ; reste sur le poste du coach." },
+        "libelles": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "groupe": { "enum": ["équipe", "groupe"] },
+            "encadrant": { "enum": ["éducateur", "entraîneur", "professeur", "coach"] }
+          }
+        }
+      }
+    },
+    "preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "formats": {
+          "type": "array",
+          "items": { "enum": ["a4", "telephone"] },
+          "uniqueItems": true
+        },
+        "utilise_mca": {
+          "type": "boolean",
+          "description": "Le coach utilise Mon Coach Assistant (FFR) : proposer les passerelles par copier-coller."
+        }
+      }
+    }
+  }
+}

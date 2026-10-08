@@ -11,3 +11,14 @@ comment c'est programmé. Format inspiré de
 
 - Socle du plugin : installation depuis la marketplace, premier accueil du
   coach (`/coach-rugby:coach`).
+- Dossier saison sur votre ordinateur (`~/Rugby-Saisons`) : vos équipes ou
+  groupes, leur saison et leur calendrier. Structures hors club prévues
+  (pôles, sections sportives, sport-études).
+- `/coach-rugby:saison` : phases de la saison (championnat, plateaux d'école
+  de rugby, rythme scolaire), calendrier des matchs, plateaux et tournois ;
+  reprise d'un calendrier copié depuis Mon Coach Assistant.
+- Le plugin sait où vous en êtes (phase, semaine, prochaine échéance) et vous
+  relance au bon moment : affûtage avant un derby, préparation de la trêve,
+  logistique d'un plateau.
+- Règles de jeu du moment selon la catégorie et le mois, d'après le Cahier
+  des écoles de rugby 2026-2027 de la FFR (à vérifier selon votre comité).

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:saison",
+  "title": "Saison d'une équipe (saison.yaml)",
+  "type": "object",
+  "required": ["saison", "mode", "debut", "fin", "phases"],
+  "additionalProperties": false,
+  "properties": {
+    "saison": { "$ref": "cr:communs#/$defs/saison" },
+    "mode": { "$ref": "cr:communs#/$defs/mode" },
+    "debut": { "$ref": "cr:communs#/$defs/date" },
+    "fin": { "$ref": "cr:communs#/$defs/date" },
+    "zone_vacances": {
+      "$ref": "cr:communs#/$defs/parametreDate",
+      "description": "Zone de vacances scolaires (A, B, C, Corse, outre-mer), paramètre daté."
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "debut", "fin"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "cr:communs#/$defs/phase" },
+          "libelle": { "type": "string" },
+          "debut": { "$ref": "cr:communs#/$defs/date" },
+          "fin": { "$ref": "cr:communs#/$defs/date" },
+          "objectifs": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "calendrier": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "date": { "$ref": "cr:communs#/$defs/date" },
+          "type": { "enum": ["match", "plateau", "tournoi", "stage", "vacances", "evenement", "competition-scolaire", "examen"] },
+          "importance": { "enum": ["normale", "haute", "derby"], "default": "normale" },
+          "domicile": { "type": "boolean" },
+          "adversaire": { "type": "string", "description": "Club ou structure adverse (jamais une personne)." },
+          "lieu": { "type": "string" },
+          "note": { "type": "string" },
+          "source": { "$ref": "cr:communs#/$defs/refSource" },
+          "statut": { "$ref": "cr:communs#/$defs/statut" }
+        }
+      }
+    }
+  }
+}
