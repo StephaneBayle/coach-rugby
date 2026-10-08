@@ -2,13 +2,13 @@
 
 Le projet avance par **lots**. Chaque lot se termine par une version publiée et
 un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans le
-[tableau de projet](https://github.com/users/StephaneBayle/projects) et les
+[tableau de projet](https://github.com/users/StephaneBayle/projects/16) et les
 [jalons](https://github.com/StephaneBayle/coach-rugby/milestones).
 
 | Lot | Version | Contenu | État |
 |---|---|---|---|
 | 1 | 0.1.0 | Socle et première séance de bout en bout : dossier saison, cadrage de la saison, conception de séance, bibliothèque de 24 exercices, schémas de terrain, fiches HTML/PDF (A4 et téléphone), relecteurs, garde RGPD, passerelles Mon Coach Assistant par copier-coller | publié le 2026-10-08 |
-| 2 | 0.2.0 | Planification (macrocycle, mésocycles, semaine type, affûtage), relances proactives complètes, playtests simulés | à venir |
+| 2 | 0.2.0 | Planification (macrocycle, mésocycles, semaine type, affûtage), relances proactives complètes, playtests simulés | en cours |
 | 3 | 0.3.0 | Effectif en codes, présences, composition, feuille de match, rotation du temps de jeu, préparation et débriefing de match, Excel | à venir |
 | 4 | 0.4.0 | Charge d'entraînement (RPE), préparation physique, prévention, rappel commotion et retour au jeu | à venir |
 | 5 | 0.5.0 | Communication (convocations, messages aux parents, comptes rendus) et accompagnement pédagogique | à venir |

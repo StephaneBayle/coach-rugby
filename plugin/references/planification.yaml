@@ -1,0 +1,71 @@
+# Repères de planification — coach-rugby.
+#
+# TOUT ce fichier est fait d'HYPOTHÈSES PÉDAGOGIQUES : des points de départ
+# raisonnables, à adapter par le coach, jamais des prescriptions. Aucune
+# valeur réglementaire ici (elles sont dans categories.yaml) ni de charge
+# chiffrée (lot 4). Explications : planification.md.
+version_schema: 1
+statut: hypothese
+sources: [bompa-haff-2009, ffr-formation-edr]
+
+# Durée visée d'un mésocycle, en jours (environ 4 semaines), et bornes.
+mesocycle: { duree_visee_jours: 28, duree_min_jours: 7, duree_max_jours: 56 }
+
+# Bloc d'affûtage avant une échéance haute ou derby (adultes et jeunes hors
+# école de rugby) : les N derniers jours avant l'échéance, échéance comprise.
+affutage: { jours: 7 }
+
+# Intention, priorités et intensité par défaut de chaque phase, selon le
+# public : « edr » (école de rugby, mode plateaux) ou « adultes » (jeunes à
+# partir de M16, seniors, structures en mode scolaire).
+phases:
+  intersaison-bilan:
+    sans_mesocycle: true
+    edr: { intention: "Bilan de la saison et repos", priorites: [Bilan avec les éducateurs, Préparer l'accueil de la rentrée], intensite: recuperation, theme: "Bilan et repos" }
+    adultes: { intention: "Bilan de la saison, repos actif, projet de la saison suivante", priorites: [Bilan collectif et individuel, Repos actif], intensite: recuperation, theme: "Bilan et repos actif" }
+  reprise-prepa:
+    edr: { intention: "Accueillir, faire jouer, poser les bases", priorites: [Accueil des nouveaux, Jeux de course et de passe, Formes de jeu de début de saison], intensite: moyenne, theme: "Accueil et bases" }
+    adultes: { intention: "Remise en forme progressive et bases collectives", priorites: [Volume progressif, Bases techniques, Lancements de jeu], intensite: moyenne, theme: "Reprise progressive" }
+  phase-aller:
+    adultes: { intention: "Construire le projet de jeu et gagner en régularité", priorites: [Projet de jeu, Conquête, Défense], intensite: forte, theme: "Construire le projet de jeu" }
+  plateaux-automne:
+    edr: { intention: "Progresser par le jeu entre les plateaux", priorites: [Avancer et soutenir, Découvrir la forme de jeu du moment], intensite: moyenne, theme: "Jouer et progresser" }
+  treve:
+    edr: { intention: "Repos", priorites: [Repos, Bilan de mi-saison avec les éducateurs], intensite: recuperation, theme: "Trêve" }
+    adultes: { intention: "Repos et entretien léger", priorites: [Récupérer, Bilan de mi-saison], intensite: recuperation, theme: "Trêve et entretien" }
+  phase-retour:
+    adultes: { intention: "Consolider et individualiser", priorites: [Consolider le projet de jeu, Individualiser, Gérer la fraîcheur], intensite: forte, theme: "Consolider" }
+  plateaux-printemps:
+    edr: { intention: "Approfondir avec la nouvelle forme de jeu", priorites: [S'approprier la nouvelle forme de jeu, Jouer en sécurité], intensite: moyenne, theme: "Nouvelle forme de jeu" }
+  phases-finales:
+    adultes: { intention: "Fraîcheur et précision", priorites: [Fraîcheur, Précision des lancements, Mental], intensite: moyenne, theme: "Fraîcheur et précision" }
+  tournois-fin-saison:
+    edr: { intention: "Plaisir, réussite et valorisation", priorites: [Tournois, Fête de fin de saison], intensite: legere, theme: "Plaisir et tournois" }
+  rentree:
+    adultes: { intention: "Accueillir et évaluer", priorites: [Accueil, Évaluation, Bases], intensite: moyenne, theme: "Rentrée" }
+  periode-scolaire:
+    adultes: { intention: "Progresser régulièrement en conciliant études et sport", priorites: [Progression technique, Régularité], intensite: moyenne, theme: "Progression" }
+  vacances-scolaires:
+    adultes: { intention: "Repos ou stage", priorites: [Repos], intensite: recuperation, theme: "Vacances" }
+  examens:
+    adultes: { intention: "Priorité aux examens, entretien léger", priorites: [Examens, Entretien], intensite: legere, theme: "Examens" }
+  fin-annee:
+    adultes: { intention: "Bilan et valorisation", priorites: [Bilan, Valorisation], intensite: legere, theme: "Fin d'année" }
+
+# Thème d'un mésocycle qui commence à un changement de forme de jeu (école de rugby).
+changement_forme: { theme: "Passage à une nouvelle forme de jeu", objectif: "Découvrir progressivement les nouvelles règles en sécurité", intensite: moyenne }
+# Thème d'un bloc d'affûtage.
+bloc_affutage: { theme: "Affûtage avant l'échéance", objectif: "Arriver frais et précis au match", intensite: affutage }
+
+# Grille de la semaine : intensité et intention d'une séance selon le nombre
+# de jours avant la prochaine échéance (J-n) et après la précédente (J+n).
+# La première règle qui s'applique l'emporte.
+grille_semaine:
+  adultes:
+    - { si: apres_match_jours_max_2, intensite: recuperation, intention: "Récupération : jeu à faible intensité, retour sur le match" }
+    - { si: avant_echeance_jours_max_2, intensite: affutage, intention: "Activation : rappels courts, lancements, vitesse, rien de nouveau ni de fatigant" }
+    - { si: avant_echeance_jours_max_4, intensite: forte, intention: "Travail principal : contenus de la semaine, intensité de match" }
+    - { si: defaut, intensite: moyenne, intention: "Développement : apprentissages du cycle, volume modéré" }
+  edr:
+    - { si: avant_echeance_jours_max_2, intensite: legere, intention: "Séance plaisir avant le plateau : jeux connus, réussite, rien de nouveau" }
+    - { si: defaut, intensite: moyenne, intention: "Séance de progression : thème du cycle, beaucoup de jeu" }

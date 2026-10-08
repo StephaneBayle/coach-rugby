@@ -118,3 +118,12 @@ sources:
     droits: résumer, citer
     statut: a-verifier
     note: Charge de séance (sRPE = RPE × durée), utilisée au lot 4.
+  - id: bompa-haff-2009
+    titre: "Periodization: Theory and Methodology of Training (5e édition)"
+    auteurs: Tudor O. Bompa, G. Gregory Haff
+    editeur: Human Kinetics
+    publie_le: "2009"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: Principes de périodisation (macrocycle, mésocycles, microcycles, affûtage) repris comme hypothèses dans planification.yaml.

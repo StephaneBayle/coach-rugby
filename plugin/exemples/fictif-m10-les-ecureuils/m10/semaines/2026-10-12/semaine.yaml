@@ -1,0 +1,24 @@
+# EXEMPLE FICTIF — Plan de la semaine — brouillon coach-rugby à adapter (hypothèses pédagogiques).
+equipe: m10
+debut: 2026-10-12
+mesocycle: c02
+phase: plateaux-automne
+theme: Passage à une nouvelle forme de jeu
+intensite_globale: moyenne
+echeances:
+  - type: plateau
+    date: 2026-10-17
+seances_prevues:
+  - date: 2026-10-14
+    heure: 14:00
+    duree_min: 75
+    j_moins: 3
+    intention: "Séance de progression : thème du cycle, beaucoup de jeu"
+    intensite: moyenne
+    dominante: Passage à une nouvelle forme de jeu
+    statut: prevue
+points_vigilance: []
+hypotheses:
+  - Intensités proposées d'après la grille J-n de references/planification.yaml (hypothèse pédagogique).
+sources:
+  - ffr-cahier-edr-2026-2027

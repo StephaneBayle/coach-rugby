@@ -4,12 +4,13 @@
 //
 // Codes de sortie : 0 succès ; 1 erreurs dans les données ou la commande ;
 // 3 outillage indisponible (dépendance absente) → suivre le chemin B.
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
 import { exporterSeance } from '../lib/export.mjs';
+import { lundiDe, proposerCycles, proposerSemaine } from '../lib/planification.mjs';
 import { genererSvg } from '../lib/terrain.mjs';
-import { lireYaml } from '../lib/yaml.mjs';
+import { ecrireYaml, lireYaml } from '../lib/yaml.mjs';
 import { dossierSaison } from '../lib/chemins.mjs';
 import { reglesDuJour } from '../lib/categories.mjs';
 import { aujourdhui, ecrireDate, lireDate } from '../lib/dates.mjs';
@@ -35,6 +36,12 @@ Usage : node coach-rugby.mjs <commande> [options]
         par défaut, ou dans le dossier indiqué).
   index-bibliotheque
         Régénère bibliotheque/INDEX.md.
+  planifier <equipe> [--ecrire] [--json]
+        Brouillon des cycles de la saison (mésocycles) ; --ecrire crée
+        cycles.yaml s'il n'existe pas encore.
+  semaine <equipe> [--date AAAA-MM-JJ] [--ecrire] [--json]
+        Brouillon du plan de la semaine qui contient la date ; --ecrire crée
+        semaines/<lundi>/semaine.yaml s'il n'existe pas encore.
   exporter <seance.yaml> [--pdf] [--formats a4,telephone]
         Fiches HTML (A4, téléphone), schémas SVG, texte pour Mon Coach
         Assistant (clubs) et, avec --pdf, PDF via Chrome.
@@ -167,6 +174,60 @@ commandes.exporter = (o) => {
   if (r.pdf.demande && !r.pdf.ok) lignes.push(`PDF non produit : ${r.pdf.raison}`);
   sortir(0, lignes.join('\n'));
 };
+
+const INTENSITES = { recuperation: 'récupération', legere: 'légère', moyenne: 'moyenne', forte: 'forte', affutage: 'affûtage' };
+
+function chargerPourPlanifier(id) {
+  if (!id) sortir(1, 'Indiquer l\'équipe (son identifiant, ex. m10).');
+  const dossier = dossierSaison();
+  const { dossier: d, equipe, saison } = chargerEquipe(dossier, id);
+  if (!saison) sortir(1, `La saison de ${id} n'est pas cadrée : lancer d'abord /coach-rugby:saison.`);
+  const fc = path.join(d, 'cycles.yaml');
+  return { d, equipe, saison, fc, cycles: existsSync(fc) ? lireYaml(fc) : null };
+}
+
+commandes.planifier = (o) => {
+  const { d, equipe, saison, fc } = chargerPourPlanifier(o._[0]);
+  const brouillon = proposerCycles(saison, equipe);
+  if (o.ecrire) {
+    if (existsSync(fc)) sortir(1, `${fc} existe déjà : le modifier plutôt que de l'écraser.`);
+    ecrireYaml(fc, brouillon, '# Cycles de la saison — brouillon coach-rugby à adapter (hypothèses pédagogiques).');
+    const erreurs = validerChemin(fc).flatMap((r) => r.erreurs);
+    sortir(erreurs.length ? 1 : 0, erreurs.length ? `Écrit mais invalide :\n${erreurs.join('\n')}` : `Écrit : ${path.relative(process.cwd(), fc) || fc}`);
+  }
+  if (o.json) sortir(0, JSON.stringify(brouillon, null, 2));
+  sortir(0, [
+    `Brouillon de cycles — ${equipe.nom} (${d})`,
+    ...brouillon.mesocycles.map((m) => `  ${m.id}  ${m.debut} → ${m.fin}  ${m.phase.padEnd(19)} ${INTENSITES[m.intensite].padEnd(12)} ${m.theme}${m.notes ? ` — ${m.notes}` : ''}`),
+    'Hypothèses pédagogiques à adapter ; --ecrire pour créer cycles.yaml.',
+  ].join('\n'));
+};
+
+commandes.semaine = (o) => {
+  const { d, equipe, saison, cycles } = chargerPour(o);
+  const brouillon = proposerSemaine(date(o), { equipe, saison, cycles });
+  const fs = path.join(d, 'semaines', brouillon.debut, 'semaine.yaml');
+  if (o.ecrire) {
+    if (existsSync(fs)) sortir(1, `${fs} existe déjà : le modifier plutôt que de l'écraser.`);
+    mkdirSync(path.dirname(fs), { recursive: true });
+    ecrireYaml(fs, brouillon, '# Plan de la semaine — brouillon coach-rugby à adapter (hypothèses pédagogiques).');
+    const erreurs = validerChemin(fs).flatMap((r) => r.erreurs);
+    sortir(erreurs.length ? 1 : 0, erreurs.length ? `Écrit mais invalide :\n${erreurs.join('\n')}` : `Écrit : ${path.relative(process.cwd(), fs) || fs}`);
+  }
+  if (o.json) sortir(0, JSON.stringify(brouillon, null, 2));
+  sortir(0, [
+    `Semaine du ${brouillon.debut} — ${equipe.nom}${brouillon.mesocycle ? ` — cycle ${brouillon.mesocycle} « ${brouillon.theme} »` : ''}`,
+    ...brouillon.echeances.map((e) => `  Échéance : ${e.type} le ${e.date}${e.importance && e.importance !== 'normale' ? ` [${e.importance}]` : ''}${e.adversaire ? ` contre ${e.adversaire}` : ''}`),
+    ...brouillon.seances_prevues.map((s) => `  ${s.date}${s.heure ? ` ${s.heure}` : ''} (${s.duree_min} min${s.j_moins !== null ? `, J-${s.j_moins}` : ''}) ${INTENSITES[s.intensite]} — ${s.intention}`),
+    ...(brouillon.seances_prevues.length ? [] : ['  Pas de séance prévue (repos, trêve ou vacances).']),
+    ...brouillon.points_vigilance.map((v) => `  ⚠ ${v}`),
+    'Hypothèses pédagogiques à adapter ; --ecrire pour créer semaine.yaml.',
+  ].join('\n'));
+};
+
+function chargerPour(o) {
+  return chargerPourPlanifier(o._[0]);
+}
 
 const [nom, ...reste] = process.argv.slice(2);
 if (!nom || nom === 'aide' || nom === '--help' || nom === '-h') sortir(0, AIDE);

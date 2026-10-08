@@ -1,0 +1,172 @@
+# EXEMPLE FICTIF — Cycles de la saison — brouillon coach-rugby à adapter (hypothèses pédagogiques).
+saison: 2026-2027
+macrocycle:
+  - phase: intersaison-bilan
+    intention: Bilan de la saison et repos
+    priorites:
+      - Bilan avec les éducateurs
+      - Préparer l'accueil de la rentrée
+  - phase: reprise-prepa
+    intention: Accueillir, faire jouer, poser les bases
+    priorites:
+      - Accueil des nouveaux
+      - Jeux de course et de passe
+      - Formes de jeu de début de saison
+  - phase: plateaux-automne
+    intention: Progresser par le jeu entre les plateaux
+    priorites:
+      - Avancer et soutenir
+      - Découvrir la forme de jeu du moment
+  - phase: treve
+    intention: Repos
+    priorites:
+      - Repos
+      - Bilan de mi-saison avec les éducateurs
+  - phase: plateaux-printemps
+    intention: Approfondir avec la nouvelle forme de jeu
+    priorites:
+      - S'approprier la nouvelle forme de jeu
+      - Jouer en sécurité
+  - phase: tournois-fin-saison
+    intention: Plaisir, réussite et valorisation
+    priorites:
+      - Tournois
+      - Fête de fin de saison
+mesocycles:
+  - id: c01
+    debut: 2026-08-24
+    fin: 2026-09-26
+    phase: reprise-prepa
+    theme: Accueil et bases
+    objectifs:
+      - texte: Accueil des nouveaux
+        domaine: technique
+      - texte: Jeux de course et de passe
+        domaine: technique
+    intensite: moyenne
+    seances_par_semaine: 1
+  - id: c02
+    debut: 2026-09-27
+    fin: 2026-10-26
+    phase: plateaux-automne
+    theme: Passage à une nouvelle forme de jeu
+    objectifs:
+      - texte: Découvrir progressivement les nouvelles règles en sécurité
+        domaine: technique
+    intensite: moyenne
+    seances_par_semaine: 1
+    declencheur: changement-forme
+    notes: "Forme de jeu : Toucher + 2 secondes (T+2) ou Jeu au contact (JCO) → Jeu au contact (JCO) (à vérifier, saison 2026-2027)."
+  - id: c03
+    debut: 2026-10-27
+    fin: 2026-11-21
+    phase: plateaux-automne
+    theme: Jouer et progresser
+    objectifs:
+      - texte: Avancer et soutenir
+        domaine: technique
+      - texte: Découvrir la forme de jeu du moment
+        domaine: technique
+    intensite: moyenne
+    seances_par_semaine: 1
+  - id: c04
+    debut: 2026-11-22
+    fin: 2026-12-18
+    phase: plateaux-automne
+    theme: Jouer et progresser
+    objectifs:
+      - texte: Avancer et soutenir
+        domaine: technique
+      - texte: Découvrir la forme de jeu du moment
+        domaine: technique
+    intensite: moyenne
+    seances_par_semaine: 1
+  - id: c05
+    debut: 2026-12-19
+    fin: 2027-01-03
+    phase: treve
+    theme: Trêve
+    objectifs:
+      - texte: Repos
+        domaine: technique
+      - texte: Bilan de mi-saison avec les éducateurs
+        domaine: technique
+    intensite: recuperation
+    seances_par_semaine: 0
+  - id: c06
+    debut: 2027-01-04
+    fin: 2027-02-01
+    phase: plateaux-printemps
+    theme: Passage à une nouvelle forme de jeu
+    objectifs:
+      - texte: Découvrir progressivement les nouvelles règles en sécurité
+        domaine: technique
+    intensite: moyenne
+    seances_par_semaine: 1
+    declencheur: changement-forme
+    notes: "Forme de jeu : Jeu au contact (JCO) → Rugby éducatif à 7 (fiche M10) (à vérifier, saison 2026-2027)."
+  - id: c07
+    debut: 2027-02-02
+    fin: 2027-03-02
+    phase: plateaux-printemps
+    theme: Nouvelle forme de jeu
+    objectifs:
+      - texte: S'approprier la nouvelle forme de jeu
+        domaine: technique
+      - texte: Jouer en sécurité
+        domaine: technique
+    intensite: moyenne
+    seances_par_semaine: 1
+  - id: c08
+    debut: 2027-03-03
+    fin: 2027-03-31
+    phase: plateaux-printemps
+    theme: Nouvelle forme de jeu
+    objectifs:
+      - texte: S'approprier la nouvelle forme de jeu
+        domaine: technique
+      - texte: Jouer en sécurité
+        domaine: technique
+    intensite: moyenne
+    seances_par_semaine: 1
+  - id: c09
+    debut: 2027-04-01
+    fin: 2027-04-30
+    phase: plateaux-printemps
+    theme: Nouvelle forme de jeu
+    objectifs:
+      - texte: S'approprier la nouvelle forme de jeu
+        domaine: technique
+      - texte: Jouer en sécurité
+        domaine: technique
+    intensite: moyenne
+    seances_par_semaine: 1
+  - id: c10
+    debut: 2027-05-01
+    fin: 2027-05-30
+    phase: tournois-fin-saison
+    theme: Plaisir et tournois
+    objectifs:
+      - texte: Tournois
+        domaine: technique
+      - texte: Fête de fin de saison
+        domaine: technique
+    intensite: legere
+    seances_par_semaine: 1
+  - id: c11
+    debut: 2027-05-31
+    fin: 2027-06-30
+    phase: tournois-fin-saison
+    theme: Plaisir et tournois
+    objectifs:
+      - texte: Tournois
+        domaine: technique
+      - texte: Fête de fin de saison
+        domaine: technique
+    intensite: legere
+    seances_par_semaine: 1
+hypotheses:
+  - Découpage proposé automatiquement d'après references/planification.yaml (hypothèses pédagogiques), à adapter par le coach.
+sources:
+  - ffr-cahier-edr-2026-2027
+  - ffr-formation-edr

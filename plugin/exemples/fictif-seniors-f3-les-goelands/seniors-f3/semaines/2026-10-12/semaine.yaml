@@ -1,0 +1,38 @@
+# EXEMPLE FICTIF — Plan de la semaine — brouillon coach-rugby à adapter (hypothèses pédagogiques).
+equipe: seniors-f3
+debut: 2026-10-12
+mesocycle: c04
+phase: phase-aller
+theme: Affûtage avant l'échéance
+intensite_globale: affutage
+echeances:
+  - type: match
+    date: 2026-10-18
+    importance: derby
+    adversaire: RC Voisinville
+  - type: match
+    date: 2026-10-25
+    adversaire: Olympique de Nullepart
+seances_prevues:
+  - date: 2026-10-13
+    heure: 19:30
+    duree_min: 105
+    j_moins: 5
+    intention: "Développement : apprentissages du cycle, volume modéré"
+    intensite: moyenne
+    dominante: Affûtage avant l'échéance
+    statut: prevue
+  - date: 2026-10-15
+    heure: 19:30
+    duree_min: 90
+    j_moins: 3
+    intention: "Activation : rappels courts, lancements, vitesse, rien de nouveau ni de fatigant"
+    intensite: affutage
+    dominante: Affûtage avant l'échéance
+    statut: prevue
+points_vigilance:
+  - "Derby le 2026-10-18 contre RC Voisinville : pas de fatigue inutile en fin de semaine."
+hypotheses:
+  - Intensités proposées d'après la grille J-n de references/planification.yaml (hypothèse pédagogique).
+sources:
+  - bompa-haff-2009
