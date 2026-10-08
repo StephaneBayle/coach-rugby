@@ -3,9 +3,9 @@
 Assistant de saison pour **coachs et éducateurs de rugby amateur**, sous forme
 de plugin pour Claude (Cowork, Claude desktop et Claude Code).
 
-> **Version 0.1.0** — première version : saison, séances, bibliothèque
-> d'exercices, fiches imprimables et téléphone. La suite (planification sur
-> plusieurs semaines, effectif et matchs, charge, communication) est dans la
+> **Version 0.2.0** — saison, cycles et semaines, séances, bibliothèque
+> d'exercices, fiches imprimables et téléphone. La suite (effectif et
+> matchs, charge, communication) est dans la
 > [feuille de route](docs/feuille-de-route.md).
 
 ## À quoi ça sert
@@ -52,6 +52,8 @@ Dites simplement : *« Prépare la séance de mercredi de mes M10 »*, ou lancez
 |---|---|
 | `/coach-rugby:coach` | Démarrer, retrouver où en est votre équipe, savoir quoi faire ensuite |
 | `/coach-rugby:saison` | Organiser la saison : phases, matchs, plateaux, tournois |
+| `/coach-rugby:planifier` | Découper la saison en cycles (thèmes, intensité, affûtage, changements de forme de jeu) |
+| `/coach-rugby:semaine` | Préparer la semaine (séances, jours avant le match, intensités) et sa fiche |
 | `/coach-rugby:seance` | Préparer une séance pour votre groupe |
 | `/coach-rugby:exercices` | Trouver, adapter ou créer un exercice |
 | `/coach-rugby:relire` | Faire vérifier une séance (sécurité, règlement, sources, données) |

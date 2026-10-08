@@ -8,7 +8,7 @@ un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans l
 | Lot | Version | Contenu | État |
 |---|---|---|---|
 | 1 | 0.1.0 | Socle et première séance de bout en bout : dossier saison, cadrage de la saison, conception de séance, bibliothèque de 24 exercices, schémas de terrain, fiches HTML/PDF (A4 et téléphone), relecteurs, garde RGPD, passerelles Mon Coach Assistant par copier-coller | publié le 2026-10-08 |
-| 2 | 0.2.0 | Planification (macrocycle, mésocycles, semaine type, affûtage), relances proactives complètes, playtests simulés | en cours |
+| 2 | 0.2.0 | Planification (macrocycle, mésocycles, semaine type, affûtage), relances proactives complètes, playtests simulés | publié le 2026-10-08 |
 | 3 | 0.3.0 | Effectif en codes, présences, composition, feuille de match, rotation du temps de jeu, préparation et débriefing de match, Excel | à venir |
 | 4 | 0.4.0 | Charge d'entraînement (RPE), préparation physique, prévention, rappel commotion et retour au jeu | à venir |
 | 5 | 0.5.0 | Communication (convocations, messages aux parents, comptes rendus) et accompagnement pédagogique | à venir |
@@ -29,3 +29,14 @@ un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans l
 | 5 | Séance et export (HTML, PDF, SVG, texte pour Mon Coach Assistant) | fait |
 | 6 | Relecteurs et évals | fait (évals écrites, non lancées : accès anticipé) |
 | 7 | Publication de la version 0.1.0 | fait |
+
+## Lot 2 — étapes
+
+| Étape | Contenu | État |
+|---|---|---|
+| 1 | Modèle de planification : cycles, semaine, contrôles, CLI | fait |
+| 2 | Skills `planifier` et `semaine`, relances complètes | fait |
+| 3 | Fiche semaine (A4 et téléphone) | fait |
+| 4 | Outil de playtest (développement) | fait |
+| 5 | Quatre playtests simulés et corrections ([synthèse](playtests/README.md)) | fait |
+| 6 | Publication de la version 0.2.0 | en cours |

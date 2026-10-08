@@ -1,13 +1,22 @@
 {
   "name": "coach-rugby",
   "displayName": "Coach Rugby",
-  "version": "0.1.0",
-  "description": "Assistant de saison pour coachs et éducateurs de rugby amateur : séances adaptées à la catégorie, bibliothèque d'exercices, schémas de terrain, fiches imprimables et lisibles sur téléphone.",
-  "author": { "name": "Stéphane Bayle" },
+  "version": "0.2.0",
+  "description": "Assistant de saison pour coachs et éducateurs de rugby amateur : planification en cycles et semaines, séances adaptées à la catégorie et au mois, bibliothèque d'exercices, schémas de terrain, fiches imprimables et lisibles sur téléphone.",
+  "author": {
+    "name": "Stéphane Bayle"
+  },
   "repository": "https://github.com/StephaneBayle/coach-rugby",
   "homepage": "https://github.com/StephaneBayle/coach-rugby#readme",
   "license": "MIT AND CC-BY-SA-4.0",
-  "keywords": ["rugby", "entraînement", "école de rugby", "séance", "éducateur", "coach"],
+  "keywords": [
+    "rugby",
+    "entraînement",
+    "école de rugby",
+    "séance",
+    "éducateur",
+    "coach"
+  ],
   "userConfig": {
     "dossier_saison": {
       "type": "directory",
