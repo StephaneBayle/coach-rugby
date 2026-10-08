@@ -66,8 +66,8 @@ export const MOTIFS = [
     id: 'date-de-naissance',
     libelle: 'date de naissance',
     regex: new RegExp(
-      `(?:n[ée]e?s?\\s+le|date\\s+de\\s+naissance|naissance|\\bDDN\\b)\\s*:?\\s*(?:\\d{1,2}[/.-]\\d{1,2}[/.-]\\d{2,4}|\\d{1,2}(?:er)?\\s+${MOIS}\\s+\\d{4}|\\d{4}-\\d{2}-\\d{2})`,
-      'gi',
+      `(?:(?<![\\p{L}\\d])n[ée]e?s?\\s+le|date\\s+de\\s+naissance|naissance|\\bDDN\\b)\\s*:?\\s*(?:\\d{1,2}[/.-]\\d{1,2}[/.-]\\d{2,4}|\\d{1,2}(?:er)?\\s+${MOIS}\\s+\\d{4}|\\d{4}-\\d{2}-\\d{2})`,
+      'giu',
     ),
   },
   {

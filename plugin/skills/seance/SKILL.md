@@ -28,7 +28,12 @@ COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN
    `/coach-rugby:coach`.
 2. Lancer `statut <equipe> --date <date>` pour connaître la phase, la semaine,
    la prochaine échéance (J-n) et les relances.
-3. Lancer `regles <catégories du groupe> --pratique <pratique> --date <date>`
+3. **Plan de la semaine** : si `<equipe>/semaines/<lundi>/semaine.yaml`
+   couvre la date, en reprendre la séance prévue (intention, intensité,
+   dominante). Renseigner alors `semaine: <lundi>` et `intensite_prevue` dans
+   la séance, et respecter cette intensité : pas de contenu fatigant pour une
+   séance d'activation ou de récupération.
+4. Lancer `regles <catégories du groupe> --pratique <pratique> --date <date>`
    pour connaître les formes de jeu, le **contact maximal** et les
    permissions (plaquage, mêlée, touche, ruck), pour la catégorie la plus
    jeune. Au chemin B, appliquer la méthode de `outillage.md`.

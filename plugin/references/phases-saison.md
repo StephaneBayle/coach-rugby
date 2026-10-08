@@ -56,6 +56,15 @@ obligations :
 | `relance-seance` | phase active et dernière séance il y a plus de 10 jours | préparer la prochaine séance |
 | `preparer-reprise` | pendant l'intersaison | bilan, préparation de la reprise |
 | `mode-scolaire` | mode `scolaire` | relances spécifiques à venir |
+| `planifier-cycles` | saison cadrée, pas de `cycles.yaml` | découper la saison en cycles |
+| `preparer-semaine` | phase active, pas de plan pour la semaine en cours (ou, du vendredi au dimanche, pour la suivante) | préparer la semaine |
+| `seance-a-preparer` | une séance prévue aujourd'hui ou demain n'a pas de `seance.yaml` | préparer cette séance (remplace `premiere-seance` et `relance-seance`) |
+| `fin-mesocycle` | le cycle en cours (hors bloc d'affûtage) finit dans 7 jours ou moins | bilan du cycle, annonce du suivant |
+| `changement-forme` | la forme de jeu change dans 21 jours ou moins (école de rugby) | préparer la progression |
+| `reprise-apres-treve` | dans les 7 jours qui suivent la fin de la trêve | remonter l'intensité progressivement |
+
+Les relances liées aux cycles et aux semaines n'apparaissent que si le
+dossier de l'équipe est lu (commande `statut`).
 
 Phases actives : `reprise-prepa`, `phase-aller`, `phase-retour`,
 `phases-finales`, `plateaux-automne`, `plateaux-printemps`,
