@@ -103,6 +103,17 @@ test('laisse passer un commit qui RETIRE un nom protégé', () => {
   assert.equal(bash('git commit -m "retrait"', d).status, 0);
 });
 
+test("ignore le lockfile npm (adresses d'auteurs de paquets), comme le mode CI", () => {
+  const d = depot();
+  mkdirSync(path.join(d, 'plugin'));
+  writeFileSync(path.join(d, 'plugin', 'package-lock.json'), `{ "deprecated": "contacter ${MAIL}" }\n`);
+  execFileSync('git', ['add', '.'], { cwd: d });
+  assert.equal(bash('git commit -m "deps"', d).status, 0);
+  writeFileSync(path.join(d, 'notes.md'), `${MAIL}\n`);
+  execFileSync('git', ['add', '.'], { cwd: d });
+  assert.equal(bash('git commit -m "notes"', d).status, 2, 'les autres fichiers restent contrôlés');
+});
+
 test('bloque les options globales de git qui masquent la sous-commande', () => {
   const d = depot();
   writeFileSync(path.join(d, 'a.md'), `${TEL}\n`);

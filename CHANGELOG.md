@@ -26,6 +26,14 @@ comment c'est programmé. Format inspiré de
   forme de jeu du jour (nombre sur le terrain, première ligne sans mêlée).
 - Rappels FFR : la feuille de match dématérialisée des écoles de rugby est
   l'outil officiel ; passeport du joueur de devant en M14 et M15F.
+- Fiche match à imprimer ou à garder sur le téléphone : préparation,
+  composition, grille de rotation, sécurité, puis statistiques et
+  débriefing. Elle rappelle qu'elle ne remplace pas la feuille de match
+  officielle.
+- Feuille de présence à imprimer (codes, colonne « Prénom » à remplir à la
+  main).
+- Tableaux Excel et CSV des présences, du temps de jeu et des progrès, à
+  ouvrir dans Excel, LibreOffice ou Numbers. Toujours en codes.
 
 ### Corrigé
 

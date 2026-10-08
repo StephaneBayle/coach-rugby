@@ -1,7 +1,8 @@
-// Export d'une séance : fiche HTML autonome (A4 et téléphone), schémas SVG,
-// texte à coller dans Mon Coach Assistant, PDF via Chrome si disponible.
-// Les fichiers vont dans seances/<date>/exports/ ; ils se régénèrent, ils ne
-// se retouchent pas.
+// Exports : séance, semaine, match, feuille de présence. Fiches HTML
+// autonomes (A4 et téléphone), PDF via Chrome si disponible. Pour une séance,
+// aussi les schémas SVG et le texte à coller dans Mon Coach Assistant.
+// Les fichiers vont dans un dossier exports/ à côté de la source ; ils se
+// régénèrent, ils ne se retouchent pas.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chargerBibliotheque } from './bibliotheque.mjs';
@@ -9,8 +10,10 @@ import { chargerCategories, reglesDuJour } from './categories.mjs';
 import { imprimerPdf, trouverChrome } from './chrome.mjs';
 import { lireDate } from './dates.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
+import { dureeTotale } from './match.mjs';
 import { publicDe } from './planification.mjs';
 import { contexteSeance } from './seance.mjs';
+import { minutesJouees } from './temps-de-jeu.mjs';
 import { genererSvg } from './terrain.mjs';
 import { lireYaml } from './yaml.mjs';
 
@@ -274,5 +277,142 @@ export function exporterSemaine(fichier, { pdf = false, formats = ['a4', 'teleph
       resultat.pdf.ok = !resultat.pdf.raison;
     }
   }
+  return resultat;
+}
+
+// ---------------------------------------------------------------- match
+// Fiche match en codes : jamais de prénom (ce module ne lit pas la table).
+const POSTES = {
+  'pilier-gauche': 'pilier gauche', talonneur: 'talonneur', 'pilier-droit': 'pilier droit', 'deuxieme-ligne': '2e ligne',
+  'troisieme-ligne-aile': '3e ligne aile', 'troisieme-ligne-centre': '3e ligne centre', 'demi-de-melee': 'demi de mêlée',
+  'demi-d-ouverture': "demi d'ouverture", centre: 'centre', ailier: 'ailier', arriere: 'arrière', avant: 'avant', 'trois-quarts': 'trois-quarts', polyvalent: 'polyvalent',
+};
+const TYPES_MATCH = { match: 'Match', plateau: 'Plateau', tournoi: 'Tournoi' };
+const STATS = {
+  essais: 'Essais', transformations: 'Transformations', penalites_reussies: 'Pénalités réussies', drops: 'Drops',
+  plaquages_reussis: 'Plaquages réussis', plaquages_manques: 'Plaquages manqués', ballons_perdus: 'Ballons perdus',
+  penalites_concedees: 'Pénalités concédées', touches_gagnees: 'Touches gagnées', touches_perdues: 'Touches perdues',
+  melees_gagnees: 'Mêlées gagnées', melees_perdues: 'Mêlées perdues', cartons: 'Cartons',
+};
+const libelleStat = (k) => STATS[k] || k.replace(/_/g, ' ');
+
+function rotationHtml(match) {
+  const periodes = match.temps_de_jeu?.periodes || [];
+  if (!periodes.length) return '';
+  const codes = [...new Set([...(match.convoques || []), ...periodes.flatMap((p) => p.sur_le_terrain)])].sort();
+  const minutes = minutesJouees(periodes);
+  const total = periodes.at(-1).fin_min;
+  const plusieurs = new Set(periodes.map((p) => p.rencontre || 1)).size > 1;
+  const entetes = periodes.map((p) => `<th class="c">${plusieurs ? `R${p.rencontre || 1}<br>` : ''}${p.debut_min}-${p.fin_min}</th>`).join('');
+  const lignes = codes.map((c) => `<tr><td class="code">${echapper(c)}</td>${periodes.map((p) => `<td class="c">${p.sur_le_terrain.includes(c) ? '●' : '·'}</td>`).join('')}<td class="c">${minutes[c] || 0}</td></tr>`).join('');
+  const cible = match.temps_de_jeu.cible ? `<p class="notes">Repère : ${echapper(match.temps_de_jeu.cible)} (hypothèse pédagogique, aucune règle officielle de temps de jeu).</p>` : '';
+  return `<section><h2>Rotation du temps de jeu</h2><table class="rotation"><thead><tr><th class="code">Code</th>${entetes}<th class="c">min</th></tr></thead><tbody>${lignes}</tbody></table><p class="notes">● sur le terrain · banc. Minutes de match (${total} min au total).</p>${cible}</section>`;
+}
+
+function compositionHtml(match) {
+  const t = match.composition?.titulaires || [];
+  const r = match.composition?.remplacants || [];
+  if (t.length) {
+    const lignes = t.map((x, i) => `<tr><td class="c">${i + 1}</td><td class="code">${echapper(x.code)}</td><td>${echapper(POSTES[x.poste] || x.poste || '')}</td></tr>`).join('');
+    return `<section><h2>Composition</h2><table><thead><tr><th class="c">N°</th><th>Code</th><th>Poste</th></tr></thead><tbody>${lignes}</tbody></table>${r.length ? `<p><b>Remplaçants :</b> ${r.map(echapper).join(', ')}</p>` : ''}</section>`;
+  }
+  if (match.convoques?.length) return `<section><h2>Convoqués (${match.convoques.length})</h2><p>${match.convoques.map(echapper).join(', ')}</p></section>`;
+  return '';
+}
+
+function apresHtml(match) {
+  const s = match.stats;
+  const d = match.debriefing;
+  if (!s && !d) return '';
+  const tableStats = s?.equipe
+    ? `<table><thead><tr><th>Statistique</th><th class="c">Nous</th>${s.adversaire ? '<th class="c">Adversaire</th>' : ''}</tr></thead><tbody>${[...new Set([...Object.keys(s.equipe), ...Object.keys(s.adversaire || {})])]
+        .map((k) => `<tr><td>${echapper(libelleStat(k))}</td><td class="c">${s.equipe[k] ?? '—'}</td>${s.adversaire ? `<td class="c">${s.adversaire[k] ?? '—'}</td>` : ''}</tr>`)
+        .join('')}</tbody></table>`
+    : '';
+  const deb = d ? `<div class="colonnes">${sectionHtml('Réussites', d.reussites, '')}${sectionHtml('À retravailler', d.a_retravailler, '')}</div>${sectionHtml('Prochaines séances', d.prochaines_seances, '')}` : '';
+  return `<section><h2>Après le match</h2>${tableStats}${deb}</section>`;
+}
+
+export function preparerMatch(match, { equipe }) {
+  const ref = chargerCategories();
+  const edr = equipe ? publicDe(equipe) === 'edr' : match.type !== 'match';
+  const adversaires = match.rencontres?.length ? match.rencontres.map((r) => r.adversaire).filter(Boolean) : [match.adversaire].filter(Boolean);
+  const type = TYPES_MATCH[match.type] || 'Match';
+  const titre = `${equipe?.nom || match.equipe} — ${type}${match.type === 'match' && match.adversaire ? ` contre ${match.adversaire}` : ''}`;
+  const p = match.preparation || {};
+  const preparation = p.projet_de_jeu || p.plan_de_match?.length || p.causerie?.length
+    ? `<section><h2>Préparation</h2>${p.projet_de_jeu ? `<p class="projet">Projet de jeu : ${echapper(p.projet_de_jeu)}</p>` : ''}${sectionHtml('Plan de match', p.plan_de_match, '')}${sectionHtml('Causerie', p.causerie, 'causerie')}</section>`
+    : '';
+  const rencontres = match.rencontres?.length > 1 || (match.rencontres?.length && match.type !== 'match')
+    ? `<section><h2>Rencontres</h2><table><thead><tr><th class="c">N°</th><th>Adversaire</th><th class="c">Durée</th></tr></thead><tbody>${match.rencontres.map((r, i) => `<tr><td class="c">${i + 1}</td><td>${echapper(r.adversaire || '—')}</td><td class="c">${r.duree_min} min</td></tr>`).join('')}</tbody></table></section>`
+    : '';
+  const vigilance = [...(match.securite || []), ...(p.points_vigilance || [])];
+  const forme = (match.regles.formes || []).map((f) => ref.formes?.[f]?.libelle || f).join(' ou ');
+  return {
+    titre,
+    date: `${dateLongue(match.date)}${match.heure ? `, ${match.heure}` : ''}`,
+    lieu: match.domicile === false ? `à l'extérieur${match.lieu ? ` (${match.lieu})` : ''}` : match.domicile ? `à domicile${match.lieu ? ` (${match.lieu})` : ''}` : match.lieu || '—',
+    categorie: (equipe?.categories || [match.regles.categorie]).map((c) => ref.categories[c]?.libelle || c).join(' + '),
+    forme: `${forme} — ${match.regles.statut === 'verifie' ? 'vérifié' : `à vérifier pour la saison ${match.regles.saison}`}`,
+    sur_le_terrain: String(match.regles.sur_le_terrain),
+    duree: `${dureeTotale(match)} min${adversaires.length > 1 ? `, ${adversaires.length} rencontres` : ''}`,
+    officiel: edr ? 'la feuille de match dématérialisée de l\'école de rugby (FDM EDR)' : 'la feuille de match Oval-e',
+    rencontres,
+    preparation,
+    composition: compositionHtml(match),
+    rotation: rotationHtml(match),
+    vigilance: sectionHtml('Sécurité et vigilance', vigilance, 'vigilance'),
+    apres: apresHtml(match),
+    hypotheses: sectionHtml('Hypothèses (choix non sourcés)', match.hypotheses),
+    sources: sourcesHtml(match.sources),
+  };
+}
+
+function imprimerTout(dossier, noms, resultat) {
+  const chrome = trouverChrome();
+  if (!chrome) resultat.pdf.raison = 'Chrome introuvable : ouvrir la fiche HTML puis Imprimer > Enregistrer en PDF.';
+  else {
+    for (const n of noms) {
+      const r = imprimerPdf(path.join(dossier, `${n}.html`), path.join(dossier, `${n}.pdf`), chrome);
+      if (!r.ok) { resultat.pdf.raison = r.raison; break; }
+      resultat.fichiers.push(`${n}.pdf`);
+    }
+    resultat.pdf.ok = !resultat.pdf.raison;
+  }
+}
+
+export function exporterMatch(fichier, { pdf = false, formats = ['a4', 'telephone'] } = {}) {
+  const match = lireYaml(fichier);
+  const d = path.resolve(path.dirname(fichier), '..', '..');
+  const equipe = existsSync(path.join(d, 'equipe.yaml')) ? lireYaml(path.join(d, 'equipe.yaml')) : null;
+  const donnees = preparerMatch(match, { equipe });
+  const dossier = path.join(path.dirname(fichier), 'exports');
+  mkdirSync(dossier, { recursive: true });
+  const g = readFileSync(path.join(RACINE_PLUGIN, 'gabarits', 'fiche-match.html'), 'utf8').replace(/<!-- Gabarit[\s\S]*?-->\n/, '');
+  const resultat = { dossier, fichiers: [], pdf: { demande: pdf, ok: false, raison: null } };
+  for (const f of formats) {
+    writeFileSync(path.join(dossier, `fiche-match-${f}.html`), remplir(g, { ...donnees, format: f, page: PAGES[f] }));
+    resultat.fichiers.push(`fiche-match-${f}.html`);
+  }
+  if (pdf) imprimerTout(dossier, formats.map((f) => `fiche-match-${f}`), resultat);
+  return resultat;
+}
+
+// Feuille de présence à imprimer : codes actifs et colonnes vides.
+export function exporterFeuillePresence(dossierEquipe, { pdf = false, colonnes = 8 } = {}) {
+  const effectif = lireYaml(path.join(dossierEquipe, 'effectif.yaml'));
+  const fe = path.join(dossierEquipe, 'equipe.yaml');
+  const equipe = existsSync(fe) ? lireYaml(fe) : null;
+  const dossier = path.join(dossierEquipe, 'exports');
+  mkdirSync(dossier, { recursive: true });
+  const g = readFileSync(path.join(RACINE_PLUGIN, 'gabarits', 'feuille-presence.html'), 'utf8').replace(/<!-- Gabarit[\s\S]*?-->\n/, '');
+  const html = remplir(g, {
+    titre: `${equipe?.nom || effectif.equipe} — feuille de présence`,
+    entetes_dates: Array(colonnes).fill('<th>Date :<br>&nbsp;</th>').join(''),
+    joueurs: effectif.joueurs.filter((j) => j.actif !== false).map((j) => ({ code: j.code, cases: Array(colonnes).fill('<td></td>').join('') })),
+  });
+  writeFileSync(path.join(dossier, 'feuille-presence-a4.html'), html);
+  const resultat = { dossier, fichiers: ['feuille-presence-a4.html'], pdf: { demande: pdf, ok: false, raison: null } };
+  if (pdf) imprimerTout(dossier, ['feuille-presence-a4'], resultat);
   return resultat;
 }

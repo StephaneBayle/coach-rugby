@@ -49,6 +49,18 @@ jobs:
             node plugin/scripts/coach-rugby.mjs exporter "$s" --pdf
             test -f "$(dirname "$s")/exports/fiche-semaine-a4.pdf" || { echo "::error::PDF non produit pour $s"; exit 1; }
           done
+          for s in plugin/exemples/*/*/matchs/*/match.yaml; do
+            node plugin/scripts/coach-rugby.mjs exporter "$s" --pdf
+            test -f "$(dirname "$s")/exports/fiche-match-a4.pdf" || { echo "::error::PDF non produit pour $s"; exit 1; }
+          done
+      - name: Feuilles de présence et tableaux d'exemple (xlsx et csv, en codes)
+        run: |
+          for e in plugin/exemples/*/*/effectif.yaml; do node plugin/scripts/coach-rugby.mjs exporter "$e"; done
+          export COACH_RUGBY_DOSSIER=plugin/exemples/fictif-m10-les-ecureuils
+          node plugin/scripts/coach-rugby.mjs tableau presences m10
+          node plugin/scripts/coach-rugby.mjs tableau temps-de-jeu m10
+          node plugin/scripts/coach-rugby.mjs tableau progres m10
+          test -f plugin/exemples/fictif-m10-les-ecureuils/m10/exports/presences.xlsx
       - name: Fiches d'exemple en artefact
         uses: actions/upload-artifact@v4
         with:
@@ -56,6 +68,8 @@ jobs:
           path: |
             plugin/exemples/*/*/seances/*/exports/
             plugin/exemples/*/*/semaines/*/exports/
+            plugin/exemples/*/*/matchs/*/exports/
+            plugin/exemples/*/*/exports/
           retention-days: 14
       - name: Schémas de terrain en artefact
         uses: actions/upload-artifact@v4
