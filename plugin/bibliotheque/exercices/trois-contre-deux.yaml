@@ -1,0 +1,37 @@
+id: trois-contre-deux
+titre: Trois contre deux
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: manipulation-passes
+categories: [m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: toucher
+duree_min: 12
+effectif: { min: 5, max: 25 }
+espace: { longueur: 25, largeur: 15 }
+materiel: [4 plots, ballons, chasubles]
+but: Lire la défense et trouver le joueur libre, en fixant un défenseur à la fois.
+organisation: Trois attaquants contre deux défenseurs dans un couloir de 15 mètres. Les défenseurs arrêtent le porteur au toucher à deux mains.
+consignes:
+  - Attaquez l'espace entre deux défenseurs pour les fixer.
+  - Le joueur libre appelle le ballon à voix haute.
+  - Après chaque passage, on change de rôle.
+variables:
+  simplifier: [Défenseurs qui partent de plus loin, Couloir plus large]
+  complexifier: [Ajouter un défenseur qui revient de derrière, Limiter à deux passes]
+criteres_reussite: [Le surnombre est exploité, Les attaquants communiquent]
+securite: [Toucher sans poussée ni plaquage, Arrêt du jeu au toucher]
+schema:
+  surface: { type: atelier, longueur: 25, largeur: 15, lignes: [{ x: 23, label: en-but }] }
+  elements:
+    - { type: porteur, x: 3, y: 4, label: A1 }
+    - { type: attaquant, x: 2, y: 8, label: A2 }
+    - { type: attaquant, x: 1, y: 12, label: A3 }
+    - { type: defenseur, x: 14, y: 5, label: D1 }
+    - { type: defenseur, x: 14, y: 10, label: D2 }
+  trajets:
+    - { type: course, de: [3, 4], a: [11, 6.5] }
+    - { type: passe, de: [11, 6.5], a: [10, 9] }
+    - { type: passe, de: [10, 9], a: [9, 12] }
+    - { type: course, de: [9, 12], a: [24, 12.5] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

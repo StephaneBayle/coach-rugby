@@ -1,0 +1,39 @@
+id: echauffement-progressif-adultes
+titre: Échauffement progressif (jeunes et adultes)
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: echauffement
+categories: [m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: aucun
+duree_min: 15
+effectif: { min: 6, max: 40 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [8 plots, ballons]
+but: Préparer muscles et articulations à l'effort et aux contacts de la séance, sans fatigue inutile.
+organisation: "Quatre temps enchaînés sur un couloir de 30 mètres : course lente avec mobilité, gammes athlétiques, passes en mouvement, trois accélérations progressives."
+consignes:
+  - Mobilité des hanches, des épaules et des chevilles en trottinant.
+  - Gammes (montées de genoux, talons-fesses, pas chassés) sur 20 mètres.
+  - Passes en mouvement par groupes de quatre.
+  - Trois accélérations à 70, 85 puis 95 % de la vitesse maximale.
+variables:
+  simplifier: [Supprimer les accélérations à 95 %, Gammes sur 10 mètres]
+  complexifier: [Ajouter des changements de direction, Terminer par un jeu réduit au toucher]
+criteres_reussite: [Joueurs échauffés sans être fatigués, Intensité croissante]
+securite: [Accélérations seulement en fin d'échauffement, Adapter par temps froid (durée plus longue)]
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20 }
+  elements:
+    - { type: plot, x: 2, y: 4 }
+    - { type: plot, x: 28, y: 4 }
+    - { type: plot, x: 2, y: 16 }
+    - { type: plot, x: 28, y: 16 }
+    - { type: attaquant, x: 3, y: 8, label: A1 }
+    - { type: attaquant, x: 3, y: 10, label: A2 }
+    - { type: attaquant, x: 3, y: 12, label: A3 }
+  trajets:
+    - { type: course, de: [3, 8], a: [27, 8] }
+    - { type: course, de: [3, 12], a: [27, 12] }
+    - { type: replacement, de: [27, 18], a: [3, 18] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

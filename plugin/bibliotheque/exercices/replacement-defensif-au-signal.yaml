@@ -1,0 +1,39 @@
+id: replacement-defensif-au-signal
+titre: Replacement défensif au signal
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: defense
+categories: [m14, m15f, m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: toucher
+duree_min: 12
+effectif: { min: 8, max: 20 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [plots, ballons, chasubles]
+but: Se replacer vite et bien après une action, pour être de nouveau aligné face à l'attaque.
+organisation: Les défenseurs partent d'une zone décalée. Au signal de l'éducateur, l'attaque joue à un endroit annoncé et la défense doit se replacer en ligne avant de monter.
+consignes:
+  - Au signal, repérez où joue l'attaque.
+  - Replacez-vous en courant, en regardant le ballon.
+  - Alignez-vous, puis montez ensemble ; toucher à deux mains.
+variables:
+  simplifier: [Annonce plus tôt, Un attaquant de moins]
+  complexifier: [Deux changements de point de jeu, Départ de la défense au sol]
+criteres_reussite: [Ligne reformée avant la montée, Pas de trou entre les défenseurs]
+securite: [Toucher sans poussée, Pas de croisement de course à pleine vitesse]
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20 }
+  zones:
+    - { x: 20, y: 1, longueur: 9, largeur: 8, label: départ défense }
+  elements:
+    - { type: defenseur, x: 22, y: 4.5, label: D1 }
+    - { type: defenseur, x: 25.5, y: 5, label: D2 }
+    - { type: defenseur, x: 23, y: 7.5, label: D3 }
+    - { type: porteur, x: 6, y: 14, label: A1 }
+    - { type: attaquant, x: 4, y: 17, label: A2 }
+    - { type: educateur, x: 15, y: 19.5 }
+  trajets:
+    - { type: replacement, de: [22, 4.5], a: [18, 11] }
+    - { type: replacement, de: [25.5, 5], a: [18, 14] }
+    - { type: replacement, de: [23, 7.5], a: [18, 17] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

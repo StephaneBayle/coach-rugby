@@ -26,3 +26,10 @@ comment c'est programmé. Format inspiré de
   GitHub un nom de joueur protégé, un téléphone, un e-mail, une date de
   naissance ou un numéro de licence. En début de session, il rappelle où en
   est chaque équipe.
+- `/coach-rugby:exercices` : une bibliothèque libre de 24 exercices originaux
+  (échauffement, passes, jeux réduits, contact progressif, jeu au pied,
+  défense, rugby à 5, retour au calme), chacun avec son schéma de terrain
+  imprimable en noir et blanc. Le plugin ne propose que les exercices permis
+  par les règles de jeu du moment pour votre catégorie.
+- Vous pouvez adapter une fiche, créer la vôtre et la proposer à la
+  bibliothèque commune (licence CC BY-SA).

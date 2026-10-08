@@ -1,0 +1,35 @@
+id: cercle-bilan
+titre: Cercle bilan
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: retour-au-calme
+categories: [m6, m8, m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 5
+effectif: { min: 2, max: 40 }
+espace: { longueur: 10, largeur: 10 }
+materiel: [1 ballon de parole]
+but: Faire dire aux joueurs ce qu'ils ont appris et ce qu'ils ont aimé ; finir sur une note positive et collective.
+organisation: Tous en cercle. Le ballon de parole passe de main en main ; celui qui le tient parle, les autres écoutent.
+consignes:
+  - Une chose que j'ai réussie aujourd'hui.
+  - Une chose que je veux encore travailler.
+  - L'éducateur rappelle l'objectif de la séance et le prochain rendez-vous.
+variables:
+  simplifier: [Pouce levé ou baissé pour les plus jeunes, Deux ou trois volontaires seulement]
+  complexifier: [Les joueurs proposent l'objectif de la prochaine séance, Un capitaine fait la synthèse]
+criteres_reussite: [Chacun peut s'exprimer, L'objectif de la séance est reformulé]
+securite: [Moment calme, hydratation, Vérifier que personne n'a de douleur ou de choc à signaler]
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  elements:
+    - { type: educateur, x: 5, y: 1.5 }
+    - { type: attaquant, x: 8, y: 3 }
+    - { type: attaquant, x: 8.5, y: 6.5 }
+    - { type: attaquant, x: 5, y: 8.5 }
+    - { type: attaquant, x: 1.5, y: 6.5 }
+    - { type: porteur, x: 2, y: 3 }
+  trajets:
+    - { type: passe, de: [2, 3], a: [5, 1.8] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

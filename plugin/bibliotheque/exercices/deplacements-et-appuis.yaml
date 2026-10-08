@@ -1,0 +1,37 @@
+id: deplacements-et-appuis
+titre: Déplacements et appuis
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: echauffement
+categories: [m8, m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 8
+effectif: { min: 4, max: 30 }
+espace: { longueur: 20, largeur: 10 }
+materiel: [10 plots, 1 ballon par colonne]
+but: Activer le corps progressivement et travailler les appuis, les changements de direction et les accélérations.
+organisation: Colonnes de 3 à 5 joueurs devant un slalom de plots. Passage en continu, retour en trottinant sur le côté.
+consignes:
+  - Premier passage en trottinant, puis on accélère à chaque passage.
+  - Appuis courts et rapides autour des plots, buste droit, regard devant.
+  - Dernier passage avec un ballon, porté à deux mains.
+variables:
+  simplifier: [Plots plus espacés, Passages sans ballon]
+  complexifier: [Changement de direction au signal de l'éducateur, Passe au partenaire en fin de slalom]
+criteres_reussite: [Appuis réactifs, Accélération en sortie de slalom]
+securite: [Montée en intensité progressive, Retour en trottinant hors du couloir de passage]
+schema:
+  surface: { type: atelier, longueur: 20, largeur: 10 }
+  elements:
+    - { type: attaquant, x: 1, y: 5, label: A1 }
+    - { type: plot, x: 4, y: 4 }
+    - { type: plot, x: 7, y: 6 }
+    - { type: plot, x: 10, y: 4 }
+    - { type: plot, x: 13, y: 6 }
+    - { type: plot, x: 16, y: 4 }
+  trajets:
+    - { type: course, de: [1, 5], a: [8.5, 5], via: [5, 7] }
+    - { type: course, de: [8.5, 5], a: [19, 5], via: [13, 3] }
+    - { type: replacement, de: [19, 9], a: [1, 9] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

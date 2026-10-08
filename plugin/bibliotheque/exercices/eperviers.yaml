@@ -1,0 +1,35 @@
+id: eperviers
+titre: Les éperviers
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: echauffement
+categories: [m6, m8, m10, m12]
+niveau: decouverte
+contact: toucher
+duree_min: 10
+effectif: { min: 8, max: 24 }
+espace: { longueur: 20, largeur: 15 }
+materiel: [6 plots, chasubles pour les éperviers]
+but: Traverser le terrain en esquivant les défenseurs ; apprendre à accélérer et à prendre les intervalles.
+organisation: Les enfants partent d'une ligne de fond. Un ou deux éperviers au milieu du terrain. Le but est d'atteindre la ligne d'en face.
+consignes:
+  - Au signal, traverse sans te faire toucher à deux mains par un épervier.
+  - Touché ? Tu deviens épervier à ton tour.
+  - Les éperviers touchent à deux mains, sans pousser ni retenir.
+variables:
+  simplifier: [Un seul épervier, Terrain plus large]
+  complexifier: [Traverser avec un ballon en main, Éperviers qui se tiennent la main par deux]
+criteres_reussite: [Les enfants accélèrent dans les espaces libres, Le toucher se fait sans brutalité]
+securite: [Toucher à deux mains sur le haut du corps, sans pousser, Espaces de dégagement autour du terrain]
+schema:
+  surface: { type: atelier, longueur: 20, largeur: 15, lignes: [{ x: 2, label: départ }, { x: 18, label: arrivée }] }
+  elements:
+    - { type: attaquant, x: 1, y: 3, label: A1 }
+    - { type: attaquant, x: 1, y: 7.5, label: A2 }
+    - { type: attaquant, x: 1, y: 12, label: A3 }
+    - { type: defenseur, x: 10, y: 6, label: D1 }
+    - { type: defenseur, x: 10, y: 10, label: D2 }
+  trajets:
+    - { type: course, de: [1, 3], a: [19, 2] }
+    - { type: course, de: [1, 12], a: [19, 13], via: [10, 14] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

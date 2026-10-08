@@ -1,0 +1,36 @@
+id: coup-de-pied-rasant-et-poursuite
+titre: Coup de pied rasant et poursuite
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: jeu-au-pied
+categories: [m14, m15f, m16, m18f, m19, seniors]
+niveau: confirme
+contact: aucun
+duree_min: 10
+effectif: { min: 3, max: 18 }
+espace: { longueur: 40, largeur: 20 }
+materiel: [ballons, plots]
+but: Jouer au pied dans le dos d'une défense montante, puis poursuivre ensemble pour récupérer le ballon.
+organisation: Un botteur et deux poursuivants partent d'une ligne. Le botteur frappe un coup de pied rasant vers une zone cible ; les poursuivants courent récupérer le ballon.
+consignes:
+  - Frappe rasante, ballon qui roule vers la zone.
+  - Poursuivants derrière le botteur au moment de la frappe (sinon hors-jeu).
+  - Le premier arrivé ramasse le ballon et le passe à son partenaire.
+variables:
+  simplifier: [Zone cible plus grande, Frapper à l'arrêt]
+  complexifier: [Un défenseur qui revient au toucher, Frapper en course]
+criteres_reussite: [Ballon arrêté dans la zone, Poursuivants en ligne derrière le botteur]
+securite: [Pas de plongeon sur le ballon chez les débutants, Ramassage en se baissant, sans collision]
+schema:
+  surface: { type: atelier, longueur: 40, largeur: 20 }
+  zones:
+    - { x: 28, y: 6, longueur: 8, largeur: 8, label: cible }
+  elements:
+    - { type: porteur, x: 5, y: 10, label: A1 }
+    - { type: attaquant, x: 3, y: 6, label: A2 }
+    - { type: attaquant, x: 3, y: 14, label: A3 }
+  trajets:
+    - { type: pied, de: [5, 10], a: [31, 10] }
+    - { type: course, de: [3, 6], a: [29, 8] }
+    - { type: course, de: [3, 14], a: [29, 12] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

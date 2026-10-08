@@ -1,0 +1,35 @@
+id: passes-en-triangle
+titre: Passes en triangle
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: manipulation-passes
+categories: [m8, m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 8
+effectif: { min: 3, max: 30 }
+espace: { longueur: 10, largeur: 10 }
+materiel: [3 plots et 1 ballon par groupe de 3]
+but: Maîtriser la passe à deux mains, des deux côtés, et la réception mains tendues.
+organisation: Groupes de trois, chacun à un plot d'un triangle de 5 à 7 mètres de côté. On se passe le ballon puis on suit sa passe.
+consignes:
+  - Mains tendues vers le passeur pour appeler le ballon.
+  - Passe à deux mains, en balayant vers la cible.
+  - Après ta passe, cours prendre la place du receveur.
+  - Changer de sens toutes les minutes pour travailler les deux côtés.
+variables:
+  simplifier: [Triangle plus petit, Gros ballon en mousse pour les plus jeunes]
+  complexifier: [Deux ballons en même temps, Passe en course]
+criteres_reussite: [Ballon attrapé sans tomber, Passes à hauteur de poitrine des deux côtés]
+securite: [Groupes espacés de 5 mètres, Ballon adapté à la catégorie]
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  elements:
+    - { type: porteur, x: 2, y: 8, label: A1 }
+    - { type: attaquant, x: 8, y: 8, label: A2 }
+    - { type: attaquant, x: 5, y: 2, label: A3 }
+  trajets:
+    - { type: passe, de: [2, 8], a: [8, 8] }
+    - { type: passe, de: [8, 8], a: [5, 2] }
+    - { type: course, de: [2.5, 7.5], a: [7.5, 8.8], via: [5, 9.5] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

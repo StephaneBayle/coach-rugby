@@ -1,0 +1,34 @@
+id: duel-de-poussee-a-genoux
+titre: Duel de poussée à genoux
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: contact
+categories: [m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: contact-progressif
+duree_min: 8
+effectif: { min: 2, max: 24 }
+espace: { longueur: 10, largeur: 10 }
+materiel: [plots, tapis ou herbe souple]
+but: Découvrir la posture de poussée (dos plat, tête haute) dans un duel ludique et contrôlé.
+organisation: Binômes de même gabarit, à genoux face à face, mains sur les épaules du partenaire. Au signal, chacun essaie de faire reculer l'autre pendant 5 secondes.
+consignes:
+  - Dos plat, tête haute, regard devant - jamais la tête baissée.
+  - Pousse avec les jambes et les épaules, pas avec la tête.
+  - Au coup de sifflet, on s'arrête tout de suite.
+variables:
+  simplifier: [Poussée sur un bouclier tenu par l'éducateur, Durée de 3 secondes]
+  complexifier: [Départ accroupi, Duel pour gagner un ballon posé entre les deux]
+criteres_reussite: [Dos plat et tête haute, Arrêt immédiat au signal]
+securite: [Binômes de gabarit comparable, Durée courte, Sol souple, Arrêt à la moindre douleur au cou]
+pour_aller_plus_loin:
+  - { source: ffr-formation-edr, note: "Situations d'entraînement aux postures de poussée (site de l'entraîneur FFR)." }
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  elements:
+    - { type: attaquant, x: 4.3, y: 5, label: A1 }
+    - { type: defenseur, x: 5.7, y: 5, label: D1 }
+    - { type: attaquant, x: 4.3, y: 8, label: A2 }
+    - { type: defenseur, x: 5.7, y: 8, label: D2 }
+    - { type: educateur, x: 8.5, y: 2 }
+relecture: { statut: relu-ia, date: 2026-10-08 }

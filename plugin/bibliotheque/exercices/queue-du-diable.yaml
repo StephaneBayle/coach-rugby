@@ -1,0 +1,39 @@
+id: queue-du-diable
+titre: La queue du diable
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: echauffement
+categories: [m5, m6, m8, m10]
+niveau: decouverte
+contact: aucun
+duree_min: 8
+effectif: { min: 6, max: 20 }
+espace: { longueur: 20, largeur: 15 }
+materiel: [un foulard ou une ceinture à flag par enfant, 4 plots]
+but: Courir, esquiver, changer de direction et lever la tête, dans un jeu sans contact.
+organisation: Chaque enfant glisse un foulard à sa ceinture, comme une queue. Tous jouent dans le carré délimité par les plots.
+consignes:
+  - Au signal, attrape le plus de foulards possible sans toucher les autres joueurs.
+  - Protège ta queue en courant et en esquivant, jamais en la tenant avec les mains.
+  - Un foulard attrapé se glisse à ta ceinture ; si tu as perdu le tien, continue à jouer.
+variables:
+  simplifier: [Agrandir le carré, Jouer d'abord à deux contre deux]
+  complexifier: [Tenir un ballon à deux mains pendant le jeu, Réduire le carré]
+criteres_reussite: [Les enfants lèvent la tête et changent de direction, Aucun contact volontaire]
+securite: [Terrain plat sans obstacle, Interdiction de pousser ou de retenir, Foulards glissés à la ceinture, jamais noués]
+schema:
+  surface: { type: atelier, longueur: 20, largeur: 15 }
+  elements:
+    - { type: plot, x: 0, y: 0 }
+    - { type: plot, x: 20, y: 0 }
+    - { type: plot, x: 0, y: 15 }
+    - { type: plot, x: 20, y: 15 }
+    - { type: attaquant, x: 5, y: 4, label: A1 }
+    - { type: attaquant, x: 12, y: 3, label: A2 }
+    - { type: attaquant, x: 15, y: 10, label: A3 }
+    - { type: attaquant, x: 7, y: 11, label: A4 }
+    - { type: educateur, x: 10, y: 7.5 }
+  trajets:
+    - { type: course, de: [5, 4], a: [9, 8], via: [8, 4] }
+    - { type: course, de: [15, 10], a: [11, 12] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

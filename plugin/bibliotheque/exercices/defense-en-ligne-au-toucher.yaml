@@ -1,0 +1,37 @@
+id: defense-en-ligne-au-toucher
+titre: Défense en ligne au toucher
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: defense
+categories: [m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: toucher
+duree_min: 10
+effectif: { min: 6, max: 16 }
+espace: { longueur: 20, largeur: 15 }
+materiel: [plots, 1 ballon, chasubles]
+but: Monter ensemble en défense, alignés, pour réduire le temps et l'espace des attaquants.
+organisation: Une ligne de 3 ou 4 défenseurs face à autant d'attaquants à 10 mètres. Au départ du ballon, les défenseurs montent ensemble et touchent à deux mains.
+consignes:
+  - Défenseurs, partez ensemble au départ du ballon, épaule contre épaule à distance de bras.
+  - Parlez - chacun annonce son attaquant.
+  - Gardez la ligne - personne ne monte seul.
+variables:
+  simplifier: [Attaquants qui marchent, Un attaquant de moins]
+  complexifier: [Un attaquant de plus, Départ décidé par l'attaque]
+criteres_reussite: [Ligne défensive alignée, Communication audible]
+securite: [Toucher à deux mains sans poussée, Pas de plaquage dans cet atelier]
+schema:
+  surface: { type: atelier, longueur: 20, largeur: 15 }
+  elements:
+    - { type: defenseur, x: 14, y: 3, label: D1 }
+    - { type: defenseur, x: 14, y: 6.5, label: D2 }
+    - { type: defenseur, x: 14, y: 10, label: D3 }
+    - { type: porteur, x: 4, y: 4, label: A1 }
+    - { type: attaquant, x: 3, y: 8, label: A2 }
+    - { type: attaquant, x: 2, y: 12, label: A3 }
+  trajets:
+    - { type: course, de: [14, 3], a: [10, 3.5] }
+    - { type: course, de: [14, 6.5], a: [10, 7] }
+    - { type: course, de: [14, 10], a: [10, 10.5] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

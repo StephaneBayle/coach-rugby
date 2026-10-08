@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:exercice",
+  "title": "Fiche d'exercice de la bibliothèque (CC BY-SA 4.0)",
+  "type": "object",
+  "required": ["id", "titre", "licence", "auteurs", "theme", "categories", "niveau", "contact", "duree_min", "effectif", "espace", "materiel", "but", "organisation", "consignes", "variables", "criteres_reussite", "securite", "schema", "relecture"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "cr:communs#/$defs/identifiant", "description": "Égal au nom du fichier, sans .yaml." },
+    "titre": { "type": "string", "minLength": 3 },
+    "licence": { "const": "CC-BY-SA-4.0" },
+    "auteurs": { "type": "string", "description": "« coach-rugby » ou pseudonyme du contributeur ; jamais le nom d'un joueur." },
+    "theme": { "enum": ["echauffement", "manipulation-passes", "jeu-reduit", "contact", "jeu-au-pied", "defense", "rugby-a-5", "retour-au-calme"] },
+    "categories": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "cr:communs#/$defs/categorie" } },
+    "niveau": { "enum": ["decouverte", "intermediaire", "confirme"] },
+    "contact": { "$ref": "cr:communs#/$defs/contact" },
+    "exige": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "enum": ["plaquage", "melee", "touche", "ruck"] },
+      "description": "Phases de jeu que l'exercice suppose permises par la forme de jeu du moment."
+    },
+    "duree_min": { "type": "integer", "minimum": 3, "maximum": 45 },
+    "effectif": {
+      "type": "object",
+      "required": ["min", "max"],
+      "additionalProperties": false,
+      "properties": { "min": { "type": "integer", "minimum": 1 }, "max": { "type": "integer", "minimum": 1 } }
+    },
+    "espace": {
+      "type": "object",
+      "required": ["longueur", "largeur"],
+      "additionalProperties": false,
+      "properties": { "longueur": { "type": "number", "exclusiveMinimum": 0 }, "largeur": { "type": "number", "exclusiveMinimum": 0 } }
+    },
+    "materiel": { "type": "array", "items": { "type": "string" } },
+    "but": { "type": "string", "minLength": 10 },
+    "organisation": { "type": "string", "minLength": 10 },
+    "consignes": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "variables": {
+      "type": "object",
+      "required": ["simplifier", "complexifier"],
+      "additionalProperties": false,
+      "properties": {
+        "simplifier": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "complexifier": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "criteres_reussite": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "securite": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "sources": { "type": "array", "items": { "$ref": "cr:communs#/$defs/refSource" } },
+    "pour_aller_plus_loin": {
+      "type": "array",
+      "description": "Renvois (sans reproduction) vers des ressources officielles de sources.yaml.",
+      "items": {
+        "type": "object",
+        "required": ["source", "note"],
+        "additionalProperties": false,
+        "properties": { "source": { "$ref": "cr:communs#/$defs/refSource" }, "note": { "type": "string" } }
+      }
+    },
+    "schema": { "$ref": "#/$defs/schemaTerrain" },
+    "relecture": {
+      "type": "object",
+      "required": ["statut"],
+      "additionalProperties": false,
+      "properties": {
+        "statut": { "enum": ["a-relire", "relu-ia", "relu-mainteneur"] },
+        "date": { "$ref": "cr:communs#/$defs/date" },
+        "note": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "point": { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 },
+    "schemaTerrain": {
+      "type": "object",
+      "required": ["surface", "elements"],
+      "additionalProperties": false,
+      "properties": {
+        "surface": {
+          "type": "object",
+          "required": ["type", "longueur", "largeur"],
+          "additionalProperties": false,
+          "properties": {
+            "type": { "enum": ["terrain", "demi", "quart", "atelier"] },
+            "longueur": { "type": "number", "exclusiveMinimum": 0 },
+            "largeur": { "type": "number", "exclusiveMinimum": 0 },
+            "lignes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["x"],
+                "additionalProperties": false,
+                "properties": { "x": { "type": "number" }, "label": { "type": "string" } }
+              }
+            }
+          }
+        },
+        "elements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "x", "y"],
+            "additionalProperties": false,
+            "properties": {
+              "type": { "enum": ["attaquant", "porteur", "defenseur", "educateur", "ballon", "plot", "piquet", "bouclier"] },
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "label": { "type": "string", "pattern": "^[A-Z][0-9]{0,2}$" }
+            }
+          }
+        },
+        "trajets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "de", "a"],
+            "additionalProperties": false,
+            "properties": {
+              "type": { "enum": ["course", "passe", "pied", "replacement"] },
+              "de": { "$ref": "#/$defs/point" },
+              "a": { "$ref": "#/$defs/point" },
+              "via": { "$ref": "#/$defs/point" }
+            }
+          }
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["x", "y", "longueur", "largeur"],
+            "additionalProperties": false,
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "longueur": { "type": "number", "exclusiveMinimum": 0 },
+              "largeur": { "type": "number", "exclusiveMinimum": 0 },
+              "label": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

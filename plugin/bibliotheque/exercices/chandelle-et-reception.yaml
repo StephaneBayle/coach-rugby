@@ -1,0 +1,33 @@
+id: chandelle-et-reception
+titre: Chandelle et réception
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: jeu-au-pied
+categories: [m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: aucun
+duree_min: 10
+effectif: { min: 2, max: 20 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [1 ballon par binôme, plots]
+but: Frapper une chandelle haute et précise, et la réceptionner en sécurité.
+organisation: Binômes face à face à 10 à 20 mètres. L'un frappe une chandelle, l'autre se place sous le ballon et le réceptionne.
+consignes:
+  - Frappeur, lâche le ballon bas et frappe avec le cou-de-pied, vers le haut.
+  - Receveur, place-toi sous le ballon, de profil, bras tendus en corbeille.
+  - Ramène le ballon contre la poitrine, coudes serrés.
+variables:
+  simplifier: [Distance de 10 mètres, Lancer à la main au lieu de frapper]
+  complexifier: [Réception sous la pression d'un poursuivant au toucher, Frapper dans une zone désignée]
+criteres_reussite: [Chandelle haute, Réception sans en-avant]
+securite: [Un seul ballon en l'air par couloir, Couloirs espacés]
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20 }
+  elements:
+    - { type: porteur, x: 5, y: 10, label: A1 }
+    - { type: attaquant, x: 22, y: 10, label: A2 }
+  zones:
+    - { x: 19, y: 7, longueur: 6, largeur: 6, label: réception }
+  trajets:
+    - { type: pied, de: [5, 10], a: [22, 10], via: [13.5, 1] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

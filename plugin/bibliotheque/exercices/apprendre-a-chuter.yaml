@@ -1,0 +1,35 @@
+id: apprendre-a-chuter
+titre: Apprendre à chuter avec le ballon
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: contact
+categories: [m8, m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: contact-progressif
+duree_min: 10
+effectif: { min: 2, max: 20 }
+espace: { longueur: 10, largeur: 10 }
+materiel: [1 ballon par binôme, tapis ou herbe souple]
+but: Savoir tomber sans se faire mal en protégeant le ballon, avant tout travail de contact.
+organisation: "Par deux, progression en quatre étapes : à genoux, accroupi, debout à l'arrêt, puis en marchant. On se pose au sol sur le côté, le ballon serré contre soi et posé vers son camp."
+consignes:
+  - Serre le ballon contre toi à deux mains.
+  - Tombe sur le côté (épaule, hanche), jamais sur les mains ou sur la tête ; menton rentré.
+  - Pose le ballon vers ton camp et relève-toi vite.
+  - On ne passe à l'étape suivante que si la précédente est réussie.
+variables:
+  simplifier: [Rester aux étapes à genoux, Tapis épais]
+  complexifier: [Chute après une légère poussée du partenaire sur un bouclier, Enchaîner chute et relevé pour rejouer]
+criteres_reussite: [Chute sur le côté, menton rentré, Ballon protégé et posé vers son camp]
+securite: [Sol souple obligatoire, Pas de chute en course chez les débutants, Arrêt à la moindre douleur]
+pour_aller_plus_loin:
+  - { source: ffr-formation-edr, note: "Ressources « circuit technique préparatoire au plaquage » et postures du site de l'entraîneur FFR." }
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  zones:
+    - { x: 2, y: 2, longueur: 6, largeur: 6, label: tapis }
+  elements:
+    - { type: porteur, x: 4, y: 5, label: A1 }
+    - { type: attaquant, x: 7, y: 5, label: A2 }
+    - { type: educateur, x: 9, y: 1 }
+relecture: { statut: relu-ia, date: 2026-10-08 }

@@ -1,0 +1,37 @@
+id: ligne-de-passes-en-avancant
+titre: Ligne de passes en avançant
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: manipulation-passes
+categories: [m8, m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 10
+effectif: { min: 4, max: 30 }
+espace: { longueur: 30, largeur: 15 }
+materiel: [plots, 1 ballon par ligne]
+but: Avancer en se passant le ballon vers l'arrière, en restant décalé derrière le porteur.
+organisation: Lignes de 4 joueurs en escalier. Le porteur court droit devant et passe au partenaire suivant, qui est toujours un peu en retrait.
+consignes:
+  - Porteur, cours droit vers la ligne d'en face avant de passer.
+  - Partenaires, restez décalés derrière le porteur, prêts à recevoir.
+  - La passe part vers l'arrière ou à plat, jamais vers l'avant.
+  - Arrivés au bout, revenez en marchant sur le côté.
+variables:
+  simplifier: [Passer en marchant, Lignes de trois]
+  complexifier: [Passe sautée, Retour dans l'autre sens pour travailler l'autre main]
+criteres_reussite: [Toutes les passes vers l'arrière, La ligne reste en escalier]
+securite: [Couloirs de passage séparés, Retour hors des couloirs]
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 15 }
+  elements:
+    - { type: porteur, x: 3, y: 3, label: A1 }
+    - { type: attaquant, x: 1.5, y: 6, label: A2 }
+    - { type: attaquant, x: 0.5, y: 9, label: A3 }
+    - { type: attaquant, x: 0, y: 12, label: A4 }
+  trajets:
+    - { type: course, de: [3, 3], a: [12, 3] }
+    - { type: course, de: [1.5, 6], a: [11, 6] }
+    - { type: passe, de: [12, 3], a: [11, 6] }
+    - { type: course, de: [0.5, 9], a: [9, 9] }
+relecture: { statut: relu-ia, date: 2026-10-08 }
