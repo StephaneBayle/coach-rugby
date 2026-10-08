@@ -70,10 +70,28 @@ l'accès est ouvert. Jamais en CI (pas de clé d'API sur GitHub).
 Ces points ne peuvent être vérifiés qu'en installant le plugin ; ils sont
 suivis dans une issue et dans la recette du lot 1.
 
-- [ ] Cowork : accès au dossier `~/Rugby-Saisons` ou nécessité de sélectionner un dossier de travail.
-- [ ] Cowork : exécution de Node et déclenchement des hooks.
-- [ ] Expansion du `~` dans la valeur par défaut d'une option `directory`.
-- [ ] Emplacement de `node_modules` après l'installation automatique des dépendances.
+- [ ] Cowork : accès au dossier `~/Rugby-Saisons` ou nécessité de sélectionner un dossier de travail (#8).
+- [ ] Cowork : exécution de Node et déclenchement des hooks (#8).
+- [x] Valeur de l'option `dossier_saison` : l'installation en ligne de commande signale « 2 userConfig options not yet set ». Sans valeur, `COACH_RUGBY_OPTION_DOSSIER` est vide et le script retombe sur `~/Rugby-Saisons`, avec le `~` développé par `developperTilde` (2026-10-08).
+- [x] Emplacement de `node_modules` : Claude Code 2.1.247 installe les dépendances **à côté du plugin** (`~/.claude/plugins/cache/coach-rugby/coach-rugby/0.1.0/node_modules`) ; l'installation de secours dans `CLAUDE_PLUGIN_DATA` n'a pas servi (2026-10-08).
+
+## Recette de la version 0.1.0 (2026-10-08, Claude Code 2.1.247, macOS)
+
+Depuis la copie installée par `/plugin install coach-rugby@coach-rugby`, sur une
+copie de l'exemple fictif M10 :
+
+| Vérification | Résultat |
+|---|---|
+| `statut` (date fixée au 2026-10-12) | phase, semaine 8, plateau à J-5, règles du moment, relance logistique |
+| `valider` sur le dossier | 4 fichiers valides |
+| `exporter --pdf` | HTML A4 et téléphone, 7 SVG, `pour-mca.txt`, 2 PDF |
+| Hook `session-start` | une ligne de situation par équipe |
+| Hook `garde-rgpd` (écriture d'un nom protégé dans le dépôt) | bloqué, code 2, nom masqué |
+| `claude plugin details` | 6 skills, 4 agents, 2 hooks ; environ 1 100 jetons permanents |
+| Release v0.1.0 | zip de 139 Ko publié par le workflow |
+
+Reste à faire par le mainteneur : la recette dans Cowork (#8) et l'essai du
+texte `pour-mca.txt` dans Mon Coach Assistant (#7).
 
 ## Sources
 
