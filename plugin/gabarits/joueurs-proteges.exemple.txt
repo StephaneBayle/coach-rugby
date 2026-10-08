@@ -1,0 +1,11 @@
+# Joueurs protégés — coach-rugby
+#
+# Un nom par ligne (prénom et nom, et leurs variantes : surnom, nom d'usage).
+# Ce fichier reste sur votre ordinateur. Dans Claude Code, coach-rugby refuse
+# de publier sur GitHub (commit, issue, pull request) tout texte qui contient
+# l'un de ces noms.
+#
+# Vous n'avez rien à écrire ici vous-même : le plugin y ajoute les noms qui
+# apparaissent dans vos conversations. Vous pouvez le relire et le compléter.
+#
+# Les lignes qui commencent par # sont ignorées.

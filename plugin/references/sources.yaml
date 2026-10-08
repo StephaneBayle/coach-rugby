@@ -1,0 +1,120 @@
+# Registre des sources citées par coach-rugby.
+#
+# statut « consultee » : lue à la date indiquée. « a-verifier » : référence
+# connue, pas encore relue pour ce projet — ne pas s'en servir pour affirmer
+# une règle sans la consulter.
+#
+# Droits : les documents de la FFR, de World Rugby et des éditeurs restent la
+# propriété de leurs auteurs. coach-rugby les RÉSUME et y RENVOIE (lien et
+# date) ; il ne les reproduit jamais (ni texte, ni schéma, ni PDF).
+version_schema: 1
+sources:
+  - id: ffr-cahier-edr-2026-2027
+    titre: Cahier des écoles de rugby 2026-2027
+    editeur: Fédération Française de Rugby
+    url: http://formation.ffr.fr/index.php/article/cahier-des-ecoles-de-rugby-2026-2027
+    publie_le: 2026-09
+    consulte_le: 2026-10-08
+    type: ffr
+    droits: © FFR — résumer, renvoyer, ne pas reproduire
+    statut: consultee
+    note: Formes de jeu par catégorie et par mois (p. 6-7), modifications réglementaires (p. 14-16), commotions (p. 17-18).
+  - id: ffr-formation-edr
+    titre: Site de l'entraîneur — rubrique École de rugby (situations, séances atelier, guides)
+    editeur: Fédération Française de Rugby, Direction sportive
+    url: http://formation.ffr.fr/index.php/categorie/ecole-de-rugby
+    consulte_le: 2026-10-08
+    type: ffr
+    droits: © FFR — résumer, renvoyer, ne pas reproduire
+    statut: consultee
+    note: Séances atelier mensuelles, initiation M6-M8 (cycles), mêlée éducative M10-M12, échauffements M8-M12, guide de l'éducateur, plan de formation du joueur.
+  - id: ffr-formation
+    titre: Site de l'entraîneur (formation.ffr.fr)
+    editeur: Fédération Française de Rugby, Direction sportive
+    url: http://formation.ffr.fr/
+    consulte_le: 2026-10-08
+    type: ffr
+    droits: © FFR — résumer, renvoyer, ne pas reproduire
+    statut: consultee
+  - id: ffr-plan-formation-joueur-2023
+    titre: Plan de formation du joueur (2023)
+    editeur: Fédération Française de Rugby
+    url: http://formation.ffr.fr/index.php/article/plan-de-formation-du-joueur-2023
+    publie_le: "2023"
+    type: ffr
+    droits: © FFR — résumer, renvoyer, ne pas reproduire
+    statut: a-verifier
+  - id: ffr-guide-educateur-2023
+    titre: Guide de l'éducateur (2023)
+    editeur: Fédération Française de Rugby
+    url: http://formation.ffr.fr/index.php/article/guide-de-l-educateur-2023
+    publie_le: "2023"
+    type: ffr
+    droits: © FFR — résumer, renvoyer, ne pas reproduire
+    statut: a-verifier
+  - id: ffr-reglements-generaux
+    titre: Règlements généraux de la FFR (saison en cours)
+    editeur: Fédération Française de Rugby
+    url: https://www.ffr.fr/
+    type: ffr
+    droits: © FFR — résumer, renvoyer, ne pas reproduire
+    statut: a-verifier
+    note: Règles du jeu des jeunes et des seniors amateurs, obligations sportives, règlement médical (annexe XIV).
+  - id: ffr-rugby-a-5
+    titre: Rugby à 5 — règles du jeu
+    editeur: Fédération Française de Rugby
+    url: https://www.ffr.fr/
+    type: ffr
+    droits: © FFR — résumer, renvoyer, ne pas reproduire
+    statut: a-verifier
+  - id: ffr-mon-coach-assistant
+    titre: Mon Coach Assistant arrive, votre assistant coach 100 % gratuit
+    editeur: Fédération Française de Rugby — Mon Club House
+    url: https://monclubhouse.ffr.fr/actualites/mon-coach-assistant-arrive-votre-assistant-coach-100-gratuit
+    publie_le: 2026-08-24
+    consulte_le: 2026-10-08
+    type: outil
+    droits: © FFR — résumer, renvoyer
+    statut: consultee
+    note: Outil fédéral d'administration d'équipe relié à Oval-e ; aucune API ni export documentés au 2026-10-08.
+  - id: world-rugby-lois-du-jeu
+    titre: Lois du jeu
+    editeur: World Rugby
+    url: https://www.world.rugby/the-game/laws/home
+    type: world-rugby
+    droits: © World Rugby — résumer, renvoyer, ne pas reproduire
+    statut: a-verifier
+  - id: world-rugby-commotion
+    titre: Commotion cérébrale — guide et ressources (Player Welfare)
+    editeur: World Rugby
+    url: https://www.world.rugby/the-game/player-welfare
+    type: world-rugby
+    droits: © World Rugby — résumer, renvoyer, ne pas reproduire
+    statut: a-verifier
+  - id: bunker-thorpe-1982
+    titre: A model for the teaching of games in secondary schools
+    auteurs: David Bunker, Rod Thorpe
+    editeur: Bulletin of Physical Education, 18(1)
+    publie_le: "1982"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: Approche par le jeu (Teaching Games for Understanding).
+  - id: deleplace-1979
+    titre: Rugby de mouvement, rugby total
+    auteurs: René Deleplace
+    editeur: Éditions EPS
+    publie_le: "1979"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: Fondements du rugby de mouvement et du « mouvement général ».
+  - id: foster-2001-srpe
+    titre: A new approach to monitoring exercise training
+    auteurs: Carl Foster et al.
+    editeur: Journal of Strength and Conditioning Research, 15(1)
+    publie_le: "2001"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: Charge de séance (sRPE = RPE × durée), utilisée au lot 4.

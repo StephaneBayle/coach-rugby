@@ -1,0 +1,11 @@
+id: groupe-cadets
+nom: Section sportive — groupe 4e/3e (fictif)
+type_groupe: groupe-entrainement
+categories: [m16, m14]
+pratique: xv
+genre: mixte
+effectif_habituel: 22
+volume_hebdo_cible: 300
+creneaux:
+  - { jour: lundi, heure: "15:00", duree_min: 120, lieu: terrain }
+  - { jour: jeudi, heure: "15:00", duree_min: 120, lieu: terrain }

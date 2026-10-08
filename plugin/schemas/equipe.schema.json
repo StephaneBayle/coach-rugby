@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:equipe",
+  "title": "Équipe ou groupe d'entraînement (equipe.yaml)",
+  "type": "object",
+  "required": ["id", "nom", "categories", "pratique", "effectif_habituel"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "cr:communs#/$defs/identifiant", "description": "Égal au nom du dossier de l'équipe." },
+    "nom": { "type": "string", "minLength": 1, "description": "Nom libre ; reste sur le poste du coach." },
+    "type_groupe": { "enum": ["equipe", "groupe-entrainement"], "default": "equipe" },
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "cr:communs#/$defs/categorie" },
+      "description": "Une ou plusieurs catégories (groupe mêlant des âges) : la plus jeune fixe les règles de contact."
+    },
+    "pratique": { "$ref": "cr:communs#/$defs/pratique" },
+    "genre": { "enum": ["masculin", "feminin", "mixte"] },
+    "niveau": { "type": "string", "description": "Niveau de compétition, ex. « Fédérale 3 », « Régionale 1 »." },
+    "effectif_habituel": { "type": "integer", "minimum": 1, "maximum": 120, "description": "Un NOMBRE de joueurs, jamais une liste de noms." },
+    "volume_hebdo_cible": { "type": "integer", "minimum": 0, "maximum": 1200, "description": "Minutes d'entraînement par semaine visées (pôles, sport-études)." },
+    "staff": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role"],
+        "additionalProperties": false,
+        "properties": {
+          "role": { "enum": ["entraineur-principal", "adjoint", "educateur", "preparateur-physique", "referent-edr", "manager", "autre"] },
+          "nombre": { "type": "integer", "minimum": 1 }
+        }
+      },
+      "description": "Rôles seulement, jamais de noms."
+    },
+    "creneaux": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["jour", "duree_min"],
+        "additionalProperties": false,
+        "properties": {
+          "jour": { "enum": ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"] },
+          "heure": { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" },
+          "duree_min": { "type": "integer", "minimum": 15, "maximum": 240 },
+          "lieu": { "enum": ["terrain", "demi-terrain", "quart-de-terrain", "gymnase", "autre"] }
+        }
+      }
+    },
+    "materiel": { "type": "array", "items": { "type": "string" } }
+  }
+}

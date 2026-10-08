@@ -1,0 +1,17 @@
+# EXEMPLE FICTIF — aucune donnée réelle. Effectif en nombre, staff en rôles.
+id: seniors-f3
+nom: Équipe première des Goélands
+type_groupe: equipe
+categories: [seniors]
+pratique: xv
+genre: masculin
+niveau: Fédérale 3
+effectif_habituel: 34
+staff:
+  - { role: entraineur-principal }
+  - { role: adjoint, nombre: 2 }
+  - { role: preparateur-physique }
+creneaux:
+  - { jour: mardi, heure: "19:30", duree_min: 105, lieu: terrain }
+  - { jour: jeudi, heure: "19:30", duree_min: 90, lieu: terrain }
+materiel: [ballons taille 5, boucliers, sacs de plaquage, plots, chasubles, ballons de touche]

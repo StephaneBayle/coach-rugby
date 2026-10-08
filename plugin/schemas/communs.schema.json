@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:communs",
+  "title": "Définitions communes de coach-rugby",
+  "$defs": {
+    "date": { "type": "string", "format": "date" },
+    "saison": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{4}$" },
+    "identifiant": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "statut": {
+      "description": "verifie : confirmé par un mainteneur avec une source datée ; a-verifier : tiré d'une source mais non confirmé, ou susceptible de changer ; hypothese : choix pédagogique ou estimation non sourcée ; perso : valeur fixée par le coach.",
+      "enum": ["verifie", "a-verifier", "hypothese", "perso"]
+    },
+    "refSource": {
+      "description": "Identifiant d'une entrée de references/sources.yaml, ou texte libre décrivant la source (ex. « mca-copie »).",
+      "type": "string",
+      "minLength": 1
+    },
+    "parametreDate": {
+      "description": "Valeur réglementaire ou pédagogique, avec son statut et sa source datée.",
+      "type": "object",
+      "required": ["valeur", "statut"],
+      "additionalProperties": false,
+      "properties": {
+        "valeur": {},
+        "statut": { "$ref": "#/$defs/statut" },
+        "source": { "$ref": "#/$defs/refSource" },
+        "page": { "type": "integer", "minimum": 1 },
+        "saison": { "$ref": "#/$defs/saison" },
+        "verifie_le": { "$ref": "#/$defs/date" },
+        "note": { "type": "string" }
+      }
+    },
+    "contact": {
+      "description": "Niveau de contact, du plus faible au plus fort : aucun, toucher, contact-progressif (chutes, postures, duels sans plaquage), plaquage (sans regroupement organisé), plein (plaquage et regroupements).",
+      "enum": ["aucun", "toucher", "contact-progressif", "plaquage", "plein"]
+    },
+    "categorie": {
+      "enum": ["m5", "m6", "m8", "m10", "m12", "m14", "m15f", "m16", "m18f", "m19", "seniors"]
+    },
+    "pratique": {
+      "description": "Forme de pratique habituelle de l'équipe. ecole-de-rugby : formes de jeu du calendrier FFR de la catégorie.",
+      "enum": ["ecole-de-rugby", "xv", "x", "7", "5", "loisir"]
+    },
+    "typeStructure": {
+      "enum": ["club", "pole-formation", "section-sportive", "sport-etudes", "centre-formation", "selection", "autre"]
+    },
+    "mode": {
+      "description": "championnat : aller / retour ; plateaux : école de rugby ; scolaire : périodes scolaires (structures hors club).",
+      "enum": ["championnat", "plateaux", "scolaire"]
+    },
+    "phase": {
+      "enum": [
+        "intersaison-bilan", "reprise-prepa", "phase-aller", "treve", "phase-retour", "phases-finales",
+        "plateaux-automne", "plateaux-printemps", "tournois-fin-saison",
+        "rentree", "periode-scolaire", "vacances-scolaires", "examens", "fin-annee"
+      ]
+    },
+    "partie": {
+      "enum": ["accueil", "echauffement", "corps", "jeu", "retour-au-calme", "bilan"]
+    }
+  }
+}

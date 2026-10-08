@@ -1,0 +1,308 @@
+# Paramètres datés des catégories et des formes de jeu — saison 2026-2027.
+#
+# Règle d'or : aucune valeur réglementaire n'est codée en dur ailleurs. Ces
+# valeurs changent chaque saison et peuvent varier selon les ligues et comités.
+# Statut « a-verifier » : extrait d'une source officielle datée, pas encore
+# confirmé par un mainteneur. « hypothese » : choix pédagogique non sourcé.
+# Les sources sont dans sources.yaml (ffr-cahier-edr-2026-2027 = Cahier des
+# écoles de rugby, FFR, septembre 2026 ; numéros de page indiqués).
+version_schema: 1
+saison: "2026-2027"
+avertissement: >-
+  Règles de la saison 2026-2027, à vérifier : elles changent chaque saison et
+  peuvent varier selon votre ligue ou votre comité. En cas de doute, la règle
+  officielle de la FFR et de votre comité fait foi.
+
+niveaux_contact: [aucun, toucher, contact-progressif, plaquage, plein]
+
+formes:
+  baby-rugby:
+    libelle: Situations pédagogiques baby rugby
+    plaquage: false
+    melee: false
+    touche: false
+    ruck: false
+    contact_max: toucher
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 14
+  toucher-2s:
+    libelle: Toucher + 2 secondes (T+2)
+    effectif: 5 x 5
+    plaquage: false
+    melee: false
+    touche: false
+    ruck: false
+    contact_max: toucher
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 6
+  jeu-au-contact:
+    libelle: Jeu au contact (JCO)
+    effectif: 5 x 5 ou 7 x 7 selon la catégorie
+    plaquage: true
+    melee: false
+    touche: false
+    ruck: false
+    contact_max: plaquage
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 14
+  rugby-educatif-7:
+    libelle: Rugby éducatif à 7 (fiche M10)
+    effectif: 7 x 7
+    plaquage: true
+    melee: false
+    touche: false
+    ruck: true
+    contact_max: plein
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 14
+  rugby-educatif-10:
+    libelle: Rugby éducatif à 10 (fiche M12)
+    effectif: 10 x 10
+    plaquage: true
+    melee: true
+    touche: true
+    ruck: true
+    contact_max: plein
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 14
+  rugby-educatif-15:
+    libelle: Rugby éducatif à 10 et à 15 (fiche M14 / M15F)
+    effectif: 10 x 10 ou 15 x 15
+    plaquage: true
+    melee: true
+    touche: true
+    ruck: true
+    contact_max: plein
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 14
+  sevens:
+    libelle: Rugby à 7 (sevens)
+    effectif: 7 x 7
+    plaquage: true
+    melee: true
+    touche: true
+    ruck: true
+    contact_max: plein
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 14
+  xv:
+    libelle: Rugby à XV
+    effectif: 15 x 15
+    plaquage: true
+    melee: true
+    touche: true
+    ruck: true
+    contact_max: plein
+    statut: a-verifier
+    source: world-rugby-lois-du-jeu
+    note: Règles de jeu des jeunes (M16, M19) et des seniors amateurs adaptées par la FFR (hauteur de plaquage notamment) — à vérifier dans les règlements généraux de la saison.
+  x:
+    libelle: Rugby à X
+    effectif: 10 x 10
+    plaquage: true
+    melee: true
+    touche: true
+    ruck: true
+    contact_max: plein
+    statut: a-verifier
+    source: ffr-reglements-generaux
+  rugby-a-5:
+    libelle: Rugby à 5 (sans plaquage)
+    effectif: 5 x 5
+    plaquage: false
+    melee: false
+    touche: false
+    ruck: false
+    contact_max: toucher
+    statut: a-verifier
+    source: ffr-rugby-a-5
+    note: Pratique sans plaquage ni regroupement ; règles détaillées à vérifier.
+
+categories:
+  m5:
+    libelle: Moins de 5 ans (baby rugby)
+    ordre: 1
+    ecole_de_rugby: true
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6], formes: [baby-rugby] }
+      statut: a-verifier
+      source: ffr-cahier-edr-2026-2027
+      page: 7
+    duree_seance_conseillee_min: { valeur: 45, statut: hypothese, note: "Séances courtes, très ludiques." }
+    encadrement: { valeur: "1 adulte pour 6 enfants", statut: hypothese }
+  m6:
+    libelle: Moins de 6 ans
+    ordre: 2
+    ecole_de_rugby: true
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6], formes: [baby-rugby], note: "Au plus 2 plateaux par trimestre pour un club." }
+      statut: a-verifier
+      source: ffr-cahier-edr-2026-2027
+      page: 7
+    duree_seance_conseillee_min: { valeur: 60, statut: hypothese }
+    encadrement: { valeur: "1 adulte pour 6 à 8 enfants", statut: hypothese }
+  m8:
+    libelle: Moins de 8 ans
+    ordre: 3
+    ecole_de_rugby: true
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8], formes: [toucher-2s], note: "Hors calendrier FFR — par prudence, forme de septembre (hypothèse)." }
+        - { mois: [9, 10, 11, 12], formes: [toucher-2s] }
+        - { mois: [1, 2, 3, 4, 5, 6], formes: [jeu-au-contact] }
+      statut: a-verifier
+      source: ffr-cahier-edr-2026-2027
+      page: 7
+    duree_seance_conseillee_min: { valeur: 60, statut: hypothese }
+    encadrement: { valeur: "1 éducateur pour 8 enfants", statut: hypothese }
+  m10:
+    libelle: Moins de 10 ans
+    ordre: 4
+    ecole_de_rugby: true
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8], formes: [toucher-2s, jeu-au-contact], note: "Hors calendrier FFR — par prudence, forme de septembre (hypothèse)." }
+        - { mois: [9], formes: [toucher-2s, jeu-au-contact] }
+        - { mois: [10, 11, 12], formes: [jeu-au-contact] }
+        - { mois: [1, 2, 3, 4, 5, 6], formes: [rugby-educatif-7] }
+      statut: a-verifier
+      source: ffr-cahier-edr-2026-2027
+      page: 7
+    duree_seance_conseillee_min: { valeur: 75, statut: hypothese }
+    encadrement: { valeur: "1 éducateur pour 8 à 10 enfants", statut: hypothese }
+  m12:
+    libelle: Moins de 12 ans
+    ordre: 5
+    ecole_de_rugby: true
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8], formes: [toucher-2s, jeu-au-contact], note: "Hors calendrier FFR — par prudence, forme de septembre (hypothèse)." }
+        - { mois: [9], formes: [toucher-2s, jeu-au-contact] }
+        - { mois: [10, 11], formes: [jeu-au-contact] }
+        - { mois: [12, 1, 2, 3, 4, 5, 6], formes: [rugby-educatif-10] }
+      statut: a-verifier
+      source: ffr-cahier-edr-2026-2027
+      page: 7
+    duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+    encadrement: { valeur: "1 éducateur pour 10 enfants", statut: hypothese }
+  m14:
+    libelle: Moins de 14 ans
+    ordre: 6
+    ecole_de_rugby: true
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8], formes: [toucher-2s, jeu-au-contact], note: "Hors calendrier FFR — par prudence, forme de septembre (hypothèse)." }
+        - { mois: [9], formes: [toucher-2s, jeu-au-contact] }
+        - { mois: [10], formes: [jeu-au-contact, rugby-educatif-15], note: "Rugby éducatif à 10 et à 15 à partir du 10 octobre." }
+        - { mois: [11, 12, 1, 2, 3, 4, 5, 6], formes: [rugby-educatif-15] }
+      statut: a-verifier
+      source: ffr-cahier-edr-2026-2027
+      page: 7
+    duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+    encadrement: { valeur: "1 éducateur pour 12 joueurs", statut: hypothese }
+  m15f:
+    libelle: Moins de 15 ans féminines
+    ordre: 7
+    ecole_de_rugby: true
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8], formes: [toucher-2s, jeu-au-contact], note: "Hors calendrier FFR — par prudence, forme de septembre (hypothèse)." }
+        - { mois: [9], formes: [toucher-2s, jeu-au-contact] }
+        - { mois: [10], formes: [jeu-au-contact, rugby-educatif-15], note: "Rugby éducatif à 10 et à 15 à partir du 10 octobre." }
+        - { mois: [11, 12, 1, 2, 3, 4, 5, 6], formes: [rugby-educatif-15] }
+      statut: a-verifier
+      source: ffr-cahier-edr-2026-2027
+      page: 7
+    duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+    encadrement: { valeur: "1 éducateur pour 12 joueuses", statut: hypothese }
+  m16:
+    libelle: Moins de 16 ans
+    ordre: 8
+    ecole_de_rugby: false
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6], formes: [xv] }
+      statut: a-verifier
+      source: ffr-reglements-generaux
+      note: Règles du jeu adaptées aux jeunes (à vérifier dans les règlements généraux de la saison).
+    duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+  m18f:
+    libelle: Moins de 18 ans féminines
+    ordre: 9
+    ecole_de_rugby: false
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6], formes: [xv, sevens] }
+      statut: a-verifier
+      source: ffr-reglements-generaux
+    duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+  m19:
+    libelle: Moins de 19 ans
+    ordre: 10
+    ecole_de_rugby: false
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6], formes: [xv] }
+      statut: a-verifier
+      source: ffr-reglements-generaux
+    duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+  seniors:
+    libelle: Seniors
+    ordre: 11
+    ecole_de_rugby: false
+    calendrier_formes:
+      valeur:
+        - { mois: [7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6], formes: [xv, x, sevens, rugby-a-5] }
+      statut: a-verifier
+      source: ffr-reglements-generaux
+      note: La pratique de l'équipe (XV, X, 7, 5, loisir) choisit la forme.
+    duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+
+regles_transverses:
+  - id: matchs-secs-interdits-edr
+    texte: À l'école de rugby, pas de match sec — seulement des plateaux ou tournois d'au moins 3 équipes, sans phase finale (quarts, demies, finale).
+    concerne: [m6, m8, m10, m12, m14, m15f]
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 8
+  - id: entrainement-inter-ages
+    texte: À l'entraînement entre deux catégories voisines, la forme de jeu est celle de la catégorie la plus jeune, selon son calendrier.
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 14
+  - id: nouveaux-arrivants
+    texte: Pour les enfants arrivés en cours de saison, on peut reprendre les formes de pratique des mois précédents.
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 6
+  - id: plan-de-seance-ffr-edr
+    texte: "Plan de séance proposé par la FFR à l'école de rugby : situation ludique de manipulation de balle, situation jouée, situation de renforcement, situation jouée."
+    concerne: [m8, m10, m12]
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 11
+  - id: protege-dents
+    texte: Protège-dents fortement recommandé en 2026-2027 (année d'information, sans sanction) ; obligatoire à partir de 2027-2028 pour toutes les pratiques avec contact ou plaquage (baby rugby, rugby à 5 et initiation sans plaquage exemptés).
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 16
+  - id: commotion-sortie-definitive
+    texte: Toute suspicion de commotion cérébrale, en match comme à l'entraînement, entraîne la sortie immédiate et définitive du terrain, sans retour au jeu ; les symptômes peuvent apparaître jusqu'à 48 heures après. Voir protocole-commotion.md.
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 17
+  - id: arbitrage-jeunes-m12-m14
+    texte: À l'école de rugby, les rencontres M12 et M14 sont arbitrées par de jeunes joueurs titulaires du passeport arbitrage, encadrés par l'éducateur.
+    concerne: [m12, m14]
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 11

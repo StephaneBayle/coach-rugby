@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:categories",
+  "title": "Paramètres datés des catégories et formes de jeu (references/categories.yaml)",
+  "type": "object",
+  "required": [
+    "version_schema",
+    "saison",
+    "avertissement",
+    "niveaux_contact",
+    "formes",
+    "categories"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version_schema": {
+      "const": 1
+    },
+    "saison": {
+      "$ref": "cr:communs#/$defs/saison"
+    },
+    "avertissement": {
+      "type": "string"
+    },
+    "niveaux_contact": {
+      "type": "array",
+      "items": {
+        "$ref": "cr:communs#/$defs/contact"
+      },
+      "minItems": 5,
+      "maxItems": 5
+    },
+    "formes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "libelle",
+          "plaquage",
+          "melee",
+          "touche",
+          "ruck",
+          "contact_max",
+          "statut",
+          "source"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "libelle": {
+            "type": "string"
+          },
+          "effectif": {
+            "type": "string"
+          },
+          "plaquage": {
+            "type": "boolean"
+          },
+          "melee": {
+            "type": "boolean"
+          },
+          "touche": {
+            "type": "boolean"
+          },
+          "ruck": {
+            "type": "boolean"
+          },
+          "contact_max": {
+            "$ref": "cr:communs#/$defs/contact"
+          },
+          "statut": {
+            "$ref": "cr:communs#/$defs/statut"
+          },
+          "source": {
+            "$ref": "cr:communs#/$defs/refSource"
+          },
+          "page": {
+            "type": "integer"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "categories": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "cr:communs#/$defs/categorie"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "libelle",
+          "ordre",
+          "ecole_de_rugby",
+          "calendrier_formes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "libelle": {
+            "type": "string"
+          },
+          "ordre": {
+            "type": "integer",
+            "description": "Rang d'âge, du plus jeune (1) au plus âgé."
+          },
+          "ecole_de_rugby": {
+            "type": "boolean"
+          },
+          "calendrier_formes": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "cr:communs#/$defs/parametreDate"
+              }
+            ],
+            "properties": {
+              "valeur": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "mois",
+                    "formes"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "mois": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 12
+                      },
+                      "minItems": 1,
+                      "uniqueItems": true
+                    },
+                    "formes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1
+                    },
+                    "note": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "duree_seance_conseillee_min": {
+            "$ref": "cr:communs#/$defs/parametreDate"
+          },
+          "encadrement": {
+            "$ref": "cr:communs#/$defs/parametreDate"
+          },
+          "points_cles": {
+            "$ref": "cr:communs#/$defs/parametreDate"
+          }
+        }
+      }
+    },
+    "regles_transverses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "texte",
+          "statut",
+          "source"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "cr:communs#/$defs/identifiant"
+          },
+          "texte": {
+            "type": "string"
+          },
+          "concerne": {
+            "type": "array",
+            "items": {
+              "$ref": "cr:communs#/$defs/categorie"
+            }
+          },
+          "statut": {
+            "$ref": "cr:communs#/$defs/statut"
+          },
+          "source": {
+            "$ref": "cr:communs#/$defs/refSource"
+          },
+          "page": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

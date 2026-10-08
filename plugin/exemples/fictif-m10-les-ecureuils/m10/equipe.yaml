@@ -1,0 +1,14 @@
+# EXEMPLE FICTIF — aucune donnée réelle. Effectif en nombre, staff en rôles.
+id: m10
+nom: M10 des Écureuils
+type_groupe: equipe
+categories: [m10]
+pratique: ecole-de-rugby
+genre: mixte
+effectif_habituel: 16
+staff:
+  - { role: educateur, nombre: 2 }
+  - { role: referent-edr }
+creneaux:
+  - { jour: mercredi, heure: "14:00", duree_min: 75, lieu: demi-terrain }
+materiel: [ballons taille 4, plots, chasubles, ceintures à flag, boucliers mousse]

@@ -1,0 +1,13 @@
+saison: "2026-2027"
+mode: scolaire
+debut: 2026-09-01
+fin: 2027-07-04
+phases:
+  - { id: rentree, debut: 2026-09-01, fin: 2026-09-30 }
+  - { id: periode-scolaire, debut: 2026-10-01, fin: 2026-10-16 }
+  - { id: vacances-scolaires, debut: 2026-10-17, fin: 2026-11-01 }
+  - { id: periode-scolaire, debut: 2026-11-02, fin: 2027-05-31 }
+  - { id: examens, debut: 2027-06-01, fin: 2027-06-30 }
+  - { id: fin-annee, debut: 2027-07-01, fin: 2027-07-04 }
+calendrier:
+  - { date: 2027-01-20, type: competition-scolaire, note: Compétition scolaire (fictive) }

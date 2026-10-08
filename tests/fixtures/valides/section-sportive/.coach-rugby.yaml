@@ -1,0 +1,4 @@
+version_schema: 1
+structure:
+  type: section-sportive
+  libelles: { groupe: groupe, encadrant: professeur }
