@@ -20,7 +20,7 @@ variables:
   simplifier: [Pouce levé ou baissé pour les plus jeunes, Deux ou trois volontaires seulement]
   complexifier: [Les joueurs proposent l'objectif de la prochaine séance, Un capitaine fait la synthèse]
 criteres_reussite: [Chacun peut s'exprimer, L'objectif de la séance est reformulé]
-securite: [Moment calme, hydratation, Vérifier que personne n'a de douleur ou de choc à signaler]
+securite: ["Moment calme, hydratation", Vérifier que personne n'a de douleur ou de choc à signaler]
 schema:
   surface: { type: atelier, longueur: 10, largeur: 10 }
   elements:

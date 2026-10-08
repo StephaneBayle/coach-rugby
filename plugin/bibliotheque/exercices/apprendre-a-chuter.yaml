@@ -20,7 +20,7 @@ consignes:
 variables:
   simplifier: [Rester aux étapes à genoux, Tapis épais]
   complexifier: [Chute après une légère poussée du partenaire sur un bouclier, Enchaîner chute et relevé pour rejouer]
-criteres_reussite: [Chute sur le côté, menton rentré, Ballon protégé et posé vers son camp]
+criteres_reussite: ["Chute sur le côté, menton rentré", Ballon protégé et posé vers son camp]
 securite: [Sol souple obligatoire, Pas de chute en course chez les débutants, Arrêt à la moindre douleur]
 pour_aller_plus_loin:
   - { source: ffr-formation-edr, note: "Ressources « circuit technique préparatoire au plaquage » et postures du site de l'entraîneur FFR." }

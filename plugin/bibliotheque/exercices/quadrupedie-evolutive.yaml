@@ -20,7 +20,7 @@ variables:
   simplifier: [Genoux au sol, Distance plus courte]
   complexifier: [Pousser un ballon avec le nez ou la main, Relevé au signal sonore]
 criteres_reussite: [Dos plat et gainé, Relevé rapide et équilibré]
-securite: [Sol souple, sans cailloux, Distances courtes chez les plus jeunes]
+securite: ["Sol souple, sans cailloux", Distances courtes chez les plus jeunes]
 pour_aller_plus_loin:
   - { source: ffr-cahier-edr-2026-2027, note: "Le plan de séance FFR des ateliers EDR intègre un renforcement par quadrupédie évolutive (p. 11)." }
 schema:

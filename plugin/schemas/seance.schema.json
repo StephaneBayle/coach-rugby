@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:seance",
+  "title": "Séance d'entraînement (seances/<AAAA-MM-JJ>/seance.yaml)",
+  "type": "object",
+  "required": ["equipe", "date", "duree_min", "effectif_prevu", "encadrants", "objectifs", "blocs", "regles"],
+  "additionalProperties": false,
+  "properties": {
+    "equipe": { "$ref": "cr:communs#/$defs/identifiant" },
+    "date": { "$ref": "cr:communs#/$defs/date" },
+    "heure": { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" },
+    "duree_min": { "type": "integer", "minimum": 15, "maximum": 240 },
+    "phase": { "$ref": "cr:communs#/$defs/phase" },
+    "semaine_saison": { "type": ["integer", "null"], "minimum": 1 },
+    "prochain_evenement": {
+      "type": "object",
+      "required": ["type", "date", "j_moins"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string" },
+        "date": { "$ref": "cr:communs#/$defs/date" },
+        "j_moins": { "type": "integer", "minimum": 0 },
+        "adversaire": { "type": "string" },
+        "importance": { "enum": ["normale", "haute", "derby"] }
+      }
+    },
+    "effectif_prevu": { "type": "integer", "minimum": 1, "maximum": 120, "description": "Un NOMBRE de joueurs, jamais de noms." },
+    "source_effectif": { "enum": ["coach", "habituel", "sondage-mca"], "description": "sondage-mca : nombre compté dans un résultat de sondage Mon Coach Assistant collé par le coach (aucun nom conservé)." },
+    "encadrants": { "type": "integer", "minimum": 1, "maximum": 20 },
+    "terrain": { "enum": ["terrain", "demi-terrain", "quart-de-terrain", "gymnase", "autre"] },
+    "materiel": { "type": "array", "items": { "type": "string" } },
+    "regles": {
+      "type": "object",
+      "description": "Règles de jeu du jour retenues pour concevoir la séance (copie de la commande regles).",
+      "required": ["categorie", "formes", "contact_max", "statut", "saison"],
+      "additionalProperties": false,
+      "properties": {
+        "categorie": { "$ref": "cr:communs#/$defs/categorie" },
+        "formes": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "contact_max": { "$ref": "cr:communs#/$defs/contact" },
+        "statut": { "$ref": "cr:communs#/$defs/statut" },
+        "source": { "$ref": "cr:communs#/$defs/refSource" },
+        "saison": { "$ref": "cr:communs#/$defs/saison" }
+      }
+    },
+    "objectifs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["texte", "domaine"],
+        "additionalProperties": false,
+        "properties": {
+          "texte": { "type": "string", "minLength": 3 },
+          "domaine": { "enum": ["technique", "tactique", "physique", "mental", "valeurs"] }
+        }
+      }
+    },
+    "blocs": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["partie", "duree_min", "titre", "contact", "consignes", "securite"],
+        "additionalProperties": false,
+        "properties": {
+          "partie": { "$ref": "cr:communs#/$defs/partie" },
+          "duree_min": { "type": "integer", "minimum": 1, "maximum": 60 },
+          "titre": { "type": "string" },
+          "exercice": { "$ref": "cr:communs#/$defs/identifiant", "description": "id d'une fiche de la bibliothèque commune ou personnelle." },
+          "contact": { "$ref": "cr:communs#/$defs/contact" },
+          "exige": { "type": "array", "uniqueItems": true, "items": { "enum": ["plaquage", "melee", "touche", "ruck"] } },
+          "organisation": { "type": "string" },
+          "consignes": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "adaptations": { "type": "array", "items": { "type": "string" } },
+          "securite": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "schema": { "$ref": "cr:exercice#/$defs/schemaTerrain" }
+        }
+      }
+    },
+    "points_vigilance": { "type": "array", "items": { "type": "string" } },
+    "sources": { "type": "array", "items": { "$ref": "cr:communs#/$defs/refSource" } },
+    "hypotheses": { "type": "array", "items": { "type": "string" } },
+    "relecture": {
+      "type": "object",
+      "required": ["date", "verdicts"],
+      "additionalProperties": false,
+      "properties": {
+        "date": { "$ref": "cr:communs#/$defs/date" },
+        "verdicts": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "securite-jeunes": { "$ref": "#/$defs/verdict" },
+            "reglement": { "$ref": "#/$defs/verdict" },
+            "sources": { "$ref": "#/$defs/verdict" },
+            "confidentialite": { "$ref": "#/$defs/verdict" }
+          }
+        }
+      }
+    },
+    "bilan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "presents": { "type": "integer", "minimum": 0 },
+        "ressenti": { "type": "string" },
+        "a_reprendre": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "$defs": {
+    "verdict": { "enum": ["ok", "a-revoir", "bloquant"] }
+  }
+}

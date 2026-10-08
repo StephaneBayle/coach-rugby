@@ -16,6 +16,7 @@ import { controlerExercice } from './bibliotheque.mjs';
 import { controlerEquipe, controlerSaison } from './controles.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { valider } from './schemas.mjs';
+import { contexteSeance, controlerSeance } from './seance.mjs';
 import { ecrireYaml, lireYaml } from './yaml.mjs';
 
 const ENTETE_CONFIG = '# Configuration du dossier saison coach-rugby. Ce dossier reste sur votre ordinateur.';
@@ -97,6 +98,10 @@ function validerFichier(fichier) {
     if (schema === 'saison') erreurs = controlerSaison(donnees);
     if (schema === 'equipe') erreurs = controlerEquipe(donnees, path.basename(path.dirname(fichier)));
     if (schema === 'exercice') erreurs = controlerExercice({ fichier, ...donnees }, { sources: idsSources() });
+    if (schema === 'seance') {
+      const { equipe, dossierSaison } = contexteSeance(fichier);
+      erreurs = controlerSeance(donnees, { equipe, dossierSaison, nomDossier: path.basename(path.dirname(fichier)) });
+    }
   }
   return { fichier, erreurs };
 }

@@ -21,7 +21,7 @@ variables:
   simplifier: [Terrain plus large, Trois secondes pour passer]
   complexifier: [Nombre de touchers limité avant de rendre le ballon, Terrain plus étroit]
 criteres_reussite: [Les joueurs avancent avant de passer, Le soutien se place derrière le porteur]
-securite: [Toucher à deux mains, sans pousser ni retenir, Arbitrage strict des contacts]
+securite: ["Toucher à deux mains, sans pousser ni retenir", Arbitrage strict des contacts]
 sources: [ffr-cahier-edr-2026-2027]
 pour_aller_plus_loin:
   - { source: ffr-cahier-edr-2026-2027, note: "Forme T+2 (toucher + 2 secondes) à 5 contre 5 et calendrier des formes de jeu par catégorie (p. 6-7)." }

@@ -1,0 +1,97 @@
+# EXEMPLE FICTIF — séance M10 de 75 min, conçue avec /coach-rugby:seance.
+equipe: m10
+date: 2026-10-14
+heure: "14:00"
+duree_min: 75
+phase: plateaux-automne
+semaine_saison: 8
+prochain_evenement: { type: plateau, date: 2026-10-17, j_moins: 3 }
+effectif_prevu: 14
+source_effectif: coach
+encadrants: 2
+terrain: demi-terrain
+materiel: [ballons taille 4, plots, chasubles, foulards, tapis]
+regles:
+  categorie: m10
+  formes: [jeu-au-contact]
+  contact_max: plaquage
+  statut: a-verifier
+  source: ffr-cahier-edr-2026-2027
+  saison: "2026-2027"
+objectifs:
+  - { texte: Fixer le défenseur avant de passer, domaine: tactique }
+  - { texte: Savoir chuter avec le ballon en sécurité, domaine: technique }
+blocs:
+  - partie: accueil
+    duree_min: 5
+    titre: Accueil et consignes
+    contact: aucun
+    organisation: Les enfants en cercle autour des éducateurs.
+    consignes:
+      - Vérifier protège-dents, gourdes et lacets.
+      - Annoncer les deux objectifs du jour et le plateau de samedi.
+    securite: [Signaler toute douleur ou tout choc récent avant de commencer]
+  - partie: echauffement
+    duree_min: 8
+    titre: La queue du diable
+    exercice: queue-du-diable
+    contact: aucun
+    organisation: Tout le groupe dans un carré de 20 × 15 m.
+    consignes: [Attrape le plus de foulards possible, Protège ta queue en esquivant]
+    adaptations: [Deux manches de 3 minutes avec une pause d'hydratation]
+    securite: [Interdiction de pousser ou de retenir]
+  - partie: echauffement
+    duree_min: 7
+    titre: Quadrupédie évolutive
+    exercice: quadrupedie-evolutive
+    contact: aucun
+    organisation: Quatre couloirs de 10 m, trois ou quatre enfants par couloir.
+    consignes: [Dos plat comme une table, Relève-toi vite et cours au plot]
+    securite: ["Sol souple, sans cailloux"]
+  - partie: corps
+    duree_min: 14
+    titre: Deux contre un
+    exercice: deux-contre-un
+    contact: toucher
+    organisation: Trois couloirs de 20 × 10 m ; un éducateur pour deux couloirs. Rotation des rôles à chaque passage.
+    consignes: [Cours vers le défenseur pour l'obliger à venir sur toi, Passe quand il s'engage]
+    adaptations: [14 enfants - deux couloirs de 5 et un couloir de 4 ; le défenseur marche pour les premiers passages]
+    securite: [Toucher à deux mains sans poussée]
+  - partie: corps
+    duree_min: 10
+    titre: Apprendre à chuter avec le ballon
+    exercice: apprendre-a-chuter
+    contact: contact-progressif
+    organisation: Par deux sur les tapis ; étapes à genoux puis accroupi seulement.
+    consignes: ["Ballon serré, chute sur le côté, menton rentré", Pose le ballon vers ton camp et relève-toi]
+    adaptations: [Pas de chute debout aujourd'hui (première séance de chute du cycle)]
+    securite: [Tapis obligatoires, Arrêt à la moindre douleur]
+  - partie: jeu
+    duree_min: 20
+    titre: Toucher + 2 secondes à 5 contre 5 (thème - fixer avant de passer)
+    exercice: toucher-2-secondes-5x5
+    contact: toucher
+    organisation: Deux terrains de 30 × 20 m ; deux équipes de 4 et deux équipes de 3 avec un éducateur arbitre.
+    consignes: [L'essai compte double s'il suit un deux contre un réussi]
+    adaptations: ["Forme T+2 conservée pour la séance, plus sûre que le jeu au contact pour ce thème ; jeu au contact au plateau"]
+    securite: [Arbitrage strict des contacts, Pause d'hydratation à la mi-temps]
+  - partie: retour-au-calme
+    duree_min: 6
+    titre: Retour au calme et mobilité douce
+    exercice: retour-au-calme-mobilite
+    contact: aucun
+    consignes: [Marche en respirant profondément, Imite le chat qui s'étire]
+    securite: [Aucun étirement forcé]
+  - partie: bilan
+    duree_min: 5
+    titre: Cercle bilan
+    exercice: cercle-bilan
+    contact: aucun
+    consignes: ["Une chose réussie, une chose à retravailler", Rappel du plateau de samedi]
+    securite: [Vérifier que personne n'a de douleur ou de choc à signaler]
+points_vigilance:
+  - Plateau dans 3 jours - pas de fatigue inutile, priorité au plaisir et à la réussite.
+sources: [ffr-cahier-edr-2026-2027]
+hypotheses:
+  - Durée de séance de 75 min conseillée pour les M10 (hypothèse pédagogique, categories.yaml).
+  - Ordre accueil, échauffement, situations, jeu, retour au calme, bilan (proche du plan de séance FFR des ateliers EDR, p. 11 du Cahier).

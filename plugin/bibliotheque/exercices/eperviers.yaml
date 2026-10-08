@@ -20,7 +20,7 @@ variables:
   simplifier: [Un seul épervier, Terrain plus large]
   complexifier: [Traverser avec un ballon en main, Éperviers qui se tiennent la main par deux]
 criteres_reussite: [Les enfants accélèrent dans les espaces libres, Le toucher se fait sans brutalité]
-securite: [Toucher à deux mains sur le haut du corps, sans pousser, Espaces de dégagement autour du terrain]
+securite: ["Toucher à deux mains sur le haut du corps, sans pousser", Espaces de dégagement autour du terrain]
 schema:
   surface: { type: atelier, longueur: 20, largeur: 15, lignes: [{ x: 2, label: départ }, { x: 18, label: arrivée }] }
   elements:

@@ -1,0 +1,85 @@
+---
+name: exporter
+description: Produit les fiches d'une séance de rugby - fiche imprimable A4, fiche lisible sur téléphone au bord du terrain, schémas de terrain SVG, PDF si possible, et texte à coller dans Mon Coach Assistant de la FFR.
+when_to_use: Quand le coach veut imprimer sa séance, l'avoir sur son téléphone, l'envoyer à son staff, en faire un PDF, ou la copier dans Mon Coach Assistant.
+argument-hint: "[équipe] [date de la séance]"
+---
+
+# Exporter une séance
+
+Lire d'abord `${CLAUDE_PLUGIN_ROOT}/references/regles-d-usage.md` et
+`${CLAUDE_PLUGIN_ROOT}/references/outillage.md`.
+
+Gabarits utilisés :
+
+- `${CLAUDE_PLUGIN_ROOT}/gabarits/fiche-seance.html`, une seule fiche en deux
+  formats (`format-a4` et `format-telephone`) ;
+- `${CLAUDE_PLUGIN_ROOT}/gabarits/pour-mca.txt` ;
+- `${CLAUDE_PLUGIN_ROOT}/references/conventions-terrain.md`, pour les schémas.
+
+Commande de l'outillage (chemin A) :
+
+```bash
+COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN_ROOT}/scripts/coach-rugby.mjs" exporter <seance.yaml> --pdf
+```
+
+## 1. Trouver la séance
+
+Prendre la séance citée ($ARGUMENTS), sinon la plus récente de l'équipe
+(`seances/<date>/seance.yaml`). Si elle n'a pas été relue, proposer
+`/coach-rugby:relire` avant d'exporter, sans l'imposer.
+
+## 2. Produire les fichiers
+
+### Chemin A
+
+Lancer `exporter <seance.yaml> --pdf`. La commande valide d'abord la séance,
+puis écrit dans `seances/<date>/exports/` :
+
+- `fiche-a4.html` et `fiche-telephone.html` : fichiers autonomes, que l'on peut
+  envoyer par mail ou par messagerie ;
+- `schemas/*.svg` : un schéma par bloc qui en a un ;
+- `pour-mca.txt` : seulement pour une structure de type `club` ;
+- `fiche-a4.pdf` et `fiche-telephone.pdf` si Chrome est disponible.
+
+### Chemin B, sans Node
+
+1. Remplir `fiche-seance.html` :
+   - les doubles accolades reçoivent du texte échappé ;
+   - les triples accolades reçoivent du HTML déjà prêt ;
+   - les zones `@repeter:liste … @fin:liste` sont répétées pour chaque
+     élément ;
+   - `{{format}}` vaut `a4` ou `telephone`, et `{{{page}}}` vaut
+     `size: A4; margin: 12mm` ou `size: 90mm 160mm; margin: 5mm`.
+2. Dessiner chaque schéma en SVG selon `conventions-terrain.md`. Partir du bloc
+   `schema` de la fiche d'exercice, et copier les symboles de
+   `gabarits/terrain.svg`.
+3. Remplir `pour-mca.txt`.
+4. Pour le PDF, utiliser la capacité de création de PDF de l'application si
+   elle existe. Sinon, dire au coach : « ouvrez la fiche dans un navigateur,
+   puis Imprimer > Enregistrer en PDF ».
+
+Ne jamais retoucher une fiche à la main après coup : corriger `seance.yaml`,
+puis réexporter.
+
+## 3. Remettre les fichiers au coach
+
+- **Imprimer** : `fiche-a4.pdf`, ou `fiche-a4.html` puis Imprimer.
+- **Au bord du terrain** : `fiche-telephone.html` (ou le PDF téléphone),
+  envoyé par mail, par messagerie ou par AirDrop. Il fonctionne hors connexion.
+- **Au staff** : les mêmes fichiers. Ils ne contiennent aucune donnée
+  personnelle de joueur.
+- **Mon Coach Assistant**, pour les clubs :
+  1. ouvrir `pour-mca.txt` et en copier le contenu ;
+  2. dans Mon Coach Assistant, créer la séance et coller le texte dans sa
+     description.
+
+  Le plugin ne se connecte jamais à Mon Coach Assistant et ne demande aucun
+  identifiant.
+
+## 4. Faire le point
+
+1. Lister les fichiers produits en une ligne chacun, et dire si le PDF n'a pas
+   pu être fait, avec la solution.
+2. Ajouter une ligne datée dans `journal.md`.
+3. Proposer de revenir après la séance pour noter le bilan.

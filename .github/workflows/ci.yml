@@ -39,6 +39,18 @@ jobs:
           node plugin/scripts/coach-rugby.mjs index-bibliotheque
           git diff --exit-code plugin/bibliotheque/INDEX.md || { echo "::error::INDEX.md n'est pas à jour : lancer node plugin/scripts/coach-rugby.mjs index-bibliotheque"; exit 1; }
           mkdir -p /tmp/schemas && for f in plugin/bibliotheque/exercices/*.yaml; do node plugin/scripts/coach-rugby.mjs terrain "$f" --sortie /tmp/schemas > /dev/null; done
+      - name: Export des séances d'exemple (HTML A4 et téléphone, SVG, texte MCA, PDF via Chrome)
+        run: |
+          for s in plugin/exemples/*/*/seances/*/seance.yaml; do
+            node plugin/scripts/coach-rugby.mjs exporter "$s" --pdf
+            test -f "$(dirname "$s")/exports/fiche-a4.pdf" || { echo "::error::PDF non produit pour $s"; exit 1; }
+          done
+      - name: Fiches d'exemple en artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: fiches-exemples
+          path: plugin/exemples/*/*/seances/*/exports/
+          retention-days: 14
       - name: Schémas de terrain en artefact
         uses: actions/upload-artifact@v4
         with:

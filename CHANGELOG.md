@@ -33,3 +33,11 @@ comment c'est programmé. Format inspiré de
   par les règles de jeu du moment pour votre catégorie.
 - Vous pouvez adapter une fiche, créer la vôtre et la proposer à la
   bibliothèque commune (licence CC BY-SA).
+- `/coach-rugby:seance` : une séance construite pour votre groupe (nombre de
+  joueurs, durée, terrain, moment de la saison, prochaine échéance). Le
+  plugin refuse un exercice trop dur pour la catégorie ce mois-ci. Vous
+  pouvez coller le résultat d'un sondage de présence de Mon Coach Assistant :
+  seul le nombre de présents est gardé.
+- `/coach-rugby:exporter` : fiche A4 à imprimer, fiche téléphone pour le bord
+  du terrain (fonctionne hors connexion), schémas de terrain, PDF, et texte à
+  coller dans Mon Coach Assistant.
