@@ -7,7 +7,7 @@ un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans l
 
 | Lot | Version | Contenu | État |
 |---|---|---|---|
-| 1 | 0.1.0 | Socle et première séance de bout en bout : dossier saison, cadrage de la saison, conception de séance, bibliothèque de 24 exercices, schémas de terrain, fiches HTML/PDF (A4 et téléphone), relecteurs, garde RGPD, passerelles Mon Coach Assistant par copier-coller | en cours |
+| 1 | 0.1.0 | Socle et première séance de bout en bout : dossier saison, cadrage de la saison, conception de séance, bibliothèque de 24 exercices, schémas de terrain, fiches HTML/PDF (A4 et téléphone), relecteurs, garde RGPD, passerelles Mon Coach Assistant par copier-coller | publié le 2026-10-08 |
 | 2 | 0.2.0 | Planification (macrocycle, mésocycles, semaine type, affûtage), relances proactives complètes, playtests simulés | à venir |
 | 3 | 0.3.0 | Effectif en codes, présences, composition, feuille de match, rotation du temps de jeu, préparation et débriefing de match, Excel | à venir |
 | 4 | 0.4.0 | Charge d'entraînement (RPE), préparation physique, prévention, rappel commotion et retour au jeu | à venir |
@@ -28,4 +28,4 @@ un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans l
 | 4 | Bibliothèque d'exercices et schémas de terrain | fait |
 | 5 | Séance et export (HTML, PDF, SVG, texte pour Mon Coach Assistant) | fait |
 | 6 | Relecteurs et évals | fait (évals écrites, non lancées : accès anticipé) |
-| 7 | Publication de la version 0.1.0 | en cours |
+| 7 | Publication de la version 0.1.0 | fait |
