@@ -38,3 +38,14 @@ test("une liste de joueurs nommés n'a pas sa place dans equipe.yaml", () => {
   const e = erreurs(path.join(ici, 'fixtures', 'invalides', 'liste-de-joueurs'));
   assert.ok(e.some((x) => /additional properties.*joueurs/.test(x)), e.join('\n'));
 });
+
+test('#29 : les heures écrites sont entre guillemets', async () => {
+  const { ecrireYaml } = await import('../plugin/lib/yaml.mjs');
+  const { mkdtempSync, readFileSync } = await import('node:fs');
+  const { tmpdir } = await import('node:os');
+  const f = path.join(mkdtempSync(path.join(tmpdir(), 'cr-h-')), 'x.yaml');
+  ecrireYaml(f, { heure: '20:00', seances: [{ date: '2026-11-10', heure: '19:30' }] });
+  const t = readFileSync(f, 'utf8');
+  assert.match(t, /^heure: "20:00"$/m);
+  assert.match(t, /^\s+heure: "19:30"$/m);
+});

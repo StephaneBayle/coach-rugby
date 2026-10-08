@@ -17,11 +17,19 @@ comment c'est programmé. Format inspiré de
   joueurs absents trois fois de suite.
 - Progrès par compétences (à travailler, en cours, acquis), d'après une
   grille simple, sans note ni commentaire sur la personne.
+- Matchs, plateaux et tournois : convocation, composition par poste,
+  préparation (projet de jeu, plan de match, causerie en trois phrases),
+  statistiques simples et débriefing.
+- Temps de jeu équitable chez les jeunes : le plugin calcule une rotation
+  où chacun joue autant que possible, sans qu'un enfant ne reste deux fois
+  de suite sur le banc. Il refuse une composition qui ne respecte pas la
+  forme de jeu du jour (nombre sur le terrain, première ligne sans mêlée).
 - Rappels FFR : la feuille de match dématérialisée des écoles de rugby est
   l'outil officiel ; passeport du joueur de devant en M14 et M15F.
 
 ### Corrigé
 
+- Les heures sont écrites entre guillemets dans les fichiers (« 20:00 »).
 - Export PDF : un échec passager de Chrome (constaté sur macOS) est rattrapé
   par un second essai, et les messages techniques sans conséquence ne sont
   plus affichés comme cause d'échec.

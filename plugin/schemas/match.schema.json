@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:match",
+  "title": "Match, plateau ou tournoi (matchs/<date>/match.yaml) — en codes",
+  "type": "object",
+  "required": [
+    "equipe",
+    "date",
+    "type",
+    "regles"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "equipe": {
+      "$ref": "cr:communs#/$defs/identifiant"
+    },
+    "date": {
+      "$ref": "cr:communs#/$defs/date"
+    },
+    "heure": {
+      "type": "string",
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "type": {
+      "enum": [
+        "match",
+        "plateau",
+        "tournoi"
+      ]
+    },
+    "adversaire": {
+      "type": "string",
+      "description": "Club adverse (jamais une personne)."
+    },
+    "domicile": {
+      "type": "boolean"
+    },
+    "rencontres": {
+      "type": "array",
+      "description": "Plateau ou tournoi : les rencontres successives.",
+      "items": {
+        "type": "object",
+        "required": [
+          "duree_min"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "adversaire": {
+            "type": "string"
+          },
+          "duree_min": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 80
+          }
+        }
+      }
+    },
+    "duree_min": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 120,
+      "description": "Temps de jeu total (somme des rencontres pour un plateau)."
+    },
+    "regles": {
+      "type": "object",
+      "required": [
+        "categorie",
+        "formes",
+        "sur_le_terrain",
+        "statut",
+        "saison"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "categorie": {
+          "$ref": "cr:communs#/$defs/categorie"
+        },
+        "formes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "sur_le_terrain": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 15
+        },
+        "statut": {
+          "$ref": "cr:communs#/$defs/statut"
+        },
+        "source": {
+          "$ref": "cr:communs#/$defs/refSource"
+        },
+        "saison": {
+          "$ref": "cr:communs#/$defs/saison"
+        }
+      }
+    },
+    "preparation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "projet_de_jeu": {
+          "type": "string"
+        },
+        "plan_de_match": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "causerie": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "string"
+          }
+        },
+        "points_vigilance": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "convoques": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "cr:communs#/$defs/codeJoueur"
+      }
+    },
+    "composition": {
+      "type": "object",
+      "required": [
+        "titulaires"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "titulaires": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "code"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "code": {
+                "$ref": "cr:communs#/$defs/codeJoueur"
+              },
+              "poste": {
+                "$ref": "cr:communs#/$defs/poste"
+              }
+            }
+          }
+        },
+        "remplacants": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "cr:communs#/$defs/codeJoueur"
+          }
+        }
+      }
+    },
+    "temps_de_jeu": {
+      "type": "object",
+      "required": [
+        "periodes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cible": {
+          "type": "string"
+        },
+        "duree_periode_min": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 40
+        },
+        "periodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "debut_min",
+              "fin_min",
+              "sur_le_terrain"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "debut_min": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "fin_min": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "rencontre": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "sur_le_terrain": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "cr:communs#/$defs/codeJoueur"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "equipe": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z_]+$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "adversaire": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[a-z_]+$"
+          },
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "par_code": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^J[0-9]{2,3}$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "propertyNames": {
+              "pattern": "^[a-z_]+$"
+            },
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    },
+    "debriefing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "reussites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "a_retravailler": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prochaines_seances": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securite": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "cr:communs#/$defs/refSource"
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

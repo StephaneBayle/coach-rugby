@@ -9,7 +9,10 @@ import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
 import { exporterSeance, exporterSemaine } from '../lib/export.mjs';
 import { absencesRepetees, lirePrenoms, prochainCode, synchroniserProteges, tauxDePresence } from '../lib/effectif.mjs';
+import { dureeTotale } from '../lib/match.mjs';
 import { lundiDe, proposerCycles, proposerSemaine } from '../lib/planification.mjs';
+import { bilanEquite, planifierRotation } from '../lib/temps-de-jeu.mjs';
+import { chargerCategories } from '../lib/categories.mjs';
 import { genererSvg } from '../lib/terrain.mjs';
 import { ecrireYaml, lireYaml } from '../lib/yaml.mjs';
 import { dossierSaison } from '../lib/chemins.mjs';
@@ -50,6 +53,9 @@ Usage : node coach-rugby.mjs <commande> [options]
   presences <equipe> [--date AAAA-MM-JJ --presents J01,J02… [--excuses …] [--type seance]] [--bilan]
         Enregistre les présents d'une date, ou affiche les taux de présence
         et les absences répétées.
+  rotation <match.yaml> [--periode N] [--ecrire]
+        Rotation équitable du temps de jeu (périodes de N minutes, 5 par
+        défaut) entre les convoqués ; --ecrire l'enregistre dans match.yaml.
   exporter <seance.yaml|semaine.yaml> [--pdf] [--formats a4,telephone]
         Fiches HTML (A4, téléphone) et, avec --pdf, PDF via Chrome. Pour une
         séance : schémas SVG et texte pour Mon Coach Assistant (clubs).
@@ -291,6 +297,35 @@ commandes.presences = (o) => {
     `Présences de ${o._[0]} sur ${presences.dates.length} date(s) :`,
     ...Object.entries(taux).map(([c, v]) => `  ${c} : ${v.presents}/${v.total}${v.taux !== null ? ` (${v.taux} %)` : ''}`),
     repetees.length ? `Absents aux 3 dernières dates : ${repetees.join(', ')}` : null,
+  ].filter(Boolean).join('\n'));
+};
+
+commandes.rotation = (o) => {
+  const fichier = o._[0];
+  if (!fichier) sortir(1, 'Usage : rotation <match.yaml> [--periode N] [--ecrire]');
+  const match = lireYaml(path.resolve(fichier));
+  const joueurs = match.convoques?.length ? match.convoques : [...(match.composition?.titulaires || []).map((t) => t.code), ...(match.composition?.remplacants || [])];
+  if (!joueurs.length) sortir(1, 'Aucun joueur : indiquer les convoqués (convoques) ou la composition.');
+  const duree = dureeTotale(match);
+  const rencontres = match.rencontres?.length ? match.rencontres : [{ duree_min: duree }];
+  const dureePeriode = Number(o.periode || 5);
+  const r = planifierRotation({ joueurs, surLeTerrain: match.regles.sur_le_terrain, rencontres, dureePeriode });
+  if (!r.possible) sortir(1, `Rotation impossible : ${r.raison}.`);
+  const b = bilanEquite(r.periodes, joueurs, duree);
+  const cible = chargerCategories().categories[match.regles.categorie]?.temps_de_jeu?.valeur;
+  if (o.ecrire) {
+    match.temps_de_jeu = { ...(cible ? { cible } : {}), duree_periode_min: dureePeriode, periodes: r.periodes };
+    ecrireYaml(path.resolve(fichier), match, '# Match — en codes, aucun nom ici.');
+    const erreurs = validerChemin(path.resolve(fichier)).flatMap((x) => x.erreurs);
+    if (erreurs.length) sortir(1, `Écrit mais invalide :\n${erreurs.join('\n')}`);
+  }
+  const moitie = b.part_min >= 0.5;
+  sortir(0, [
+    `Rotation : ${joueurs.length} joueurs, ${match.regles.sur_le_terrain} sur le terrain, ${r.periodes.length} périodes de ${dureePeriode} min, ${duree} min au total.`,
+    ...Object.entries(b.minutes).map(([c, m]) => `  ${c} : ${m} min`),
+    `Écart entre joueurs : ${b.ecart} min. ${moitie ? 'Chacun joue au moins la moitié du temps.' : `Le moins servi joue ${Math.round(100 * b.part_min)} % du temps : trop de joueurs pour une seule équipe ? (repère d'équité, hypothèse)`}`,
+    cible ? `Repère : ${cible} (hypothèse pédagogique).` : null,
+    o.ecrire ? 'Enregistré dans match.yaml.' : '--ecrire pour l\'enregistrer.',
   ].filter(Boolean).join('\n'));
 };
 
