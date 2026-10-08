@@ -5,6 +5,17 @@ comment c'est programmé. Format inspiré de
 [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions selon
 [SemVer](https://semver.org/lang/fr/).
 
+## [Non publié]
+
+### Ajouté
+
+- Planification : le plugin propose un découpage de votre saison en cycles
+  d'environ 4 semaines (thème, intensité prévue), avec un bloc d'affûtage
+  avant chaque match important, et repère les changements de forme de jeu
+  de l'école de rugby (par exemple le passage des M10 au rugby éducatif à 7
+  en janvier). Il propose aussi le plan de chaque semaine : séances, jours
+  avant l'échéance, intensité et intention de chaque séance.
+
 ## [0.1.0] — 2026-10-08
 
 ### Ajouté

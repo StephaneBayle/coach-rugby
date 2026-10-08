@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:planification",
+  "title": "Repères de planification (references/planification.yaml)",
+  "type": "object",
+  "required": [
+    "version_schema",
+    "statut",
+    "mesocycle",
+    "affutage",
+    "phases",
+    "changement_forme",
+    "bloc_affutage",
+    "grille_semaine"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version_schema": {
+      "const": 1
+    },
+    "statut": {
+      "const": "hypothese"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "cr:communs#/$defs/refSource"
+      }
+    },
+    "mesocycle": {
+      "type": "object",
+      "required": [
+        "duree_visee_jours",
+        "duree_min_jours",
+        "duree_max_jours"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "duree_visee_jours": {
+          "type": "integer"
+        },
+        "duree_min_jours": {
+          "type": "integer"
+        },
+        "duree_max_jours": {
+          "type": "integer"
+        }
+      }
+    },
+    "affutage": {
+      "type": "object",
+      "required": [
+        "jours"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "jours": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 14
+        }
+      }
+    },
+    "phases": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "cr:communs#/$defs/phase"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "sans_mesocycle": {
+            "type": "boolean"
+          },
+          "edr": {
+            "type": "object",
+            "required": [
+              "intention",
+              "intensite",
+              "theme"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "intention": {
+                "type": "string"
+              },
+              "priorites": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "intensite": {
+                "$ref": "cr:communs#/$defs/intensite"
+              },
+              "theme": {
+                "type": "string"
+              }
+            }
+          },
+          "adultes": {
+            "type": "object",
+            "required": [
+              "intention",
+              "intensite",
+              "theme"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "intention": {
+                "type": "string"
+              },
+              "priorites": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "intensite": {
+                "$ref": "cr:communs#/$defs/intensite"
+              },
+              "theme": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "changement_forme": {
+      "type": "object",
+      "required": [
+        "theme",
+        "objectif",
+        "intensite"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "theme": {
+          "type": "string"
+        },
+        "objectif": {
+          "type": "string"
+        },
+        "intensite": {
+          "$ref": "cr:communs#/$defs/intensite"
+        }
+      }
+    },
+    "bloc_affutage": {
+      "type": "object",
+      "required": [
+        "theme",
+        "objectif",
+        "intensite"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "theme": {
+          "type": "string"
+        },
+        "objectif": {
+          "type": "string"
+        },
+        "intensite": {
+          "$ref": "cr:communs#/$defs/intensite"
+        }
+      }
+    },
+    "grille_semaine": {
+      "type": "object",
+      "required": [
+        "adultes",
+        "edr"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "adultes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "si",
+              "intensite",
+              "intention"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "si": {
+                "enum": [
+                  "apres_match_jours_max_2",
+                  "avant_echeance_jours_max_2",
+                  "avant_echeance_jours_max_4",
+                  "defaut"
+                ]
+              },
+              "intensite": {
+                "$ref": "cr:communs#/$defs/intensite"
+              },
+              "intention": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "edr": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "si",
+              "intensite",
+              "intention"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "si": {
+                "enum": [
+                  "apres_match_jours_max_2",
+                  "avant_echeance_jours_max_2",
+                  "avant_echeance_jours_max_4",
+                  "defaut"
+                ]
+              },
+              "intensite": {
+                "$ref": "cr:communs#/$defs/intensite"
+              },
+              "intention": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

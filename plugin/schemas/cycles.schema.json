@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:cycles",
+  "title": "Planification de la saison en cycles (cycles.yaml)",
+  "type": "object",
+  "required": [
+    "saison",
+    "macrocycle",
+    "mesocycles"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "saison": {
+      "$ref": "cr:communs#/$defs/saison"
+    },
+    "macrocycle": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "phase",
+          "intention"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "phase": {
+            "$ref": "cr:communs#/$defs/phase"
+          },
+          "intention": {
+            "type": "string"
+          },
+          "priorites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "mesocycles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "debut",
+          "fin",
+          "phase",
+          "theme",
+          "intensite"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^c[0-9]{2}$"
+          },
+          "debut": {
+            "$ref": "cr:communs#/$defs/date"
+          },
+          "fin": {
+            "$ref": "cr:communs#/$defs/date"
+          },
+          "phase": {
+            "$ref": "cr:communs#/$defs/phase"
+          },
+          "theme": {
+            "type": "string",
+            "minLength": 3
+          },
+          "objectifs": {
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "$ref": "cr:communs#/$defs/objectif"
+            }
+          },
+          "intensite": {
+            "$ref": "cr:communs#/$defs/intensite"
+          },
+          "seances_par_semaine": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 14
+          },
+          "declencheur": {
+            "type": "string",
+            "pattern": "^(changement-forme|echeance:[0-9]{4}-[0-9]{2}-[0-9]{2})$"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "cr:communs#/$defs/refSource"
+      }
+    }
+  }
+}

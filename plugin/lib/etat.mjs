@@ -28,12 +28,12 @@ export function avancement(dossierEquipe) {
   return ETAPES.map((e) => ({ id: e.id, skill: e.skill, fait: e.preuve(dossierEquipe) }));
 }
 
-const PHASES_ACTIVES = new Set([
+export const PHASES_ACTIVES = new Set([
   'reprise-prepa', 'phase-aller', 'phase-retour', 'phases-finales',
   'plateaux-automne', 'plateaux-printemps', 'tournois-fin-saison', 'rentree', 'periode-scolaire', 'examens',
 ]);
 const DEBUT_DE_SAISON = ['reprise-prepa', 'rentree'];
-const TYPES_ECHEANCE = new Set(['match', 'plateau', 'tournoi', 'competition-scolaire', 'stage', 'evenement', 'examen']);
+export const TYPES_ECHEANCE = new Set(['match', 'plateau', 'tournoi', 'competition-scolaire', 'stage', 'evenement', 'examen']);
 
 // Position dans la saison à une date donnée.
 export function situer(saison, date) {

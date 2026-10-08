@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:semaine",
+  "title": "Plan de la semaine (semaines/<lundi>/semaine.yaml)",
+  "type": "object",
+  "required": [
+    "equipe",
+    "debut",
+    "theme",
+    "seances_prevues"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "equipe": {
+      "$ref": "cr:communs#/$defs/identifiant"
+    },
+    "debut": {
+      "$ref": "cr:communs#/$defs/date",
+      "description": "Le lundi de la semaine."
+    },
+    "mesocycle": {
+      "type": "string",
+      "pattern": "^c[0-9]{2}$"
+    },
+    "phase": {
+      "$ref": "cr:communs#/$defs/phase"
+    },
+    "semaine_saison": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "theme": {
+      "type": "string"
+    },
+    "intensite_globale": {
+      "$ref": "cr:communs#/$defs/intensite"
+    },
+    "echeances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "date"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "date": {
+            "$ref": "cr:communs#/$defs/date"
+          },
+          "importance": {
+            "enum": [
+              "normale",
+              "haute",
+              "derby"
+            ]
+          },
+          "adversaire": {
+            "type": "string"
+          },
+          "lieu": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "seances_prevues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "duree_min",
+          "intention",
+          "intensite"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "$ref": "cr:communs#/$defs/date"
+          },
+          "heure": {
+            "type": "string",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$"
+          },
+          "duree_min": {
+            "type": "integer",
+            "minimum": 15,
+            "maximum": 240
+          },
+          "j_moins": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "intention": {
+            "type": "string"
+          },
+          "intensite": {
+            "$ref": "cr:communs#/$defs/intensite"
+          },
+          "dominante": {
+            "type": "string"
+          },
+          "statut": {
+            "enum": [
+              "prevue",
+              "faite",
+              "annulee"
+            ]
+          }
+        }
+      }
+    },
+    "points_vigilance": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "hypotheses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "cr:communs#/$defs/refSource"
+      }
+    }
+  }
+}

@@ -16,6 +16,7 @@ import { controlerExercice } from './bibliotheque.mjs';
 import { controlerEquipe, controlerSaison } from './controles.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { valider } from './schemas.mjs';
+import { controlerCycles, controlerSemaine } from './planification.mjs';
 import { contexteSeance, controlerSeance } from './seance.mjs';
 import { ecrireYaml, lireYaml } from './yaml.mjs';
 
@@ -66,6 +67,9 @@ export function schemaDe(fichier) {
   if (base === 'saison.yaml') return 'saison';
   if (base === 'categories.yaml') return 'categories';
   if (base === 'sources.yaml') return 'sources';
+  if (base === 'planification.yaml') return 'planification';
+  if (base === 'cycles.yaml') return 'cycles';
+  if (base === 'semaine.yaml') return 'semaine';
   if (base === 'seance.yaml') return 'seance';
   if (/[\\/]bibliotheque[\\/]exercices[\\/][^\\/]+\.yaml$/.test(fichier) || /[\\/]_bibliotheque-perso[\\/]exercices[\\/][^\\/]+\.yaml$/.test(fichier)) return 'exercice';
   return null;
@@ -98,6 +102,15 @@ function validerFichier(fichier) {
     if (schema === 'saison') erreurs = controlerSaison(donnees);
     if (schema === 'equipe') erreurs = controlerEquipe(donnees, path.basename(path.dirname(fichier)));
     if (schema === 'exercice') erreurs = controlerExercice({ fichier, ...donnees }, { sources: idsSources() });
+    if (schema === 'cycles') {
+      const fs = path.join(path.dirname(fichier), 'saison.yaml');
+      erreurs = controlerCycles(donnees, { saison: existsSync(fs) ? lireYaml(fs) : null });
+    }
+    if (schema === 'semaine') {
+      const d = path.resolve(path.dirname(fichier), '..', '..');
+      const lire = (f) => (existsSync(path.join(d, f)) ? lireYaml(path.join(d, f)) : null);
+      erreurs = controlerSemaine(donnees, { equipe: lire('equipe.yaml'), saison: lire('saison.yaml'), cycles: lire('cycles.yaml'), nomDossier: path.basename(path.dirname(fichier)) });
+    }
     if (schema === 'seance') {
       const { equipe, dossierSaison } = contexteSeance(fichier);
       erreurs = controlerSeance(donnees, { equipe, dossierSaison, nomDossier: path.basename(path.dirname(fichier)) });
