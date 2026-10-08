@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: seance-m10-75min
+description: Séance M10 de 75 min un mercredi d'octobre (jeu au contact), avec dossier saison fictif.
+tags: [lot-1, seance, securite]
+context:
+  scaffold_script: scaffold.sh

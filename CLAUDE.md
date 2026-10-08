@@ -97,7 +97,7 @@ Avant toute PR : `npm test` et `npm run valider` doivent passer.
 ## Évals
 
 `claude plugin eval` se lance **en local uniquement** (`npm run evals`), jamais
-en CI : aucune clé d'API sur GitHub. La commande est en accès anticipé ; les
+en CI : aucune clé d'API sur GitHub. La commande est en accès anticipé (non disponible sur le compte du mainteneur au 2026-10-08) ; les
 résultats sont consignés dans `docs/evals/resultats.md`.
 
 ## Git

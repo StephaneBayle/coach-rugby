@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: reprise-treve-proactive
+description: Le coach demande où il en est le 5 décembre ; le plugin doit situer la saison et anticiper la trêve.
+tags: [lot-1, proactivite]
+context:
+  scaffold_script: scaffold.sh

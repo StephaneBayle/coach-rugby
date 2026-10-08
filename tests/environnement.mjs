@@ -10,3 +10,5 @@ process.env.COACH_RUGBY_DOSSIER = mkdtempSync(path.join(tmpdir(), 'coach-rugby-t
 delete process.env.CLAUDE_PLUGIN_OPTION_DOSSIER_SAISON;
 delete process.env.CLAUDE_PLUGIN_OPTION_dossier_saison;
 delete process.env.COACH_RUGBY_AUJOURDHUI;
+delete process.env.EVAL_COACH_RUGBY_AUJOURDHUI;
+delete process.env.EVAL_COACH_RUGBY_DOSSIER;

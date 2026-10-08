@@ -1,5 +1,7 @@
 // Dates « AAAA-MM-JJ » manipulées en UTC pour éviter les décalages d'heure.
-// COACH_RUGBY_AUJOURDHUI fixe la date du jour (tests, évals, démonstrations).
+// COACH_RUGBY_AUJOURDHUI fixe la date du jour (tests, démonstrations) ;
+// EVAL_COACH_RUGBY_AUJOURDHUI en est l'alias pour `claude plugin eval`, qui ne
+// transmet que les variables EVAL_*.
 
 const JOUR = 86_400_000;
 
@@ -15,7 +17,8 @@ export function ecrireDate(d) {
 }
 
 export function aujourdhui(env = process.env) {
-  if (env.COACH_RUGBY_AUJOURDHUI) return lireDate(env.COACH_RUGBY_AUJOURDHUI);
+  const fixe = env.COACH_RUGBY_AUJOURDHUI || env.EVAL_COACH_RUGBY_AUJOURDHUI;
+  if (fixe) return lireDate(fixe);
   const n = new Date();
   return new Date(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()));
 }
