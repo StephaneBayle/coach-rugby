@@ -1,0 +1,44 @@
+# Gabarit de fiche d'exercice — coach-rugby (licence CC BY-SA 4.0)
+#
+# 1. Copier ce fichier dans plugin/bibliotheque/exercices/<id>.yaml
+#    (ou, pour un usage personnel, dans <dossier saison>/_bibliotheque-perso/exercices/).
+# 2. Remplir chaque champ. Exercice ORIGINAL : ne pas recopier un document
+#    de la FFR, d'un livre ou d'un site (on peut y renvoyer, voir pour_aller_plus_loin).
+# 3. Aucun nom de joueur, ni photo : les joueurs sont A1, A2, D1…
+# 4. Vérifier : node plugin/scripts/coach-rugby.mjs valider <fichier>
+#    puis dessiner : node plugin/scripts/coach-rugby.mjs terrain <fichier>
+# Conventions du schéma : plugin/references/conventions-terrain.md
+id: mon-exercice                 # = nom du fichier, minuscules et tirets
+titre: Mon exercice
+licence: CC-BY-SA-4.0
+auteurs: votre pseudonyme        # jamais le nom d'un joueur
+theme: manipulation-passes       # echauffement, manipulation-passes, jeu-reduit, contact, jeu-au-pied, defense, rugby-a-5, retour-au-calme
+categories: [m10, m12]           # m5, m6, m8, m10, m12, m14, m15f, m16, m18f, m19, seniors
+niveau: decouverte               # decouverte, intermediaire, confirme
+contact: toucher                 # aucun, toucher, contact-progressif, plaquage, plein
+exige: []                        # plaquage, melee, touche, ruck — si l'exercice les suppose
+duree_min: 10
+effectif: { min: 4, max: 16 }
+espace: { longueur: 20, largeur: 15 }   # en mètres
+materiel: [plots, ballons]
+but: Ce que les joueurs apprennent, en une phrase.
+organisation: Comment on place les joueurs et le matériel.
+consignes:
+  - Une consigne courte, dite comme sur le terrain.
+variables:
+  simplifier: [Pour rendre plus facile]
+  complexifier: [Pour rendre plus difficile]
+criteres_reussite: [Ce que l'éducateur observe quand c'est réussi]
+securite: [Les points de sécurité indispensables]
+sources: []                      # identifiants de plugin/references/sources.yaml
+pour_aller_plus_loin: []         # ex. - { source: ffr-formation-edr, note: "…" }
+schema:
+  surface: { type: atelier, longueur: 20, largeur: 15 }
+  elements:
+    - { type: porteur, x: 3, y: 7, label: A1 }
+    - { type: attaquant, x: 2, y: 11, label: A2 }
+    - { type: defenseur, x: 12, y: 8, label: D1 }
+  trajets:
+    - { type: course, de: [3, 7], a: [9, 7.5] }
+    - { type: passe, de: [9, 7.5], a: [8, 11] }
+relecture: { statut: a-relire }  # le mainteneur passe à relu-mainteneur après relecture

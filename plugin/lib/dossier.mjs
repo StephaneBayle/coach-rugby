@@ -12,6 +12,7 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { FICHIER_CONFIG, FICHIER_JOUEURS_PROTEGES, racineGit } from './chemins.mjs';
+import { controlerExercice } from './bibliotheque.mjs';
 import { controlerEquipe, controlerSaison } from './controles.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { valider } from './schemas.mjs';
@@ -69,6 +70,12 @@ export function schemaDe(fichier) {
   return null;
 }
 
+let sources;
+function idsSources() {
+  sources ??= new Set(lireYaml(path.join(RACINE_PLUGIN, 'references', 'sources.yaml')).sources.map((s) => s.id));
+  return sources;
+}
+
 function validerFichier(fichier) {
   const schema = schemaDe(fichier);
   if (!schema) return null;
@@ -89,6 +96,7 @@ function validerFichier(fichier) {
   if (!erreurs.length) {
     if (schema === 'saison') erreurs = controlerSaison(donnees);
     if (schema === 'equipe') erreurs = controlerEquipe(donnees, path.basename(path.dirname(fichier)));
+    if (schema === 'exercice') erreurs = controlerExercice({ fichier, ...donnees }, { sources: idsSources() });
   }
   return { fichier, erreurs };
 }

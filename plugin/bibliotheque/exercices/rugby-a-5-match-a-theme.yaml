@@ -1,0 +1,38 @@
+id: rugby-a-5-match-a-theme
+titre: Rugby à 5 - match à thème
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: rugby-a-5
+categories: [m16, m18f, m19, seniors]
+niveau: decouverte
+contact: toucher
+duree_min: 15
+effectif: { min: 8, max: 12 }
+espace: { longueur: 40, largeur: 25 }
+materiel: [plots, 1 ballon, chasubles]
+but: Jouer en rugby à 5 sans plaquage, avec un thème qui oriente les choix (jouer large, jouer vite, soutenir).
+organisation: Deux équipes de 5 sur un terrain réduit. L'éducateur fixe un thème par période de 5 minutes ; un essai réalisé selon le thème compte double.
+consignes:
+  - Toucher à deux mains, pas de plaquage ni de regroupement.
+  - Thème 1 - l'essai compte double s'il est marqué après trois passes.
+  - Thème 2 - l'essai compte double s'il est marqué en moins de 10 secondes.
+  - Rotations fréquentes pour que chacun joue.
+variables:
+  simplifier: [Terrain plus large, Équipes à 4]
+  complexifier: [Nombre de touchers limité, Thème annoncé en cours d'action]
+criteres_reussite: [Plaisir de jeu partagé, Le thème est appliqué]
+securite: [Aucun plaquage, Échauffement préalable pour les adultes reprenant le sport, Hydratation]
+sources: [ffr-rugby-a-5]
+schema:
+  surface: { type: atelier, longueur: 40, largeur: 25, lignes: [{ x: 4, label: en-but }, { x: 36, label: en-but }] }
+  elements:
+    - { type: porteur, x: 12, y: 12, label: A1 }
+    - { type: attaquant, x: 10, y: 7, label: A2 }
+    - { type: attaquant, x: 10, y: 17, label: A3 }
+    - { type: defenseur, x: 22, y: 8, label: D1 }
+    - { type: defenseur, x: 22, y: 13, label: D2 }
+    - { type: defenseur, x: 22, y: 18, label: D3 }
+  trajets:
+    - { type: passe, de: [12, 12], a: [10.5, 17] }
+    - { type: course, de: [10.5, 17], a: [35, 21], via: [26, 23] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

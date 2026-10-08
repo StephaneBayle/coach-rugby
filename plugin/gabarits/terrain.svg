@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 19" role="img" aria-labelledby="titre desc">
+  <!-- Gabarit des schémas de terrain coach-rugby (CC BY-SA 4.0).
+       Conventions : references/conventions-terrain.md.
+       1 unité = 1 mètre ; x = sens de l'attaque (de gauche à droite) ;
+       y = largeur (touche gauche en haut). Les symboles ont une boîte de
+       -1 à 1 : on les place avec <use href="#…" x y width height>.
+       Les formes priment sur la couleur : tout reste lisible en noir et blanc. -->
+  <title id="titre">Titre de l'exercice</title>
+  <desc id="desc">Description de l'organisation, pour les lecteurs d'écran.</desc>
+  <defs>
+    <!-- @symboles -->
+    <symbol id="attaquant" viewBox="-1 -1 2 2"><circle r="0.9" fill="#111"/></symbol>
+    <symbol id="porteur" viewBox="-1 -1 2 2"><circle r="0.62" fill="#111"/><circle r="0.9" fill="none" stroke="#111" stroke-width="0.16"/></symbol>
+    <symbol id="defenseur" viewBox="-1 -1 2 2"><path d="M0,-0.9 L0.85,0.75 L-0.85,0.75 Z" fill="#fff" stroke="#111" stroke-width="0.18"/></symbol>
+    <symbol id="educateur" viewBox="-1 -1 2 2"><rect x="-0.85" y="-0.85" width="1.7" height="1.7" fill="#fff" stroke="#111" stroke-width="0.16"/><text y="0.42" text-anchor="middle" font-size="1.15" font-family="sans-serif" font-weight="bold" fill="#111">E</text></symbol>
+    <symbol id="ballon" viewBox="-1 -1 2 2"><ellipse rx="0.9" ry="0.55" fill="#fff" stroke="#111" stroke-width="0.2"/><line x1="-0.3" y1="0" x2="0.3" y2="0" stroke="#111" stroke-width="0.15"/></symbol>
+    <symbol id="plot" viewBox="-1 -1 2 2"><path d="M0,-0.8 L0.7,0.7 L-0.7,0.7 Z" fill="#888" stroke="#111" stroke-width="0.12"/></symbol>
+    <symbol id="piquet" viewBox="-1 -1 2 2"><line x1="0" y1="-0.95" x2="0" y2="0.95" stroke="#111" stroke-width="0.28"/><circle cy="0.95" r="0.22" fill="#111"/></symbol>
+    <symbol id="bouclier" viewBox="-1 -1 2 2"><rect x="-0.45" y="-0.9" width="0.9" height="1.8" rx="0.3" fill="#fff" stroke="#111" stroke-width="0.18"/></symbol>
+    <marker id="fleche" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 Z" fill="#111"/></marker>
+    <pattern id="hachures" width="1" height="1" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1" stroke="#111" stroke-width="0.12"/></pattern>
+    <!-- @fin-symboles -->
+  </defs>
+  <rect x="0" y="0" width="20" height="15" fill="#fff" stroke="#111" stroke-width="0.2"/>
+</svg>

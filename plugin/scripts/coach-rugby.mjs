@@ -4,7 +4,11 @@
 //
 // Codes de sortie : 0 succès ; 1 erreurs dans les données ou la commande ;
 // 3 outillage indisponible (dépendance absente) → suivre le chemin B.
+import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
+import { genererSvg } from '../lib/terrain.mjs';
+import { lireYaml } from '../lib/yaml.mjs';
 import { dossierSaison } from '../lib/chemins.mjs';
 import { reglesDuJour } from '../lib/categories.mjs';
 import { aujourdhui, ecrireDate, lireDate } from '../lib/dates.mjs';
@@ -25,6 +29,11 @@ Usage : node coach-rugby.mjs <commande> [options]
         Valide les fichiers YAML (schémas et contrôles de cohérence).
   regles <categorie[,categorie…]> [--pratique <p>] [--date AAAA-MM-JJ] [--json]
         Formes de jeu, contact maximal et permissions à une date.
+  terrain <fiche.yaml> [--sortie <dossier>]
+        Génère le schéma SVG d'une fiche d'exercice (à côté de la fiche
+        par défaut, ou dans le dossier indiqué).
+  index-bibliotheque
+        Régénère bibliotheque/INDEX.md.
 
 Dossier saison : ${dossierSaison()}
 (variable COACH_RUGBY_DOSSIER ; date du jour : COACH_RUGBY_AUJOURDHUI)`;
@@ -123,6 +132,24 @@ const commandes = {
       r.avertissement,
     ].filter(Boolean).join('\n'));
   },
+};
+
+commandes.terrain = (o) => {
+  const fiche = o._[0];
+  if (!fiche) sortir(1, 'Usage : terrain <fiche.yaml> [--sortie <dossier>]');
+  const ex = lireYaml(path.resolve(fiche));
+  const dossier = typeof o.sortie === 'string' ? path.resolve(o.sortie) : path.dirname(path.resolve(fiche));
+  mkdirSync(dossier, { recursive: true });
+  const cible = path.join(dossier, `${ex.id}.svg`);
+  writeFileSync(cible, genererSvg(ex.schema, { titre: ex.titre, description: `${ex.but} ${ex.organisation}` }));
+  sortir(0, `Schéma écrit : ${cible}`);
+};
+
+commandes['index-bibliotheque'] = () => {
+  const cible = path.join(path.dirname(DOSSIER_BIBLIOTHEQUE), 'INDEX.md');
+  const exercices = chargerBibliotheque();
+  writeFileSync(cible, genererIndex(exercices));
+  sortir(0, `Index écrit : ${cible} (${exercices.length} fiches)`);
 };
 
 const [nom, ...reste] = process.argv.slice(2);

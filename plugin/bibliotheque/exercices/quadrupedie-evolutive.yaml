@@ -1,0 +1,38 @@
+id: quadrupedie-evolutive
+titre: Quadrupédie évolutive
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: echauffement
+categories: [m6, m8, m10, m12, m14, m15f]
+niveau: decouverte
+contact: aucun
+duree_min: 8
+effectif: { min: 4, max: 24 }
+espace: { longueur: 15, largeur: 10 }
+materiel: [4 plots]
+but: Renforcer le gainage, les épaules et la coordination par des déplacements à quatre pattes, sous forme ludique.
+organisation: Couloirs de 10 mètres. Les enfants se déplacent à quatre pattes selon différentes consignes, aller puis retour en marchant.
+consignes:
+  - Avance à quatre pattes, genoux décollés du sol, dos plat comme une table.
+  - Puis en marche arrière, puis de côté comme un crabe.
+  - Termine en te relevant vite pour courir jusqu'au plot.
+variables:
+  simplifier: [Genoux au sol, Distance plus courte]
+  complexifier: [Pousser un ballon avec le nez ou la main, Relevé au signal sonore]
+criteres_reussite: [Dos plat et gainé, Relevé rapide et équilibré]
+securite: [Sol souple, sans cailloux, Distances courtes chez les plus jeunes]
+pour_aller_plus_loin:
+  - { source: ffr-cahier-edr-2026-2027, note: "Le plan de séance FFR des ateliers EDR intègre un renforcement par quadrupédie évolutive (p. 11)." }
+schema:
+  surface: { type: atelier, longueur: 15, largeur: 10 }
+  elements:
+    - { type: plot, x: 1, y: 3 }
+    - { type: plot, x: 13, y: 3 }
+    - { type: plot, x: 1, y: 7 }
+    - { type: plot, x: 13, y: 7 }
+    - { type: attaquant, x: 2, y: 3, label: A1 }
+    - { type: attaquant, x: 2, y: 7, label: A2 }
+  trajets:
+    - { type: course, de: [2, 3], a: [12, 3] }
+    - { type: course, de: [2, 7], a: [12, 7] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

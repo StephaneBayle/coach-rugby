@@ -1,0 +1,37 @@
+id: soutien-au-porteur
+titre: Soutien au porteur
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: rugby-a-5
+categories: [m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: toucher
+duree_min: 10
+effectif: { min: 6, max: 16 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [plots, 1 ballon, chasubles]
+but: Être toujours disponible pour le porteur - derrière lui et proche, prêt à recevoir.
+organisation: Jeu au toucher à 4 contre 3. Après chaque toucher, le porteur doit passer à un partenaire qui arrive en soutien dans les 2 secondes, sinon le ballon change de camp.
+consignes:
+  - Partenaires, rapprochez-vous du porteur et placez-vous derrière lui.
+  - Appelez le ballon - à gauche ou à droite.
+  - Porteur, après le toucher, cherche le soutien le plus proche.
+variables:
+  simplifier: [Trois secondes pour passer, Un défenseur de moins]
+  complexifier: [Défense à égalité numérique, Soutien obligatoire des deux côtés]
+criteres_reussite: [Un soutien disponible à chaque toucher, Communication]
+securite: [Toucher à deux mains sans poussée]
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20, lignes: [{ x: 27, label: en-but }] }
+  elements:
+    - { type: porteur, x: 12, y: 10, label: A1 }
+    - { type: attaquant, x: 9, y: 7, label: A2 }
+    - { type: attaquant, x: 9, y: 13, label: A3 }
+    - { type: attaquant, x: 6, y: 10, label: A4 }
+    - { type: defenseur, x: 14, y: 10, label: D1 }
+    - { type: defenseur, x: 18, y: 6, label: D2 }
+    - { type: defenseur, x: 18, y: 14, label: D3 }
+  trajets:
+    - { type: course, de: [9, 7], a: [11, 9] }
+    - { type: course, de: [9, 13], a: [11, 11] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

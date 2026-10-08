@@ -1,0 +1,35 @@
+id: retour-au-calme-mobilite
+titre: Retour au calme et mobilité douce
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: retour-au-calme
+categories: [m5, m6, m8, m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 6
+effectif: { min: 1, max: 40 }
+espace: { longueur: 10, largeur: 10 }
+materiel: []
+but: Faire redescendre l'intensité progressivement et finir la séance au calme.
+organisation: Marche lente en cercle, respiration ample, puis mouvements doux de mobilité (épaules, hanches, chevilles) guidés par l'éducateur.
+consignes:
+  - Marche en respirant profondément, inspire par le nez, souffle par la bouche.
+  - Fais de grands cercles avec les bras, puis avec les hanches.
+  - Chez les plus jeunes - imiter des animaux qui s'étirent (le chat, la girafe).
+variables:
+  simplifier: [Marche seule, Durée de 3 minutes]
+  complexifier: [Auto-massage des mollets, Respiration guidée plus longue]
+criteres_reussite: [Respiration apaisée, Joueurs calmes avant le bilan]
+securite: [Aucun étirement forcé ni douloureux, S'hydrater]
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  elements:
+    - { type: educateur, x: 5, y: 5 }
+    - { type: attaquant, x: 5, y: 1.5 }
+    - { type: attaquant, x: 8.5, y: 5 }
+    - { type: attaquant, x: 5, y: 8.5 }
+    - { type: attaquant, x: 1.5, y: 5 }
+  trajets:
+    - { type: course, de: [5, 1.5], a: [8.5, 5], via: [8, 2] }
+    - { type: course, de: [5, 8.5], a: [1.5, 5], via: [2, 8] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

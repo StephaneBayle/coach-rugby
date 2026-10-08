@@ -1,0 +1,43 @@
+id: toucher-2-secondes-5x5
+titre: Toucher + 2 secondes à 5 contre 5
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: jeu-reduit
+categories: [m8, m10, m12, m14, m15f]
+niveau: decouverte
+contact: toucher
+duree_min: 12
+effectif: { min: 8, max: 12 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [8 plots, 1 ballon, chasubles]
+but: Jouer en avançant, chercher les espaces et soutenir le porteur, dans la forme de jeu de début de saison de l'école de rugby.
+organisation: Deux équipes de 4 ou 5 sur un terrain réduit avec deux en-buts. Le porteur touché à deux mains a 2 secondes pour passer.
+consignes:
+  - Avance vers l'en-but adverse ; la passe se fait vers l'arrière.
+  - Touché à deux mains ? Tu as 2 secondes pour passer.
+  - Essai en aplatissant dans l'en-but.
+  - Après un essai, l'autre équipe repart de sa ligne.
+variables:
+  simplifier: [Terrain plus large, Trois secondes pour passer]
+  complexifier: [Nombre de touchers limité avant de rendre le ballon, Terrain plus étroit]
+criteres_reussite: [Les joueurs avancent avant de passer, Le soutien se place derrière le porteur]
+securite: [Toucher à deux mains, sans pousser ni retenir, Arbitrage strict des contacts]
+sources: [ffr-cahier-edr-2026-2027]
+pour_aller_plus_loin:
+  - { source: ffr-cahier-edr-2026-2027, note: "Forme T+2 (toucher + 2 secondes) à 5 contre 5 et calendrier des formes de jeu par catégorie (p. 6-7)." }
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20, lignes: [{ x: 3, label: en-but }, { x: 27, label: en-but }] }
+  elements:
+    - { type: porteur, x: 10, y: 10, label: A1 }
+    - { type: attaquant, x: 8, y: 6, label: A2 }
+    - { type: attaquant, x: 8, y: 14, label: A3 }
+    - { type: attaquant, x: 6, y: 3, label: A4 }
+    - { type: defenseur, x: 17, y: 5, label: D1 }
+    - { type: defenseur, x: 16, y: 10, label: D2 }
+    - { type: defenseur, x: 17, y: 15, label: D3 }
+    - { type: defenseur, x: 20, y: 9, label: D4 }
+    - { type: educateur, x: 15, y: 19 }
+  trajets:
+    - { type: course, de: [10, 10], a: [14, 11] }
+    - { type: passe, de: [14, 11], a: [12, 14] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

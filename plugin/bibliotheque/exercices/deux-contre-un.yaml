@@ -1,0 +1,35 @@
+id: deux-contre-un
+titre: Deux contre un
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: manipulation-passes
+categories: [m8, m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: toucher
+duree_min: 10
+effectif: { min: 3, max: 24 }
+espace: { longueur: 20, largeur: 10 }
+materiel: [4 plots, ballons]
+but: Créer et exploiter le surnombre - fixer le défenseur, puis passer au bon moment.
+organisation: Couloir de 10 mètres de large. Deux attaquants face à un défenseur. Le défenseur arrête le porteur en le touchant à deux mains.
+consignes:
+  - Porteur, cours vers le défenseur pour l'obliger à venir sur toi.
+  - Passe à ton partenaire quand le défenseur s'engage sur toi.
+  - Défenseur, tu n'es pas obligé de choisir tout de suite.
+  - On tourne les rôles à chaque passage.
+variables:
+  simplifier: [Défenseur qui marche, Couloir plus large]
+  complexifier: [Défenseur qui part plus tôt, Couloir plus étroit]
+criteres_reussite: [Le porteur fixe avant de passer, L'essai est marqué plus d'une fois sur deux]
+securite: [Toucher à deux mains sans poussée, Arrêt du jeu au toucher]
+schema:
+  surface: { type: atelier, longueur: 20, largeur: 10, lignes: [{ x: 18, label: en-but }] }
+  elements:
+    - { type: porteur, x: 2, y: 4, label: A1 }
+    - { type: attaquant, x: 1, y: 7.5, label: A2 }
+    - { type: defenseur, x: 12, y: 5, label: D1 }
+  trajets:
+    - { type: course, de: [2, 4], a: [10, 4.5] }
+    - { type: passe, de: [10, 4.5], a: [9, 7.5] }
+    - { type: course, de: [9, 7.5], a: [19, 7.5] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

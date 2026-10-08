@@ -1,7 +1,7 @@
 // Invariants de structure du dépôt et du plugin livré.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -38,7 +38,7 @@ test('la version du plugin suit SemVer', () => {
 
 test('chaque skill a un SKILL.md dont le name correspond au dossier', () => {
   const dossier = path.join(plugin, 'skills');
-  for (const s of readdirSync(dossier)) {
+  for (const s of readdirSync(dossier).filter((d) => statSync(path.join(dossier, d)).isDirectory())) {
     const md = readFileSync(path.join(dossier, s, 'SKILL.md'), 'utf8');
     const nom = /^---\n[\s\S]*?^name:\s*(\S+)/m.exec(md)?.[1];
     assert.equal(nom, s, `skill ${s}`);

@@ -1,0 +1,37 @@
+id: jeu-a-flag
+titre: Jeu à flag
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: jeu-reduit
+categories: [m6, m8, m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: toucher
+duree_min: 12
+effectif: { min: 6, max: 14 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [une ceinture à deux flags par joueur, 8 plots, 1 ballon, chasubles]
+but: Jouer au rugby sans contact - avancer, esquiver, passer au bon moment.
+organisation: Deux équipes sur un terrain réduit. Arracher un flag du porteur arrête l'action ; le porteur passe le ballon dans les 2 secondes.
+consignes:
+  - Le défenseur arrache un flag au lieu de toucher.
+  - Flag arraché ? Le porteur s'arrête et passe vers l'arrière.
+  - Interdit de protéger ses flags avec les mains ou le ballon.
+variables:
+  simplifier: [Plus de joueurs en attaque qu'en défense, Terrain plus large]
+  complexifier: [Possession limitée à quatre flags arrachés, En-but plus petit]
+criteres_reussite: [Le porteur cherche l'espace, Aucun contact]
+securite: [Ceintures bien ajustées, Aucun contact, Plots souples]
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20, lignes: [{ x: 3, label: en-but }, { x: 27, label: en-but }] }
+  elements:
+    - { type: porteur, x: 9, y: 9, label: A1 }
+    - { type: attaquant, x: 7, y: 13, label: A2 }
+    - { type: attaquant, x: 7, y: 5, label: A3 }
+    - { type: defenseur, x: 16, y: 7, label: D1 }
+    - { type: defenseur, x: 16, y: 13, label: D2 }
+    - { type: defenseur, x: 20, y: 10, label: D3 }
+  trajets:
+    - { type: course, de: [9, 9], a: [14, 10] }
+    - { type: passe, de: [14, 10], a: [11, 13.5] }
+    - { type: course, de: [11, 13.5], a: [26, 16], via: [20, 17] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

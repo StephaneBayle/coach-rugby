@@ -33,6 +33,18 @@ jobs:
         run: |
           node plugin/scripts/coach-rugby.mjs valider plugin/references
           node plugin/scripts/coach-rugby.mjs valider plugin/exemples
+      - name: Bibliothèque d'exercices (fiches valides, index à jour, schémas SVG)
+        run: |
+          node plugin/scripts/coach-rugby.mjs valider plugin/bibliotheque
+          node plugin/scripts/coach-rugby.mjs index-bibliotheque
+          git diff --exit-code plugin/bibliotheque/INDEX.md || { echo "::error::INDEX.md n'est pas à jour : lancer node plugin/scripts/coach-rugby.mjs index-bibliotheque"; exit 1; }
+          mkdir -p /tmp/schemas && for f in plugin/bibliotheque/exercices/*.yaml; do node plugin/scripts/coach-rugby.mjs terrain "$f" --sortie /tmp/schemas > /dev/null; done
+      - name: Schémas de terrain en artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: schemas-terrain
+          path: /tmp/schemas/
+          retention-days: 14
 
   donnees-personnelles:
     name: Données personnelles

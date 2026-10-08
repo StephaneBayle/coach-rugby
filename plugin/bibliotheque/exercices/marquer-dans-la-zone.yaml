@@ -1,0 +1,40 @@
+id: marquer-dans-la-zone
+titre: Marquer dans la zone (4 contre 4)
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: jeu-reduit
+categories: [m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: toucher
+duree_min: 12
+effectif: { min: 8, max: 10 }
+espace: { longueur: 25, largeur: 20 }
+materiel: [12 plots, 1 ballon, chasubles]
+but: Faire des choix collectifs pour atteindre une zone de marque qui change de place.
+organisation: Deux équipes de 4 au toucher. Deux zones de marque de 5 mètres sur 5 sont tracées dans chaque en-but ; l'éducateur annonce laquelle est ouverte.
+consignes:
+  - Écoute l'annonce de l'éducateur - zone gauche ou zone droite.
+  - Essai seulement dans la zone ouverte.
+  - Touché à deux mains ? Passe dans les 2 secondes.
+variables:
+  simplifier: [Une seule zone large, Annonce avant le départ de l'action]
+  complexifier: [Changement de zone pendant l'action, Trois touchers maximum par possession]
+criteres_reussite: [L'équipe change de direction ensemble, Le porteur lève la tête]
+securite: [Toucher sans poussée, Zones éloignées des plots de délimitation]
+schema:
+  surface: { type: atelier, longueur: 25, largeur: 20 }
+  zones:
+    - { x: 20, y: 1, longueur: 5, largeur: 5, label: zone 1 }
+    - { x: 20, y: 14, longueur: 5, largeur: 5, label: zone 2 }
+  elements:
+    - { type: porteur, x: 5, y: 10, label: A1 }
+    - { type: attaquant, x: 3, y: 6, label: A2 }
+    - { type: attaquant, x: 3, y: 14, label: A3 }
+    - { type: defenseur, x: 12, y: 8, label: D1 }
+    - { type: defenseur, x: 12, y: 13, label: D2 }
+    - { type: educateur, x: 12, y: 19.5 }
+  trajets:
+    - { type: course, de: [5, 10], a: [9, 12] }
+    - { type: passe, de: [9, 12], a: [7, 15] }
+    - { type: course, de: [7, 15], a: [21, 16.5] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

@@ -1,0 +1,45 @@
+id: plaquage-educatif-progressif
+titre: Plaquage éducatif progressif
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: contact
+categories: [m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: plaquage
+exige: [plaquage]
+duree_min: 15
+effectif: { min: 2, max: 20 }
+espace: { longueur: 10, largeur: 10 }
+materiel: [boucliers ou sacs de plaquage, tapis ou herbe souple]
+but: Apprendre à plaquer bas, en sécurité pour le plaqueur et pour le plaqué.
+organisation: "Progression par étapes, sur bouclier puis sur partenaire : à genoux contre à genoux, accroupi contre à genoux, debout contre marchant. On ne passe à l'étape suivante que si la précédente est maîtrisée."
+consignes:
+  - Tête sur le côté, joue contre la cuisse ou la hanche du porteur, jamais devant lui.
+  - Vise la taille ou plus bas (sous la ceinture), jamais au-dessus.
+  - Serre avec les deux bras et accompagne le porteur au sol.
+  - Le porteur apprend à chuter (fiche « Apprendre à chuter avec le ballon »).
+variables:
+  simplifier: [Rester sur bouclier, Étapes à genoux uniquement]
+  complexifier: [Porteur qui trottine, Plaquage suivi d'un relevé pour rejouer le ballon]
+criteres_reussite: [Tête du bon côté, Bras serrés, Plaquage bas]
+securite:
+  - Seulement pendant les mois où la forme de jeu de la catégorie permet le plaquage (vérifier les règles du jour).
+  - Binômes de gabarit comparable, vitesse très réduite.
+  - Hauteur de plaquage - en dessous de la poitrine, viser la ceinture ou plus bas ; règle de hauteur de la saison à vérifier.
+  - Tout choc à la tête - sortie immédiate et définitive, voir le protocole commotion.
+  - Protège-dents fortement recommandé.
+sources: [ffr-cahier-edr-2026-2027]
+pour_aller_plus_loin:
+  - { source: ffr-formation-edr, note: "Circuit technique préparatoire au plaquage et postures post-plaquage (site de l'entraîneur FFR)." }
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  zones:
+    - { x: 2, y: 2.5, longueur: 6.5, largeur: 5, label: tapis }
+  elements:
+    - { type: porteur, x: 7, y: 5.5, label: A1 }
+    - { type: defenseur, x: 3, y: 5.5, label: D1 }
+    - { type: bouclier, x: 6.5, y: 8.5 }
+    - { type: educateur, x: 9, y: 1 }
+  trajets:
+    - { type: course, de: [3.8, 5.5], a: [5.9, 5.5] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

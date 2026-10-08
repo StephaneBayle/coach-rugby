@@ -1,0 +1,36 @@
+id: rondo-4-contre-1
+titre: Rondo à quatre contre un
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: echauffement
+categories: [m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: toucher
+duree_min: 8
+effectif: { min: 5, max: 25 }
+espace: { longueur: 10, largeur: 10 }
+materiel: [4 plots par carré, 1 ballon par carré]
+but: Conserver le ballon par des passes rapides et précises sous la pression d'un défenseur.
+organisation: Quatre attaquants sur les côtés d'un carré, un défenseur au centre. Plusieurs carrés si l'effectif le permet.
+consignes:
+  - Les attaquants se passent le ballon sans entrer dans le carré ; toutes les directions de passe sont permises dans cet atelier.
+  - Le défenseur touche le porteur à deux mains ou intercepte.
+  - Touché ou ballon au sol ? Le fautif devient défenseur.
+variables:
+  simplifier: [Carré plus grand, Défenseur qui marche]
+  complexifier: [Deux défenseurs, Passe obligatoire dans les deux secondes]
+criteres_reussite: [Passes précises à hauteur de poitrine, Soutien en se décalant]
+securite: [Toucher sans poussée, Carrés espacés de 5 mètres]
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  elements:
+    - { type: porteur, x: 5, y: 0.5, label: A1 }
+    - { type: attaquant, x: 9.5, y: 5, label: A2 }
+    - { type: attaquant, x: 5, y: 9.5, label: A3 }
+    - { type: attaquant, x: 0.5, y: 5, label: A4 }
+    - { type: defenseur, x: 5, y: 5, label: D1 }
+  trajets:
+    - { type: passe, de: [5, 0.5], a: [9.5, 5] }
+    - { type: passe, de: [9.5, 5], a: [5, 9.5] }
+    - { type: course, de: [5, 5], a: [7.5, 7.5] }
+relecture: { statut: relu-ia, date: 2026-10-08 }
