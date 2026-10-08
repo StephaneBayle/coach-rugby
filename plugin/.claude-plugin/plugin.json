@@ -1,7 +1,7 @@
 {
   "name": "coach-rugby",
   "displayName": "Coach Rugby",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Assistant de saison pour coachs et éducateurs de rugby amateur : planification en cycles et semaines, séances adaptées à la catégorie et au mois, bibliothèque d'exercices, schémas de terrain, fiches imprimables et lisibles sur téléphone.",
   "author": {
     "name": "Stéphane Bayle"

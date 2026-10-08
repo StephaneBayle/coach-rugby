@@ -3,9 +3,10 @@
 Assistant de saison pour **coachs et éducateurs de rugby amateur**, sous forme
 de plugin pour Claude (Cowork, Claude desktop et Claude Code).
 
-> **Version 0.2.0** — saison, cycles et semaines, séances, bibliothèque
-> d'exercices, fiches imprimables et téléphone. La suite (effectif et
-> matchs, charge, communication) est dans la
+> **Version 0.3.0** — saison, cycles et semaines, séances, bibliothèque
+> d'exercices, effectif et matchs (temps de jeu équitable, fiche match,
+> débriefing), fiches imprimables et téléphone, tableaux Excel. La suite
+> (charge, communication) est dans la
 > [feuille de route](docs/feuille-de-route.md).
 
 ## À quoi ça sert
@@ -16,6 +17,10 @@ de plugin pour Claude (Cowork, Claude desktop et Claude Code).
   phases finales, ou calendrier de plateaux pour l'école de rugby.
 - Puiser dans une **bibliothèque d'exercices** libre (CC BY-SA), avec des
   schémas de terrain.
+- Suivre vos **joueurs en codes** (les prénoms restent sur votre
+  ordinateur) : présences, progrès, feuille de présence, tableaux Excel.
+- Préparer vos **matchs et plateaux** : convocation, composition, temps de
+  jeu équitable chez les jeunes, causerie, puis débriefing.
 - Obtenir des **fiches imprimables** et lisibles sur téléphone au bord du
   terrain.
 - Être **relancé au bon moment** : affûtage avant un derby, préparation de la

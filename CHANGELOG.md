@@ -5,7 +5,7 @@ comment c'est programmé. Format inspiré de
 [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions selon
 [SemVer](https://semver.org/lang/fr/).
 
-## [Non publié]
+## [0.3.0] — 2026-10-08
 
 ### Ajouté
 
@@ -21,9 +21,13 @@ comment c'est programmé. Format inspiré de
   préparation (projet de jeu, plan de match, causerie en trois phrases),
   statistiques simples et débriefing.
 - Temps de jeu équitable chez les jeunes : le plugin calcule une rotation
-  où chacun joue autant que possible, sans qu'un enfant ne reste deux fois
-  de suite sur le banc. Il refuse une composition qui ne respecte pas la
-  forme de jeu du jour (nombre sur le terrain, première ligne sans mêlée).
+  où chacun joue autant que possible, à cinq minutes près, et vous dit
+  l'attente la plus longue sur le banc. D'un plateau à l'autre, ce ne sont
+  pas toujours les mêmes enfants qui jouent un peu plus. C'est un repère,
+  pas une règle de la fédération.
+- Le plugin refuse une composition qui ne respecte pas la forme de jeu du
+  jour (nombre sur le terrain, première ligne sans mêlée) et signale un
+  joueur placé en première ligne hors de ses postes habituels.
 - Rappels FFR : la feuille de match dématérialisée des écoles de rugby est
   l'outil officiel ; passeport du joueur de devant en M14 et M15F.
 - Fiche match à imprimer ou à garder sur le téléphone : préparation,
@@ -43,11 +47,6 @@ comment c'est programmé. Format inspiré de
   les six semaines.
 - La séance s'appuie sur le dernier débriefing de match et sur les
   compétences à travailler ; la semaine reprend les thèmes du débriefing.
-- Le temps de jeu annonce l'attente la plus longue sur le banc, et ce ne
-  sont plus toujours les mêmes enfants qui jouent la période en plus d'un
-  plateau à l'autre.
-- Un joueur placé en première ligne hors de ses postes habituels est
-  signalé (sécurité en mêlée).
 - Le score se note à part et s'affiche sur la fiche match.
 
 ### Corrigé
