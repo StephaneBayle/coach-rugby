@@ -104,7 +104,12 @@ plugin ; `~/Rugby-Saisons`.
      à égalité, celui qui sort du banc ;
   3. vérifier que chaque période a exactement le nombre de joueurs de la
      forme de jeu, et qu'entre deux enfants l'écart ne dépasse pas une
-     période.
+     période ;
+  4. compter l'**attente la plus longue** sur le banc et l'annoncer. Avec
+     plus de deux fois plus de joueurs que de places, certains attendent
+     forcément deux périodes de suite : ne jamais promettre le contraire.
+     Si chacun joue moins de la moitié du temps, l'écrire dans la cible
+     (« non atteinte ici »).
 
   C'est un repère d'équité (hypothèse pédagogique), pas une règle de la
   FFR.

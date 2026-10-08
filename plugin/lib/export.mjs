@@ -289,7 +289,7 @@ const POSTES = {
 };
 const TYPES_MATCH = { match: 'Match', plateau: 'Plateau', tournoi: 'Tournoi' };
 const STATS = {
-  essais: 'Essais', transformations: 'Transformations', penalites_reussies: 'Pénalités réussies', drops: 'Drops',
+  points: 'Points', essais: 'Essais', transformations: 'Transformations', penalites_reussies: 'Pénalités réussies', drops: 'Drops',
   plaquages_reussis: 'Plaquages réussis', plaquages_manques: 'Plaquages manqués', ballons_perdus: 'Ballons perdus',
   penalites_concedees: 'Pénalités concédées', touches_gagnees: 'Touches gagnées', touches_perdues: 'Touches perdues',
   melees_gagnees: 'Mêlées gagnées', melees_perdues: 'Mêlées perdues', cartons: 'Cartons',
@@ -304,9 +304,10 @@ function rotationHtml(match) {
   const total = periodes.at(-1).fin_min;
   const plusieurs = new Set(periodes.map((p) => p.rencontre || 1)).size > 1;
   const entetes = periodes.map((p) => `<th class="c">${plusieurs ? `R${p.rencontre || 1}<br>` : ''}${p.debut_min}-${p.fin_min}</th>`).join('');
-  const lignes = codes.map((c) => `<tr><td class="code">${echapper(c)}</td>${periodes.map((p) => `<td class="c">${p.sur_le_terrain.includes(c) ? '●' : '·'}</td>`).join('')}<td class="c">${minutes[c] || 0}</td></tr>`).join('');
+  // Colonne « Prénom » vide (A4) : à remplir au stylo, jamais par le plugin.
+  const lignes = codes.map((c) => `<tr><td class="code">${echapper(c)}</td><td class="masquer-tel prenom"></td>${periodes.map((p) => `<td class="c">${p.sur_le_terrain.includes(c) ? '●' : '·'}</td>`).join('')}<td class="c">${minutes[c] || 0}</td></tr>`).join('');
   const cible = match.temps_de_jeu.cible ? `<p class="notes">Repère : ${echapper(match.temps_de_jeu.cible)} (hypothèse pédagogique, aucune règle officielle de temps de jeu).</p>` : '';
-  return `<section><h2>Rotation du temps de jeu</h2><table class="rotation"><thead><tr><th class="code">Code</th>${entetes}<th class="c">min</th></tr></thead><tbody>${lignes}</tbody></table><p class="notes">● sur le terrain · banc. Minutes de match (${total} min au total).</p>${cible}</section>`;
+  return `<section><h2>Rotation du temps de jeu</h2><table class="rotation"><thead><tr><th class="code">Code</th><th class="masquer-tel prenom">Prénom</th>${entetes}<th class="c">min</th></tr></thead><tbody>${lignes}</tbody></table><p class="notes">● sur le terrain · banc. Minutes de match (${total} min au total). Colonne « Prénom » à remplir à la main.</p>${cible}</section>`;
 }
 
 function compositionHtml(match) {
@@ -323,14 +324,16 @@ function compositionHtml(match) {
 function apresHtml(match) {
   const s = match.stats;
   const d = match.debriefing;
-  if (!s && !d) return '';
+  const sc = match.score;
+  if (!s && !d && !sc) return '';
+  const score = sc ? `<p class="projet">Score : ${sc.nous} – ${sc.adversaire}${match.adversaire ? ` contre ${echapper(match.adversaire)}` : ''}</p>` : '';
   const tableStats = s?.equipe
     ? `<table><thead><tr><th>Statistique</th><th class="c">Nous</th>${s.adversaire ? '<th class="c">Adversaire</th>' : ''}</tr></thead><tbody>${[...new Set([...Object.keys(s.equipe), ...Object.keys(s.adversaire || {})])]
         .map((k) => `<tr><td>${echapper(libelleStat(k))}</td><td class="c">${s.equipe[k] ?? '—'}</td>${s.adversaire ? `<td class="c">${s.adversaire[k] ?? '—'}</td>` : ''}</tr>`)
         .join('')}</tbody></table>`
     : '';
   const deb = d ? `<div class="colonnes">${sectionHtml('Réussites', d.reussites, '')}${sectionHtml('À retravailler', d.a_retravailler, '')}</div>${sectionHtml('Prochaines séances', d.prochaines_seances, '')}` : '';
-  return `<section><h2>Après le match</h2>${tableStats}${deb}</section>`;
+  return `<section><h2>Après le match</h2>${score}${tableStats}${deb}</section>`;
 }
 
 export function preparerMatch(match, { equipe }) {

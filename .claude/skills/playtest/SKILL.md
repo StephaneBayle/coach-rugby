@@ -78,7 +78,9 @@ skill ; note-le dans le journal (« le skill dit X, ce qui conduit à Y »).
    - le skill appliqué ;
    - les commandes lancées et leur code de sortie ;
    - les fichiers écrits et le résultat de `valider` ;
-   - la réponse donnée au coach ;
+   - la réponse donnée au coach, **mot à mot** (pas un résumé : le rapport
+     doit pouvoir vérifier le jargon, les mentions « à vérifier » et les
+     phrases de sécurité) ;
    - puis, au tour suivant, son RESSENTI et ce qui lui a MANQUÉ.
 
 Arrêter quand le coach répond `J'ARRÊTE : oui`, ou après 5 échanges.

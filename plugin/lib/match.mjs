@@ -50,6 +50,14 @@ export function controlerMatch(match, { equipe = null, effectif = null } = {}) {
       erreurs.push(`${titulaires.length} titulaires pour ${match.regles.sur_le_terrain} places sur le terrain`);
     }
     const postes = (match.composition?.titulaires || []).map((t) => t.poste).filter(Boolean);
+    // Première ligne : un joueur formé à ces postes (sécurité en mêlée). On
+    // ne contrôle que si l'effectif indique ses postes.
+    for (const t of match.composition?.titulaires || []) {
+      const habituels = joueurs.get(t.code)?.postes;
+      if (PREMIERE_LIGNE.includes(t.poste) && habituels?.length && !habituels.some((p) => PREMIERE_LIGNE.includes(p))) {
+        erreurs.push(`${t.code} placé en ${t.poste} alors que ses postes sont ${habituels.join(', ')} : la première ligne demande un joueur formé à ces postes (sécurité en mêlée ; ajouter le poste dans effectif.yaml s'il l'est)`);
+      }
+    }
     if (postes.some((p) => PREMIERE_LIGNE.includes(p))) {
       if (!regles.melee) erreurs.push(`poste de première ligne alors que la forme du jour n'a pas de mêlée (${regles.formes.map((f) => f.libelle).join(' ou ')})`);
       else if (regles.regles_transverses.some((r) => r.id === 'passeport-joueur-de-devant')) {

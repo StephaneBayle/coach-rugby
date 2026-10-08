@@ -12,7 +12,7 @@ import { ecrireCsv, ecrireXlsx, tableauPresences, tableauProgres, tableauTempsDe
 import { absencesRepetees, lirePrenoms, prochainCode, synchroniserProteges, tauxDePresence } from '../lib/effectif.mjs';
 import { dureeTotale } from '../lib/match.mjs';
 import { lundiDe, proposerCycles, proposerSemaine } from '../lib/planification.mjs';
-import { bilanEquite, planifierRotation } from '../lib/temps-de-jeu.mjs';
+import { attenteMax, bilanEquite, planifierRotation } from '../lib/temps-de-jeu.mjs';
 import { chargerCategories } from '../lib/categories.mjs';
 import { genererSvg } from '../lib/terrain.mjs';
 import { ecrireYaml, lireYaml } from '../lib/yaml.mjs';
@@ -360,21 +360,31 @@ commandes.rotation = (o) => {
   const duree = dureeTotale(match);
   const rencontres = match.rencontres?.length ? match.rencontres : [{ duree_min: duree }];
   const dureePeriode = Number(o.periode || 5);
-  const r = planifierRotation({ joueurs, surLeTerrain: match.regles.sur_le_terrain, rencontres, dureePeriode });
+  // Départage des égalités décalé d'un match à l'autre : nombre de matchs
+  // déjà enregistrés avant celui-ci.
+  const dossierMatchs = path.dirname(path.dirname(path.resolve(fichier)));
+  const decalage = existsSync(dossierMatchs) ? readdirSync(dossierMatchs).filter((x) => /^\d{4}-\d{2}-\d{2}$/.test(x) && x < String(match.date)).length : 0;
+  const surLeTerrain = match.regles.sur_le_terrain;
+  const r = planifierRotation({ joueurs, surLeTerrain, rencontres, dureePeriode, decalage });
   if (!r.possible) sortir(1, `Rotation impossible : ${r.raison}.`);
   const b = bilanEquite(r.periodes, joueurs, duree);
-  const cible = chargerCategories().categories[match.regles.categorie]?.temps_de_jeu?.valeur;
+  const attente = attenteMax(r.periodes, joueurs);
+  const repere = chargerCategories().categories[match.regles.categorie]?.temps_de_jeu?.valeur;
+  const moitie = b.part_min >= 0.5;
+  // La cible écrite dit si elle est tenue : jamais de promesse fausse.
+  const cible = repere && !moitie ? `${repere} — non atteinte ici : ${joueurs.length} joueurs pour ${surLeTerrain} places` : repere;
   if (o.ecrire) {
     match.temps_de_jeu = { ...(cible ? { cible } : {}), duree_periode_min: dureePeriode, periodes: r.periodes };
     ecrireYaml(path.resolve(fichier), match, '# Match — en codes, aucun nom ici.');
     const erreurs = validerChemin(path.resolve(fichier)).flatMap((x) => x.erreurs);
     if (erreurs.length) sortir(1, `Écrit mais invalide :\n${erreurs.join('\n')}`);
   }
-  const moitie = b.part_min >= 0.5;
+  const inevitable = joueurs.length > 2 * surLeTerrain;
   sortir(0, [
     `Rotation : ${joueurs.length} joueurs, ${match.regles.sur_le_terrain} sur le terrain, ${r.periodes.length} périodes de ${dureePeriode} min, ${duree} min au total.`,
     ...Object.entries(b.minutes).map(([c, m]) => `  ${c} : ${m} min`),
     `Écart entre joueurs : ${b.ecart} min. ${moitie ? 'Chacun joue au moins la moitié du temps.' : `Le moins servi joue ${Math.round(100 * b.part_min)} % du temps : trop de joueurs pour une seule équipe ? (repère d'équité, hypothèse)`}`,
+    `Attente la plus longue sur le banc : ${attente.max} min d'affilée.${attente.deuxDeSuite.length ? ` ${attente.deuxDeSuite.length} joueur(s) attendent deux périodes de suite${inevitable ? ` (inévitable : plus de deux fois plus de joueurs que de places)` : ''} : ${attente.deuxDeSuite.join(', ')}.` : ' Personne n\'attend deux périodes de suite.'}`,
     cible ? `Repère : ${cible} (hypothèse pédagogique).` : null,
     o.ecrire ? 'Enregistré dans match.yaml.' : '--ecrire pour l\'enregistrer.',
   ].filter(Boolean).join('\n'));

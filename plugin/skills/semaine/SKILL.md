@@ -32,6 +32,10 @@ COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN
    les échéances et les relances.
 3. Sans `cycles.yaml`, le plan reste possible, mais proposer
    `/coach-rugby:planifier` ensuite.
+4. **Dernier match** : si `<equipe>/matchs/<date>/match.yaml` a un
+   `debriefing`, reprendre ses `prochaines_seances` dans l'intention des
+   séances de **travail** de la semaine (pas dans une séance de
+   récupération ni d'activation), et le dire au coach.
 
 ## 2. Obtenir le brouillon
 

@@ -25,9 +25,8 @@ COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN
 
 ## Le principe, à dire au coach en une phrase
 
-« Je garde les prénoms seulement sur votre ordinateur, dans une liste à part ;
-vos fiches et tableaux utilisent des codes (J01, J02…), vous n'avez rien à
-faire. »
+« Je garde les prénoms seulement sur votre ordinateur ; sur les feuilles,
+chaque enfant a un numéro de liste (J01, J02…). Vous n'avez rien à faire. »
 
 Ne pas parler de RGPD, de fichier ni de table. Ne jamais demander de nom de
 famille, de date de naissance, de licence, de téléphone ni d'information de
@@ -39,12 +38,16 @@ santé.
    coach seulement, les prénoms connus.
 2. Le coach donne un **nombre** : `effectif <equipe> --ajouter N`.
 3. Le coach donne des **prénoms** :
+   - la première fois, **un seul accord**, avec la valeur par défaut :
+     « Je note vos N joueurs pour la saison (vous les retrouverez la
+     prochaine fois), d'accord ? » ;
    - créer un code par joueur (`--ajouter N`) ;
    - écrire les prénoms **seulement** dans `<equipe>/.prenoms.yaml`, une
      ligne `J01: Prénom` par joueur ; deux prénoms identiques reçoivent un
      chiffre ;
    - s'il donne aussi des noms de famille : ne garder que le prénom, et
-     ajouter le nom complet à `<dossier saison>/.joueurs-proteges.txt` ;
+     ajouter le nom complet à `<dossier saison>/.joueurs-proteges.txt`, **sans
+     répéter le nom de famille** dans la réponse ;
    - relancer `effectif <equipe>` : les prénoms deviennent des noms
      protégés.
 4. Seniors et jeunes à XV : noter les `postes` si le coach les donne.
@@ -58,10 +61,11 @@ ou `match.yaml`, ni dans `journal.md`.
 
 - Un joueur indisponible : `disponible: false`, **sans motif**.
 - Si le coach donne une raison de santé (blessure, maladie, choc) : ne pas
-  l'écrire, ne donner aucun avis médical, rappeler en une phrase que la
-  reprise se décide avec un professionnel de santé
-  (`${CLAUDE_PLUGIN_ROOT}/references/protocole-commotion.md` pour un choc à
-  la tête).
+  l'écrire, ne donner aucun avis médical ni **aucun critère de reprise**.
+  Phrase type : « Je ne peux pas vous dire s'il pourra jouer : la reprise se
+  décide avec un professionnel de santé (et les parents pour un mineur).
+  Dites-moi s'il joue, et j'adapte. » Pour un choc à la tête :
+  `${CLAUDE_PLUGIN_ROOT}/references/protocole-commotion.md`.
 - Retour du joueur : `disponible: true`.
 
 ## 3. Présences

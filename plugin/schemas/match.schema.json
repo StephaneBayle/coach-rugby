@@ -218,6 +218,25 @@
         }
       }
     },
+    "score": {
+      "type": "object",
+      "description": "Score final (points).",
+      "required": [
+        "nous",
+        "adversaire"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "nous": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "adversaire": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
     "stats": {
       "type": "object",
       "additionalProperties": false,

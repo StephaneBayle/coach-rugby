@@ -86,6 +86,8 @@ test('fiche match : rotation, composition, statistiques, mention de la feuille o
   assert.deepEqual(p.fichiers, ['fiche-match-a4.html', 'fiche-match-telephone.html']);
   const plateau = readFileSync(path.join(p.dossier, 'fiche-match-a4.html'), 'utf8');
   assert.match(plateau, /Rotation du temps de jeu/);
+  assert.match(plateau, /<th class="masquer-tel prenom">Prénom<\/th>/);
+  assert.match(plateau, /<td class="masquer-tel prenom"><\/td>/, 'colonne prénom vide');
   assert.match(plateau, /FDM EDR/);
   assert.match(plateau, /Choc à la tête/);
   assert.doesNotMatch(plateau, /\{\{|@repeter/);

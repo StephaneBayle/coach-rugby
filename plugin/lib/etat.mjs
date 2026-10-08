@@ -108,7 +108,7 @@ export function suggestions(saison, date, { derniereSeance = null, equipe = null
   }
   const p = s.prochain;
   const ecoleDeRugby = equipe && publicDe(equipe) === 'edr';
-  if (p && ['match', 'tournoi'].includes(p.type) && ['haute', 'derby'].includes(p.importance) && p.j_moins <= 7 && !ecoleDeRugby) {
+  if (p && ['match', 'tournoi'].includes(p.type) && ['haute', 'derby'].includes(p.importance) && p.j_moins >= 1 && p.j_moins <= 7 && !ecoleDeRugby) {
     ajouter(
       'affutage',
       p.j_moins <= 2

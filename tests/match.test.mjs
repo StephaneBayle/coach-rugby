@@ -8,7 +8,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { controlerMatch, effectifsPermis } from '../plugin/lib/match.mjs';
 import { reglesDuJour } from '../plugin/lib/categories.mjs';
-import { bilanEquite, decouperPeriodes, planifierRotation } from '../plugin/lib/temps-de-jeu.mjs';
+import { attenteMax, bilanEquite, decouperPeriodes, planifierRotation } from '../plugin/lib/temps-de-jeu.mjs';
+import { suggestions } from '../plugin/lib/etat.mjs';
+import { preparerMatch } from '../plugin/lib/export.mjs';
 import { validerChemin } from '../plugin/lib/dossier.mjs';
 import { ecrireYaml, lireYaml } from '../plugin/lib/yaml.mjs';
 
@@ -101,4 +103,55 @@ test('CLI rotation : calcule, enregistre et valide', () => {
   assert.match(r.stdout, /13 joueurs, 5 sur le terrain/);
   assert.match(r.stdout, /trop de joueurs pour une seule équipe/);
   assert.equal(lireYaml(f).temps_de_jeu.periodes.length, 6);
+});
+
+test("attente la plus longue : annoncée, et inévitable au-delà de deux fois plus de joueurs que de places (playtest 5)", () => {
+  const r12 = planifierRotation({ joueurs: codes(12), surLeTerrain: 5, rencontres: Array(3).fill({ duree_min: 10 }), dureePeriode: 5 });
+  const a = attenteMax(r12.periodes, codes(12));
+  assert.ok(a.deuxDeSuite.length > 0, 'à 12 pour 5, certains attendent deux périodes de suite');
+  assert.equal(a.max, 10, "mais jamais plus de deux périodes");
+  const r7 = planifierRotation({ joueurs: codes(7), surLeTerrain: 5, rencontres: Array(3).fill({ duree_min: 10 }), dureePeriode: 5 });
+  assert.deepEqual(attenteMax(r7.periodes, codes(7)).deuxDeSuite, []);
+});
+
+test("décalage : ce ne sont pas toujours les mêmes qui jouent la période en plus", () => {
+  const plus = (decalage) => {
+    const r = planifierRotation({ joueurs: codes(13), surLeTerrain: 5, rencontres: Array(3).fill({ duree_min: 10 }), dureePeriode: 5, decalage });
+    return Object.entries(r.minutes).filter(([, m]) => m === 15).map(([c]) => c);
+  };
+  assert.deepEqual(plus(0), ['J01', 'J02', 'J03', 'J04']);
+  assert.notDeepEqual(plus(1), plus(0));
+  assert.equal(plus(1).length, 4);
+});
+
+test('CLI rotation : attente annoncée, cible marquée non atteinte quand elle ne peut pas être tenue', () => {
+  const d = path.join(mkdtempSync(path.join(tmpdir(), 'cr-rot2-')), 'Rugby-Saisons');
+  cpSync(path.join(ex, 'fictif-m10-les-ecureuils'), d, { recursive: true });
+  const f = path.join(d, 'm10', 'matchs', '2026-10-17', 'match.yaml');
+  const m = lireYaml(f);
+  delete m.temps_de_jeu;
+  m.convoques = codes(12);
+  ecrireYaml(f, m);
+  const r = spawnSync(process.execPath, [path.join(racine, 'plugin', 'scripts', 'coach-rugby.mjs'), 'rotation', f, '--ecrire'], { encoding: 'utf8', env: { ...process.env, COACH_RUGBY_DOSSIER: d } });
+  assert.equal(r.status, 0, r.stdout + r.stderr);
+  assert.match(r.stdout, /Attente la plus longue sur le banc : 10 min/);
+  assert.match(r.stdout, /inévitable/);
+  assert.match(lireYaml(f).temps_de_jeu.cible, /non atteinte ici : 12 joueurs pour 5 places/);
+});
+
+test('première ligne : un joueur hors de ses postes est signalé (playtest 6)', () => {
+  const d = structuredClone(derby);
+  d.composition.titulaires[2] = { code: 'J22', poste: 'pilier-droit' };
+  d.composition.remplacants = d.composition.remplacants.filter((c) => c !== 'J22');
+  assert.match(controlerMatch(d, f3).join('\n'), /J22 placé en pilier-droit alors que ses postes sont troisieme-ligne-aile/);
+  assert.deepEqual(controlerMatch(derby, f3), []);
+});
+
+test('score sur la fiche ; pas de relance d\'affûtage le jour du match', () => {
+  const d = { ...structuredClone(derby), score: { nous: 23, adversaire: 17 } };
+  assert.match(preparerMatch(d, { equipe: f3.equipe }).apres, /Score : 23 – 17 contre RC Voisinville/);
+  const saison = lireYaml(path.join(ex, 'fictif-seniors-f3-les-goelands', 'seniors-f3', 'saison.yaml'));
+  const c = (date) => suggestions(saison, date, { equipe: f3.equipe }).map((x) => x.code);
+  assert.ok(c('2026-10-17').includes('affutage'));
+  assert.ok(!c('2026-10-18').includes('affutage'));
 });

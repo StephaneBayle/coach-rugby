@@ -22,13 +22,13 @@ test("l'outil de playtest n'est pas livré dans le plugin", () => {
   assert.match(lire('.claude/skills/playtest/SKILL.md'), /^disable-model-invocation: true$/m);
 });
 
-test('quatre scénarios, chacun avec profil, départ, pièges et critères', () => {
+test('six scénarios, chacun avec profil, départ, pièges et critères', () => {
   const scenarios = readdirSync(path.join(racine, 'playtests', 'scenarios')).filter((f) => f.endsWith('.md'));
-  assert.equal(scenarios.length, 4);
+  assert.equal(scenarios.length, 6);
   for (const s of scenarios) {
     const t = lire(path.join('playtests', 'scenarios', s));
     for (const section of ['## Profil du coach', '## Départ', '## Pièges à placer', '## Critères de réussite']) assert.ok(t.includes(section), `${s} : ${section}`);
-    assert.match(t, /Date fixée :\s+\*\*\d{4}-\d{2}-\d{2}\*\*/, `${s} : date fixée`);
+    assert.match(t, /Date fixée :?\s+\*\*\d{4}-\d{2}-\d{2}\*\*/, `${s} : date fixée`);
     assert.match(t, /Tout est fictif/);
   }
 });
