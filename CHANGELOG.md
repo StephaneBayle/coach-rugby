@@ -18,6 +18,9 @@ comment c'est programmé. Format inspiré de
 - `/coach-rugby:planifier` et `/coach-rugby:semaine` : ces plans se
   construisent avec vous, puis la séance du jour reprend l'intention et
   l'intensité prévues.
+- Fiche de la semaine (A4 et téléphone, PDF) à partager au staff : les sept
+  jours, les jours avant l'échéance, l'intensité prévue (en texte et en
+  pictogramme, lisible en noir et blanc), les cycles autour de la semaine.
 - Relances : semaine à préparer, séance prévue demain à préparer, fin de
   cycle, changement de forme de jeu à venir (école de rugby), reprise
   progressive après la trêve.

@@ -9,6 +9,7 @@ import { chargerCategories, reglesDuJour } from './categories.mjs';
 import { imprimerPdf, trouverChrome } from './chrome.mjs';
 import { lireDate } from './dates.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
+import { publicDe } from './planification.mjs';
 import { contexteSeance } from './seance.mjs';
 import { genererSvg } from './terrain.mjs';
 import { lireYaml } from './yaml.mjs';
@@ -180,3 +181,97 @@ export function exporterSeance(fichierSeance, { pdf = false, formats = ['a4', 't
 }
 
 export const existeExport = (fichierSeance) => existsSync(path.join(path.dirname(fichierSeance), 'exports', 'fiche-a4.html'));
+
+// ---------------------------------------------------------------- semaine
+const INTENSITES = {
+  recuperation: { libelle: 'récupération', picto: '○' },
+  legere: { libelle: 'légère', picto: '◔' },
+  moyenne: { libelle: 'moyenne', picto: '◑' },
+  forte: { libelle: 'forte', picto: '●' },
+  affutage: { libelle: 'activation (affûtage)', picto: '◆' },
+};
+const JOURS_COURTS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+const jourMois = (d) => new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(lireDate(d));
+
+export function preparerSemaine(semaine, { equipe, saison, cycles }) {
+  const ref = chargerCategories();
+  const debut = lireDate(semaine.debut);
+  const echeances = semaine.echeances || [];
+  const jours = JOURS_COURTS.map((nom, i) => {
+    const d = new Date(debut.getTime() + i * 86_400_000).toISOString().slice(0, 10);
+    const s = semaine.seances_prevues.find((x) => x.date === d);
+    const e = echeances.find((x) => x.date === d);
+    const libelleJour = `${nom} ${jourMois(d)}`;
+    if (e) {
+      const titre = `${e.type === 'match' ? 'MATCH' : e.type.toUpperCase()}${e.adversaire ? ` contre ${e.adversaire}` : ''}${e.importance && e.importance !== 'normale' ? ` (${e.importance})` : ''}`;
+      return { classe: 'echeance', jour: libelleJour, jn: 'jour J', seance: titre, intensite: '', picto: '', intention: e.lieu || '' };
+    }
+    if (s) {
+      const i = INTENSITES[s.intensite];
+      const statut = s.statut === 'annulee' ? ' — annulée' : s.statut === 'faite' ? ' — faite' : '';
+      return {
+        classe: '', jour: libelleJour, jn: s.j_moins !== null && s.j_moins !== undefined ? `J-${s.j_moins}` : '—',
+        seance: `${s.heure ? `${s.heure}, ` : ''}${s.duree_min} min${statut}`, intensite: i.libelle, picto: i.picto, intention: s.intention,
+      };
+    }
+    return { classe: 'repos', jour: libelleJour, jn: '', seance: '—', intensite: '', picto: '', intention: '' };
+  });
+  const meso = (cycles?.mesocycles || []).find((m) => m.id === semaine.mesocycle) || null;
+  const idx = meso ? cycles.mesocycles.indexOf(meso) : -1;
+  const autour = idx >= 0 ? cycles.mesocycles.slice(Math.max(0, idx - 1), idx + 3) : (cycles?.mesocycles || []).slice(0, 4);
+  const regles = equipe ? reglesDuJour({ categories: equipe.categories, pratique: equipe.pratique, date: semaine.debut }) : null;
+  const intentions = semaine.seances_prevues.length
+    ? `<section class="masquer-a4"><h2>Intention de chaque séance</h2><ul>${semaine.seances_prevues.map((s) => `<li><b>${echapper(JOURS_COURTS[(lireDate(s.date).getUTCDay() + 6) % 7])}</b> — ${echapper(s.intention)}${s.dominante ? ` <i>(${echapper(s.dominante)})</i>` : ''}</li>`).join('')}</ul></section>`
+    : '';
+  return {
+    titre: `${equipe?.nom || semaine.equipe} — semaine du ${jourMois(semaine.debut)}`,
+    equipe: equipe?.nom || semaine.equipe,
+    du: jourMois(semaine.debut),
+    au: jourMois(new Date(debut.getTime() + 6 * 86_400_000)),
+    categorie: (equipe?.categories || []).map((c) => ref.categories[c]?.libelle || c).join(' + ') || '—',
+    phase: PHASES[semaine.phase] || '—',
+    semaine_saison: semaine.semaine_saison ? `, semaine ${semaine.semaine_saison}` : '',
+    nb_seances: String(semaine.seances_prevues.filter((s) => s.statut !== 'annulee').length),
+    cycle: meso ? `${meso.id} « ${meso.theme} », du ${jourMois(meso.debut)} au ${jourMois(meso.fin)} — intensité prévue : ${INTENSITES[meso.intensite].libelle}${meso.notes ? ` — ${meso.notes}` : ''}` : (semaine.theme || '—'),
+    jours,
+    intentions,
+    vigilance: sectionHtml('Points de vigilance', semaine.points_vigilance, 'vigilance'),
+    cycles: autour.map((m) => ({ classe: m === meso ? 'encours' : '', id: m === meso ? `▶ ${m.id}` : m.id, dates: `${jourMois(m.debut)} → ${jourMois(m.fin)}`, theme: m.theme, intensite: INTENSITES[m.intensite].libelle })),
+    legende: Object.entries(INTENSITES)
+      .filter(([k]) => !(equipe && publicDe(equipe) === 'edr' && k === 'affutage'))
+      .map(([, v]) => `${v.picto} ${v.libelle}`)
+      .join(' · '),
+    regles: regles ? `${regles.formes.map((f) => f.libelle).join(' ou ')} — contact maximal : ${regles.contact_max} — ${regles.statut === 'verifie' ? 'vérifié' : `à vérifier (saison ${regles.saison})`}.` : '—',
+    hypotheses: sectionHtml('Hypothèses (choix non sourcés)', semaine.hypotheses),
+    sources: sourcesHtml(semaine.sources),
+  };
+}
+
+export function exporterSemaine(fichier, { pdf = false, formats = ['a4', 'telephone'] } = {}) {
+  const semaine = lireYaml(fichier);
+  const d = path.resolve(path.dirname(fichier), '..', '..');
+  const lire = (f) => (existsSync(path.join(d, f)) ? lireYaml(path.join(d, f)) : null);
+  const donnees = preparerSemaine(semaine, { equipe: lire('equipe.yaml'), saison: lire('saison.yaml'), cycles: lire('cycles.yaml') });
+  const dossier = path.join(path.dirname(fichier), 'exports');
+  mkdirSync(dossier, { recursive: true });
+  const g = readFileSync(path.join(RACINE_PLUGIN, 'gabarits', 'fiche-semaine.html'), 'utf8').replace(/<!-- Gabarit[\s\S]*?-->\n/, '');
+  const fichiers = [];
+  for (const f of formats) {
+    writeFileSync(path.join(dossier, `fiche-semaine-${f}.html`), remplir(g, { ...donnees, format: f, page: PAGES[f] }));
+    fichiers.push(`fiche-semaine-${f}.html`);
+  }
+  const resultat = { dossier, fichiers, pdf: { demande: pdf, ok: false, raison: null } };
+  if (pdf) {
+    const chrome = trouverChrome();
+    if (!chrome) resultat.pdf.raison = 'Chrome introuvable : ouvrir la fiche HTML puis Imprimer > Enregistrer en PDF.';
+    else {
+      for (const f of formats) {
+        const r = imprimerPdf(path.join(dossier, `fiche-semaine-${f}.html`), path.join(dossier, `fiche-semaine-${f}.pdf`), chrome);
+        if (!r.ok) { resultat.pdf.raison = r.raison; break; }
+        fichiers.push(`fiche-semaine-${f}.pdf`);
+      }
+      resultat.pdf.ok = !resultat.pdf.raison;
+    }
+  }
+  return resultat;
+}

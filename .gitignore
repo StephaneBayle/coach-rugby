@@ -8,6 +8,7 @@
 # Sorties générées
 build/
 plugin/exemples/*/*/seances/*/exports/
+plugin/exemples/*/*/semaines/*/exports/
 plugin/evals/results/
 
 # Dépendances et système
