@@ -1,0 +1,14 @@
+{
+  // Lint des Markdown du dépôt. Règles assouplies pour des textes en français
+  // rédigés pour des coachs : lignes longues et HTML léger autorisés.
+  "config": {
+    "default": true,
+    "MD013": false,
+    "MD024": { "siblings_only": true },
+    "MD033": false,
+    "MD041": false,
+    "MD060": false
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", "plugin/node_modules/**", "**/results/**", "docs/brief-initial.md"]
+}

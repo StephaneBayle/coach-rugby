@@ -1,0 +1,25 @@
+{
+  "name": "coach-rugby",
+  "displayName": "Coach Rugby",
+  "version": "0.1.0",
+  "description": "Assistant de saison pour coachs et éducateurs de rugby amateur : séances adaptées à la catégorie, bibliothèque d'exercices, schémas de terrain, fiches imprimables et lisibles sur téléphone.",
+  "author": { "name": "Stéphane Bayle" },
+  "repository": "https://github.com/StephaneBayle/coach-rugby",
+  "homepage": "https://github.com/StephaneBayle/coach-rugby#readme",
+  "license": "MIT AND CC-BY-SA-4.0",
+  "keywords": ["rugby", "entraînement", "école de rugby", "séance", "éducateur", "coach"],
+  "userConfig": {
+    "dossier_saison": {
+      "type": "directory",
+      "title": "Dossier saison",
+      "description": "Dossier HORS de tout dépôt git qui contient vos équipes, saisons et séances. Cowork ne pose pas la question : la valeur par défaut est alors utilisée.",
+      "default": "~/Rugby-Saisons"
+    },
+    "chemin_chrome": {
+      "type": "string",
+      "title": "Chemin de Google Chrome (export PDF)",
+      "description": "Laisser vide pour la détection automatique. Sans Chrome, le PDF s'obtient par Imprimer > Enregistrer en PDF depuis la fiche HTML.",
+      "default": ""
+    }
+  }
+}

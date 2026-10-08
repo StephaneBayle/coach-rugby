@@ -1,0 +1,46 @@
+name: Un problème avec le plugin
+description: Le plugin ne fait pas ce qu'il devrait, affiche une erreur ou produit une fiche incorrecte.
+title: "[Bug] "
+labels: ["type:bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de prendre le temps de signaler ce problème.
+        **Ne mettez aucune information personnelle d'un joueur** : ni nom, ni date de naissance, ni numéro de licence, ni téléphone, ni information de santé. Parlez en nombres (« 14 enfants ») ou en codes (J01).
+  - type: checkboxes
+    id: rgpd
+    attributes:
+      label: Protection des joueurs
+      options:
+        - label: Je n'ai indiqué aucun nom, date de naissance, numéro de licence, coordonnée ni information de santé d'un joueur.
+          required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Où utilisez-vous le plugin ?
+      options:
+        - Cowork / Claude desktop
+        - Claude Code
+        - Claude sur mobile
+        - Autre
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version du plugin
+      description: Visible dans la liste des plugins installés (ex. 0.1.0).
+  - type: textarea
+    id: quoi
+    attributes:
+      label: Ce qui s'est passé
+      description: Ce que vous avez demandé, ce que le plugin a fait, le message d'erreur éventuel.
+    validations:
+      required: true
+  - type: textarea
+    id: attendu
+    attributes:
+      label: Ce que vous attendiez
+    validations:
+      required: true

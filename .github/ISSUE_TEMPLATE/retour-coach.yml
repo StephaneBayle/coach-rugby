@@ -1,0 +1,66 @@
+name: Un retour de terrain
+description: Raconter comment le plugin vous a aidé (ou pas) dans votre saison.
+title: "[Retour] "
+labels: ["type:retour-coach"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Vos retours orientent la suite du projet. Merci !
+        **Ne mettez aucune information personnelle d'un joueur.**
+  - type: checkboxes
+    id: rgpd
+    attributes:
+      label: Protection des joueurs
+      options:
+        - label: Je n'ai indiqué aucun nom, date de naissance, numéro de licence, coordonnée ni information de santé d'un joueur.
+          required: true
+  - type: dropdown
+    id: structure
+    attributes:
+      label: Type de structure
+      options:
+        - Club
+        - Pôle de formation
+        - Section sportive scolaire
+        - Sport-études
+        - Centre de formation
+        - Sélection (comité, ligue)
+        - Autre
+    validations:
+      required: true
+  - type: dropdown
+    id: categorie
+    attributes:
+      label: Catégorie entraînée
+      multiple: true
+      options: [M6, M8, M10, M12, M14, M16, M19, Seniors, Féminines, Rugby à 5, Rugby à 7, Loisir]
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Où utilisez-vous le plugin ?
+      multiple: true
+      options:
+        - Cowork / Claude desktop
+        - Claude Code
+        - Claude sur mobile
+    validations:
+      required: true
+  - type: dropdown
+    id: mca
+    attributes:
+      label: Utilisez-vous aussi Mon Coach Assistant (FFR) ?
+      options:
+        - Oui
+        - Non
+        - Je ne connais pas
+  - type: textarea
+    id: aide
+    attributes:
+      label: Ce qui vous a aidé
+  - type: textarea
+    id: manque
+    attributes:
+      label: Ce qui a manqué ou gêné

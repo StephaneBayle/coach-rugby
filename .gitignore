@@ -1,0 +1,18 @@
+# Données de coachs : elles vivent HORS du dépôt (dossier saison).
+Rugby-Saisons/
+.coach-rugby.yaml
+.joueurs-proteges.txt
+effectif*.yaml
+presences*
+
+# Sorties générées
+build/
+plugin/exemples/*/*/seances/*/exports/
+plugin/evals/results/
+evals/results/
+
+# Dépendances et système
+node_modules
+node_modules.nosync
+.DS_Store
+*.log

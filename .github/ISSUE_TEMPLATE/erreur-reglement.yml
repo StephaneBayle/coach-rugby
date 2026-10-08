@@ -1,0 +1,56 @@
+name: Une erreur de règlement
+description: Une règle de catégorie (nombre de joueurs, terrain, plaquage, mêlée…) est fausse ou dépassée.
+title: "[Règlement] "
+labels: ["type:erreur-reglement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Les règles de la FFR changent chaque saison et peuvent varier selon les comités. coach-rugby les traite comme des **paramètres datés**, à vérifier.
+        Merci d'indiquer une **source officielle** (lien et date) : c'est elle qui permet de corriger.
+  - type: checkboxes
+    id: rgpd
+    attributes:
+      label: Protection des joueurs
+      options:
+        - label: Je n'ai indiqué aucun nom, date de naissance, numéro de licence, coordonnée ni information de santé d'un joueur.
+          required: true
+  - type: dropdown
+    id: categorie
+    attributes:
+      label: Catégorie concernée
+      options: [M6, M8, M10, M12, M14, M16, M19, Seniors, Féminines, Rugby à 5, Rugby à 7, Loisir]
+    validations:
+      required: true
+  - type: input
+    id: regle
+    attributes:
+      label: Règle concernée
+      placeholder: "ex. nombre de joueurs par équipe, plaquage, dimensions du terrain"
+    validations:
+      required: true
+  - type: input
+    id: saison
+    attributes:
+      label: Saison
+      placeholder: "2026-2027"
+    validations:
+      required: true
+  - type: textarea
+    id: valeurs
+    attributes:
+      label: Valeur affichée par le plugin et valeur correcte
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source officielle (lien)
+      description: Règlement FFR, cahier des écoles de rugby, site du comité…
+    validations:
+      required: true
+  - type: input
+    id: portee
+    attributes:
+      label: Portée
+      description: Nationale, ou propre à un comité ou une ligue (laquelle) ?

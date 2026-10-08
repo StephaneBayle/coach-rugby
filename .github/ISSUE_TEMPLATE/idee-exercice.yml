@@ -1,0 +1,59 @@
+name: Une idée d'exercice ou de jeu
+description: Proposer un exercice, un jeu ou une situation pour la bibliothèque (CC BY-SA).
+title: "[Exercice] "
+labels: ["type:idee-exercice", "contenu:a-relire"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Les exercices de la bibliothèque sont publiés sous licence **CC BY-SA 4.0** : chacun peut les réutiliser et les adapter en citant la source.
+        Proposez un exercice **que vous avez créé ou adapté vous-même** : pas de copie de documents de la FFR, de livres ou de sites.
+  - type: checkboxes
+    id: engagements
+    attributes:
+      label: Engagements
+      options:
+        - label: Je n'ai indiqué aucun nom, date de naissance, numéro de licence, coordonnée ni information de santé d'un joueur.
+          required: true
+        - label: J'accepte que cet exercice soit publié sous licence CC BY-SA 4.0, et il ne recopie pas un document protégé.
+          required: true
+  - type: input
+    id: titre
+    attributes:
+      label: Nom de l'exercice
+    validations:
+      required: true
+  - type: dropdown
+    id: categories
+    attributes:
+      label: Catégories visées
+      multiple: true
+      options: [M6, M8, M10, M12, M14, M16, M19, Seniors, Féminines, Rugby à 5, Rugby à 7, Loisir]
+    validations:
+      required: true
+  - type: dropdown
+    id: contact
+    attributes:
+      label: Niveau de contact
+      options:
+        - Aucun
+        - Toucher
+        - Ceinture / flag
+        - Contact progressif (chute, duel au sol)
+        - Plaquage éducatif
+        - Contact plein
+    validations:
+      required: true
+  - type: textarea
+    id: deroule
+    attributes:
+      label: Organisation et consignes
+      description: Espace, nombre de joueurs, matériel, déroulement, consignes, variantes pour simplifier ou complexifier.
+    validations:
+      required: true
+  - type: textarea
+    id: securite
+    attributes:
+      label: Points de sécurité
+    validations:
+      required: true

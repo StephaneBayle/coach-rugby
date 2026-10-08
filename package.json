@@ -1,0 +1,18 @@
+{
+  "name": "coach-rugby-dev",
+  "private": true,
+  "description": "Dépôt de développement du plugin coach-rugby (tests, CI). Le plugin livré est dans plugin/.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "preparer": "npm ci && (test ! -f plugin/package.json || npm --prefix plugin ci)",
+    "test": "node --import ./tests/environnement.mjs --test \"tests/**/*.test.mjs\"",
+    "valider": "claude plugin validate --strict plugin && claude plugin validate --strict .",
+    "lint": "markdownlint-cli2",
+    "evals": "cd plugin && claude plugin eval . --trust-plugin --threshold 0.8 --max-cost-usd 3 --no-publish"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.23.3"
+  }
+}

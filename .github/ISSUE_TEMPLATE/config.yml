@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Une question, un échange entre coachs
+    url: https://github.com/StephaneBayle/coach-rugby/discussions
+    about: Posez vos questions et partagez vos expériences dans les Discussions.
+  - name: Une donnée personnelle publiée par erreur
+    url: https://github.com/StephaneBayle/coach-rugby/security/advisories/new
+    about: Signalement privé, traité en priorité. Ne recopiez pas la donnée.
