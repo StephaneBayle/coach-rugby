@@ -23,8 +23,8 @@ un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans l
 |---|---|---|
 | 0 | Vérifications de la documentation ([structure.md](structure.md)) | fait |
 | 1 | Socle du dépôt : manifestes, licences, `.github/`, CI | fait |
-| 2 | Dossier saison : schémas, références, CLI, exemples, skills `coach` et `saison` | en cours |
-| 3 | Garde RGPD : hooks et contrôle CI | à venir |
+| 2 | Dossier saison : schémas, références, CLI, exemples, skills `coach` et `saison` | fait |
+| 3 | Garde RGPD : hooks et contrôle CI | en cours |
 | 4 | Bibliothèque d'exercices et schémas de terrain | à venir |
 | 5 | Séance et export (HTML, PDF, SVG, texte pour Mon Coach Assistant) | à venir |
 | 6 | Relecteurs et évals | à venir |
