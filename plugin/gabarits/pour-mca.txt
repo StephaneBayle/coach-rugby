@@ -1,0 +1,17 @@
+{{titre}}
+{{date_longue}}{{horaire}} — {{duree}} min — {{effectif}} joueurs, {{encadrants}} encadrant(s)
+
+OBJECTIFS
+{{objectifs}}
+
+DÉROULÉ
+{{deroule}}
+
+MATÉRIEL
+{{materiel}}
+
+SÉCURITÉ
+{{securite}}
+- Choc à la tête : sortie immédiate et définitive, avis médical.
+
+Préparé avec coach-rugby — règles de jeu {{statut_regles}}.

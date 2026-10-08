@@ -1,0 +1,112 @@
+<!doctype html>
+<!-- Gabarit de fiche séance coach-rugby (CC BY-SA 4.0).
+     Remplissage : double accolade = texte (échappé), triple accolade = HTML
+     déjà prêt ; les commentaires « @repeter:liste » … « @fin:liste »
+     encadrent ce qui est répété pour chaque élément de la liste.
+     Deux formats : format-a4 (impression) et format-telephone (bord du terrain).
+     Fichier autonome : aucune ressource externe, envoyable par mail ou messagerie. -->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{titre}}</title>
+<style>
+@page { {{{page}}} }
+:root { --encre: #111; --gris: #555; --fond: #f2f2f2; --trait: #bbb; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--encre); background: #fff; font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.35; }
+h1 { font-size: 1.35em; margin: 0 0 .2em; }
+h2 { font-size: 1.05em; margin: 1em 0 .4em; padding-bottom: .15em; border-bottom: 2px solid var(--encre); }
+h3 { font-size: .95em; margin: .6em 0 .2em; }
+ul { margin: .2em 0 .4em; padding-left: 1.2em; }
+li { margin: .1em 0; }
+.entete { display: grid; gap: .1em .8em; grid-template-columns: repeat(3, auto); font-size: .9em; color: var(--gris); }
+.entete b { color: var(--encre); }
+.regles { background: var(--fond); border-left: 4px solid var(--encre); padding: .4em .6em; font-size: .9em; }
+table.frise { width: 100%; border-collapse: collapse; font-size: .88em; }
+.frise th, .frise td { border-bottom: 1px solid var(--trait); padding: .25em .3em; text-align: left; vertical-align: top; }
+.frise td.h { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.bloc { border: 1px solid var(--trait); border-radius: 6px; padding: .4em .6em; margin: .5em 0; break-inside: avoid; }
+.bloc summary { font-weight: 700; cursor: pointer; }
+.bloc .partie { font-weight: 400; color: var(--gris); }
+.bloc .contenu { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: .6em; }
+.bloc svg { width: 100%; height: auto; max-height: 70mm; }
+.securite { font-size: .9em; border-top: 1px dashed var(--trait); margin-top: .3em; padding-top: .2em; }
+.securite::before { content: "⚠ Sécurité : "; font-weight: 700; }
+.securite ul { display: inline; padding: 0; }
+.securite li { display: inline; }
+.securite li + li::before { content: " · "; }
+.commotion { border: 2px solid var(--encre); border-radius: 6px; padding: .4em .6em; margin: .8em 0; font-size: .9em; break-inside: avoid; }
+.notes { font-size: .85em; color: var(--gris); }
+footer { margin-top: 1em; font-size: .75em; color: var(--gris); border-top: 1px solid var(--trait); padding-top: .3em; }
+/* A4 */
+.format-a4 { font-size: 10.5pt; padding: 0; }
+.format-a4 main { max-width: 186mm; margin: 0 auto; }
+/* Téléphone : une colonne, gros caractères */
+.format-telephone { font-size: 18px; padding: 12px 14px; }
+.format-telephone .entete { grid-template-columns: 1fr; }
+.format-telephone .bloc .contenu { grid-template-columns: 1fr; }
+.format-telephone .bloc svg { max-height: none; }
+.format-telephone table.frise .p { display: none; }
+@media screen and (min-width: 700px) { .format-a4 { padding: 12mm; background: #e9e9e9; } .format-a4 main { background: #fff; padding: 10mm; box-shadow: 0 1px 4px rgba(0,0,0,.2); } }
+@media print { .bloc details > summary { list-style: none; } }
+</style>
+</head>
+<body class="format-{{format}}">
+<main>
+<header>
+  <h1>{{equipe}} — séance du {{date_longue}}</h1>
+  <div class="entete">
+    <span><b>Catégorie</b> {{categorie}}</span>
+    <span><b>Durée</b> {{duree}} min{{horaire}}</span>
+    <span><b>Effectif</b> {{effectif}} joueurs · {{encadrants}} encadrant(s)</span>
+    <span><b>Terrain</b> {{terrain}}</span>
+    <span><b>Saison</b> {{phase}}{{semaine}}</span>
+    <span><b>Échéance</b> {{prochain}}</span>
+  </div>
+</header>
+
+<h2>Objectifs</h2>
+<ul>
+<!-- @repeter:objectifs --><li><b>{{domaine}}</b> — {{texte}}</li>
+<!-- @fin:objectifs -->
+</ul>
+<p class="regles"><b>Règles du jour :</b> {{regles}}</p>
+
+<h2>Déroulé</h2>
+<table class="frise">
+<thead><tr><th>Heure</th><th>Durée</th><th class="p">Partie</th><th>Contenu</th></tr></thead>
+<tbody>
+<!-- @repeter:frise --><tr><td class="h">{{debut}}</td><td class="h">{{duree}} min</td><td class="p">{{partie}}</td><td>{{titre}}</td></tr>
+<!-- @fin:frise -->
+</tbody>
+</table>
+
+<!-- @repeter:blocs --><section class="bloc">
+<details open>
+<summary>{{debut}} · {{titre}} <span class="partie">({{partie}}, {{duree}} min)</span></summary>
+<div class="contenu">
+<div>
+<p>{{organisation}}</p>
+<h3>Consignes</h3>
+<ul>{{{consignes}}}</ul>
+{{{adaptations}}}
+</div>
+<div>{{{schema}}}</div>
+</div>
+<div class="securite"><ul>{{{securite}}}</ul></div>
+</details>
+</section>
+<!-- @fin:blocs -->
+
+<aside class="commotion"><b>Choc à la tête ou suspicion de commotion :</b> sortie immédiate et définitive, sans retour au jeu, même à l'entraînement. Prévenir les parents, orienter vers un médecin ; les signes peuvent apparaître jusqu'à 48 heures après. Aucun avis médical n'est donné par ce document.</aside>
+
+{{{vigilance}}}
+{{{hypotheses}}}
+{{{sources}}}
+
+<footer>Préparé avec coach-rugby — fiche et exercices sous licence CC BY-SA 4.0. Règles de jeu {{statut_regles}}. Ne contient aucune donnée personnelle de joueur.</footer>
+</main>
+</body>
+</html>

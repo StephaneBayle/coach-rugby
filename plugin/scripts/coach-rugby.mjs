@@ -7,6 +7,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
+import { exporterSeance } from '../lib/export.mjs';
 import { genererSvg } from '../lib/terrain.mjs';
 import { lireYaml } from '../lib/yaml.mjs';
 import { dossierSaison } from '../lib/chemins.mjs';
@@ -34,6 +35,9 @@ Usage : node coach-rugby.mjs <commande> [options]
         par défaut, ou dans le dossier indiqué).
   index-bibliotheque
         Régénère bibliotheque/INDEX.md.
+  exporter <seance.yaml> [--pdf] [--formats a4,telephone]
+        Fiches HTML (A4, téléphone), schémas SVG, texte pour Mon Coach
+        Assistant (clubs) et, avec --pdf, PDF via Chrome.
 
 Dossier saison : ${dossierSaison()}
 (variable COACH_RUGBY_DOSSIER ; date du jour : COACH_RUGBY_AUJOURDHUI)`;
@@ -150,6 +154,18 @@ commandes['index-bibliotheque'] = () => {
   const exercices = chargerBibliotheque();
   writeFileSync(cible, genererIndex(exercices));
   sortir(0, `Index écrit : ${cible} (${exercices.length} fiches)`);
+};
+
+commandes.exporter = (o) => {
+  const fichier = o._[0];
+  if (!fichier) sortir(1, 'Usage : exporter <seance.yaml> [--pdf] [--formats a4,telephone]');
+  const erreurs = validerChemin(path.resolve(fichier)).flatMap((r) => r.erreurs);
+  if (erreurs.length) sortir(1, `Séance invalide, corriger avant d'exporter :\n${erreurs.map((e) => `  - ${e}`).join('\n')}`);
+  const formats = typeof o.formats === 'string' ? o.formats.split(',') : ['a4', 'telephone'];
+  const r = exporterSeance(path.resolve(fichier), { pdf: Boolean(o.pdf), formats });
+  const lignes = [`Exports dans ${r.dossier} :`, ...r.fichiers.map((f) => `  - ${f}`)];
+  if (r.pdf.demande && !r.pdf.ok) lignes.push(`PDF non produit : ${r.pdf.raison}`);
+  sortir(0, lignes.join('\n'));
 };
 
 const [nom, ...reste] = process.argv.slice(2);

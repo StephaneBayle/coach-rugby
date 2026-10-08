@@ -20,7 +20,7 @@ variables:
   simplifier: [Zone cible plus grande, Frapper à l'arrêt]
   complexifier: [Un défenseur qui revient au toucher, Frapper en course]
 criteres_reussite: [Ballon arrêté dans la zone, Poursuivants en ligne derrière le botteur]
-securite: [Pas de plongeon sur le ballon chez les débutants, Ramassage en se baissant, sans collision]
+securite: [Pas de plongeon sur le ballon chez les débutants, "Ramassage en se baissant, sans collision"]
 schema:
   surface: { type: atelier, longueur: 40, largeur: 20 }
   zones:

@@ -20,7 +20,7 @@ variables:
   simplifier: [Agrandir le carré, Jouer d'abord à deux contre deux]
   complexifier: [Tenir un ballon à deux mains pendant le jeu, Réduire le carré]
 criteres_reussite: [Les enfants lèvent la tête et changent de direction, Aucun contact volontaire]
-securite: [Terrain plat sans obstacle, Interdiction de pousser ou de retenir, Foulards glissés à la ceinture, jamais noués]
+securite: [Terrain plat sans obstacle, Interdiction de pousser ou de retenir, "Foulards glissés à la ceinture, jamais noués"]
 schema:
   surface: { type: atelier, longueur: 20, largeur: 15 }
   elements:

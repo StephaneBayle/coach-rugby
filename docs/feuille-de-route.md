@@ -25,7 +25,7 @@ un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans l
 | 1 | Socle du dépôt : manifestes, licences, `.github/`, CI | fait |
 | 2 | Dossier saison : schémas, références, CLI, exemples, skills `coach` et `saison` | fait |
 | 3 | Garde RGPD : hooks et contrôle CI | fait |
-| 4 | Bibliothèque d'exercices et schémas de terrain | en cours |
-| 5 | Séance et export (HTML, PDF, SVG, texte pour Mon Coach Assistant) | à venir |
+| 4 | Bibliothèque d'exercices et schémas de terrain | fait |
+| 5 | Séance et export (HTML, PDF, SVG, texte pour Mon Coach Assistant) | en cours |
 | 6 | Relecteurs et évals | à venir |
 | 7 | Publication de la version 0.1.0 | à venir |
