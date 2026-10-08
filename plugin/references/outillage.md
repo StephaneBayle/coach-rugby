@@ -94,3 +94,17 @@ plugin ; `~/Rugby-Saisons`.
 - **B** : ajouter dans `<equipe>/presences.yaml` une entrée par date, avec
   les codes des présents et des excusés. Un code ne peut pas être à la fois
   présent et excusé.
+
+## `rotation` — temps de jeu équitable
+
+- **A** : `coach-rugby.mjs rotation <match.yaml> [--periode 5] [--ecrire]`
+- **B** :
+  1. découper la durée en périodes de 5 minutes, rencontre par rencontre ;
+  2. à chaque période, faire entrer les joueurs qui ont **le moins joué** ;
+     à égalité, celui qui sort du banc ;
+  3. vérifier que chaque période a exactement le nombre de joueurs de la
+     forme de jeu, et qu'entre deux enfants l'écart ne dépasse pas une
+     période.
+
+  C'est un repère d'équité (hypothèse pédagogique), pas une règle de la
+  FFR.
