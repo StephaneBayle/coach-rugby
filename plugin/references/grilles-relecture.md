@@ -74,6 +74,8 @@ Lire d'abord les règles du jour : `regles` dans la séance, à recouper avec
 | Aucune date de naissance, aucun numéro de licence, téléphone, e-mail ou adresse | bloquant |
 | Aucune information de santé liée à une personne identifiable | bloquant |
 | Effectifs en nombres, joueurs en codes (A1, D1, J01) | a-revoir |
+| Aucun prénom de la table locale `.prenoms.yaml` (fiches, tableaux, match) | bloquant |
+| Aucun motif d'indisponibilité, aucun jugement sur un joueur (progrès en trois niveaux, débriefing sur le jeu de l'équipe) | bloquant |
 | Staff désigné par son rôle, pas par son nom | a-revoir |
 | Fichier hors de tout dépôt git (dossier saison) | a-revoir |
 

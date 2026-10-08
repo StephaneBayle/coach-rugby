@@ -114,6 +114,25 @@ test("ignore le lockfile npm (adresses d'auteurs de paquets), comme le mode CI",
   assert.equal(bash('git commit -m "notes"', d).status, 2, 'les autres fichiers restent contrôlés');
 });
 
+test("push d'une branche nouvelle : seuls les commits absents du serveur sont contrôlés", () => {
+  const d = depot();
+  const g = (...a) => execFileSync('git', a, { cwd: d, stdio: 'ignore' });
+  writeFileSync(path.join(d, 'ancien.md'), `${MAIL}\n`);
+  g('add', '.');
+  g('commit', '-q', '-m', 'déjà sur le serveur');
+  assert.equal(bash('git push -u origin nouvelle', d).status, 2, 'sans branche distante connue : les 50 derniers commits');
+  g('update-ref', 'refs/remotes/origin/main', 'HEAD');
+  g('checkout', '-q', '-b', 'nouvelle');
+  writeFileSync(path.join(d, 'propre.md'), 'rien de personnel\n');
+  g('add', '.');
+  g('commit', '-q', '-m', 'propre');
+  assert.equal(bash('git push -u origin nouvelle', d).status, 0, bash('git push -u origin nouvelle', d).stderr);
+  writeFileSync(path.join(d, 'notes.md'), `${NOM}\n`);
+  g('add', '.');
+  g('commit', '-q', '-m', 'notes');
+  assert.equal(bash('git push -u origin nouvelle', d).status, 2);
+});
+
 test('bloque les options globales de git qui masquent la sous-commande', () => {
   const d = depot();
   writeFileSync(path.join(d, 'a.md'), `${TEL}\n`);

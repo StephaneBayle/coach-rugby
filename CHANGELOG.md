@@ -34,9 +34,22 @@ comment c'est programmé. Format inspiré de
   main).
 - Tableaux Excel et CSV des présences, du temps de jeu et des progrès, à
   ouvrir dans Excel, LibreOffice ou Numbers. Toujours en codes.
+- Deux nouvelles commandes : `/coach-rugby:effectif` (joueurs, présences,
+  progrès, y compris un sondage Mon Coach Assistant collé) et
+  `/coach-rugby:match` (préparer, faire tourner, débriefer).
+- Le plugin vous rappelle de préparer le match trois jours avant, de le
+  débriefer dans la semaine qui suit, de prendre des nouvelles d'un joueur
+  absent trois fois de suite, et de refaire le point sur les progrès toutes
+  les six semaines.
+- La séance s'appuie sur le dernier débriefing de match et sur les
+  compétences à travailler.
 
 ### Corrigé
 
+- La protection des joueurs ne bloque plus un envoi à cause du fichier
+  `package-lock.json` (adresses d'auteurs de paquets npm), comme le
+  contrôle du dépôt en CI. Le premier envoi d'une nouvelle branche ne
+  contrôle plus que les modifications qui ne sont pas encore en ligne.
 - Les heures sont écrites entre guillemets dans les fichiers (« 20:00 »).
 - Export PDF : un échec passager de Chrome (constaté sur macOS) est rattrapé
   par un second essai, et les messages techniques sans conséquence ne sont

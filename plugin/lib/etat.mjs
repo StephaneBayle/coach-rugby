@@ -5,6 +5,7 @@
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { ajouterJours, ecartJours, ecrireDate, lireDate } from './dates.mjs';
+import { absencesRepetees } from './effectif.mjs';
 import { changementsDeForme, lundiDe, publicDe } from './planification.mjs';
 import { lireYaml } from './yaml.mjs';
 
@@ -14,9 +15,11 @@ export const ETAPES = [
   { id: 'saison', skill: 'saison', preuve: (d) => existsSync(path.join(d, 'saison.yaml')) },
   { id: 'cycles', skill: 'planifier', preuve: (d) => existsSync(path.join(d, 'cycles.yaml')) },
   { id: 'semaine', skill: 'semaine', preuve: (d) => Object.keys(lireSemaines(d)).length > 0 },
+  { id: 'effectif', skill: 'effectif', preuve: (d) => existsSync(path.join(d, 'effectif.yaml')) },
   { id: 'premiere-seance', skill: 'seance', preuve: (d) => seancesAvec(d, 'seance.yaml').length > 0 },
   { id: 'relue', skill: 'relire', preuve: (d) => seancesAvec(d, 'relecture.md').length > 0 },
   { id: 'exportee', skill: 'exporter', preuve: (d) => seancesAvec(d, path.join('exports', 'fiche-a4.html')).length > 0 },
+  { id: 'match', skill: 'match', preuve: (d) => Object.keys(lireMatchs(d)).length > 0 },
 ];
 
 // Dates (AAAA-MM-JJ) des séances qui contiennent `fichier`.
@@ -37,6 +40,24 @@ export function lireSemaines(dossierEquipe) {
       .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && existsSync(path.join(s, d, 'semaine.yaml')))
       .map((d) => [d, lireYaml(path.join(s, d, 'semaine.yaml'))]),
   );
+}
+
+// Matchs préparés d'une équipe : { <date>: contenu de match.yaml }.
+export function lireMatchs(dossierEquipe) {
+  const m = path.join(dossierEquipe, 'matchs');
+  if (!existsSync(m)) return {};
+  return Object.fromEntries(
+    readdirSync(m)
+      .filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d) && existsSync(path.join(m, d, 'match.yaml')))
+      .map((d) => [d, lireYaml(path.join(m, d, 'match.yaml'))]),
+  );
+}
+
+// Suivi des joueurs, pour les relances : effectif, présences, progrès, matchs.
+// En codes seulement : la table des prénoms n'est jamais lue ici.
+export function lireSuivi(dossierEquipe) {
+  const lire = (f) => (existsSync(path.join(dossierEquipe, f)) ? lireYaml(path.join(dossierEquipe, f)) : null);
+  return { effectif: lire('effectif.yaml'), presences: lire('presences.yaml'), progres: lire('progres.yaml'), matchs: lireMatchs(dossierEquipe) };
 }
 
 // Planification d'une équipe, pour les relances : cycles, semaines, séances faites.
@@ -78,7 +99,7 @@ export function situer(saison, date, { cycles = null } = {}) {
 }
 
 // Suggestions proactives. Chaque suggestion : { code, message, statut }.
-export function suggestions(saison, date, { derniereSeance = null, equipe = null, planification = null } = {}) {
+export function suggestions(saison, date, { derniereSeance = null, equipe = null, planification = null, suivi = null } = {}) {
   const s = situer(saison, date, { cycles: planification?.cycles });
   const liste = [];
   const ajouter = (code, message) => liste.push({ code, message, statut: 'hypothese' });
@@ -112,6 +133,12 @@ export function suggestions(saison, date, { derniereSeance = null, equipe = null
   }
   if (s.phase?.id === 'intersaison-bilan' && np) {
     ajouter('preparer-reprise', `Intersaison : la phase « ${np.id} » commence le ${np.debut}. Faire le bilan et préparer la reprise.`);
+  }
+  if (suivi) {
+    const relances = relancesDeSuivi(s, saison, suivi);
+    // Préparer le match couvre la logistique du plateau.
+    if (relances.some((r) => r.code === 'preparer-match')) liste.splice(0, liste.length, ...liste.filter((x) => x.code !== 'logistique-plateau'));
+    relances.forEach((r) => ajouter(r.code, r.message));
   }
   if (planification) {
     const plan = relancesDePlanification(s, saison, { equipe, ...planification });
@@ -153,5 +180,33 @@ function relancesDePlanification(s, saison, { equipe, cycles, semaines = {}, sea
   }
   const treve = saison.phases.find((p) => p.id === 'treve' && ecartJours(p.fin, s.date) >= 1 && ecartJours(p.fin, s.date) <= 7);
   if (treve) r('reprise-apres-treve', `Reprise après la trêve (finie le ${treve.fin}) : remonter l'intensité progressivement sur deux semaines.`);
+  return liste;
+}
+
+const TYPES_MATCH = ['match', 'plateau', 'tournoi'];
+const LIBELLE_MATCH = { match: 'Match', plateau: 'Plateau', tournoi: 'Tournoi' };
+
+function relancesDeSuivi(s, saison, { effectif, presences, progres, matchs = {} }) {
+  const liste = [];
+  const r = (code, message) => liste.push({ code, message });
+  const p = s.prochain;
+  if (p && TYPES_MATCH.includes(p.type) && p.j_moins <= 3 && !matchs[p.date]) {
+    r('preparer-match', `${LIBELLE_MATCH[p.type]} ${p.j_moins === 0 ? 'aujourd\'hui' : `dans ${p.j_moins} jour(s)`} (${p.date})${p.adversaire ? ` contre ${p.adversaire}` : ''} : préparer la convocation, ${p.type === 'match' ? 'la composition' : 'la rotation du temps de jeu'} et la fiche match (/coach-rugby:match) ?`);
+  }
+  for (const e of saison.calendrier || []) {
+    const depuis = ecartJours(e.date, s.date);
+    if (!TYPES_MATCH.includes(e.type) || depuis < 1 || depuis > 7 || matchs[e.date]?.debriefing) continue;
+    const quoi = e.type === 'match' ? 'noter le score, les statistiques et le débriefing' : 'faire le bilan (ce qui a réussi, ce qui reste à travailler)';
+    r('debriefer-match', `${LIBELLE_MATCH[e.type]} du ${e.date}${e.adversaire ? ` contre ${e.adversaire}` : ''} : ${quoi}, et en tirer les thèmes des prochaines séances (/coach-rugby:match) ?`);
+  }
+  if (effectif && presences?.dates?.length) {
+    const absents = absencesRepetees(effectif, presences);
+    if (absents.length) r('absences-repetees', `Absents aux 3 dernières dates : ${absents.join(', ')}. Prendre des nouvelles, sans demander de motif.`);
+  }
+  if (progres?.observations?.length && s.phase && PHASES_ACTIVES.has(s.phase.id)) {
+    const derniere = progres.observations.map((o) => o.date).sort().at(-1);
+    const depuis = ecartJours(derniere, s.date);
+    if (depuis > 42) r('point-progres', `Progrès notés pour la dernière fois le ${derniere} (il y a ${Math.floor(depuis / 7)} semaines) : refaire un point sur deux ou trois compétences (/coach-rugby:effectif) ?`);
+  }
   return liste;
 }

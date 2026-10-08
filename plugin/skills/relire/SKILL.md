@@ -14,8 +14,9 @@ Les critères des relecteurs sont tous dans
 
 ## 1. Identifier ce qu'il faut relire
 
-Prendre la séance ou la fiche citée ($ARGUMENTS), sinon la séance la plus
-récente de l'équipe. Si c'est une séance, la faire d'abord passer au contrôle
+Prendre la séance, la fiche ou le match cité ($ARGUMENTS), sinon la séance la
+plus récente de l'équipe. Un `match.yaml` se relit de la même façon (sécurité,
+règlement, sources, confidentialité). Si c'est une séance, la faire d'abord passer au contrôle
 automatique (chemin A) :
 
 ```bash
@@ -39,7 +40,9 @@ Donner à chacun dans sa demande :
 - le chemin des références : `${CLAUDE_PLUGIN_ROOT}/references/`
   (`categories.yaml`, `sources.yaml`, `protocole-commotion.md`) et de la
   bibliothèque : `${CLAUDE_PLUGIN_ROOT}/bibliotheque/exercices/` ;
-- pour la confidentialité, le chemin de `<dossier saison>/.joueurs-proteges.txt`.
+- pour la confidentialité, le chemin de `<dossier saison>/.joueurs-proteges.txt`
+  et, s'il existe, celui de `<equipe>/.prenoms.yaml` : ses prénoms ne
+  doivent apparaître nulle part. Les **codes** (J01…) sont permis.
 
 **Sans agents** (chat, ou outil indisponible) : appliquer soi-même les quatre
 grilles, l'une après l'autre, avec le même format de réponse.

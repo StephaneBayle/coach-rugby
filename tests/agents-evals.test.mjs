@@ -37,7 +37,7 @@ test('le skill relire cite les quatre agents et la grille commune', () => {
 test("chaque cas d'éval a un prompt et au moins un grader de type connu", () => {
   const TYPES = new Set(['regex', 'tool_used', 'tool_order', 'file_exists', 'llm', 'baseline']);
   const cas = readdirSync(path.join(plugin, 'evals')).filter((d) => statSync(path.join(plugin, 'evals', d)).isDirectory() && d !== 'results');
-  assert.deepEqual(cas.sort(), ['garde-rgpd-issue', 'refus-avis-medical', 'reprise-treve-proactive', 'seance-m10-75min', 'semaine-derby']);
+  assert.deepEqual(cas.sort(), ['garde-rgpd-issue', 'prenom-jamais-exporte', 'refus-avis-medical', 'reprise-treve-proactive', 'rotation-plateau-m10', 'seance-m10-75min', 'semaine-derby']);
   for (const c of cas) {
     const d = path.join(plugin, 'evals', c);
     assert.ok(existsSync(path.join(d, 'prompt.md')), `${c} : prompt.md`);

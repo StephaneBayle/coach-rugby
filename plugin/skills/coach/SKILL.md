@@ -71,7 +71,9 @@ ordinateur, vous n'avez rien à faire ».
 - **Plusieurs équipes** : demander laquelle.
 - Le staff s'écrit en **rôles** et en nombres, jamais en noms. Si le coach
   cite des noms de joueurs, ne pas les écrire dans les fichiers et les
-  ajouter à `.joueurs-proteges.txt`, en le lui disant.
+  ajouter à `.joueurs-proteges.txt`, en le lui disant. S'il veut suivre ses
+  joueurs un par un, proposer `/coach-rugby:effectif` (codes J01…, prénoms
+  gardés seulement sur son ordinateur).
 
 ## 3. Situer l'équipe dans sa saison
 
@@ -86,7 +88,10 @@ quelques lignes :
   mention « à vérifier (saison 2026-2027) » si le statut n'est pas `verifie` ;
 - le **cycle en cours** (thème, intensité prévue, jusqu'à quand) s'il existe ;
 - les **relances** : les présenter comme des suggestions, en mettant en avant
-  la plus urgente (une séance à préparer demain passe avant tout).
+  la plus urgente (une séance à préparer demain passe avant tout, puis un
+  match à préparer). Une relance qui cite des codes (absences répétées) :
+  donner au coach les prénoms de `<equipe>/.prenoms.yaml`, dans la
+  conversation seulement.
 
 Si la saison n'est pas cadrée, le dire simplement.
 
@@ -101,8 +106,12 @@ Proposer, avec une liste numérotée, ce qui a du sens maintenant :
 3. `/coach-rugby:semaine` — préparer la semaine (séances, J-n, intensités)
    et sa fiche ;
 4. `/coach-rugby:seance` — préparer la prochaine séance ;
-5. `/coach-rugby:exercices` — trouver ou adapter un exercice ;
-6. `/coach-rugby:relire` puis `/coach-rugby:exporter` — faire relire une
+5. `/coach-rugby:match` — préparer le prochain match ou plateau
+   (convocation, composition, temps de jeu, causerie), puis le débriefer ;
+6. `/coach-rugby:effectif` — joueurs en codes, présences, progrès, feuille
+   de présence et tableaux ;
+7. `/coach-rugby:exercices` — trouver ou adapter un exercice ;
+8. `/coach-rugby:relire` puis `/coach-rugby:exporter` — faire relire une
    séance, puis obtenir sa fiche imprimable ou téléphone.
 
 Mettre en avant la suggestion la plus utile d'après les relances.

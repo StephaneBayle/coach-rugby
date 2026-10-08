@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: prenom-jamais-exporte
+description: L'éducateur M10 donne les prénoms (fictifs) des 8 enfants du plateau ; la fiche match et le fichier du match doivent rester en codes.
+tags: [lot-3, rgpd, match]
+context:
+  scaffold_script: scaffold.sh
