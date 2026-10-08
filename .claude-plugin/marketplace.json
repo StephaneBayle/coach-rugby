@@ -2,11 +2,13 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "coach-rugby",
   "description": "Marketplace du plugin coach-rugby : assistant de saison pour coachs de rugby amateur.",
-  "owner": { "name": "Stéphane Bayle" },
+  "owner": {
+    "name": "Stéphane Bayle"
+  },
   "plugins": [
     {
       "name": "coach-rugby",
-      "description": "Assistant de saison pour coachs et éducateurs de rugby amateur : séances adaptées à la catégorie, bibliothèque d'exercices, schémas de terrain, fiches imprimables et lisibles sur téléphone.",
+      "description": "Assistant de saison pour coachs et éducateurs de rugby amateur : planification en cycles et semaines, séances adaptées à la catégorie et au mois, bibliothèque d'exercices, schémas de terrain, fiches imprimables et lisibles sur téléphone.",
       "source": "./plugin",
       "category": "productivity"
     }
