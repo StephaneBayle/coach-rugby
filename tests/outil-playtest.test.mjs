@@ -28,7 +28,7 @@ test('quatre scénarios, chacun avec profil, départ, pièges et critères', () 
   for (const s of scenarios) {
     const t = lire(path.join('playtests', 'scenarios', s));
     for (const section of ['## Profil du coach', '## Départ', '## Pièges à placer', '## Critères de réussite']) assert.ok(t.includes(section), `${s} : ${section}`);
-    assert.match(t, /Date fixée : \*\*\d{4}-\d{2}-\d{2}\*\*/, `${s} : date fixée`);
+    assert.match(t, /Date fixée :\s+\*\*\d{4}-\d{2}-\d{2}\*\*/, `${s} : date fixée`);
     assert.match(t, /Tout est fictif/);
   }
 });

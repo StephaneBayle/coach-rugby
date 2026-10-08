@@ -10,8 +10,7 @@ conformité, et à l'aise avec l'ordinateur.
 
 ## Départ
 
-Copie de `plugin/exemples/fictif-m10-les-ecureuils`, cycles compris. Date
-fixée : **2026-12-10**.
+Copie de `plugin/exemples/fictif-m10-les-ecureuils`, cycles compris. Date fixée : **2026-12-10**.
 
 ## Ce que veut le référent
 
