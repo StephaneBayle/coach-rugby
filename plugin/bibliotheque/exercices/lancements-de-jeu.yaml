@@ -1,0 +1,41 @@
+id: lancements-de-jeu
+titre: Lancements de jeu sans opposition
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: manipulation-passes
+categories: [m16, m18f, m19, seniors]
+niveau: confirme
+contact: aucun
+exige: [touche, melee]
+duree_min: 15
+effectif: { min: 8, max: 30 }
+espace: { longueur: 40, largeur: 30 }
+materiel: [ballons, plots]
+but: Répéter les lancements (touche, mêlée sans poussée, première main) à vitesse de match, sans fatigue ni contact.
+organisation: Avants en touche et en mêlée sans poussée, trois-quarts sur les combinaisons de première main ; enchaînements courts, à vitesse de match.
+consignes:
+  - Annonces claires, précision avant vitesse.
+  - Mêlée - liaisons et placement seulement, sans poussée.
+  - Trois-quarts - alignement, timing de la passe, ligne de course.
+variables:
+  simplifier: [À vitesse réduite, Une seule combinaison]
+  complexifier: [Annonce tardive, Une défense passive qui se place]
+criteres_reussite: [Lancers et réceptions réussis, Timing des combinaisons]
+securite: ["Mêlée sans poussée réelle", "Pas d'opposition active"]
+pour_aller_plus_loin:
+  - { source: world-rugby-lois-du-jeu, note: "Lois de la touche et de la mêlée (à vérifier pour la saison)." }
+schema:
+  surface: { type: atelier, longueur: 40, largeur: 30, lignes: [{ x: 20, label: ligne de touche simulée }] }
+  elements:
+    - { type: attaquant, x: 18, y: 4, label: A1 }
+    - { type: attaquant, x: 18, y: 7, label: A2 }
+    - { type: attaquant, x: 18, y: 10, label: A3 }
+    - { type: porteur, x: 21, y: 2, label: A4 }
+    - { type: attaquant, x: 14, y: 14, label: A5 }
+    - { type: attaquant, x: 11, y: 18, label: A6 }
+    - { type: attaquant, x: 8, y: 22, label: A7 }
+  trajets:
+    - { type: passe, de: [21, 2], a: [18, 7] }
+    - { type: passe, de: [18, 7], a: [14, 14] }
+    - { type: course, de: [8, 22], a: [16, 26] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

@@ -123,3 +123,24 @@ test('les consignes ne sont pas coupées par une virgule YAML (élément en minu
   for (const f of fichiers) voir(lireYaml(f), '', f);
   assert.deepEqual(fautifs, [], 'mettre entre guillemets les éléments qui contiennent une virgule');
 });
+
+test('playtests : un bloc avec contact sans rappel « choc à la tête » est refusé', () => {
+  const s = structuredClone(seance);
+  s.blocs[4] = { ...s.blocs[4], securite: ['Tapis obligatoires'] };
+  assert.ok(controlerSeance(s, { equipe }).some((x) => /bloc 5 .*sans rappel de la conduite en cas de choc à la tête/.test(x)));
+});
+
+test('playtests : une séance avec plaquage sans protège-dents est refusée', () => {
+  const s = structuredClone(seance);
+  s.blocs[4] = { ...s.blocs[4], contact: 'plaquage', exige: ['plaquage'] };
+  assert.ok(controlerSeance(s, { equipe }).some((x) => /protège-dents/.test(x)));
+  s.points_vigilance = ['Protège-dents pour tous'];
+  assert.ok(!controlerSeance(s, { equipe }).some((x) => /protège-dents/.test(x)));
+});
+
+test("playtests : pas de texte MCA si le club n'a pas dit utiliser Mon Coach Assistant", () => {
+  const f = copie();
+  const config = path.join(path.dirname(f), '..', '..', '..', '.coach-rugby.yaml');
+  spawnSync('sh', ['-c', `cat > "${config}"`], { input: readFileSync(config, 'utf8').replace('utilise_mca: true', 'utilise_mca: false') });
+  assert.ok(!exporterSeance(f).fichiers.includes('pour-mca.txt'));
+});

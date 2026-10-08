@@ -30,6 +30,16 @@ Prendre l'équipe citée ($ARGUMENTS) ou lancer `statut`. Si aucune équipe
 n'existe, passer d'abord par `/coach-rugby:coach`. Lire `equipe.yaml` (catégories,
 pratique) et `.coach-rugby.yaml` (type de structure, `utilise_mca`).
 
+## 1 bis. Échéance seule (mode express)
+
+Si le coach veut seulement noter une échéance (« note le tournoi du 14 »),
+ne pas lui imposer tout le cadrage :
+
+1. créer une saison minimale avec les dates par défaut ;
+2. **lui dire en une phrase** que ce sont des dates par défaut, qui ne gênent
+   rien et qu'il pourra corriger ;
+3. ajouter l'échéance avec son importance.
+
 ## 2. Choisir le mode
 
 Proposer le mode par défaut, puis le faire confirmer :

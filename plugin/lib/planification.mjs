@@ -89,7 +89,7 @@ export function proposerCycles(saison, equipe) {
   });
   const formes = changementsDeForme(equipe, saison.debut, saison.fin);
   const importantes = pub === 'adultes'
-    ? (saison.calendrier || []).filter((e) => e.type === 'match' && ['haute', 'derby'].includes(e.importance))
+    ? (saison.calendrier || []).filter((e) => ['match', 'tournoi'].includes(e.type) && ['haute', 'derby'].includes(e.importance))
     : [];
   const mesocycles = [];
   const seancesParSemaine = (equipe.creneaux || []).length || 1;
@@ -118,7 +118,7 @@ export function proposerCycles(saison, equipe) {
           debut: z.debut, fin: z.fin, phase: p.id, theme: plan.bloc_affutage.theme,
           objectifs: [{ texte: plan.bloc_affutage.objectif, domaine: 'physique' }],
           intensite: plan.bloc_affutage.intensite, seances_par_semaine: seancesParSemaine, declencheur: `echeance:${z.echeance.date}`,
-          notes: `${z.echeance.importance === 'derby' ? 'Derby' : 'Match important'}${z.echeance.adversaire ? ` contre ${z.echeance.adversaire}` : ''} le ${z.echeance.date}.`,
+          notes: `${z.echeance.importance === 'derby' ? 'Derby' : z.echeance.type === 'tournoi' ? 'Tournoi important' : 'Match important'}${z.echeance.adversaire ? ` contre ${z.echeance.adversaire}` : ''} le ${z.echeance.date}.`,
         });
         continue;
       }
@@ -194,13 +194,20 @@ export function proposerSemaine(date, { equipe, saison, cycles = null }) {
       return ecartJours(d, da) <= 0 || ecartJours(da, prochaine.date) <= 0;
     });
     let intention = regle.intention;
-    if (meso?.intensite === 'affutage' && derniereAvant && pub === 'adultes' && ['haute', 'derby'].includes(prochaine.importance)) {
-      const activation = plan.grille_semaine.adultes.find((r) => r.si === 'avant_echeance_jours_max_2');
-      intensite = activation.intensite;
-      intention = activation.intention;
+    if (meso?.intensite === 'affutage' && pub === 'adultes' && ['haute', 'derby'].includes(prochaine?.importance)) {
+      if (derniereAvant) {
+        const activation = plan.grille_semaine.adultes.find((r) => r.si === 'avant_echeance_jours_max_2');
+        intensite = activation.intensite;
+        intention = activation.intention;
+      } else if (regle.si === 'defaut') {
+        intention = plan.bloc_affutage.intention_autres_seances;
+      }
     }
+    // J-n affiché seulement s'il aide : échéance proche et pas de trêve entre les deux.
+    const treveEntre = jMoins !== null && saison.phases.some((p) => ['treve', 'vacances-scolaires'].includes(p.id) && ecartJours(d, p.debut) > 0 && ecartJours(p.debut, prochaine.date) > 0);
+    const jAffiche = jMoins !== null && jMoins <= plan.j_moins_max_affiche && !treveEntre ? jMoins : null;
     return {
-      date: d, ...(c.heure ? { heure: c.heure } : {}), duree_min: c.duree_min, j_moins: jMoins,
+      date: d, ...(c.heure ? { heure: c.heure } : {}), duree_min: c.duree_min, j_moins: jAffiche,
       intention, intensite, dominante: meso?.theme || phase?.id || '—', statut: 'prevue',
     };
   }).sort((a, b) => lireDate(a.date) - lireDate(b.date));

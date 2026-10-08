@@ -1,0 +1,58 @@
+equipe: seniors-f3
+date: 2026-10-15
+heure: "19:30"
+duree_min: 90
+phase: phase-aller
+semaine_saison: 14
+semaine: 2026-10-12
+intensite_prevue: affutage
+prochain_evenement: { type: match, date: 2026-10-18, j_moins: 3, adversaire: RC Voisinville, importance: derby }
+effectif_prevu: 22
+source_effectif: coach
+encadrants: 3
+terrain: terrain
+materiel: [ballons, boucliers, plots, chasubles]
+regles: { categorie: seniors, formes: [xv], contact_max: plein, statut: a-verifier, source: ffr-reglements-generaux, saison: "2026-2027" }
+objectifs:
+  - { texte: "Être prêts au contact sans fatigue avant le derby", domaine: physique }
+  - { texte: "Lancements de jeu précis", domaine: tactique }
+blocs:
+  - { partie: accueil, duree_min: 5, titre: "Accueil, objectifs du derby", contact: aucun, consignes: ["Rappel du plan de jeu de dimanche"], securite: ["Signaler toute douleur ou choc récent"] }
+  - partie: echauffement
+    duree_min: 15
+    titre: Échauffement progressif
+    exercice: echauffement-progressif-adultes
+    contact: aucun
+    consignes: ["Mobilité, gammes, passes en mouvement, 3 accélérations"]
+    securite: ["Accélérations seulement en fin d'échauffement"]
+  - partie: corps
+    duree_min: 12
+    titre: Contact court et contrôlé (plaquage, rucks)
+    exercice: plaquage-educatif-progressif
+    contact: plaquage
+    exige: [plaquage]
+    organisation: "Groupes de 4 sur boucliers puis à deux ; efforts de 6 à 8 s, 30 s de récupération (repère à ajuster par le coach)"
+    consignes: ["Plaquage bas, tête du bon côté", "Accompagner au sol, pas de mise au sol violente", "Arrêt dès que la qualité baisse"]
+    adaptations: ["Volume réduit : J-3 du derby"]
+    securite: ["Choc à la tête : sortie immédiate et définitive", "Gabarits comparables"]
+  - partie: corps
+    duree_min: 20
+    titre: Lancements de jeu sans opposition
+    contact: aucun
+    exige: [touche, melee]
+    organisation: "Touches et mêlées sans poussée, combinaisons de première main, à vitesse de match"
+    consignes: ["Annonces claires", "Précision avant vitesse"]
+    securite: ["Mêlée sans poussée réelle cette semaine"]
+  - partie: jeu
+    duree_min: 23
+    titre: Oppositions courtes au toucher
+    exercice: marquer-dans-la-zone
+    contact: toucher
+    consignes: ["Séquences de 2 min, récupération 1 min", "Toucher à deux mains"]
+    adaptations: ["22 joueurs : deux terrains de 5 contre 5, rotations"]
+    securite: ["Aucun plaquage dans ce bloc"]
+  - { partie: retour-au-calme, duree_min: 10, titre: "Retour au calme", exercice: retour-au-calme-mobilite, contact: aucun, consignes: ["Marche, respiration, mobilité douce"], securite: ["Hydratation"] }
+  - { partie: bilan, duree_min: 5, titre: "Derniers mots avant le derby", exercice: cercle-bilan, contact: aucun, consignes: ["Trois mots-clés pour dimanche"], securite: ["Vérifier que personne n'a de douleur"] }
+points_vigilance: ["Derby à J-3 : volume réduit, qualité avant quantité"]
+sources: [ffr-reglements-generaux]
+hypotheses: ["Volume réduit à J-3 : hypothèse pédagogique (planification.yaml)", "Durées d'effort du bloc contact : repère non sourcé, à ajuster par le coach"]

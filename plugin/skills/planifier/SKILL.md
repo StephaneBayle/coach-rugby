@@ -65,6 +65,13 @@ puis poser **au plus deux questions**, avec des choix proposés.
 - Pas de charge chiffrée : l'intensité est seulement **prévue** (légère,
   moyenne, forte, affûtage, récupération).
 
+**Préparer une forme de jeu pas encore permise** (école de rugby) : tant
+que la nouvelle forme n'est pas en vigueur, on prépare sans la pratiquer.
+Par exemple, avant le ruck : chute avec le ballon, poser le ballon, appuis
+au contact, poussée à genoux (contact progressif). On n'utilise la fiche
+« Ruck éducatif progressif » qu'à partir du mois où la forme le permet ;
+`valider` refuse sinon.
+
 ## 4. Écrire et valider
 
 1. Chemin A : `planifier <equipe> --ecrire` crée `cycles.yaml` s'il n'existe

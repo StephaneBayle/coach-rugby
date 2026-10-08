@@ -15,17 +15,17 @@ const racine = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const exercices = chargerBibliotheque();
 const fiche = (id) => exercices.find((e) => e.id === id);
 
-test('24 fiches, toutes valides (schéma, sécurité par catégorie, schéma de terrain, sources)', () => {
-  assert.equal(exercices.length, 24);
+test('27 fiches, toutes valides (schéma, sécurité par catégorie, schéma de terrain, sources)', () => {
+  assert.equal(exercices.length, 27);
   const r = validerChemin(DOSSIER_BIBLIOTHEQUE);
   assert.deepEqual(r.flatMap((x) => x.erreurs.map((e) => `${path.basename(x.fichier)} : ${e}`)), []);
 });
 
-test('répartition par thème conforme au plan du lot 1', () => {
+test('répartition par thème (lot 1, plus 3 fiches issues des playtests du lot 2)', () => {
   const compte = {};
   for (const e of exercices) compte[e.theme] = (compte[e.theme] || 0) + 1;
   assert.deepEqual(compte, {
-    echauffement: 6, 'manipulation-passes': 4, 'jeu-reduit': 3, contact: 3,
+    echauffement: 6, 'manipulation-passes': 5, 'jeu-reduit': 4, contact: 4,
     'jeu-au-pied': 2, defense: 2, 'rugby-a-5': 2, 'retour-au-calme': 2,
   });
 });

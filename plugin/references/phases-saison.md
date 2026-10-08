@@ -48,7 +48,7 @@ obligations :
 
 | Code | Quand | Message type |
 |---|---|---|
-| `affutage` | match d'importance `haute` ou `derby` à J-7 ou moins | semaine d'affûtage ; à J-2 ou moins, séance courte d'activation |
+| `affutage` | match ou tournoi d'importance `haute` ou `derby` à J-7 ou moins (jamais à l'école de rugby) | semaine d'affûtage ; à J-2 ou moins, séance courte d'activation |
 | `logistique-plateau` | plateau ou tournoi à J-10 ou moins | groupes, rotations, transport, convocation |
 | `preparer-treve` | la trêve commence dans 14 jours ou moins | message aux joueurs, programme d'entretien |
 | `bilan-mi-saison` | pendant la trêve | bilan de mi-saison, préparation de la reprise |
@@ -60,7 +60,7 @@ obligations :
 | `preparer-semaine` | phase active, pas de plan pour la semaine en cours (ou, du vendredi au dimanche, pour la suivante) | préparer la semaine |
 | `seance-a-preparer` | une séance prévue aujourd'hui ou demain n'a pas de `seance.yaml` | préparer cette séance (remplace `premiere-seance` et `relance-seance`) |
 | `fin-mesocycle` | le cycle en cours (hors bloc d'affûtage) finit dans 7 jours ou moins | bilan du cycle, annonce du suivant |
-| `changement-forme` | la forme de jeu change dans 21 jours ou moins (école de rugby) | préparer la progression |
+| `changement-forme` | la forme de jeu change dans 35 jours ou moins (école de rugby), pour pouvoir préparer avant la trêve | préparer la progression |
 | `reprise-apres-treve` | dans les 7 jours qui suivent la fin de la trêve | remonter l'intensité progressivement |
 
 Les relances liées aux cycles et aux semaines n'apparaissent que si le
