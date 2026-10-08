@@ -137,6 +137,7 @@ categories:
       source: ffr-cahier-edr-2026-2027
       page: 7
     duree_seance_conseillee_min: { valeur: 45, statut: hypothese, note: "Séances courtes, très ludiques." }
+    temps_de_jeu: { valeur: "Tous les enfants jouent, rotations très fréquentes", statut: hypothese, note: "Aucune règle de temps de jeu minimal trouvée dans le Cahier EDR 2026-2027 : repère d'équité pédagogique." }
     encadrement: { valeur: "1 adulte pour 6 enfants", statut: hypothese }
   m6:
     libelle: Moins de 6 ans
@@ -149,6 +150,7 @@ categories:
       source: ffr-cahier-edr-2026-2027
       page: 7
     duree_seance_conseillee_min: { valeur: 60, statut: hypothese }
+    temps_de_jeu: { valeur: "Tous les enfants jouent, rotations très fréquentes", statut: hypothese, note: "Aucune règle de temps de jeu minimal trouvée dans le Cahier EDR 2026-2027 : repère d'équité pédagogique." }
     encadrement: { valeur: "1 adulte pour 6 à 8 enfants", statut: hypothese }
   m8:
     libelle: Moins de 8 ans
@@ -163,6 +165,7 @@ categories:
       source: ffr-cahier-edr-2026-2027
       page: 7
     duree_seance_conseillee_min: { valeur: 60, statut: hypothese }
+    temps_de_jeu: { valeur: "Chaque enfant joue au moins la moitié du temps ; écart minimal entre enfants", statut: hypothese, note: "Aucune règle de temps de jeu minimal trouvée dans le Cahier EDR 2026-2027 : repère d'équité pédagogique." }
     encadrement: { valeur: "1 éducateur pour 8 enfants", statut: hypothese }
   m10:
     libelle: Moins de 10 ans
@@ -178,6 +181,7 @@ categories:
       source: ffr-cahier-edr-2026-2027
       page: 7
     duree_seance_conseillee_min: { valeur: 75, statut: hypothese }
+    temps_de_jeu: { valeur: "Chaque enfant joue au moins la moitié du temps ; écart minimal entre enfants", statut: hypothese, note: "Aucune règle de temps de jeu minimal trouvée dans le Cahier EDR 2026-2027 : repère d'équité pédagogique." }
     encadrement: { valeur: "1 éducateur pour 8 à 10 enfants", statut: hypothese }
   m12:
     libelle: Moins de 12 ans
@@ -193,6 +197,7 @@ categories:
       source: ffr-cahier-edr-2026-2027
       page: 7
     duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+    temps_de_jeu: { valeur: "Chaque enfant joue au moins la moitié du temps ; écart minimal entre enfants", statut: hypothese, note: "Aucune règle de temps de jeu minimal trouvée dans le Cahier EDR 2026-2027 : repère d'équité pédagogique." }
     encadrement: { valeur: "1 éducateur pour 10 enfants", statut: hypothese }
   m14:
     libelle: Moins de 14 ans
@@ -208,6 +213,7 @@ categories:
       source: ffr-cahier-edr-2026-2027
       page: 7
     duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+    temps_de_jeu: { valeur: "Chaque joueur joue au moins la moitié du temps", statut: hypothese, note: "Aucune règle de temps de jeu minimal trouvée dans le Cahier EDR 2026-2027 : repère d'équité pédagogique." }
     encadrement: { valeur: "1 éducateur pour 12 joueurs", statut: hypothese }
   m15f:
     libelle: Moins de 15 ans féminines
@@ -223,6 +229,7 @@ categories:
       source: ffr-cahier-edr-2026-2027
       page: 7
     duree_seance_conseillee_min: { valeur: 90, statut: hypothese }
+    temps_de_jeu: { valeur: "Chaque joueuse joue au moins la moitié du temps", statut: hypothese, note: "Aucune règle de temps de jeu minimal trouvée dans le Cahier EDR 2026-2027 : repère d'équité pédagogique." }
     encadrement: { valeur: "1 éducateur pour 12 joueuses", statut: hypothese }
   m16:
     libelle: Moins de 16 ans
@@ -306,3 +313,15 @@ regles_transverses:
     statut: a-verifier
     source: ffr-cahier-edr-2026-2027
     page: 11
+  - id: fdm-edr
+    texte: "La feuille de match dématérialisée des écoles de rugby (FDM EDR) est l'outil officiel des plateaux et tournois depuis septembre 2026 (présences, commotions, discipline). La composition préparée avec coach-rugby n'est qu'un outil du coach."
+    concerne: [m6, m8, m10, m12, m14, m15f]
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 10
+  - id: passeport-joueur-de-devant
+    texte: "M14 et M15F : le « Passeport du joueur de devant » est à préparer et à évaluer pour les joueurs des postes de devant (première ligne). Vérifier les conditions auprès du comité avant de composer une première ligne."
+    concerne: [m14, m15f]
+    statut: a-verifier
+    source: ffr-cahier-edr-2026-2027
+    page: 6

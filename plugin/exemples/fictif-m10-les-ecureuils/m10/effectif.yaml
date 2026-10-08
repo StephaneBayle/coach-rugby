@@ -1,0 +1,35 @@
+# EXEMPLE FICTIF — Effectif en codes — aucun nom ici (les prénoms sont dans .prenoms.yaml, sur votre ordinateur).
+equipe: m10
+joueurs:
+  - code: J01
+    disponible: true
+  - code: J02
+    disponible: true
+  - code: J03
+    disponible: true
+  - code: J04
+    disponible: true
+  - code: J05
+    disponible: true
+  - code: J06
+    disponible: true
+  - code: J07
+    disponible: true
+  - code: J08
+    disponible: true
+  - code: J09
+    disponible: true
+  - code: J10
+    disponible: true
+  - code: J11
+    disponible: true
+  - code: J12
+    disponible: true
+  - code: J13
+    disponible: true
+  - code: J14
+    disponible: true
+  - code: J15
+    disponible: true
+  - code: J16
+    disponible: true

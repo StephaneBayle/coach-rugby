@@ -175,6 +175,29 @@
           ]
         }
       }
+    },
+    "codeJoueur": {
+      "type": "string",
+      "pattern": "^J[0-9]{2,3}$",
+      "description": "Code local d'un joueur (J01…). Jamais de nom."
+    },
+    "poste": {
+      "enum": [
+        "pilier-gauche",
+        "talonneur",
+        "pilier-droit",
+        "deuxieme-ligne",
+        "troisieme-ligne-aile",
+        "troisieme-ligne-centre",
+        "demi-de-melee",
+        "demi-d-ouverture",
+        "centre",
+        "ailier",
+        "arriere",
+        "avant",
+        "trois-quarts",
+        "polyvalent"
+      ]
     }
   }
 }

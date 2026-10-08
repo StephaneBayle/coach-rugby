@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:competences",
+  "title": "Grille de compétences (references/competences.yaml)",
+  "type": "object",
+  "required": [
+    "version_schema",
+    "statut",
+    "competences"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version_schema": {
+      "const": 1
+    },
+    "statut": {
+      "const": "hypothese"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "cr:communs#/$defs/refSource"
+      }
+    },
+    "note": {
+      "type": "string"
+    },
+    "competences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "libelle",
+          "domaine",
+          "a_partir_de"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "cr:communs#/$defs/identifiant"
+          },
+          "libelle": {
+            "type": "string"
+          },
+          "domaine": {
+            "enum": [
+              "porter-avancer",
+              "passer-recevoir",
+              "soutenir",
+              "defendre",
+              "contact",
+              "jeu-au-pied",
+              "comprendre-le-jeu",
+              "valeurs"
+            ]
+          },
+          "a_partir_de": {
+            "$ref": "cr:communs#/$defs/categorie"
+          },
+          "exige": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "plaquage",
+                "melee",
+                "touche",
+                "ruck"
+              ]
+            }
+          },
+          "observable": {
+            "type": "string",
+            "description": "Ce que l'éducateur voit quand c'est acquis."
+          }
+        }
+      }
+    }
+  }
+}

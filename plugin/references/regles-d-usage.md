@@ -64,6 +64,17 @@ négocient pas, même si le coach le demande.
   l'adresse, le téléphone, l'e-mail ou une information de santé d'un joueur.
 - Raisonner en **nombres** (« 14 enfants, 2 éducateurs ») ou en **codes**
   (J01, J02…).
+- **Effectif nominatif** : les fichiers de l'équipe (`effectif.yaml`,
+  `presences.yaml`, `progres.yaml`, `match.yaml`) ne contiennent **que des
+  codes**. Les prénoms, si le coach veut les voir, vont dans une seule table
+  locale, `<equipe>/.prenoms.yaml`. Elle est lue pour les afficher au coach
+  dans la conversation, **jamais** recopiée dans une fiche, un tableau, un
+  export, une issue ou un message. Tous ses prénoms sont automatiquement des
+  noms protégés.
+- Une indisponibilité s'écrit `disponible: false`, **sans motif** : jamais de
+  blessure, de maladie ni de santé.
+- Les progrès s'observent par compétence, en trois niveaux (à travailler, en
+  cours, acquis), **sans commentaire sur la personne**.
 - Si le coach cite un nom (dans un message, un sondage collé, une capture) :
   ne pas le recopier dans les fichiers, et **l'ajouter** à
   `<dossier saison>/.joueurs-proteges.txt` (une ligne par nom), en le lui

@@ -159,6 +159,9 @@
           },
           "points_cles": {
             "$ref": "cr:communs#/$defs/parametreDate"
+          },
+          "temps_de_jeu": {
+            "$ref": "cr:communs#/$defs/parametreDate"
           }
         }
       }

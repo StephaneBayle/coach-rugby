@@ -8,6 +8,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
 import { exporterSeance, exporterSemaine } from '../lib/export.mjs';
+import { absencesRepetees, lirePrenoms, prochainCode, synchroniserProteges, tauxDePresence } from '../lib/effectif.mjs';
 import { lundiDe, proposerCycles, proposerSemaine } from '../lib/planification.mjs';
 import { genererSvg } from '../lib/terrain.mjs';
 import { ecrireYaml, lireYaml } from '../lib/yaml.mjs';
@@ -42,6 +43,13 @@ Usage : node coach-rugby.mjs <commande> [options]
   semaine <equipe> [--date AAAA-MM-JJ] [--ecrire] [--json]
         Brouillon du plan de la semaine qui contient la date ; --ecrire crée
         semaines/<lundi>/semaine.yaml s'il n'existe pas encore.
+  effectif <equipe> [--ajouter N] [--prenoms] [--json]
+        Effectif en codes (J01…) ; --ajouter crée N codes ; --prenoms affiche
+        les prénoms de la table locale (jamais exportés). Synchronise les
+        prénoms avec la liste des joueurs protégés.
+  presences <equipe> [--date AAAA-MM-JJ --presents J01,J02… [--excuses …] [--type seance]] [--bilan]
+        Enregistre les présents d'une date, ou affiche les taux de présence
+        et les absences répétées.
   exporter <seance.yaml|semaine.yaml> [--pdf] [--formats a4,telephone]
         Fiches HTML (A4, téléphone) et, avec --pdf, PDF via Chrome. Pour une
         séance : schémas SVG et texte pour Mon Coach Assistant (clubs).
@@ -231,6 +239,60 @@ commandes.semaine = (o) => {
 function chargerPour(o) {
   return chargerPourPlanifier(o._[0]);
 }
+
+function chargerEffectif(id) {
+  if (!id) sortir(1, 'Indiquer l\'équipe (son identifiant, ex. m10).');
+  const dossier = dossierSaison();
+  const d = path.join(dossier, id);
+  if (!existsSync(path.join(d, 'equipe.yaml'))) sortir(1, `Équipe ${id} introuvable dans ${dossier}.`);
+  const fe = path.join(d, 'effectif.yaml');
+  return { dossier, d, fe, effectif: existsSync(fe) ? lireYaml(fe) : { equipe: id, joueurs: [] } };
+}
+
+const listeCodes = (v) => (typeof v === 'string' ? v.split(',').map((c) => c.trim()).filter(Boolean) : []);
+
+commandes.effectif = (o) => {
+  const { dossier, d, fe, effectif } = chargerEffectif(o._[0]);
+  const n = Number(o.ajouter || 0);
+  if (n > 0) {
+    for (let i = 0; i < n; i++) effectif.joueurs.push({ code: prochainCode(effectif.joueurs.map((j) => j.code)), disponible: true });
+    ecrireYaml(fe, effectif, '# Effectif en codes — aucun nom ici (les prénoms sont dans .prenoms.yaml, sur votre ordinateur).');
+    const erreurs = validerChemin(fe).flatMap((r) => r.erreurs);
+    if (erreurs.length) sortir(1, erreurs.join('\n'));
+  }
+  const ajoutes = synchroniserProteges(dossier);
+  const prenoms = o.prenoms ? lirePrenoms(d) : {};
+  if (o.json) sortir(0, JSON.stringify({ ...effectif, protégés_ajoutés: ajoutes.length }, null, 2));
+  const actifs = effectif.joueurs.filter((j) => j.actif !== false);
+  sortir(0, [
+    `Effectif de ${o._[0]} : ${actifs.length} joueur(s), ${actifs.filter((j) => j.disponible).length} disponible(s).`,
+    ...actifs.map((j) => `  ${j.code}${prenoms[j.code] ? ` (${prenoms[j.code]})` : ''}${j.postes?.length ? ` — ${j.postes.join(', ')}` : ''}${j.disponible ? '' : ' — indisponible'}`),
+    ajoutes.length ? `${ajoutes.length} prénom(s) ajouté(s) aux joueurs protégés.` : null,
+  ].filter(Boolean).join('\n'));
+};
+
+commandes.presences = (o) => {
+  const { d, effectif } = chargerEffectif(o._[0]);
+  const fp = path.join(d, 'presences.yaml');
+  const presences = existsSync(fp) ? lireYaml(fp) : { equipe: o._[0], dates: [] };
+  if (o.presents) {
+    if (typeof o.date !== 'string') sortir(1, 'Indiquer --date AAAA-MM-JJ.');
+    const entree = { date: o.date, type: typeof o.type === 'string' ? o.type : 'seance', presents: listeCodes(o.presents), ...(o.excuses ? { excuses: listeCodes(o.excuses) } : {}), ...(o.source ? { source: o.source } : {}) };
+    presences.dates = [...presences.dates.filter((x) => x.date !== entree.date), entree].sort((a, b) => (a.date < b.date ? -1 : 1));
+    ecrireYaml(fp, presences, '# Présences en codes — aucun nom ici.');
+    const erreurs = validerChemin(fp).flatMap((r) => r.erreurs);
+    if (erreurs.length) sortir(1, erreurs.join('\n'));
+    sortir(0, `Présences du ${entree.date} : ${entree.presents.length} présent(s)${entree.excuses ? `, ${entree.excuses.length} excusé(s)` : ''}.`);
+  }
+  const taux = tauxDePresence(effectif, presences);
+  const repetees = absencesRepetees(effectif, presences);
+  if (o.json) sortir(0, JSON.stringify({ taux, absences_repetees: repetees }, null, 2));
+  sortir(0, [
+    `Présences de ${o._[0]} sur ${presences.dates.length} date(s) :`,
+    ...Object.entries(taux).map(([c, v]) => `  ${c} : ${v.presents}/${v.total}${v.taux !== null ? ` (${v.taux} %)` : ''}`),
+    repetees.length ? `Absents aux 3 dernières dates : ${repetees.join(', ')}` : null,
+  ].filter(Boolean).join('\n'));
+};
 
 const [nom, ...reste] = process.argv.slice(2);
 if (!nom || nom === 'aide' || nom === '--help' || nom === '-h') sortir(0, AIDE);

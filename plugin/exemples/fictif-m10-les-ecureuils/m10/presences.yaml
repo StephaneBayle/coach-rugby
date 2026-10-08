@@ -1,0 +1,77 @@
+# EXEMPLE FICTIF — Présences en codes — aucun nom ici.
+equipe: m10
+dates:
+  - date: 2026-09-16
+    type: seance
+    presents:
+      - J01
+      - J02
+      - J03
+      - J04
+      - J05
+      - J06
+      - J07
+      - J08
+      - J09
+      - J10
+      - J11
+      - J12
+      - J13
+      - J14
+      - J15
+    excuses:
+      - J16
+  - date: 2026-09-23
+    type: seance
+    presents:
+      - J01
+      - J02
+      - J03
+      - J04
+      - J05
+      - J06
+      - J07
+      - J08
+      - J09
+      - J10
+      - J11
+      - J12
+      - J13
+      - J14
+      - J16
+  - date: 2026-09-30
+    type: seance
+    presents:
+      - J01
+      - J02
+      - J03
+      - J04
+      - J05
+      - J06
+      - J07
+      - J08
+      - J09
+      - J10
+      - J11
+      - J12
+      - J13
+      - J16
+  - date: 2026-10-07
+    type: seance
+    presents:
+      - J01
+      - J02
+      - J03
+      - J04
+      - J05
+      - J06
+      - J07
+      - J08
+      - J09
+      - J10
+      - J11
+      - J12
+      - J13
+      - J16
+    excuses:
+      - J14

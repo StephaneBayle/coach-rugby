@@ -76,3 +76,21 @@ plugin ; `~/Rugby-Saisons`.
      formes sont permises) et les permissions plaquage, mêlée, touche, ruck ;
   5. citer la source, la page et le statut ; si le statut n'est pas
      `verifie`, écrire « à vérifier (saison 2026-2027) ».
+
+## `effectif` — joueurs en codes
+
+- **A** : `coach-rugby.mjs effectif <equipe> [--ajouter N] [--prenoms]`
+- **B** :
+  - écrire `<equipe>/effectif.yaml` : une ligne par joueur, avec un `code`
+    (J01, J02…), un `disponible` (oui ou non, sans motif) et les `postes` si
+    le coach les donne ;
+  - les prénoms vont **seulement** dans `<equipe>/.prenoms.yaml`
+    (`J01: Prénom`), puis on les ajoute à `.joueurs-proteges.txt`.
+
+## `presences` — qui était là
+
+- **A** : `coach-rugby.mjs presences <equipe> --date AAAA-MM-JJ --presents J01,J02 [--excuses J05]`,
+  ou `--bilan` pour les taux et les absences répétées.
+- **B** : ajouter dans `<equipe>/presences.yaml` une entrée par date, avec
+  les codes des présents et des excusés. Un code ne peut pas être à la fois
+  présent et excusé.
