@@ -22,3 +22,7 @@ comment c'est programmé. Format inspiré de
   logistique d'un plateau.
 - Règles de jeu du moment selon la catégorie et le mois, d'après le Cahier
   des écoles de rugby 2026-2027 de la FFR (à vérifier selon votre comité).
+- Protection des joueurs : dans Claude Code, le plugin refuse de publier sur
+  GitHub un nom de joueur protégé, un téléphone, un e-mail, une date de
+  naissance ou un numéro de licence. En début de session, il rappelle où en
+  est chaque équipe.

@@ -34,6 +34,18 @@ jobs:
           node plugin/scripts/coach-rugby.mjs valider plugin/references
           node plugin/scripts/coach-rugby.mjs valider plugin/exemples
 
+  donnees-personnelles:
+    name: Données personnelles
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Aucune donnée personnelle de joueur dans le dépôt
+        # Sans dépendance : le script n'importe que des modules node:*.
+        run: node plugin/scripts/garde-rgpd.mjs --depot .
+
   lint:
     name: Lint Markdown
     runs-on: ubuntu-latest

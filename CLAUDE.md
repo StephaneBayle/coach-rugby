@@ -42,6 +42,10 @@ réponses du plugin sont simples, courtes et sans jargon technique.
 - La garde `garde-rgpd` (hook) et le job CI `donnees-personnelles` bloquent les
   fuites. **Ne jamais les contourner.**
 - Les exemples sont 100 % fictifs ; le nom de test est « Zébulon Testard ».
+- Une donnée de test **volontairement fictive** qui ressemble à une donnée
+  personnelle (téléphone, date de naissance…) porte le marqueur
+  `rgpd:fictif` sur sa ligne, ou est assemblée par concaténation dans les
+  tests. N'utiliser ce marqueur que pour des données inventées.
 
 ## Santé et sécurité
 

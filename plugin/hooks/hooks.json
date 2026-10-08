@@ -1,0 +1,28 @@
+{
+  "description": "coach-rugby : situation des équipes en début de session et protection des données des joueurs.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/session-start.mjs\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/scripts/garde-rgpd.mjs\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
