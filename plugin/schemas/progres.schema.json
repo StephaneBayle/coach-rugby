@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:progres",
+  "title": "Progrès par compétences (progres.yaml) — en codes, sans commentaire sur la personne",
+  "type": "object",
+  "required": [
+    "equipe",
+    "observations"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "equipe": {
+      "$ref": "cr:communs#/$defs/identifiant"
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "competence",
+          "niveau",
+          "date"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "$ref": "cr:communs#/$defs/codeJoueur"
+          },
+          "competence": {
+            "$ref": "cr:communs#/$defs/identifiant"
+          },
+          "niveau": {
+            "enum": [
+              "a-travailler",
+              "en-cours",
+              "acquis"
+            ]
+          },
+          "date": {
+            "$ref": "cr:communs#/$defs/date"
+          }
+        }
+      }
+    }
+  }
+}

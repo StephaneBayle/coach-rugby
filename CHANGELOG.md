@@ -7,6 +7,19 @@ comment c'est programmé. Format inspiré de
 
 ## [Non publié]
 
+### Ajouté
+
+- Effectif de l'équipe en codes (J01, J02…), avec une table des prénoms qui
+  reste sur votre ordinateur : vous voyez les prénoms, mais ils ne sont
+  jamais recopiés dans une fiche, un tableau ou un export, et ils sont
+  automatiquement protégés.
+- Présences par séance ou par match, taux de présence, et repérage des
+  joueurs absents trois fois de suite.
+- Progrès par compétences (à travailler, en cours, acquis), d'après une
+  grille simple, sans note ni commentaire sur la personne.
+- Rappels FFR : la feuille de match dématérialisée des écoles de rugby est
+  l'outil officiel ; passeport du joueur de devant en M14 et M15F.
+
 ### Corrigé
 
 - Export PDF : un échec passager de Chrome (constaté sur macOS) est rattrapé

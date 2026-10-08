@@ -17,6 +17,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { dossierSaison, fichierJoueursProteges, racineGit } from '../lib/chemins.mjs';
+import { prenomsDuDossier } from '../lib/effectif.mjs';
 import { analyser, decrire, lireNomsProteges } from '../lib/rgpd.mjs';
 
 const MARQUE_DEPOT = 'coach-rugby';
@@ -40,6 +41,8 @@ function estDepotCoachRugby(racine) {
 const HORS_FICTIF = (f) => !/^(plugin\/exemples|tests\/fixtures)\//.test(f);
 const FICHIERS_INTERDITS = [
   { test: (f) => /(^|\/)\.joueurs-proteges\.txt$/.test(f), raison: 'liste de joueurs protégés' },
+  { test: (f) => /(^|\/)\.prenoms\.ya?ml$/.test(f), raison: 'table des prénoms de joueurs' },
+  { test: (f) => /(^|\/)progres[^/]*\.ya?ml$/i.test(f) && HORS_FICTIF(f), raison: 'progrès de joueurs' },
   { test: (f) => /(^|\/)\.coach-rugby\.yaml$/.test(f) && HORS_FICTIF(f), raison: 'configuration d\'un dossier saison réel' },
   { test: (f) => /(^|\/)(effectif|presences?)[^/]*\.(ya?ml|csv|xlsx?)$/i.test(f) && HORS_FICTIF(f), raison: 'effectif ou présences' },
 ];
@@ -128,7 +131,8 @@ const outil = entree.tool_name;
 const params = entree.tool_input || {};
 const cwd = entree.cwd || process.cwd();
 const dossier = dossierSaison({ cwd });
-const noms = lireNomsProteges(fichierJoueursProteges(dossier));
+// Noms protégés : la liste, plus tous les prénoms des tables d'équipe.
+const noms = [...new Set([...lireNomsProteges(fichierJoueursProteges(dossier)), ...prenomsDuDossier(dossier)])];
 
 if (outil === 'Bash') {
   const cmd = String(params.command || '');

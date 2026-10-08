@@ -16,6 +16,7 @@ import { controlerExercice } from './bibliotheque.mjs';
 import { controlerEquipe, controlerSaison } from './controles.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { valider } from './schemas.mjs';
+import { controlerCodes } from './effectif.mjs';
 import { controlerCycles, controlerSemaine } from './planification.mjs';
 import { contexteSeance, controlerSeance } from './seance.mjs';
 import { ecrireYaml, lireYaml } from './yaml.mjs';
@@ -70,6 +71,10 @@ export function schemaDe(fichier) {
   if (base === 'planification.yaml') return 'planification';
   if (base === 'cycles.yaml') return 'cycles';
   if (base === 'semaine.yaml') return 'semaine';
+  if (base === 'effectif.yaml') return 'effectif';
+  if (base === 'presences.yaml') return 'presences';
+  if (base === 'progres.yaml') return 'progres';
+  if (base === 'competences.yaml') return 'competences';
   if (base === 'seance.yaml') return 'seance';
   if (/[\\/]bibliotheque[\\/]exercices[\\/][^\\/]+\.yaml$/.test(fichier) || /[\\/]_bibliotheque-perso[\\/]exercices[\\/][^\\/]+\.yaml$/.test(fichier)) return 'exercice';
   return null;
@@ -110,6 +115,28 @@ function validerFichier(fichier) {
       const d = path.resolve(path.dirname(fichier), '..', '..');
       const lire = (f) => (existsSync(path.join(d, f)) ? lireYaml(path.join(d, f)) : null);
       erreurs = controlerSemaine(donnees, { equipe: lire('equipe.yaml'), saison: lire('saison.yaml'), cycles: lire('cycles.yaml'), nomDossier: path.basename(path.dirname(fichier)) });
+    }
+    if (schema === 'effectif') {
+      const codes = donnees.joueurs.map((j) => j.code);
+      erreurs = codes.filter((c, i) => codes.indexOf(c) !== i).map((c) => `code ${c} en double`);
+      if (donnees.equipe !== path.basename(path.dirname(fichier))) erreurs.push(`équipe « ${donnees.equipe} » différente du dossier`);
+    }
+    if (schema === 'presences' || schema === 'progres') {
+      const fe = path.join(path.dirname(fichier), 'effectif.yaml');
+      const effectif = existsSync(fe) ? lireYaml(fe) : null;
+      const codes = schema === 'presences'
+        ? donnees.dates.flatMap((d) => [...d.presents, ...(d.excuses || [])])
+        : donnees.observations.map((o) => o.code);
+      erreurs = controlerCodes(codes, effectif, schema);
+      if (schema === 'presences') {
+        for (const d of donnees.dates) {
+          const doublon = (d.excuses || []).filter((c) => d.presents.includes(c));
+          if (doublon.length) erreurs.push(`${d.date} : ${doublon.join(', ')} à la fois présent et excusé`);
+        }
+      } else {
+        const ids = new Set(lireYaml(path.join(RACINE_PLUGIN, 'references', 'competences.yaml')).competences.map((c) => c.id));
+        for (const o of donnees.observations) if (!ids.has(o.competence)) erreurs.push(`compétence inconnue : ${o.competence}`);
+      }
     }
     if (schema === 'seance') {
       const { equipe, dossierSaison } = contexteSeance(fichier);

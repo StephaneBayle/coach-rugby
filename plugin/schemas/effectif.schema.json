@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:effectif",
+  "title": "Effectif d'une équipe (effectif.yaml) — en codes, sans aucun nom",
+  "type": "object",
+  "required": [
+    "equipe",
+    "joueurs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "equipe": {
+      "$ref": "cr:communs#/$defs/identifiant"
+    },
+    "joueurs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "code",
+          "disponible"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "$ref": "cr:communs#/$defs/codeJoueur"
+          },
+          "postes": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "cr:communs#/$defs/poste"
+            }
+          },
+          "disponible": {
+            "type": "boolean",
+            "description": "Indisponible : jamais de motif (ni blessure, ni maladie)."
+          },
+          "depuis": {
+            "$ref": "cr:communs#/$defs/date"
+          },
+          "categorie": {
+            "$ref": "cr:communs#/$defs/categorie",
+            "description": "Pour un groupe mêlant plusieurs catégories."
+          },
+          "actif": {
+            "type": "boolean",
+            "default": true,
+            "description": "false : a quitté l'équipe (le code n'est pas réattribué)."
+          }
+        }
+      }
+    }
+  }
+}

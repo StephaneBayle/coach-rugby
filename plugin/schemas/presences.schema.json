@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:presences",
+  "title": "Présences (presences.yaml) — en codes",
+  "type": "object",
+  "required": [
+    "equipe",
+    "dates"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "equipe": {
+      "$ref": "cr:communs#/$defs/identifiant"
+    },
+    "dates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "type",
+          "presents"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "$ref": "cr:communs#/$defs/date"
+          },
+          "type": {
+            "enum": [
+              "seance",
+              "match",
+              "plateau",
+              "tournoi"
+            ]
+          },
+          "presents": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "cr:communs#/$defs/codeJoueur"
+            }
+          },
+          "excuses": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "cr:communs#/$defs/codeJoueur"
+            }
+          },
+          "source": {
+            "enum": [
+              "coach",
+              "sondage-mca"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

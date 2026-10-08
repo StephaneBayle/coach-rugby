@@ -4,6 +4,7 @@
 /Rugby-Saisons/
 /.coach-rugby.yaml
 /.joueurs-proteges.txt
+.prenoms.yaml
 
 # Sorties générées
 build/

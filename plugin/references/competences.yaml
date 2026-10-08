@@ -1,0 +1,26 @@
+# Grille de compétences coach-rugby — originale, sous licence CC BY-SA 4.0.
+# HYPOTHÈSES PÉDAGOGIQUES : une aide à l'observation, pas un référentiel
+# officiel. Trois niveaux seulement (à travailler, en cours, acquis), jamais
+# de note ni de commentaire sur la personne. Pour aller plus loin, le plan
+# de formation du joueur de la FFR (renvoi, sans reproduction).
+version_schema: 1
+statut: hypothese
+sources: [ffr-plan-formation-joueur-2023]
+note: "« a_partir_de » : catégorie à partir de laquelle on observe la compétence ; « exige » : phases de jeu qui doivent être permises par la forme du jour."
+competences:
+  - { id: avancer-avec-le-ballon, libelle: "Avancer avec le ballon vers l'en-but", domaine: porter-avancer, a_partir_de: m6, observable: "Court droit vers l'avant dès qu'il a le ballon" }
+  - { id: eviter-un-adversaire, libelle: "Éviter un adversaire (changement de direction)", domaine: porter-avancer, a_partir_de: m6, observable: "Change d'appui pour passer à côté du défenseur" }
+  - { id: porter-a-deux-mains, libelle: "Porter le ballon à deux mains", domaine: porter-avancer, a_partir_de: m6, observable: "Garde le ballon à deux mains en courant" }
+  - { id: passer-vers-l-arriere, libelle: "Passer vers l'arrière à un partenaire", domaine: passer-recevoir, a_partir_de: m8, observable: "Passe à plat ou vers l'arrière, sans en-avant" }
+  - { id: recevoir-mains-tendues, libelle: "Recevoir mains tendues", domaine: passer-recevoir, a_partir_de: m8, observable: "Appelle le ballon, mains tendues vers le passeur" }
+  - { id: fixer-et-passer, libelle: "Fixer un défenseur puis passer", domaine: passer-recevoir, a_partir_de: m10, observable: "Attaque le défenseur avant de passer au partenaire libre" }
+  - { id: soutenir-le-porteur, libelle: "Se placer en soutien du porteur", domaine: soutenir, a_partir_de: m8, observable: "Reste derrière et près du porteur, prêt à recevoir" }
+  - { id: monter-en-ligne, libelle: "Monter en ligne en défense", domaine: defendre, a_partir_de: m10, observable: "Monte avec ses partenaires, sans laisser de trou" }
+  - { id: toucher-sans-pousser, libelle: "Toucher à deux mains sans pousser", domaine: defendre, a_partir_de: m6, observable: "Arrête le porteur au toucher, sans brutalité" }
+  - { id: chuter-en-securite, libelle: "Chuter avec le ballon en sécurité", domaine: contact, a_partir_de: m8, observable: "Tombe sur le côté, menton rentré, ballon protégé" }
+  - { id: plaquer-en-securite, libelle: "Plaquer bas en sécurité", domaine: contact, a_partir_de: m10, exige: [plaquage], observable: "Tête du bon côté, bras serrés, sous la ceinture" }
+  - { id: ruck-educatif, libelle: "Participer à un ruck éducatif", domaine: contact, a_partir_de: m10, exige: [ruck], observable: "Arrive debout, dos plat, tête haute" }
+  - { id: jouer-au-pied, libelle: "Jouer au pied avec une intention", domaine: jeu-au-pied, a_partir_de: m12, observable: "Choisit une chandelle, un rasant ou une touche selon la situation" }
+  - { id: lire-l-espace, libelle: "Repérer et attaquer l'espace libre", domaine: comprendre-le-jeu, a_partir_de: m10, observable: "Lève la tête et va vers l'espace libre" }
+  - { id: respecter-les-regles, libelle: "Respecter les règles et l'arbitre", domaine: valeurs, a_partir_de: m6, observable: "Accepte les décisions sans contester" }
+  - { id: jouer-avec-les-autres, libelle: "Jouer avec ses partenaires et respecter les adversaires", domaine: valeurs, a_partir_de: m6, observable: "Encourage, passe le ballon, serre la main" }

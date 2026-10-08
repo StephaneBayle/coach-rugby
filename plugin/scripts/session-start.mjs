@@ -15,6 +15,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { dossierSaison, racineGit } from '../lib/chemins.mjs';
+import { synchroniserProteges } from '../lib/effectif.mjs';
 
 const racine = process.env.CLAUDE_PLUGIN_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const donnees = process.env.CLAUDE_PLUGIN_DATA;
@@ -42,8 +43,14 @@ if (!aCote && donnees && path.basename(donnees).startsWith('coach-rugby')) {
   }
 }
 
-// 2. Une ligne par équipe.
+// 2. Prénoms des tables d'équipe ajoutés aux joueurs protégés, puis une
+//    ligne par équipe.
 const dossier = dossierSaison();
+try {
+  synchroniserProteges(dossier);
+} catch {
+  // dossier absent ou illisible : rien à protéger
+}
 if (existsSync(path.join(dossier, '.coach-rugby.yaml'))) {
   const r = spawnSync(process.execPath, [path.join(racine, 'scripts', 'coach-rugby.mjs'), 'statut', '--json'], {
     encoding: 'utf8',

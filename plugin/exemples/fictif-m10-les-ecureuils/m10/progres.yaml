@@ -1,0 +1,9 @@
+# EXEMPLE FICTIF — progrès par compétences, en codes, sans commentaire sur la personne.
+equipe: m10
+observations:
+  - { code: J01, competence: passer-vers-l-arriere, niveau: acquis, date: 2026-10-07 }
+  - { code: J01, competence: fixer-et-passer, niveau: en-cours, date: 2026-10-07 }
+  - { code: J02, competence: passer-vers-l-arriere, niveau: en-cours, date: 2026-10-07 }
+  - { code: J03, competence: chuter-en-securite, niveau: a-travailler, date: 2026-10-07 }
+  - { code: J04, competence: soutenir-le-porteur, niveau: acquis, date: 2026-10-07 }
+  - { code: J05, competence: plaquer-en-securite, niveau: a-travailler, date: 2026-10-07 }
