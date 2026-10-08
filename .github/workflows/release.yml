@@ -1,0 +1,52 @@
+name: Publication
+
+# Sur un tag vX.Y.Z : vérifie que la version du plugin correspond, fabrique le
+# zip installable dans Cowork / Claude desktop (Personnaliser > Plugins >
+# Téléverser) et publie la version avec les notes du CHANGELOG.
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: write
+
+jobs:
+  publier:
+    name: Zip du plugin et version GitHub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Version du tag = version du plugin
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          VERSION="$(node -p "require('./plugin/.claude-plugin/plugin.json').version")"
+          test "$TAG" = "$VERSION" || { echo "::error::tag v$TAG ≠ version du plugin $VERSION"; exit 1; }
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+      - name: Aucune donnée personnelle
+        run: node plugin/scripts/garde-rgpd.mjs --depot .
+      - name: Zip installable (un seul dossier de premier niveau)
+        run: |
+          mkdir -p dist/coach-rugby
+          git archive HEAD plugin | tar -x -C dist
+          cp -R dist/plugin/. dist/coach-rugby/ && rm -rf dist/plugin
+          rm -rf dist/coach-rugby/evals/results
+          (cd dist && zip -qr "coach-rugby-v${VERSION}.zip" coach-rugby)
+          unzip -l "dist/coach-rugby-v${VERSION}.zip" | tail -1
+          test -f dist/coach-rugby/.claude-plugin/plugin.json
+          test ! -d dist/coach-rugby/bin
+      - name: Notes de version (section du CHANGELOG)
+        run: |
+          awk -v v="$VERSION" '
+            $0 ~ "^## \\[" v "\\]" { dedans = 1; next }
+            dedans && /^## \[/ { exit }
+            dedans { print }
+          ' CHANGELOG.md > dist/notes.md
+          test -s dist/notes.md || { echo "::error::pas de section [$VERSION] dans CHANGELOG.md"; exit 1; }
+          printf '\n---\n\n**Installer** : voir [docs/installation.md](https://github.com/%s/blob/v%s/docs/installation.md).\n' "$GITHUB_REPOSITORY" "$VERSION" >> dist/notes.md
+      - name: Publier la version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" "dist/coach-rugby-v${VERSION}.zip" --title "coach-rugby ${VERSION}" --notes-file dist/notes.md

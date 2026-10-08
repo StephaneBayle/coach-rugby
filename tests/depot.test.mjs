@@ -45,3 +45,9 @@ test('chaque skill a un SKILL.md dont le name correspond au dossier', () => {
     assert.match(md, /^description:\s*\S/m, `skill ${s} sans description`);
   }
 });
+
+test('le CHANGELOG a une section pour la version du plugin (notes de publication)', () => {
+  const { version } = json('plugin/.claude-plugin/plugin.json');
+  const changelog = readFileSync(path.join(racine, 'CHANGELOG.md'), 'utf8');
+  assert.match(changelog, new RegExp(`^## \\[${version.replace(/\./g, '\\.')}\\]`, 'm'));
+});

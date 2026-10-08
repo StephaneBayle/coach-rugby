@@ -3,9 +3,9 @@
 Assistant de saison pour **coachs et éducateurs de rugby amateur**, sous forme
 de plugin pour Claude (Cowork, Claude desktop et Claude Code).
 
-> 🚧 **Version 0.1.0 en construction.** Le socle est en place ; la conception
-> de séances, la bibliothèque d'exercices et les fiches imprimables arrivent au
-> fil du lot 1. Suivez l'avancement dans la
+> **Version 0.1.0** — première version : saison, séances, bibliothèque
+> d'exercices, fiches imprimables et téléphone. La suite (planification sur
+> plusieurs semaines, effectif et matchs, charge, communication) est dans la
 > [feuille de route](docs/feuille-de-route.md).
 
 ## À quoi ça sert
@@ -39,12 +39,25 @@ féminin, rugby à 5, à 7 et loisir.
 saisir `StephaneBayle/coach-rugby`. Vous pouvez aussi téléverser le fichier
 `.zip` joint à chaque [version publiée](https://github.com/StephaneBayle/coach-rugby/releases).
 
-Le guide détaillé arrive avec la version 0.1.0 dans `docs/installation.md`.
+Guide détaillé : [docs/installation.md](docs/installation.md).
 
 ## Premier pas
 
 Dites simplement : *« Prépare la séance de mercredi de mes M10 »*, ou lancez
 `/coach-rugby:coach`.
+
+## Ce que vous pouvez demander
+
+| Commande | Pour |
+|---|---|
+| `/coach-rugby:coach` | Démarrer, retrouver où en est votre équipe, savoir quoi faire ensuite |
+| `/coach-rugby:saison` | Organiser la saison : phases, matchs, plateaux, tournois |
+| `/coach-rugby:seance` | Préparer une séance pour votre groupe |
+| `/coach-rugby:exercices` | Trouver, adapter ou créer un exercice |
+| `/coach-rugby:relire` | Faire vérifier une séance (sécurité, règlement, sources, données) |
+| `/coach-rugby:exporter` | Obtenir la fiche à imprimer, la fiche téléphone, le PDF |
+
+Pas besoin de retenir les commandes : décrivez simplement ce que vous voulez.
 
 ## Vos données restent chez vous
 
