@@ -48,11 +48,15 @@ Poser **au plus trois questions**, avec des valeurs par défaut proposées :
      d'`equipe.yaml`) est **annoncée en une ligne** pour que le coach la
      corrige. Le matériel demandé par la séance doit être celui dont le coach
      dispose ; sinon, choisir une variante ou le lui demander.
+   - **Effectif en codes** (`effectif.yaml`) : partir des joueurs
+     `disponible: true` et des présences récentes (`presences --bilan`) pour
+     estimer le nombre. La séance ne garde que des **nombres**.
    - **Sondage Mon Coach Assistant** (clubs) : si le coach colle le résultat
      d'un sondage de présence, compter les présents et les encadrants, puis
      **ne garder que les nombres** (`source_effectif: sondage-mca`). Ne
      recopier aucun nom, ajouter les noms de joueurs à `.joueurs-proteges.txt`
-     et le dire au coach en une phrase.
+     et le dire au coach en une phrase. Si l'équipe a un effectif en codes,
+     proposer aussi de noter ces présences (`/coach-rugby:effectif`).
 2. **Durée et terrain**. Par défaut, le créneau ; sinon
    `duree_seance_conseillee_min` de la catégorie, qui est une hypothèse.
 3. **Ce qu'il veut travailler**, si les objectifs de la phase et l'échéance
@@ -60,8 +64,10 @@ Poser **au plus trois questions**, avec des valeurs par défaut proposées :
 
 ## 3. Fixer 1 à 3 objectifs
 
-Les tirer des objectifs de la phase (`saison.yaml`), de la prochaine échéance
-et des relances. Par exemple : affûtage à J-2, logistique et plaisir avant un
+Les tirer des objectifs de la phase (`saison.yaml`), de la prochaine échéance,
+des relances, du dernier **débriefing de match** (`prochaines_seances` de
+`matchs/<date>/match.yaml`) et des compétences le plus souvent « à
+travailler » dans `progres.yaml`. Par exemple : affûtage à J-2, logistique et plaisir avant un
 plateau. Un objectif s'écrit en une phrase simple, avec son domaine (technique,
 tactique, physique, mental, valeurs).
 
@@ -145,4 +151,6 @@ reprise) et les **hypothèses** (choix non sourcés). Citer les **sources**
 4. Si la séance s'écarte de l'intention prévue dans `semaine.yaml`, mettre à
    jour cette intention.
 5. Après la séance, proposer de noter le bilan : nombre de présents,
-   ressenti, choses à reprendre.
+   ressenti, choses à reprendre. Si l'équipe a un effectif en codes,
+   proposer de noter les présences et, au plus, trois compétences observées
+   (`/coach-rugby:effectif`).

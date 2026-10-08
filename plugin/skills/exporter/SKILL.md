@@ -1,7 +1,7 @@
 ---
 name: exporter
-description: Produit les fiches d'une séance ou d'une semaine de rugby - fiche imprimable A4, fiche lisible sur téléphone au bord du terrain, schémas de terrain SVG, PDF si possible, et texte à coller dans Mon Coach Assistant de la FFR (séances).
-when_to_use: Quand le coach veut imprimer sa séance ou le programme de sa semaine, l'avoir sur son téléphone, l'envoyer à son staff, en faire un PDF, ou copier une séance dans Mon Coach Assistant.
+description: Produit les fiches d'une séance, d'une semaine ou d'un match de rugby et la feuille de présence - fiche imprimable A4, fiche lisible sur téléphone au bord du terrain, schémas de terrain SVG, PDF si possible, et texte à coller dans Mon Coach Assistant de la FFR (séances).
+when_to_use: Quand le coach veut imprimer sa séance, le programme de sa semaine, sa fiche match ou une feuille de présence, l'avoir sur son téléphone, l'envoyer à son staff, en faire un PDF, ou copier une séance dans Mon Coach Assistant.
 argument-hint: "[équipe] [date de la séance]"
 ---
 
@@ -23,7 +23,7 @@ Commande de l'outillage (chemin A) :
 COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN_ROOT}/scripts/coach-rugby.mjs" exporter <seance.yaml> --pdf
 ```
 
-## 0. Séance ou semaine ?
+## 0. Séance, semaine, match ou présence ?
 
 - **Une semaine** (`semaines/<lundi>/semaine.yaml`) : `exporter <semaine.yaml> --pdf`
   produit `exports/fiche-semaine-a4.html`, `exports/fiche-semaine-telephone.html`
@@ -37,6 +37,19 @@ COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN
 
   Au chemin B, remplir `${CLAUDE_PLUGIN_ROOT}/gabarits/fiche-semaine.html`.
   Pour une équipe d'école de rugby, le mot « affûtage » n'apparaît jamais.
+- **Un match** (`matchs/<date>/match.yaml`) : `exporter <match.yaml> --pdf`
+  produit `exports/fiche-match-a4.html`, `exports/fiche-match-telephone.html`
+  et leurs PDF : préparation, composition ou convocation, grille de
+  rotation, sécurité, puis statistiques et débriefing. En codes. Elle
+  rappelle qu'elle ne remplace pas la FDM EDR ni Oval-e.
+- **Une feuille de présence** : `exporter <equipe>/effectif.yaml --pdf`
+  produit `<equipe>/exports/feuille-presence-a4.html` : codes, colonne
+  « Prénom » vide à remplir à la main.
+- **Un tableau** (présences, temps de jeu, progrès) : voir
+  `/coach-rugby:effectif` et la commande `tableau`.
+
+  **Jamais de prénom** dans une fiche ou un tableau, même si le coach le
+  demande : il les ajoute lui-même sur le papier ou dans la colonne prévue.
 - **Une séance** : suivre les étapes ci-dessous.
 
 ## 1. Trouver la séance

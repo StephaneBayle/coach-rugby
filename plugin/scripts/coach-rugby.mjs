@@ -21,7 +21,7 @@ import { dossierSaison } from '../lib/chemins.mjs';
 import { reglesDuJour } from '../lib/categories.mjs';
 import { aujourdhui, ecrireDate, lireDate } from '../lib/dates.mjs';
 import { chargerEquipe, equipes, initialiser, validerChemin } from '../lib/dossier.mjs';
-import { avancement, lirePlanification, seancesAvec, situer, suggestions } from '../lib/etat.mjs';
+import { avancement, lirePlanification, lireSuivi, seancesAvec, situer, suggestions } from '../lib/etat.mjs';
 
 const AIDE = `coach-rugby — outillage du plugin
 
@@ -113,7 +113,7 @@ const commandes = {
       if (saison) {
         const planification = lirePlanification(d);
         r.situation = situer(saison, jour, { cycles: planification.cycles });
-        r.suggestions = suggestions(saison, jour, { derniereSeance, equipe, planification });
+        r.suggestions = suggestions(saison, jour, { derniereSeance, equipe, planification, suivi: lireSuivi(d) });
         r.regles = reglesDuJour({ categories: equipe.categories, pratique: equipe.pratique, date: jour });
       }
       return r;

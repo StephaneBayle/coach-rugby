@@ -55,6 +55,8 @@ Dites simplement : *« Prépare la séance de mercredi de mes M10 »*, ou lancez
 | `/coach-rugby:planifier` | Découper la saison en cycles (thèmes, intensité, affûtage, changements de forme de jeu) |
 | `/coach-rugby:semaine` | Préparer la semaine (séances, jours avant le match, intensités) et sa fiche |
 | `/coach-rugby:seance` | Préparer une séance pour votre groupe |
+| `/coach-rugby:match` | Préparer un match ou un plateau (convocation, composition, temps de jeu équitable, causerie), puis le débriefer ; fiche match |
+| `/coach-rugby:effectif` | Suivre vos joueurs en codes (prénoms gardés sur votre ordinateur) : présences, progrès, feuille de présence, tableaux Excel |
 | `/coach-rugby:exercices` | Trouver, adapter ou créer un exercice |
 | `/coach-rugby:relire` | Faire vérifier une séance (sécurité, règlement, sources, données) |
 | `/coach-rugby:exporter` | Obtenir la fiche à imprimer, la fiche téléphone, le PDF |

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: rotation-plateau-m10
+description: Plateau M10 du samedi 17 octobre 2026, 13 enfants, 4 rencontres de 10 minutes à 5 contre 5 ; rotation équitable du temps de jeu.
+tags: [lot-3, match, temps-de-jeu]
+context:
+  scaffold_script: scaffold.sh

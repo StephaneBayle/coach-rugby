@@ -62,9 +62,13 @@ obligations :
 | `fin-mesocycle` | le cycle en cours (hors bloc d'affûtage) finit dans 7 jours ou moins | bilan du cycle, annonce du suivant |
 | `changement-forme` | la forme de jeu change dans 35 jours ou moins (école de rugby), pour pouvoir préparer avant la trêve | préparer la progression |
 | `reprise-apres-treve` | dans les 7 jours qui suivent la fin de la trêve | remonter l'intensité progressivement |
+| `preparer-match` | match, plateau ou tournoi à J-3 ou moins sans `matchs/<date>/match.yaml` | convocation, composition ou rotation, fiche match (remplace `logistique-plateau`) |
+| `debriefer-match` | match, plateau ou tournoi passé depuis 1 à 7 jours, sans débriefing | statistiques et débriefing (match) ou bilan (plateau), thèmes des prochaines séances |
+| `absences-repetees` | un joueur de l'effectif absent aux 3 dernières dates de `presences.yaml` | prendre des nouvelles, sans demander de motif (codes ; le skill donne les prénoms au coach) |
+| `point-progres` | phase active, dernière observation de `progres.yaml` il y a plus de 6 semaines | refaire un point sur deux ou trois compétences |
 
-Les relances liées aux cycles et aux semaines n'apparaissent que si le
-dossier de l'équipe est lu (commande `statut`).
+Les relances liées aux cycles, aux semaines, à l'effectif et aux matchs
+n'apparaissent que si le dossier de l'équipe est lu (commande `statut`).
 
 Phases actives : `reprise-prepa`, `phase-aller`, `phase-retour`,
 `phases-finales`, `plateaux-automne`, `plateaux-printemps`,

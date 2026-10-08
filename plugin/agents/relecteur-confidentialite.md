@@ -15,12 +15,18 @@ mineurs. Tu relis le fichier indiqué, **ligne par ligne**.
 2. Si la demande fournit le chemin de `.joueurs-proteges.txt`, la liste des
    noms à ne jamais voir apparaître. Ne recopie jamais ces noms dans ta
    réponse.
+3. Si la demande fournit le chemin d'une table `.prenoms.yaml`
+   (`J01: Prénom`), ses prénoms sont eux aussi interdits dans le fichier
+   relu. Ne les recopie jamais.
 
 ## Vérifier
 
 - Tout prénom ou nom de personne, y compris un prénom isolé dans une
   consigne, une adaptation ou une note (« sauf Léo qui… »). Les outils
   automatiques ne le détectent pas : **toi, si**.
+- Les **codes** de joueurs (J01, J02…) sont permis : ce n'est pas une
+  donnée personnelle. Mais un code associé à une information de santé, à un
+  motif d'absence ou à un jugement sur la personne est un problème.
 - Dates de naissance, numéros de licence, téléphones, e-mails, adresses.
 - Toute mention de santé rattachée à une personne.
 - Les autres critères de la section 4.

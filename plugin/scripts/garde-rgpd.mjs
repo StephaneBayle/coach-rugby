@@ -156,8 +156,12 @@ if (outil === 'Bash') {
       texte += `\n${texteEnvoye(git(racine, ['diff']))}`;
     }
     if (sousCommande === 'push') {
-      const amont = git(racine, ['log', '-p', '--format=%x00%B', '@{upstream}..HEAD']);
-      texte += `\n${texteEnvoye(amont || git(racine, ['log', '-p', '--format=%x00%B', '-n', '50']))}`;
+      // Commits absents du serveur : ceux que le push envoie, y compris pour
+      // une branche nouvelle (sans amont). Sans aucune branche distante
+      // connue, les 50 derniers.
+      const nouveaux = git(racine, ['log', '-p', '--format=%x00%B', 'HEAD', '--not', '--remotes']);
+      const distantes = git(racine, ['branch', '-r']).trim();
+      texte += `\n${texteEnvoye(distantes ? nouveaux : git(racine, ['log', '-p', '--format=%x00%B', '-n', '50']))}`;
     }
   }
   // Fichiers passés en corps (gh … --body-file / -F / --notes-file).
