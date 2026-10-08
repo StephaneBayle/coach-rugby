@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { trouverChrome } from '../plugin/lib/chrome.mjs';
+import { imprimerPdf, trouverChrome } from '../plugin/lib/chrome.mjs';
 import { exporterSeance, remplir } from '../plugin/lib/export.mjs';
 import { controlerSeance } from '../plugin/lib/seance.mjs';
 import { lireYaml } from '../plugin/lib/yaml.mjs';
@@ -143,4 +143,25 @@ test("playtests : pas de texte MCA si le club n'a pas dit utiliser Mon Coach Ass
   const config = path.join(path.dirname(f), '..', '..', '..', '.coach-rugby.yaml');
   spawnSync('sh', ['-c', `cat > "${config}"`], { input: readFileSync(config, 'utf8').replace('utilise_mca: true', 'utilise_mca: false') });
   assert.ok(!exporterSeance(f).fichiers.includes('pour-mca.txt'));
+});
+
+test('PDF : un échec passager de Chrome est rattrapé par un second essai', () => {
+  // Faux Chrome : échoue au premier appel, réussit au second.
+  const d = mkdtempSync(path.join(tmpdir(), 'cr-faux-chrome-'));
+  const compteur = path.join(d, 'n');
+  const faux = path.join(d, 'chrome');
+  spawnSync('sh', ['-c', `cat > "${faux}" <<'FIN'
+#!/bin/sh
+n=$(cat "${compteur}" 2>/dev/null || echo 0); n=$((n+1)); echo $n > "${compteur}"
+for a in "$@"; do case "$a" in --print-to-pdf=*) out="\${a#--print-to-pdf=}";; esac; done
+echo "ERROR:cv_display_link_mac.mm CVDisplayLinkCreateWithCGDisplay failed" >&2
+if [ "$n" -lt 2 ]; then exit 1; fi
+printf '%%PDF-1.4' > "$out"
+FIN
+chmod +x "${faux}"`]);
+  const html = path.join(d, 'a.html');
+  spawnSync('sh', ['-c', `echo '<p>x</p>' > "${html}"`]);
+  const r = imprimerPdf(html, path.join(d, 'a.pdf'), faux);
+  assert.equal(r.ok, true);
+  assert.equal(r.essais, 2);
 });
