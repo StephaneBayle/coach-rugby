@@ -71,7 +71,9 @@ quelques lignes :
 - les **règles de jeu du moment** pour la catégorie la plus jeune du groupe :
   forme de jeu, contact maximal, plaquage, mêlée, touche, ruck, avec la
   mention « à vérifier (saison 2026-2027) » si le statut n'est pas `verifie` ;
-- les **relances** : les présenter comme des suggestions.
+- le **cycle en cours** (thème, intensité prévue, jusqu'à quand) s'il existe ;
+- les **relances** : les présenter comme des suggestions, en mettant en avant
+  la plus urgente (une séance à préparer demain passe avant tout).
 
 Si la saison n'est pas cadrée, le dire simplement.
 
@@ -81,9 +83,13 @@ Proposer, avec une liste numérotée, ce qui a du sens maintenant :
 
 1. `/coach-rugby:saison` — organiser la saison (phases, calendrier) : en
    premier si `saison.yaml` manque ;
-2. `/coach-rugby:seance` — préparer la prochaine séance ;
-3. `/coach-rugby:exercices` — trouver ou adapter un exercice ;
-4. `/coach-rugby:relire` puis `/coach-rugby:exporter` — faire relire une
+2. `/coach-rugby:planifier` — découper la saison en cycles (thèmes,
+   intensité, affûtage, changements de forme de jeu) ;
+3. `/coach-rugby:semaine` — préparer la semaine (séances, J-n, intensités)
+   et sa fiche ;
+4. `/coach-rugby:seance` — préparer la prochaine séance ;
+5. `/coach-rugby:exercices` — trouver ou adapter un exercice ;
+6. `/coach-rugby:relire` puis `/coach-rugby:exporter` — faire relire une
    séance, puis obtenir sa fiche imprimable ou téléphone.
 
 Mettre en avant la suggestion la plus utile d'après les relances.

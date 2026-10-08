@@ -69,6 +69,9 @@ test('analyser : pas de faux positif courant', () => {
     'saison 2026-2027, match le 2026-10-18 à 15:00',
     'séance de 75 min pour 14 enfants, 2 éducateurs',
     'ecart de 12 34 56 points',
+    // Faux positif corrigé en 0.2.0 : « …ne le <date> » n'est pas « né le ».
+    'le cycle se termine' + ' le 2026-12-18',
+    'la semaine' + ' le 12/10/2026',
   ]) assert.deepEqual(analyser(t), [], t);
 });
 

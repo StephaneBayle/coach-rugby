@@ -15,7 +15,7 @@ import { dossierSaison } from '../lib/chemins.mjs';
 import { reglesDuJour } from '../lib/categories.mjs';
 import { aujourdhui, ecrireDate, lireDate } from '../lib/dates.mjs';
 import { chargerEquipe, equipes, initialiser, validerChemin } from '../lib/dossier.mjs';
-import { avancement, seancesAvec, situer, suggestions } from '../lib/etat.mjs';
+import { avancement, lirePlanification, seancesAvec, situer, suggestions } from '../lib/etat.mjs';
 
 const AIDE = `coach-rugby — outillage du plugin
 
@@ -91,8 +91,9 @@ const commandes = {
       const derniereSeance = seances.at(-1) || null;
       const r = { id, nom: equipe.nom, categories: equipe.categories, avancement: avancement(d), derniere_seance: derniereSeance };
       if (saison) {
-        r.situation = situer(saison, jour);
-        r.suggestions = suggestions(saison, jour, { derniereSeance });
+        const planification = lirePlanification(d);
+        r.situation = situer(saison, jour, { cycles: planification.cycles });
+        r.suggestions = suggestions(saison, jour, { derniereSeance, equipe, planification });
         r.regles = reglesDuJour({ categories: equipe.categories, pratique: equipe.pratique, date: jour });
       }
       return r;
@@ -105,6 +106,7 @@ const commandes = {
       if (!s) lignes.push('  Saison non cadrée : lancer /coach-rugby:saison.');
       else {
         lignes.push(`  Phase : ${s.phase ? s.phase.id : 'hors saison'}${s.semaine ? ` — semaine ${s.semaine}` : ''}`);
+        if (s.mesocycle) lignes.push(`  Cycle : ${s.mesocycle.id} « ${s.mesocycle.theme} » jusqu'au ${s.mesocycle.fin} (intensité prévue : ${INTENSITES[s.mesocycle.intensite]})`);
         if (s.prochain) lignes.push(`  Prochaine échéance : ${s.prochain.type} le ${s.prochain.date} (J-${s.prochain.j_moins})${s.prochain.adversaire ? ` contre ${s.prochain.adversaire}` : ''}${s.prochain.importance && s.prochain.importance !== 'normale' ? ` [${s.prochain.importance}]` : ''}`);
         const g = r.regles;
         lignes.push(`  Règles du moment : ${g.formes.map((f) => f.libelle).join(' ou ')} — contact max : ${g.contact_max} (${g.statut === 'verifie' ? 'vérifié' : `à vérifier, saison ${g.saison}`})`);

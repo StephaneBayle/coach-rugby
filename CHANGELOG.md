@@ -15,6 +15,17 @@ comment c'est programmé. Format inspiré de
   de l'école de rugby (par exemple le passage des M10 au rugby éducatif à 7
   en janvier). Il propose aussi le plan de chaque semaine : séances, jours
   avant l'échéance, intensité et intention de chaque séance.
+- `/coach-rugby:planifier` et `/coach-rugby:semaine` : ces plans se
+  construisent avec vous, puis la séance du jour reprend l'intention et
+  l'intensité prévues.
+- Relances : semaine à préparer, séance prévue demain à préparer, fin de
+  cycle, changement de forme de jeu à venir (école de rugby), reprise
+  progressive après la trêve.
+
+### Corrigé
+
+- La protection des données bloquait à tort des phrases comme « le cycle se
+  termine le 18/12 », prises pour une date de naissance.
 
 ## [0.1.0] — 2026-10-08
 

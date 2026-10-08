@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: semaine-derby
+description: Semaine du derby (seniors F3, lundi 12 octobre 2026, derby le dimanche 18).
+tags: [lot-2, planification, securite]
+context:
+  scaffold_script: scaffold.sh
