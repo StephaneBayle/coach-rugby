@@ -21,6 +21,9 @@ import { prenomsDuDossier } from '../lib/effectif.mjs';
 import { analyser, decrire, lireNomsProteges } from '../lib/rgpd.mjs';
 
 const MARQUE_DEPOT = 'coach-rugby';
+// Fichiers générés dont le contenu vient de tiers : le lockfile npm reprend
+// les messages des paquets, adresses de leurs auteurs comprises.
+const GENERE = /(^|\/)package-lock\.json$/;
 
 function git(cwd, args) {
   try {
@@ -54,7 +57,7 @@ function scannerDepot(dossier) {
     const interdit = FICHIERS_INTERDITS.find((r) => r.test(f));
     if (interdit) problemes.push(`${f} : fichier interdit (${interdit.raison})`);
     const chemin = path.join(dossier, f);
-    if (!existsSync(chemin) || /\.(png|jpe?g|gif|pdf|zip|ico|woff2?)$/i.test(f) || f.endsWith('package-lock.json')) continue;
+    if (!existsSync(chemin) || /\.(png|jpe?g|gif|pdf|zip|ico|woff2?)$/i.test(f) || GENERE.test(f)) continue;
     const texte = readFileSync(chemin, 'utf8');
     const constats = analyser(texte);
     if (constats.length) problemes.push(`${f} : ${decrire(constats)}`);
@@ -100,12 +103,13 @@ function bloquer(constats, contexte) {
 // donnée du dépôt. Les commits sont séparés par \0 (--format=%x00%B).
 function texteEnvoye(sortie) {
   let dansDiff = false;
+  let ignore = false;
   const garde = [];
   for (const l of sortie.split('\n')) {
     if (l.startsWith('\0')) { dansDiff = false; garde.push(l.slice(1)); continue; }
-    if (l.startsWith('diff --git')) { dansDiff = true; continue; }
+    if (l.startsWith('diff --git')) { dansDiff = true; ignore = GENERE.test(l.split(' b/').pop()); continue; }
     if (!dansDiff) { garde.push(l); continue; }
-    if (l.startsWith('+') && !l.startsWith('+++')) garde.push(l.slice(1));
+    if (!ignore && l.startsWith('+') && !l.startsWith('+++')) garde.push(l.slice(1));
   }
   return garde.join('\n');
 }

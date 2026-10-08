@@ -10,6 +10,8 @@
 build/
 plugin/exemples/*/*/seances/*/exports/
 plugin/exemples/*/*/semaines/*/exports/
+plugin/exemples/*/*/matchs/*/exports/
+plugin/exemples/*/*/exports/
 plugin/evals/results/
 
 # Dépendances et système

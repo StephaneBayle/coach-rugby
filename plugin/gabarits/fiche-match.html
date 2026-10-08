@@ -1,0 +1,82 @@
+<!doctype html>
+<!-- Gabarit de fiche match coach-rugby (CC BY-SA 4.0). Même principe que
+     fiche-seance.html : double accolade = texte, triple accolade = HTML
+     prêt, commentaires « @repeter:liste » … « @fin:liste » pour les listes.
+     Deux formats : format-a4 et format-telephone. Fichier autonome, en
+     codes : aucun prénom. -->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{titre}}</title>
+<style>
+@page { {{{page}}} }
+:root { --encre: #111; --gris: #555; --fond: #f2f2f2; --trait: #bbb; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--encre); background: #fff; font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.35; }
+h1 { font-size: 1.35em; margin: 0 0 .2em; }
+h2 { font-size: 1.05em; margin: 1em 0 .4em; padding-bottom: .15em; border-bottom: 2px solid var(--encre); }
+h3 { font-size: .95em; margin: .6em 0 .2em; }
+ul { margin: .2em 0 .4em; padding-left: 1.2em; }
+.entete { display: grid; gap: .1em .8em; grid-template-columns: repeat(3, auto); font-size: .9em; color: var(--gris); }
+.entete b { color: var(--encre); }
+.officiel { background: var(--fond); border-left: 4px solid var(--encre); padding: .4em .6em; font-size: .85em; }
+.projet { font-size: 1.05em; font-weight: 600; }
+.causerie li { font-weight: 600; margin: .2em 0; }
+table { width: 100%; border-collapse: collapse; font-size: .88em; }
+th, td { border-bottom: 1px solid var(--trait); padding: .3em .3em; text-align: left; vertical-align: top; }
+td.c, th.c { text-align: center; font-variant-numeric: tabular-nums; }
+td.code { font-weight: 700; white-space: nowrap; }
+.rotation td.c { font-size: 1.1em; }
+.rotation th.c { font-size: .8em; }
+.colonnes { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.2em; }
+.vigilance li { margin: .15em 0; }
+.notes { font-size: .85em; color: var(--gris); }
+footer { margin-top: 1em; font-size: .75em; color: var(--gris); border-top: 1px solid var(--trait); padding-top: .3em; }
+.format-a4 { font-size: 10.5pt; }
+.format-a4 main { max-width: 186mm; margin: 0 auto; }
+.format-telephone { font-size: 18px; padding: 12px 14px; }
+.format-telephone .entete, .format-telephone .colonnes { grid-template-columns: 1fr; }
+.format-telephone .masquer-tel { display: none; }
+.format-telephone table { font-size: .78em; table-layout: fixed; }
+.format-telephone th, .format-telephone td { padding: .3em .15em; overflow-wrap: anywhere; }
+.format-telephone .rotation { font-size: .7em; }
+@media screen and (min-width: 700px) { .format-a4 { padding: 12mm; background: #e9e9e9; } .format-a4 main { background: #fff; padding: 10mm; box-shadow: 0 1px 4px rgba(0,0,0,.2); } }
+</style>
+</head>
+<body class="format-{{format}}">
+<main>
+<header>
+  <h1>{{titre}}</h1>
+  <div class="entete">
+    <span><b>Date</b> {{date}}</span>
+    <span><b>Lieu</b> {{lieu}}</span>
+    <span><b>Catégorie</b> {{categorie}}</span>
+    <span><b>Forme de jeu</b> {{forme}}</span>
+    <span><b>Sur le terrain</b> {{sur_le_terrain}}</span>
+    <span><b>Durée</b> {{duree}}</span>
+  </div>
+</header>
+
+<p class="officiel">Fiche de préparation du coach : elle ne remplace pas {{officiel}}, seule feuille de match officielle.</p>
+
+{{{rencontres}}}
+
+{{{preparation}}}
+
+{{{composition}}}
+
+{{{rotation}}}
+
+{{{vigilance}}}
+
+{{{apres}}}
+
+{{{hypotheses}}}
+{{{sources}}}
+
+<footer>Préparé avec coach-rugby — sous licence CC BY-SA 4.0. Joueurs désignés par leur code : aucune donnée personnelle sur cette fiche.</footer>
+</main>
+</body>
+</html>

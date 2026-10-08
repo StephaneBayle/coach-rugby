@@ -108,3 +108,31 @@ plugin ; `~/Rugby-Saisons`.
 
   C'est un repère d'équité (hypothèse pédagogique), pas une règle de la
   FFR.
+
+## `exporter` un match ou une feuille de présence
+
+- **A** : `coach-rugby.mjs exporter <equipe>/matchs/<date>/match.yaml [--pdf]`
+  produit `fiche-match-a4.html` et `fiche-match-telephone.html` ;
+  `coach-rugby.mjs exporter <equipe>/effectif.yaml [--pdf]` produit
+  `exports/feuille-presence-a4.html`.
+- **B** : écrire la fiche à la main, en codes, à partir de
+  `gabarits/fiche-match.html` : préparation, composition (n°, code,
+  poste), grille de rotation (une ligne par code, une colonne par période,
+  ● sur le terrain), sécurité, après le match. Toujours rappeler que la
+  feuille officielle est la FDM EDR (école de rugby) ou Oval-e. Pour la
+  feuille de présence : un tableau « Code | Prénom (vide) | 8 dates ».
+
+## `tableau` — présences, temps de jeu, progrès
+
+- **A** : `coach-rugby.mjs tableau presences|temps-de-jeu|progres <equipe> [--match AAAA-MM-JJ] [--format xlsx|csv]`.
+  Le CSV est toujours produit ; l'Excel (`.xlsx`) aussi, sauf avec
+  `--format csv` ou si l'outillage manque.
+- **B** : écrire un CSV (séparateur « ; », une ligne d'en-tête) :
+  - présences : `Code;Prénom (à remplir à la main);<date 1>;…;Présences;Taux %`,
+    avec `P` (présent), `E` (excusé) ou rien (absent) ;
+  - temps de jeu : `Code;Prénom (à remplir à la main);Minutes;% du temps`,
+    d'après les périodes de `match.yaml` ;
+  - progrès : `Code;Prénom (à remplir à la main);<compétence>;…`, avec la
+    dernière observation (à travailler, en cours, acquis).
+
+  La colonne « Prénom » reste **vide** : jamais de prénom dans un fichier.

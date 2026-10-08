@@ -4,10 +4,11 @@
 //
 // Codes de sortie : 0 succès ; 1 erreurs dans les données ou la commande ;
 // 3 outillage indisponible (dépendance absente) → suivre le chemin B.
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
-import { exporterSeance, exporterSemaine } from '../lib/export.mjs';
+import { exporterFeuillePresence, exporterMatch, exporterSeance, exporterSemaine } from '../lib/export.mjs';
+import { ecrireCsv, ecrireXlsx, tableauPresences, tableauProgres, tableauTempsDeJeu } from '../lib/tableur.mjs';
 import { absencesRepetees, lirePrenoms, prochainCode, synchroniserProteges, tauxDePresence } from '../lib/effectif.mjs';
 import { dureeTotale } from '../lib/match.mjs';
 import { lundiDe, proposerCycles, proposerSemaine } from '../lib/planification.mjs';
@@ -15,6 +16,7 @@ import { bilanEquite, planifierRotation } from '../lib/temps-de-jeu.mjs';
 import { chargerCategories } from '../lib/categories.mjs';
 import { genererSvg } from '../lib/terrain.mjs';
 import { ecrireYaml, lireYaml } from '../lib/yaml.mjs';
+import { RACINE_PLUGIN } from '../lib/deps.mjs';
 import { dossierSaison } from '../lib/chemins.mjs';
 import { reglesDuJour } from '../lib/categories.mjs';
 import { aujourdhui, ecrireDate, lireDate } from '../lib/dates.mjs';
@@ -56,9 +58,13 @@ Usage : node coach-rugby.mjs <commande> [options]
   rotation <match.yaml> [--periode N] [--ecrire]
         Rotation équitable du temps de jeu (périodes de N minutes, 5 par
         défaut) entre les convoqués ; --ecrire l'enregistre dans match.yaml.
-  exporter <seance.yaml|semaine.yaml> [--pdf] [--formats a4,telephone]
+  exporter <seance.yaml|semaine.yaml|match.yaml|effectif.yaml> [--pdf] [--formats a4,telephone]
         Fiches HTML (A4, téléphone) et, avec --pdf, PDF via Chrome. Pour une
-        séance : schémas SVG et texte pour Mon Coach Assistant (clubs).
+        séance : schémas SVG et texte pour Mon Coach Assistant (clubs). Pour
+        effectif.yaml : feuille de présence à imprimer (codes, prénom vide).
+  tableau presences|temps-de-jeu|progres <equipe> [--match AAAA-MM-JJ] [--format xlsx|csv]
+        Tableau en codes (jamais de prénom) dans <equipe>/exports/. Le CSV
+        est toujours produit ; l'Excel (xlsx, par défaut) en plus si possible.
 
 Dossier saison : ${dossierSaison()}
 (variable COACH_RUGBY_DOSSIER ; date du jour : COACH_RUGBY_AUJOURDHUI)`;
@@ -181,15 +187,60 @@ commandes['index-bibliotheque'] = () => {
 
 commandes.exporter = (o) => {
   const fichier = o._[0];
-  if (!fichier) sortir(1, 'Usage : exporter <seance.yaml> [--pdf] [--formats a4,telephone]');
+  if (!fichier) sortir(1, 'Usage : exporter <seance.yaml|semaine.yaml|match.yaml|effectif.yaml> [--pdf] [--formats a4,telephone]');
   const erreurs = validerChemin(path.resolve(fichier)).flatMap((r) => r.erreurs);
-  if (erreurs.length) sortir(1, `Séance invalide, corriger avant d'exporter :\n${erreurs.map((e) => `  - ${e}`).join('\n')}`);
+  const base = path.basename(fichier);
+  const quoi = { 'semaine.yaml': 'Semaine', 'match.yaml': 'Match', 'effectif.yaml': 'Effectif' }[base] || 'Séance';
+  if (erreurs.length) sortir(1, `${quoi} invalide, corriger avant d'exporter :\n${erreurs.map((e) => `  - ${e}`).join('\n')}`);
   const formats = typeof o.formats === 'string' ? o.formats.split(',') : ['a4', 'telephone'];
-  const exporter = path.basename(fichier) === 'semaine.yaml' ? exporterSemaine : exporterSeance;
-  const r = exporter(path.resolve(fichier), { pdf: Boolean(o.pdf), formats });
+  const r = base === 'effectif.yaml'
+    ? exporterFeuillePresence(path.dirname(path.resolve(fichier)), { pdf: Boolean(o.pdf) })
+    : ({ 'semaine.yaml': exporterSemaine, 'match.yaml': exporterMatch }[base] || exporterSeance)(path.resolve(fichier), { pdf: Boolean(o.pdf), formats });
   const lignes = [`Exports dans ${r.dossier} :`, ...r.fichiers.map((f) => `  - ${f}`)];
   if (r.pdf.demande && !r.pdf.ok) lignes.push(`PDF non produit : ${r.pdf.raison}`);
   sortir(0, lignes.join('\n'));
+};
+
+commandes.tableau = async (o) => {
+  const [quoi, id] = o._;
+  const usage = 'Usage : tableau presences|temps-de-jeu|progres <equipe> [--match AAAA-MM-JJ] [--format xlsx|csv]';
+  if (!['presences', 'temps-de-jeu', 'progres'].includes(quoi)) sortir(1, usage);
+  const { d, effectif } = chargerEffectif(id);
+  const lire = (f) => {
+    if (!existsSync(path.join(d, f))) sortir(1, `${f} introuvable dans ${d}.`);
+    return lireYaml(path.join(d, f));
+  };
+  let feuilles;
+  let nom = quoi;
+  if (quoi === 'presences') feuilles = [tableauPresences(effectif, lire('presences.yaml'))];
+  else if (quoi === 'progres') feuilles = [tableauProgres(effectif, lire('progres.yaml'), lireYaml(path.join(RACINE_PLUGIN, 'references', 'competences.yaml')))];
+  else {
+    const dates = existsSync(path.join(d, 'matchs')) ? readdirSync(path.join(d, 'matchs')).filter((x) => existsSync(path.join(d, 'matchs', x, 'match.yaml'))).sort() : [];
+    const date = typeof o.match === 'string' ? o.match : dates.at(-1);
+    if (!date) sortir(1, 'Aucun match dans matchs/.');
+    feuilles = tableauTempsDeJeu(lire(path.join('matchs', date, 'match.yaml')));
+    if (!feuilles[0].lignes.length) sortir(1, `Match du ${date} : aucune rotation (temps_de_jeu) enregistrée.`);
+    nom = `temps-de-jeu-${date}`;
+  }
+  const dossier = path.join(d, 'exports');
+  mkdirSync(dossier, { recursive: true });
+  const fichiers = [];
+  feuilles.forEach((f, i) => {
+    const n = `${nom}${i ? `-${f.nom.toLowerCase().replace(/\s+/g, '-')}` : ''}.csv`;
+    ecrireCsv(path.join(dossier, n), f);
+    fichiers.push(n);
+  });
+  let note = null;
+  if (o.format !== 'csv') {
+    try {
+      await ecrireXlsx(path.join(dossier, `${nom}.xlsx`), feuilles);
+      fichiers.push(`${nom}.xlsx`);
+    } catch (e) {
+      if (e.code !== 'DEPENDANCE_ABSENTE') throw e;
+      note = 'Excel non produit (outillage indisponible) : ouvrir le CSV dans Excel, LibreOffice ou Numbers.';
+    }
+  }
+  sortir(0, [`Tableau ${quoi} (en codes) dans ${dossier} :`, ...fichiers.map((f) => `  - ${f}`), note].filter(Boolean).join('\n'));
 };
 
 const INTENSITES = { recuperation: 'récupération', legere: 'légère', moyenne: 'moyenne', forte: 'forte', affutage: 'affûtage' };
@@ -333,7 +384,7 @@ const [nom, ...reste] = process.argv.slice(2);
 if (!nom || nom === 'aide' || nom === '--help' || nom === '-h') sortir(0, AIDE);
 if (!commandes[nom]) sortir(1, `Commande inconnue : ${nom}\n\n${AIDE}`);
 try {
-  commandes[nom](options(reste));
+  await commandes[nom](options(reste));
 } catch (e) {
   if (e.code === 'DEPENDANCE_ABSENTE') sortir(3, e.message);
   sortir(1, `Erreur : ${e.message}`);
