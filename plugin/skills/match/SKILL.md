@@ -25,9 +25,9 @@ Commande de l'outillage (chemin A) :
 COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN_ROOT}/scripts/coach-rugby.mjs" <commande>
 ```
 
-**À dire une fois, en une phrase** : la fiche du plugin est un outil du
-coach ; la feuille de match officielle reste la **FDM EDR** à l'école de
-rugby, **Oval-e** ailleurs. Ne jamais saisir quoi que ce soit dans ces outils
+**À dire une fois, en une phrase** : la fiche du plugin est un aide-mémoire
+du coach ; la feuille de match officielle reste la **feuille de match de
+l'école de rugby (FDM EDR)**, remplie par le club, ou **Oval-e** ailleurs. Ne jamais saisir quoi que ce soit dans ces outils
 à la place du coach.
 
 ## 1. Situer la rencontre
@@ -35,7 +35,10 @@ rugby, **Oval-e** ailleurs. Ne jamais saisir quoi que ce soit dans ces outils
 1. Prendre l'équipe et la date ($ARGUMENTS), sinon la prochaine échéance de
    `statut <equipe>`.
 2. Lancer `regles <catégories> --pratique <pratique> --date <date>` : forme
-   de jeu, nombre de joueurs sur le terrain, mêlée permise ou non.
+   de jeu, nombre de joueurs sur le terrain, mêlée permise ou non. **Dès la
+   première fois** qu'une règle est citée au coach, ajouter « à vérifier
+   (saison 2026-2027) » et sa source en quelques mots (« Cahier des écoles
+   de rugby 2026-2027 »).
 3. Le fichier est `<equipe>/matchs/<AAAA-MM-JJ>/match.yaml`. Le reprendre
    s'il existe.
 4. L'adversaire est un **club** (« RC Voisinville »), jamais une personne.
@@ -46,8 +49,12 @@ rugby, **Oval-e** ailleurs. Ne jamais saisir quoi que ce soit dans ces outils
    récentes. Montrer au coach les **prénoms** de `.prenoms.yaml` à côté des
    codes, dans la conversation seulement.
 2. Le coach répond en prénoms : les traduire en codes.
-3. Sans effectif en codes, travailler en nombres (« 13 enfants ») et
-   proposer `/coach-rugby:effectif` plus tard.
+3. Sans effectif en codes :
+   - le coach donne des **prénoms** : appliquer la section 1 de
+     `/coach-rugby:effectif` (un seul accord, « Je note vos N joueurs pour la
+     saison, d'accord ? »), puis revenir ici ;
+   - il donne un **nombre** : travailler en nombres (« 13 enfants ») et
+     proposer `/coach-rugby:effectif` plus tard.
 4. Écrire `convoques` (codes).
 
 ## 3. Composer et faire tourner
@@ -58,13 +65,24 @@ rugby, **Oval-e** ailleurs. Ne jamais saisir quoi que ce soit dans ces outils
   auprès du comité).
 - **École de rugby (plateau, tournoi)** : pas de titulaires. Lancer
   `rotation <match.yaml> --ecrire` (périodes de 5 minutes, ou `--periode N`).
-  Chacun joue autant que possible, personne ne reste deux fois de suite sur
-  le banc. Présenter la grille au coach avec les prénoms, et dire que c'est
-  un **repère d'équité (hypothèse pédagogique)** : aucune règle de temps de
-  jeu minimal n'a été trouvée dans le Cahier des écoles de rugby.
+  Chacun joue autant que possible, à une période près. Reprendre **telle
+  quelle** l'attente la plus longue donnée par la commande (« personne
+  n'attend plus de 10 minutes d'affilée ») ; **ne jamais promettre** que
+  personne n'attend deux fois de suite : au-delà de deux fois plus de
+  joueurs que de places, c'est impossible. Dire que l'équité est un
+  **repère (hypothèse pédagogique)** : aucune règle de temps de jeu minimal
+  n'a été trouvée dans le Cahier des écoles de rugby.
+- **Présenter la grille en prénoms**, dans la conversation seulement : un
+  tableau court (une ligne par match ou par moitié), facile à garder en
+  capture d'écran sur le téléphone. Ce n'est jamais enregistré.
 - Trop d'enfants pour une seule équipe (le moins servi joue moins de la
   moitié du temps) : proposer deux équipes si le plateau le permet.
 - Au chemin B, appliquer la méthode `rotation` de `outillage.md`.
+
+**Réponse courte**, surtout à l'école de rugby : d'abord le tableau, puis la
+sécurité en une ligne, puis la fiche en une ligne. Le reste (feuille
+officielle, piste de deux équipes, équité) en une ligne chacun au plus, ou au
+message suivant.
 
 ## 4. Préparer
 
@@ -88,21 +106,34 @@ fois ?**
 3. Proposer en une ligne la **fiche match** :
    `exporter <match.yaml> --pdf` (A4 et téléphone), et, pour l'école de
    rugby, le tableau du temps de jeu : `tableau temps-de-jeu <equipe> --match <date>`.
+4. **Remettre la fiche sans jamais donner d'emplacement** (ni « dossier »,
+   ni chemin) : l'afficher ou l'ouvrir, et dire « appuyez sur Imprimer ».
+   La fiche est en codes, avec une colonne « Prénom » vide dans la grille de
+   rotation, à remplir au stylo si le coach le souhaite.
+5. Un joueur à écarter (indisponible, avis médical attendu) : **proposer**
+   un remplaçant, ne pas l'imposer.
 
 ## 6. Après le match
 
-1. Demander le score et, si le coach le veut, quelques **statistiques
-   simples** (essais, plaquages réussis et manqués, ballons perdus,
-   pénalités concédées) dans `stats.equipe` et `stats.adversaire`, en
-   nombres entiers. Statistiques par joueur seulement en codes
-   (`stats.par_code`).
+1. Noter le **score** (`score: { nous, adversaire }`) et, si le coach le
+   veut, quelques **statistiques simples** (essais, plaquages réussis et
+   manqués, ballons perdus, pénalités concédées, touches gagnées et
+   perdues) dans `stats.equipe` et `stats.adversaire`, en nombres entiers.
+   Un pourcentage (« touche à 80 % ») va dans le débriefing. Préférer les
+   totaux de l'équipe ; une statistique par joueur, seulement en codes
+   (`stats.par_code`) et seulement si le coach la demande.
 2. `debriefing` :
    - `reussites` et `a_retravailler`, deux ou trois points chacun, sur le
      jeu de l'équipe, **jamais un jugement sur un joueur** ;
-   - `prochaines_seances` : les thèmes à reprendre.
+   - `prochaines_seances` : les thèmes à reprendre, **sans jour** (c'est la
+     semaine qui les place : le lendemain d'un match est souvent une
+     récupération).
+   - un jugement du coach sur un joueur (« il a été nul ») : garder le fait
+     chiffré s'il y en a un, jamais le jugement, et le dire en une phrase.
 3. Blessure ou choc évoqué : ne pas l'écrire dans le fichier, aucun avis
-   médical, rappel du protocole commotion et renvoi vers un professionnel de
-   santé.
+   médical ni critère de reprise (phrase type de `regles-d-usage.md`,
+   section 3), rappel du protocole commotion et renvoi vers un
+   professionnel de santé.
 4. Valider, ajouter une ligne datée dans `journal.md` (sans prénom).
 5. Proposer en une ligne : préparer la semaine (`/coach-rugby:semaine`) ou la
    prochaine séance (`/coach-rugby:seance`) à partir des thèmes du

@@ -52,6 +52,10 @@ négocient pas, même si le coach le demande.
   définitive** du terrain, puis renvoi vers un médecin et vers le protocole de
   la FFR (`protocole-commotion.md`).
 - Douleur, blessure, malaise : renvoyer vers un professionnel de santé.
+- « Il pourra jouer ? » : ne donner **aucun critère de reprise** (pas même
+  « s'il a encore mal… »). Phrase type : « Je ne peux pas vous dire s'il
+  pourra jouer : la reprise se décide avec un professionnel de santé (et les
+  parents pour un mineur). Dites-moi s'il joue, et j'adapte. »
 - Maladie chronique d'un joueur (asthme, allergie, épilepsie, diabète…) :
   demander aux parents la **consigne écrite du médecin** et le traitement à
   garder près du terrain. **En cas de détresse** (gêne respiratoire qui ne
@@ -75,6 +79,9 @@ négocient pas, même si le coach le demande.
   blessure, de maladie ni de santé.
 - Les progrès s'observent par compétence, en trois niveaux (à travailler, en
   cours, acquis), **sans commentaire sur la personne**.
+- Si le coach donne un **nom de famille**, ne pas le répéter dans la
+  réponse, même pour dire qu'on ne l'a pas gardé : « Je garde seulement les
+  prénoms, tout reste sur votre ordinateur. »
 - Si le coach cite un nom (dans un message, un sondage collé, une capture) :
   ne pas le recopier dans les fichiers, et **l'ajouter** à
   `<dossier saison>/.joueurs-proteges.txt` (une ligne par nom), en le lui

@@ -42,7 +42,13 @@ comment c'est programmé. Format inspiré de
   absent trois fois de suite, et de refaire le point sur les progrès toutes
   les six semaines.
 - La séance s'appuie sur le dernier débriefing de match et sur les
-  compétences à travailler.
+  compétences à travailler ; la semaine reprend les thèmes du débriefing.
+- Le temps de jeu annonce l'attente la plus longue sur le banc, et ce ne
+  sont plus toujours les mêmes enfants qui jouent la période en plus d'un
+  plateau à l'autre.
+- Un joueur placé en première ligne hors de ses postes habituels est
+  signalé (sécurité en mêlée).
+- Le score se note à part et s'affiche sur la fiche match.
 
 ### Corrigé
 
@@ -50,6 +56,7 @@ comment c'est programmé. Format inspiré de
   `package-lock.json` (adresses d'auteurs de paquets npm), comme le
   contrôle du dépôt en CI. Le premier envoi d'une nouvelle branche ne
   contrôle plus que les modifications qui ne sont pas encore en ligne.
+- Plus de rappel « affûtage » le jour même du match.
 - Les heures sont écrites entre guillemets dans les fichiers (« 20:00 »).
 - Export PDF : un échec passager de Chrome (constaté sur macOS) est rattrapé
   par un second essai, et les messages techniques sans conséquence ne sont

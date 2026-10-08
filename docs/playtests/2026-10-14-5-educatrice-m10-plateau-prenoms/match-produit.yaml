@@ -1,0 +1,104 @@
+# EXEMPLE FICTIF — produit pendant le playtest 5 (codes seulement).
+# Match — en codes, aucun nom ici.
+equipe: m10
+date: 2026-10-17
+type: plateau
+domicile: true
+rencontres:
+  - duree_min: 10
+  - duree_min: 10
+  - duree_min: 10
+duree_min: 30
+regles:
+  categorie: m10
+  formes:
+    - jeu-au-contact
+  sur_le_terrain: 5
+  statut: a-verifier
+  source: ffr-cahier-edr-2026-2027
+  saison: 2026-2027
+preparation:
+  projet_de_jeu: Avancer et soutenir le porteur
+  causerie:
+    - On joue pour s'amuser et progresser
+    - On avance ensemble
+    - On respecte l'arbitre et les adversaires
+convoques:
+  - J01
+  - J02
+  - J04
+  - J05
+  - J06
+  - J07
+  - J08
+  - J09
+  - J10
+  - J11
+  - J12
+  - J13
+securite:
+  - Protège-dents fortement recommandé
+  - "Choc à la tête : sortie immédiate et définitive, prévenir les parents, avis médical"
+  - Gourdes et pauses entre les rencontres
+hypotheses:
+  - "Rotation équitable : repère d'équité, aucune règle de temps de jeu trouvée dans le Cahier EDR"
+sources:
+  - ffr-cahier-edr-2026-2027
+temps_de_jeu:
+  cible: Chaque enfant joue au moins la moitié du temps ; écart minimal entre enfants
+  duree_periode_min: 5
+  periodes:
+    - debut_min: 0
+      fin_min: 5
+      rencontre: 1
+      sur_le_terrain:
+        - J01
+        - J02
+        - J04
+        - J05
+        - J06
+    - debut_min: 5
+      fin_min: 10
+      rencontre: 1
+      sur_le_terrain:
+        - J07
+        - J08
+        - J09
+        - J10
+        - J11
+    - debut_min: 10
+      fin_min: 15
+      rencontre: 2
+      sur_le_terrain:
+        - J01
+        - J02
+        - J04
+        - J12
+        - J13
+    - debut_min: 15
+      fin_min: 20
+      rencontre: 2
+      sur_le_terrain:
+        - J05
+        - J06
+        - J07
+        - J08
+        - J09
+    - debut_min: 20
+      fin_min: 25
+      rencontre: 3
+      sur_le_terrain:
+        - J01
+        - J10
+        - J11
+        - J12
+        - J13
+    - debut_min: 25
+      fin_min: 30
+      rencontre: 3
+      sur_le_terrain:
+        - J02
+        - J04
+        - J05
+        - J06
+        - J07

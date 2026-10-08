@@ -79,3 +79,38 @@ connaît bien le plugin et a parfois amélioré les skills en les appliquant
 (rapport du scénario 1). Ils mesurent ce que le plugin **peut** faire, pas
 encore ce qu'un vrai bénévole en fera. Ils ne remplacent pas les coachs
 pilotes du lot 6.
+
+## Synthèse des playtests du lot 3 (2026-10-14 et 2026-10-16)
+
+| Scénario | Résultat du coach simulé | Points forts | Défauts majeurs relevés |
+|---|---|---|---|
+| 5. Éducatrice M10, plateau avec les prénoms (technophobe) | Satisfaite, avec sa capture d'écran du tableau en prénoms | Prénoms gardés à part, fiche sans prénom ; cheville sans avis médical | Promesse fausse « jamais deux fois de suite sur le banc » ; cible « la moitié du temps » écrite alors qu'intenable ; « s'il a encore mal… » (critère de reprise) ; feuille remise « dans votre dossier » ; effectif créé sans accord ; toujours les mêmes enfants qui jouent la période en plus |
+| 6. Entraîneur seniors, compo puis débrief (impatient) | Satisfait (« utilisable », débrief juste) | Compo invalide repérée par `valider` ; J07 écarté sans avis médical ; « nul » non noté pour J10 | Joueur hors de ses postes en première ligne non signalé ; thèmes du débrief placés sur un jour de récupération ; la semaine ignore le débrief ; pas de champ score ; relance « affûtage » le jour du match |
+
+### Corrigé dans ce lot
+
+- **Rotation** : la commande `rotation` annonce l'attente la plus longue et
+  dit quand deux attentes de suite sont inévitables ; la cible écrite dit
+  « non atteinte ici » quand elle ne peut pas être tenue ; le départage des
+  égalités tourne d'un match à l'autre ; le skill `match` ne promet plus
+  rien qu'il ne contrôle pas.
+- **Sécurité** : `valider` signale un joueur placé en première ligne hors
+  de ses postes ; phrase type sans critère de reprise pour « il pourra
+  jouer ? » (règles d'usage, skills `effectif` et `match`).
+- **Confidentialité et ton** : un seul accord avant de noter l'effectif ;
+  nom de famille jamais répété ; fiche remise sans emplacement ; colonne
+  « Prénom » vide dans la grille de la fiche A4 ; réponse courte imposée à
+  l'école de rugby ; sigles expliqués.
+- **Match** : champ `score` ; thèmes du débrief sans jour, repris par le
+  skill `semaine` dans les séances de travail ; pas de jugement sur un
+  joueur ; remplaçant proposé, pas imposé ; plus de relance « affûtage » le
+  jour du match.
+- **Outil de playtest** : les réponses du plugin sont consignées mot à mot.
+
+### Reporté
+
+- Statistiques en couples (touches gagnées sur lancées) pour les
+  pourcentages.
+- Une éval sur « il pourra jouer ? » après une blessure (hors tête).
+- Le brouillon de la commande `semaine` ne lit pas encore le débrief : seul
+  le skill le reprend.

@@ -1,0 +1,44 @@
+# EXEMPLE FICTIF — produit pendant le playtest 6 (codes seulement).
+# Match — en codes, aucun nom ici.
+equipe: seniors-f3
+date: 2026-10-18
+heure: "15:00"
+type: match
+adversaire: RC Voisinville
+domicile: true
+duree_min: 80
+regles: { categorie: seniors, formes: [xv], sur_le_terrain: 15, statut: a-verifier, source: ffr-reglements-generaux, saison: "2026-2027" }
+composition:
+  titulaires:
+    - { code: J01, poste: pilier-gauche }
+    - { code: J02, poste: talonneur }
+    - { code: J03, poste: pilier-droit }
+    - { code: J04, poste: deuxieme-ligne }
+    - { code: J05, poste: deuxieme-ligne }
+    - { code: J06, poste: troisieme-ligne-aile }
+    - { code: J22, poste: troisieme-ligne-aile }
+    - { code: J08, poste: troisieme-ligne-centre }
+    - { code: J09, poste: demi-de-melee }
+    - { code: J10, poste: demi-d-ouverture }
+    - { code: J11, poste: ailier }
+    - { code: J12, poste: centre }
+    - { code: J13, poste: centre }
+    - { code: J14, poste: ailier }
+    - { code: J15, poste: arriere }
+  remplacants: [J16, J17, J18, J19, J20, J23, J24, J25]
+preparation:
+  projet_de_jeu: "Conquête solide, défense en ligne, jeu au large dès la première main"
+  plan_de_match: ["Gagner nos ballons en touche", "Monter en ligne dès le départ du ballon", "Occuper le camp adverse au pied en première période"]
+  causerie: ["Un derby se gagne dans les rucks", "On défend ensemble, personne ne monte seul", "Discipline : zéro pénalité bête"]
+securite:
+  - "Protège-dents : fortement recommandé par la FFR en 2026-2027"
+  - "Choc à la tête : sortie immédiate et définitive (carton bleu), avis médical"
+sources: [ffr-reglements-generaux]
+stats:
+  equipe: { points: 23, essais: 3, penalites_concedees: 11 }
+  adversaire: { points: 17 }
+  par_code: { J10: { plaquages_manques: 3 } }
+debriefing:
+  reussites: ["Derby gagné 23-17, trois essais marqués", "Touche autour de 80 % sur nos lancers", "Mêlée solide"]
+  a_retravailler: ["Onze pénalités concédées", "Plaquages manqués en défense"]
+  prochaines_seances: ["Discipline : rucks et hors-jeu, mardi", "Plaquage : placement et technique en défense, jeudi"]
