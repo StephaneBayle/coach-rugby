@@ -1,7 +1,7 @@
 ---
 name: exporter
-description: Produit les fiches d'une séance de rugby - fiche imprimable A4, fiche lisible sur téléphone au bord du terrain, schémas de terrain SVG, PDF si possible, et texte à coller dans Mon Coach Assistant de la FFR.
-when_to_use: Quand le coach veut imprimer sa séance, l'avoir sur son téléphone, l'envoyer à son staff, en faire un PDF, ou la copier dans Mon Coach Assistant.
+description: Produit les fiches d'une séance ou d'une semaine de rugby - fiche imprimable A4, fiche lisible sur téléphone au bord du terrain, schémas de terrain SVG, PDF si possible, et texte à coller dans Mon Coach Assistant de la FFR (séances).
+when_to_use: Quand le coach veut imprimer sa séance ou le programme de sa semaine, l'avoir sur son téléphone, l'envoyer à son staff, en faire un PDF, ou copier une séance dans Mon Coach Assistant.
 argument-hint: "[équipe] [date de la séance]"
 ---
 
@@ -22,6 +22,22 @@ Commande de l'outillage (chemin A) :
 ```bash
 COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN_ROOT}/scripts/coach-rugby.mjs" exporter <seance.yaml> --pdf
 ```
+
+## 0. Séance ou semaine ?
+
+- **Une semaine** (`semaines/<lundi>/semaine.yaml`) : `exporter <semaine.yaml> --pdf`
+  produit `exports/fiche-semaine-a4.html`, `exports/fiche-semaine-telephone.html`
+  et leurs PDF. La fiche contient :
+  - la frise des 7 jours (J-n, intensité prévue en texte et en pictogramme,
+    intention) ;
+  - les échéances ;
+  - la vigilance ;
+  - les cycles autour de la semaine ;
+  - les règles du moment.
+
+  Au chemin B, remplir `${CLAUDE_PLUGIN_ROOT}/gabarits/fiche-semaine.html`.
+  Pour une équipe d'école de rugby, le mot « affûtage » n'apparaît jamais.
+- **Une séance** : suivre les étapes ci-dessous.
 
 ## 1. Trouver la séance
 

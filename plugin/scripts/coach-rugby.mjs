@@ -7,7 +7,7 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
-import { exporterSeance } from '../lib/export.mjs';
+import { exporterSeance, exporterSemaine } from '../lib/export.mjs';
 import { lundiDe, proposerCycles, proposerSemaine } from '../lib/planification.mjs';
 import { genererSvg } from '../lib/terrain.mjs';
 import { ecrireYaml, lireYaml } from '../lib/yaml.mjs';
@@ -42,9 +42,9 @@ Usage : node coach-rugby.mjs <commande> [options]
   semaine <equipe> [--date AAAA-MM-JJ] [--ecrire] [--json]
         Brouillon du plan de la semaine qui contient la date ; --ecrire crée
         semaines/<lundi>/semaine.yaml s'il n'existe pas encore.
-  exporter <seance.yaml> [--pdf] [--formats a4,telephone]
-        Fiches HTML (A4, téléphone), schémas SVG, texte pour Mon Coach
-        Assistant (clubs) et, avec --pdf, PDF via Chrome.
+  exporter <seance.yaml|semaine.yaml> [--pdf] [--formats a4,telephone]
+        Fiches HTML (A4, téléphone) et, avec --pdf, PDF via Chrome. Pour une
+        séance : schémas SVG et texte pour Mon Coach Assistant (clubs).
 
 Dossier saison : ${dossierSaison()}
 (variable COACH_RUGBY_DOSSIER ; date du jour : COACH_RUGBY_AUJOURDHUI)`;
@@ -171,7 +171,8 @@ commandes.exporter = (o) => {
   const erreurs = validerChemin(path.resolve(fichier)).flatMap((r) => r.erreurs);
   if (erreurs.length) sortir(1, `Séance invalide, corriger avant d'exporter :\n${erreurs.map((e) => `  - ${e}`).join('\n')}`);
   const formats = typeof o.formats === 'string' ? o.formats.split(',') : ['a4', 'telephone'];
-  const r = exporterSeance(path.resolve(fichier), { pdf: Boolean(o.pdf), formats });
+  const exporter = path.basename(fichier) === 'semaine.yaml' ? exporterSemaine : exporterSeance;
+  const r = exporter(path.resolve(fichier), { pdf: Boolean(o.pdf), formats });
   const lignes = [`Exports dans ${r.dossier} :`, ...r.fichiers.map((f) => `  - ${f}`)];
   if (r.pdf.demande && !r.pdf.ok) lignes.push(`PDF non produit : ${r.pdf.raison}`);
   sortir(0, lignes.join('\n'));

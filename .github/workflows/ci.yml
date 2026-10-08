@@ -45,11 +45,17 @@ jobs:
             node plugin/scripts/coach-rugby.mjs exporter "$s" --pdf
             test -f "$(dirname "$s")/exports/fiche-a4.pdf" || { echo "::error::PDF non produit pour $s"; exit 1; }
           done
+          for s in plugin/exemples/*/*/semaines/*/semaine.yaml; do
+            node plugin/scripts/coach-rugby.mjs exporter "$s" --pdf
+            test -f "$(dirname "$s")/exports/fiche-semaine-a4.pdf" || { echo "::error::PDF non produit pour $s"; exit 1; }
+          done
       - name: Fiches d'exemple en artefact
         uses: actions/upload-artifact@v4
         with:
           name: fiches-exemples
-          path: plugin/exemples/*/*/seances/*/exports/
+          path: |
+            plugin/exemples/*/*/seances/*/exports/
+            plugin/exemples/*/*/semaines/*/exports/
           retention-days: 14
       - name: Schémas de terrain en artefact
         uses: actions/upload-artifact@v4
