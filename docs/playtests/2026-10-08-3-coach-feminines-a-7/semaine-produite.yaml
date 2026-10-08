@@ -1,0 +1,24 @@
+# Plan de la semaine — brouillon coach-rugby à adapter (hypothèses pédagogiques).
+equipe: feminines-7
+debut: 2026-11-09
+phase: phase-aller
+theme: Construire le projet de jeu
+echeances:
+  - type: tournoi
+    date: 2026-11-14
+    importance: haute
+seances_prevues:
+  - date: 2026-11-10
+    heure: 20:00
+    duree_min: 90
+    j_moins: 4
+    intention: "Travail principal : contenus de la semaine, intensité de match"
+    intensite: forte
+    dominante: phase-aller
+    statut: prevue
+points_vigilance:
+  - "Échéance importante le 2026-11-14 : pas de fatigue inutile en fin de semaine."
+hypotheses:
+  - Intensités proposées d'après la grille J-n de references/planification.yaml (hypothèse pédagogique).
+sources:
+  - bompa-haff-2009

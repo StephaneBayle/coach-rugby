@@ -2,7 +2,7 @@
 
 <!-- Fichier généré par « coach-rugby.mjs index-bibliotheque » : ne pas modifier à la main. -->
 
-24 fiches originales sous licence CC BY-SA 4.0. Chaque fiche
+27 fiches originales sous licence CC BY-SA 4.0. Chaque fiche
 précise les catégories visées et son niveau de contact ; la séance vérifie
 en plus les règles de jeu du mois (`references/categories.yaml`).
 
@@ -22,6 +22,7 @@ en plus les règles de jeu du mois (`references/categories.yaml`).
 | Fiche | Catégories | Contact | Durée | Joueurs |
 |---|---|---|---|---|
 | [Deux contre un](exercices/deux-contre-un.yaml) | M8, M10, M12, M14, M15F, M16, M18F, M19, SENIORS | toucher | 10 min | 3–24 |
+| [Lancements de jeu sans opposition](exercices/lancements-de-jeu.yaml) | M16, M18F, M19, SENIORS | aucun | 15 min | 8–30 |
 | [Ligne de passes en avançant](exercices/ligne-de-passes-en-avancant.yaml) | M8, M10, M12, M14, M15F, M16, M18F, M19, SENIORS | aucun | 10 min | 4–30 |
 | [Passes en triangle](exercices/passes-en-triangle.yaml) | M8, M10, M12, M14, M15F, M16, M18F, M19, SENIORS | aucun | 8 min | 3–30 |
 | [Trois contre deux](exercices/trois-contre-deux.yaml) | M10, M12, M14, M15F, M16, M18F, M19, SENIORS | toucher | 12 min | 5–25 |
@@ -31,6 +32,7 @@ en plus les règles de jeu du mois (`references/categories.yaml`).
 | Fiche | Catégories | Contact | Durée | Joueurs |
 |---|---|---|---|---|
 | [Jeu à flag](exercices/jeu-a-flag.yaml) | M6, M8, M10, M12, M14, M15F, M16, M18F, M19, SENIORS | toucher | 12 min | 6–14 |
+| [Jeu au contact à 5 contre 5](exercices/jeu-au-contact-5x5.yaml) | M8, M10, M12, M14, M15F | plaquage | 15 min | 8–12 |
 | [Marquer dans la zone (4 contre 4)](exercices/marquer-dans-la-zone.yaml) | M10, M12, M14, M15F, M16, M18F, M19, SENIORS | toucher | 12 min | 8–10 |
 | [Toucher + 2 secondes à 5 contre 5](exercices/toucher-2-secondes-5x5.yaml) | M8, M10, M12, M14, M15F | toucher | 12 min | 8–12 |
 
@@ -41,6 +43,7 @@ en plus les règles de jeu du mois (`references/categories.yaml`).
 | [Apprendre à chuter avec le ballon](exercices/apprendre-a-chuter.yaml) | M8, M10, M12, M14, M15F, M16, M18F, M19, SENIORS | progressif | 10 min | 2–20 |
 | [Duel de poussée à genoux](exercices/duel-de-poussee-a-genoux.yaml) | M10, M12, M14, M15F, M16, M18F, M19, SENIORS | progressif | 8 min | 2–24 |
 | [Plaquage éducatif progressif](exercices/plaquage-educatif-progressif.yaml) | M10, M12, M14, M15F, M16, M18F, M19, SENIORS | plaquage | 15 min | 2–20 |
+| [Ruck éducatif progressif](exercices/ruck-educatif-progressif.yaml) | M10, M12, M14, M15F, M16, M18F, M19, SENIORS | plein | 15 min | 3–18 |
 
 ## Jeu au pied
 

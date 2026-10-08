@@ -1,0 +1,25 @@
+equipe: feminines-7
+date: 2026-11-03
+heure: "20:00"
+duree_min: 90
+phase: phase-aller
+prochain_evenement: { type: tournoi, date: 2026-11-14, j_moins: 11, importance: haute }
+effectif_prevu: 9
+source_effectif: coach
+encadrants: 1
+terrain: terrain
+materiel: [ballons, plots, chasubles]
+regles: { categorie: seniors, formes: [sevens], contact_max: plein, statut: a-verifier, source: ffr-reglements-generaux, saison: "2026-2027" }
+objectifs:
+  - { texte: "Occuper la largeur à 7 et soutenir le porteur", domaine: tactique }
+  - { texte: "Enchaîner les efforts courts", domaine: physique }
+blocs:
+  - { partie: echauffement, duree_min: 15, titre: "Échauffement progressif", exercice: echauffement-progressif-adultes, contact: aucun, consignes: ["Mobilité, gammes, passes, accélérations"], securite: ["Montée progressive, soir et froid : bien se couvrir"] }
+  - { partie: corps, duree_min: 15, titre: "Trois contre deux", exercice: trois-contre-deux, contact: toucher, consignes: ["Fixer un défenseur, le joueur libre appelle"], adaptations: ["9 joueuses : 3 attaquantes, 2 défenseures, 4 qui tournent"], securite: ["Toucher à deux mains"] }
+  - { partie: corps, duree_min: 15, titre: "Soutien au porteur", exercice: soutien-au-porteur, contact: toucher, consignes: ["Arriver derrière le porteur, appeler le ballon"], adaptations: ["4 contre 3, 2 joueuses en rotation"], securite: ["Toucher sans poussée"] }
+  - { partie: corps, duree_min: 10, titre: "Plaquage en sécurité", exercice: plaquage-educatif-progressif, contact: plaquage, exige: [plaquage], consignes: ["Plaquage bas, tête du bon côté"], securite: ["Gabarits comparables", "Choc à la tête : sortie immédiate et définitive"] }
+  - { partie: jeu, duree_min: 25, titre: "Jeu à 4 contre 4 sur largeur réduite", exercice: marquer-dans-la-zone, contact: toucher, consignes: ["Séquences de 3 min, 1 min de récupération"], adaptations: ["9 joueuses : 4 contre 4 + 1 joueuse qui entre à chaque séquence"], securite: ["Toucher, pas de plaquage dans ce bloc"] }
+  - { partie: retour-au-calme, duree_min: 7, titre: "Retour au calme", exercice: retour-au-calme-mobilite, contact: aucun, consignes: ["Marche, respiration"], securite: ["Hydratation"] }
+  - { partie: bilan, duree_min: 3, titre: "Bilan", exercice: cercle-bilan, contact: aucun, consignes: ["Un mot sur le tournoi du 14"], securite: ["Personne n'a mal ?"] }
+sources: [ffr-reglements-generaux]
+hypotheses: ["Effectif habituel de 12 supposé (à confirmer)", "Dates de phases de la saison proposées par défaut"]

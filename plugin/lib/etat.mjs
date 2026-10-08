@@ -5,7 +5,7 @@
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { ajouterJours, ecartJours, ecrireDate, lireDate } from './dates.mjs';
-import { changementsDeForme, lundiDe } from './planification.mjs';
+import { changementsDeForme, lundiDe, publicDe } from './planification.mjs';
 import { lireYaml } from './yaml.mjs';
 
 // Étapes du parcours, chacune prouvée par la présence d'un fichier.
@@ -86,7 +86,8 @@ export function suggestions(saison, date, { derniereSeance = null, equipe = null
     ajouter('mode-scolaire', 'Les relances propres au mode scolaire (périodes, examens) arrivent dans une prochaine version.');
   }
   const p = s.prochain;
-  if (p && p.type === 'match' && ['haute', 'derby'].includes(p.importance) && p.j_moins <= 7) {
+  const ecoleDeRugby = equipe && publicDe(equipe) === 'edr';
+  if (p && ['match', 'tournoi'].includes(p.type) && ['haute', 'derby'].includes(p.importance) && p.j_moins <= 7 && !ecoleDeRugby) {
     ajouter(
       'affutage',
       p.j_moins <= 2
@@ -146,7 +147,8 @@ function relancesDePlanification(s, saison, { equipe, cycles, semaines = {}, sea
     r('fin-mesocycle', `Le cycle « ${m.theme} » se termine le ${m.fin}${suivant ? ` ; le suivant : « ${suivant.theme} »` : ''}. Faire un petit bilan du cycle.`);
   }
   if (equipe) {
-    const prochain = changementsDeForme(equipe, s.date, ajouterJours(s.date, 21))[0];
+    // 35 jours : la transition se prépare souvent avant la trêve.
+    const prochain = changementsDeForme(equipe, s.date, ajouterJours(s.date, 35))[0];
     if (prochain) r('changement-forme', `La forme de jeu change le ${prochain.date} : ${prochain.de} → ${prochain.vers} (à vérifier). Préparer la progression (règles, sécurité) dans les séances qui viennent.`);
   }
   const treve = saison.phases.find((p) => p.id === 'treve' && ecartJours(p.fin, s.date) >= 1 && ecartJours(p.fin, s.date) <= 7);

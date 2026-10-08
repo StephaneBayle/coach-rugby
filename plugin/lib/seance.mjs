@@ -53,6 +53,19 @@ export function controlerSeance(seance, { equipe = null, dossierSaison = null, n
       }
     });
   }
+  // Sécurité (playtests du lot 2) : tout bloc avec contact rappelle la
+  // conduite en cas de choc à la tête ; toute séance avec plaquage parle du
+  // protège-dents.
+  const AVEC_CONTACT = ['contact-progressif', 'plaquage', 'plein'];
+  seance.blocs.forEach((b, i) => {
+    if (AVEC_CONTACT.includes(b.contact) && !b.securite.some((s) => /t[eê]te|commotion/i.test(s))) {
+      erreurs.push(`bloc ${i + 1} « ${b.titre} » : contact « ${b.contact} » sans rappel de la conduite en cas de choc à la tête (sortie immédiate et définitive, avis médical)`);
+    }
+  });
+  if (seance.blocs.some((b) => ['plaquage', 'plein'].includes(b.contact))) {
+    const textes = [...seance.blocs.flatMap((b) => b.securite), ...(seance.points_vigilance || [])];
+    if (!textes.some((s) => /prot[eè]ge[- ]dents?/i.test(s))) erreurs.push('séance avec plaquage : rappeler le protège-dents (fortement recommandé en 2026-2027, obligatoire en 2027-2028 — à vérifier)');
+  }
   const connus = exercicesConnus(dossierSaison);
   seance.blocs.forEach((b, i) => {
     if (b.exercice && !connus.has(b.exercice)) erreurs.push(`bloc ${i + 1} : exercice « ${b.exercice} » introuvable dans la bibliothèque`);

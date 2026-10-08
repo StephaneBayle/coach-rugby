@@ -20,6 +20,19 @@ inquiéter le coach. Si aucun accès aux fichiers n'est possible (chat) :
 travailler sans dossier, le dire en une phrase, et proposer au coach de coller
 le contenu de son `saison.yaml` s'il en a un.
 
+## 0. Parcours express
+
+Si le coach veut « juste » une séance ou un plan (débutant, pressé) :
+
+1. une seule question regroupée : nombre de joueurs, d'encadrants, durée ;
+2. tout le reste par défaut (club, catégorie et créneau déduits de son
+   message), **annoncé en une ligne** ;
+3. un seul accord (« je prépare ça ? »).
+
+Ensuite seulement, créer le dossier et l'équipe. Ne jamais parler de
+« dossier » ni de « fichier » ; dire « je garde vos séances sur votre
+ordinateur, vous n'avez rien à faire ».
+
 ## 1. Trouver ou créer le dossier saison
 
 1. Lancer `statut --json`.

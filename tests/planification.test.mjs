@@ -113,3 +113,21 @@ test('CLI : planifier et semaine --ecrire créent les fichiers sans jamais écra
   assert.match(cli('semaine', 'seniors-f3', '--date', '2026-10-14').stdout, /affûtage — Activation/);
   assert.match(readFileSync(path.join(d, 'seniors-f3', 'cycles.yaml'), 'utf8'), /EXEMPLE FICTIF/);
 });
+
+test('playtest 2 : dans un bloc d\'affûtage, la séance de J-5 a une intention cohérente', () => {
+  const s = proposerSemaine('2026-10-14', { ...f3, cycles: proposerCycles(f3.saison, f3.equipe) });
+  assert.match(s.seances_prevues[0].intention, /volume réduit, rien de nouveau/);
+});
+
+test('playtest 4 : J-n masqué à travers la trêve ou au-delà de 14 jours', () => {
+  const s = proposerSemaine('2026-12-14', { ...m10, cycles: proposerCycles(m10.saison, m10.equipe) });
+  assert.equal(s.seances_prevues[0].j_moins, null);
+});
+
+test('playtest 3 : un tournoi important a son bloc d\'affûtage (adultes)', () => {
+  const saison = { ...f3.saison, calendrier: [...f3.saison.calendrier, { date: '2026-11-21', type: 'tournoi', importance: 'haute' }] };
+  const c = proposerCycles(saison, f3.equipe);
+  const bloc = c.mesocycles.find((m) => m.declencheur === 'echeance:2026-11-21');
+  assert.equal(bloc.intensite, 'affutage');
+  assert.match(bloc.notes, /Tournoi important/);
+});

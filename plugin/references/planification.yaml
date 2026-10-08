@@ -55,7 +55,10 @@ phases:
 # Thème d'un mésocycle qui commence à un changement de forme de jeu (école de rugby).
 changement_forme: { theme: "Passage à une nouvelle forme de jeu", objectif: "Découvrir progressivement les nouvelles règles en sécurité", intensite: moyenne }
 # Thème d'un bloc d'affûtage.
-bloc_affutage: { theme: "Affûtage avant l'échéance", objectif: "Arriver frais et précis au match", intensite: affutage }
+bloc_affutage: { theme: "Affûtage avant l'échéance", objectif: "Arriver frais et précis au match", intensite: affutage, intention_autres_seances: "Travail ciblé du plan de jeu : volume réduit, rien de nouveau" }
+# Au-delà de ce nombre de jours, ou si une trêve sépare la séance de
+# l'échéance, le J-n n'est pas affiché (il n'aide pas le coach).
+j_moins_max_affiche: 14
 
 # Grille de la semaine : intensité et intention d'une séance selon le nombre
 # de jours avant la prochaine échéance (J-n) et après la précédente (J+n).

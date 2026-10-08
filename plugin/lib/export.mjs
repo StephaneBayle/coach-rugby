@@ -124,7 +124,8 @@ export function preparer(seance, { equipe, config, dossierSaison }) {
     sources: sourcesHtml(seance.sources),
     materiel: seance.materiel || equipe?.materiel || [],
     conformite: regles,
-    clubMca: config?.structure?.type === 'club',
+    // Texte pour Mon Coach Assistant : seulement si le club a dit l'utiliser.
+    clubMca: config?.structure?.type === 'club' && config?.preferences?.utilise_mca === true,
   };
 }
 

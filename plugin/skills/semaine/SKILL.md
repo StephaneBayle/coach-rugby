@@ -64,6 +64,24 @@ Ajuster ensuite :
 - à l'école de rugby, une **séance plaisir** (légère) juste avant un plateau,
   et jamais le mot « affûtage ».
 
+**Quand le coach veut s'écarter** d'une hypothèse pédagogique hors de la
+zone de sécurité (par exemple du contact intense à J-3) :
+
+1. donner un argument de terrain, présenté comme une hypothèse s'il n'est pas
+   sourcé ;
+2. proposer une alternative ;
+3. **laisser le choix** au coach et noter son choix dans `hypotheses`
+   (« choix du coach : … »).
+
+Ne jamais moraliser.
+
+**« Charge »** : le plugin ne calcule pas encore de charge chiffrée,
+seulement une intensité prévue. Le dire en une phrase.
+
+**Un seul créneau par semaine** : ne pas écrire seulement « repos » ;
+proposer une activité libre facultative (footing léger, mobilité), présentée
+comme une hypothèse.
+
 Ajouter ensuite les **points de vigilance** : fatigue, chaleur ou froid,
 changement de forme de jeu qui approche, reprise après la trêve.
 
@@ -78,7 +96,7 @@ changement de forme de jeu qui approche, reprise après la trêve.
 ## 5. Présenter, proposer la suite
 
 Présenter la semaine en une ligne par jour : jour, J-n, intensité, intention.
-Puis proposer :
+Puis proposer **toujours**, en une ligne :
 
 - la **fiche de la semaine** (`/coach-rugby:exporter` sur `semaine.yaml`), à
   partager au staff ;

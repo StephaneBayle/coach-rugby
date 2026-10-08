@@ -31,7 +31,7 @@ on parle de **séance plaisir avant le plateau** (`legere`).
    `edr` pour l'école de rugby en mode plateaux, `adultes` pour les autres.
    L'intersaison n'a pas de cycle.
 2. **Adultes** : un bloc d'affûtage de 7 jours se termine sur chaque match
-   `haute` ou `derby`.
+   ou tournoi `haute` ou `derby`.
 3. On découpe le reste en blocs d'environ 28 jours. Un bout de moins de
    7 jours rejoint son voisin.
 4. **Changement de forme de jeu** (école de rugby) : quand la forme de jeu au
@@ -62,7 +62,9 @@ Pour chaque créneau d'`equipe.yaml` de la semaine :
 | École de rugby | sinon | moyenne | progression par le jeu |
 
 - Dans un **bloc d'affûtage**, la dernière séance avant le match important
-   devient une séance d'activation, quel que soit son J-n.
+  devient une séance d'activation, quel que soit son J-n ; les autres
+  séances deviennent un « travail ciblé du plan de jeu, volume réduit ».
+- Le J-n n'est affiché que jusqu'à 14 jours, et jamais à travers une trêve.
 - Pendant la trêve et les vacances, aucune séance n'est prévue.
 
 ## Contrôles (`valider`)

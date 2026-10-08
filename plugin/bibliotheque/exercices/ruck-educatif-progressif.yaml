@@ -1,0 +1,43 @@
+id: ruck-educatif-progressif
+titre: Ruck éducatif progressif
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: contact
+categories: [m10, m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: plein
+exige: [ruck]
+duree_min: 15
+effectif: { min: 3, max: 18 }
+espace: { longueur: 10, largeur: 10 }
+materiel: [1 ballon par groupe de 3, boucliers, tapis ou herbe souple]
+but: Apprendre le regroupement au sol (ruck) en sécurité - poser le ballon, protéger, libérer.
+organisation: "Groupes de 3 : un porteur, un soutien, un adversaire au bouclier. Progression par étapes : à l'arrêt, en marchant, puis en trottinant. On ne passe à l'étape suivante que si la précédente est maîtrisée."
+consignes:
+  - Porteur, tombe sur le côté et pose le ballon vers ton camp, bras tendus.
+  - Soutien, arrive debout, pieds écartés, épaules plus hautes que les hanches, et pousse le bouclier au-delà du ballon.
+  - Jamais de plongeon, jamais de tête en avant.
+variables:
+  simplifier: ["Adversaire sans bouclier qui recule de lui-même", Tout à l'arrêt]
+  complexifier: [Deux soutiens, Un adversaire qui résiste un peu]
+criteres_reussite: ["Ballon posé vers son camp", "Soutien debout, dos plat, tête haute"]
+securite:
+  - Seulement les mois où la forme de jeu de la catégorie permet le ruck (vérifier les règles du jour).
+  - "Gabarits comparables, vitesse réduite, sol souple."
+  - "Choc à la tête : sortie immédiate et définitive, prévenir les parents, avis médical."
+  - "Protège-dents fortement recommandé."
+sources: [ffr-cahier-edr-2026-2027]
+pour_aller_plus_loin:
+  - { source: ffr-formation-edr, note: "Postures post-plaquage et situations de poussée (site de l'entraîneur FFR)." }
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  zones:
+    - { x: 1, y: 2, longueur: 8, largeur: 6, label: tapis }
+  elements:
+    - { type: porteur, x: 4, y: 5, label: A1 }
+    - { type: attaquant, x: 1.5, y: 5, label: A2 }
+    - { type: bouclier, x: 6.5, y: 5 }
+    - { type: defenseur, x: 7.8, y: 5, label: D1 }
+  trajets:
+    - { type: course, de: [1.5, 5], a: [5.6, 5] }
+relecture: { statut: relu-ia, date: 2026-10-08 }

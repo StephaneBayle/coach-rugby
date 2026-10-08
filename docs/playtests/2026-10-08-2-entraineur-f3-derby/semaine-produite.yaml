@@ -1,4 +1,4 @@
-# EXEMPLE FICTIF — Plan de la semaine — brouillon coach-rugby à adapter (hypothèses pédagogiques).
+# Plan de la semaine — brouillon coach-rugby à adapter (hypothèses pédagogiques).
 equipe: seniors-f3
 debut: 2026-10-12
 mesocycle: c04
@@ -18,7 +18,7 @@ seances_prevues:
     heure: 19:30
     duree_min: 105
     j_moins: 5
-    intention: "Travail ciblé du plan de jeu : volume réduit, rien de nouveau"
+    intention: "Développement : apprentissages du cycle, volume modéré"
     intensite: moyenne
     dominante: Affûtage avant l'échéance
     statut: prevue

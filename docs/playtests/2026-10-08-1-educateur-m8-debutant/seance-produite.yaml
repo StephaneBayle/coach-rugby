@@ -1,0 +1,23 @@
+equipe: m8
+date: 2026-09-09
+heure: "14:00"
+duree_min: 60
+effectif_prevu: 15
+source_effectif: coach
+encadrants: 2
+terrain: demi-terrain
+materiel: [ballons, plots, chasubles]
+regles: { categorie: m8, formes: [toucher-2s], contact_max: toucher, statut: a-verifier, source: ffr-cahier-edr-2026-2027, saison: "2026-2027" }
+objectifs:
+  - { texte: "Courir avec le ballon vers l'avant", domaine: technique }
+  - { texte: "Jouer ensemble et respecter les autres", domaine: valeurs }
+blocs:
+  - { partie: accueil, duree_min: 5, titre: "Accueil en cercle", contact: aucun, consignes: ["Se présenter, expliquer la séance en une phrase"], securite: ["Gourdes à portée", "Lacets faits"] }
+  - { partie: echauffement, duree_min: 10, titre: "La queue du diable", exercice: queue-du-diable, contact: aucun, consignes: ["Attrape les foulards sans toucher les autres"], securite: ["Pas de poussée"] }
+  - { partie: corps, duree_min: 12, titre: "Les éperviers", exercice: eperviers, contact: toucher, consignes: ["Traverse sans te faire toucher à deux mains"], securite: ["Toucher sans pousser"] }
+  - { partie: corps, duree_min: 10, titre: "Passes en triangle", exercice: passes-en-triangle, contact: aucun, consignes: ["Mains tendues pour appeler le ballon"], securite: ["Groupes espacés"] }
+  - { partie: jeu, duree_min: 15, titre: "Toucher + 2 secondes à 5 contre 5", exercice: toucher-2-secondes-5x5, contact: toucher, consignes: ["Touché à deux mains : 2 secondes pour passer"], adaptations: ["15 enfants : 3 équipes de 5, une équipe se repose et boit à tour de rôle"], securite: ["Toucher sans pousser ni retenir"] }
+  - { partie: retour-au-calme, duree_min: 4, titre: "Retour au calme", exercice: retour-au-calme-mobilite, contact: aucun, consignes: ["Imiter le chat qui s'étire"], securite: ["Boire"] }
+  - { partie: bilan, duree_min: 4, titre: "Cercle bilan", exercice: cercle-bilan, contact: aucun, consignes: ["Pouce levé ou baissé"], securite: ["Personne n'a mal ?"] }
+sources: [ffr-cahier-edr-2026-2027]
+hypotheses: ["Séance de 60 min conseillée pour les M8 (hypothèse)"]

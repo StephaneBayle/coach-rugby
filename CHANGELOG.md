@@ -25,6 +25,24 @@ comment c'est programmé. Format inspiré de
   cycle, changement de forme de jeu à venir (école de rugby), reprise
   progressive après la trêve.
 
+- Trois nouveaux exercices : ruck éducatif progressif, jeu au contact à 5
+  contre 5 (école de rugby), lancements de jeu sans opposition.
+
+### Amélioré (après quatre tests avec des coachs simulés)
+
+- Chaque séance présentée dit comment on joue chaque jeu, la mise en place,
+  le matériel en quantités, les règles « à vérifier » et une ligne sécurité
+  complète (protège-dents, choc à la tête, avis médical).
+- Le plugin refuse une séance avec contact qui ne rappelle pas la conduite
+  en cas de choc à la tête, ou avec du plaquage sans parler du protège-dents.
+- Moins de jargon, un parcours rapide pour les coachs débutants ou pressés,
+  et toute valeur supposée (effectif, matériel, dates) est annoncée.
+- Maladie chronique d'un joueur : consigne écrite des parents, et en cas de
+  détresse, appeler le 15 ou le 112.
+- Affûtage aussi avant un tournoi important ; changement de forme de jeu
+  annoncé plus tôt (avant la trêve).
+- Le texte pour Mon Coach Assistant n'est produit que si votre club l'utilise.
+
 ### Corrigé
 
 - La protection des données bloquait à tort des phrases comme « le cycle se

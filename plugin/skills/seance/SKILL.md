@@ -44,6 +44,10 @@ Poser **au plus trois questions**, avec des valeurs par défaut proposées :
 
 1. **Combien de joueurs** et **combien d'encadrants**. Par défaut,
    `effectif_habituel` et le staff de `equipe.yaml`.
+   - Toute valeur prise par défaut (effectif habituel, encadrants, matériel
+     d'`equipe.yaml`) est **annoncée en une ligne** pour que le coach la
+     corrige. Le matériel demandé par la séance doit être celui dont le coach
+     dispose ; sinon, choisir une variante ou le lui demander.
    - **Sondage Mon Coach Assistant** (clubs) : si le coach colle le résultat
      d'un sondage de présence, compter les présents et les encadrants, puis
      **ne garder que les nombres** (`source_effectif: sondage-mca`). Ne
@@ -86,11 +90,15 @@ jeu, retour au calme, bilan.
 
 Noter l'adaptation dans `adaptations`.
 
+**Rotations** : quand l'effectif ne se divise pas exactement en équipes ou
+dépasse la fourchette d'une fiche, dire qui attend, combien de temps, et le
+rôle de l'encadrant (personne sans rôle).
+
 **Durées :**
 
 - la somme des blocs est égale à la durée de la séance ;
 - on garde du temps de jeu ;
-- on prévoit une pause d'hydratation.
+- on prévoit une pause d'hydratation **au milieu** de la séance.
 
 **Sécurité :** chaque bloc a au moins un point de sécurité. Pour un bloc avec
 contact, rappeler la conduite à tenir en cas de choc à la tête. Le
@@ -112,13 +120,29 @@ reprise) et les **hypothèses** (choix non sourcés). Citer les **sources**
 
 ## 6. Présenter et faire le point
 
-1. Montrer la séance en version courte :
-   - la frise, avec heure, durée et contenu ;
-   - les objectifs ;
-   - les règles du jour, « à vérifier » si leur statut l'exige ;
-   - les deux ou trois points de sécurité clés.
+1. Montrer la séance dans ce **format imposé**, court :
+   - une ligne d'en-tête : date, heure, durée, effectif, encadrants ;
+   - la frise : heure, durée, titre et, pour chaque jeu, **comment on joue en
+     une ou deux phrases** (toujours pour l'école de rugby et pour un coach
+     débutant) ;
+   - la **mise en place** des ateliers en une phrase (espace, plots), et le
+     **matériel en quantités** ;
+   - les **règles du jour** avec « à vérifier (saison 2026-2027) » et leur
+     source en quelques mots ;
+   - une ligne **Sécurité** : protège-dents si un bloc a du contact, terrain
+     et matériel vérifiés, conduite en cas de choc à la tête (formulation
+     type de `protocole-commotion.md` : sortie immédiate et définitive,
+     parents prévenus, avis médical), douleur → professionnel de santé ;
+   - « si ça coince » : raccourcir le jeu, montrer avec deux joueurs,
+     passer au suivant.
+
+   Pour un coach pressé, garder seulement la frise, la ligne Sécurité et les
+   règles « à vérifier ».
 2. Ajouter une ligne datée dans `journal.md`.
-3. Proposer `/coach-rugby:relire`, puis `/coach-rugby:exporter`, sans les
-   enchaîner sans l'accord du coach.
-4. Après la séance, proposer de noter le bilan : nombre de présents,
+3. Proposer **en une ligne** : `/coach-rugby:relire`, puis
+   `/coach-rugby:exporter` pour la fiche téléphone. Ne pas lancer l'export
+   sans l'accord du coach.
+4. Si la séance s'écarte de l'intention prévue dans `semaine.yaml`, mettre à
+   jour cette intention.
+5. Après la séance, proposer de noter le bilan : nombre de présents,
    ressenti, choses à reprendre.

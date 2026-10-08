@@ -1,0 +1,37 @@
+equipe: m10
+date: 2026-12-16
+heure: "14:00"
+duree_min: 75
+phase: plateaux-automne
+effectif_prevu: 16
+source_effectif: habituel
+encadrants: 2
+terrain: demi-terrain
+materiel: [ballons taille 4, plots, chasubles, foulards, tapis]
+regles: { categorie: m10, formes: [jeu-au-contact], contact_max: plaquage, statut: a-verifier, source: ffr-cahier-edr-2026-2027, saison: "2026-2027" }
+objectifs:
+  - { texte: "Chuter et protéger le ballon en sécurité", domaine: technique }
+  - { texte: "Découvrir la posture de poussée, avant le ruck de janvier", domaine: technique }
+blocs:
+  - { partie: accueil, duree_min: 5, titre: "Accueil : ce qui arrive en janvier", contact: aucun, consignes: ["Annoncer le rugby à 7 de janvier"], securite: ["Protège-dents, gourdes"] }
+  - { partie: echauffement, duree_min: 10, titre: "La queue du diable", exercice: queue-du-diable, contact: aucun, consignes: ["Attrape les foulards sans toucher les autres"], securite: ["Pas de poussée"] }
+  - partie: corps
+    duree_min: 15
+    titre: Apprendre à chuter avec le ballon
+    exercice: apprendre-a-chuter
+    contact: contact-progressif
+    consignes: ["Ballon serré, chute sur le côté, menton rentré", "Poser le ballon vers son camp"]
+    adaptations: ["Étapes à genoux puis accroupi"]
+    securite: ["Tapis obligatoires", "Choc à la tête : sortie immédiate et définitive"]
+  - partie: corps
+    duree_min: 12
+    titre: Duel de poussée à genoux
+    exercice: duel-de-poussee-a-genoux
+    contact: contact-progressif
+    consignes: ["Dos plat, tête haute", "5 secondes, arrêt au sifflet"]
+    securite: ["Binômes de même gabarit", "Arrêt à la moindre douleur au cou"]
+  - { partie: jeu, duree_min: 22, titre: "Jeu au contact à 5 contre 5", contact: plaquage, exige: [plaquage], consignes: ["Forme de jeu de décembre : pas de ruck"], securite: ["Plaquage bas, arbitrage strict"] }
+  - { partie: retour-au-calme, duree_min: 6, titre: "Retour au calme", exercice: retour-au-calme-mobilite, contact: aucun, consignes: ["Respiration, mobilité douce"], securite: ["Hydratation"] }
+  - { partie: bilan, duree_min: 5, titre: "Cercle bilan avant la trêve", exercice: cercle-bilan, contact: aucun, consignes: ["Une réussite de l'automne"], securite: ["Personne n'a mal ?"] }
+sources: [ffr-cahier-edr-2026-2027]
+hypotheses: ["Préparer le ruck par la chute et la poussée, sans ruck (non permis en décembre)"]

@@ -55,7 +55,8 @@ puis écrit dans `seances/<date>/exports/` :
 - `fiche-a4.html` et `fiche-telephone.html` : fichiers autonomes, que l'on peut
   envoyer par mail ou par messagerie ;
 - `schemas/*.svg` : un schéma par bloc qui en a un ;
-- `pour-mca.txt` : seulement pour une structure de type `club` ;
+- `pour-mca.txt` : seulement pour un club qui a dit utiliser Mon Coach
+  Assistant (`utilise_mca: true`) ;
 - `fiche-a4.pdf` et `fiche-telephone.pdf` si Chrome est disponible.
 
 ### Chemin B, sans Node
@@ -83,6 +84,10 @@ puis réexporter.
 - **Imprimer** : `fiche-a4.pdf`, ou `fiche-a4.html` puis Imprimer.
 - **Au bord du terrain** : `fiche-telephone.html` (ou le PDF téléphone),
   envoyé par mail, par messagerie ou par AirDrop. Il fonctionne hors connexion.
+  **Ne pas donner de chemin** à un coach peu technicien : proposer d'ouvrir la
+  fiche pour lui (lien cliquable ou ouverture dans le navigateur), puis lui
+  expliquer « Partager › Mail » ou « Partager › Messages ». Les schémas des
+  ateliers sont dans la fiche : les signaler (« où poser les plots »).
 - **Au staff** : les mêmes fichiers. Ils ne contiennent aucune donnée
   personnelle de joueur.
 - **Mon Coach Assistant**, pour les clubs :

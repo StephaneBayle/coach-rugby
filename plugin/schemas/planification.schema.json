@@ -165,6 +165,9 @@
         },
         "intensite": {
           "$ref": "cr:communs#/$defs/intensite"
+        },
+        "intention_autres_seances": {
+          "type": "string"
         }
       }
     },
@@ -233,6 +236,11 @@
           }
         }
       }
+    },
+    "j_moins_max_affiche": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 60
     }
   }
 }

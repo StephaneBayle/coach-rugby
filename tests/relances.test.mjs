@@ -44,9 +44,10 @@ test('fin de cycle ordinaire annoncée avec le cycle suivant', () => {
   assert.match(s.message, /se termine\s+le 2026-12-18 ; le suivant : « Trêve »/);
 });
 
-test('changement de forme de jeu annoncé 21 jours avant, pas avant', () => {
-  assert.ok(codes(m10, '2026-12-11').includes('changement-forme'));
-  assert.ok(!codes(m10, '2026-12-01').includes('changement-forme'));
+test('changement de forme de jeu annoncé 35 jours avant (avant la trêve), pas avant', () => {
+  assert.ok(codes(m10, '2026-12-10').includes('changement-forme'), 'cas du playtest 4 : 22 jours avant');
+  assert.ok(codes(m10, '2026-11-27').includes('changement-forme'));
+  assert.ok(!codes(m10, '2026-11-20').includes('changement-forme'));
   assert.ok(!codes(f3, '2026-12-11').includes('changement-forme'), 'pas de changement de forme en seniors');
 });
 
