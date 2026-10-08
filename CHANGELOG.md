@@ -41,3 +41,8 @@ comment c'est programmé. Format inspiré de
 - `/coach-rugby:exporter` : fiche A4 à imprimer, fiche téléphone pour le bord
   du terrain (fonctionne hors connexion), schémas de terrain, PDF, et texte à
   coller dans Mon Coach Assistant.
+- `/coach-rugby:relire` : quatre relecteurs passent votre séance au crible
+  (sécurité des jeunes, règlement de la catégorie, sources, protection des
+  données) et vous disent ce qu'il faut corriger avant de l'utiliser.
+- Commotion : le plugin rappelle toujours la conduite à tenir (sortie
+  immédiate et définitive, avis médical) et ne donne jamais d'avis médical.

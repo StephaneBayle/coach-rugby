@@ -65,7 +65,7 @@ blocs:
     organisation: Par deux sur les tapis ; étapes à genoux puis accroupi seulement.
     consignes: ["Ballon serré, chute sur le côté, menton rentré", Pose le ballon vers ton camp et relève-toi]
     adaptations: [Pas de chute debout aujourd'hui (première séance de chute du cycle)]
-    securite: [Tapis obligatoires, Arrêt à la moindre douleur]
+    securite: [Tapis obligatoires, Arrêt à la moindre douleur, "Choc à la tête : sortie immédiate et définitive, prévenir les parents"]
   - partie: jeu
     duree_min: 20
     titre: Toucher + 2 secondes à 5 contre 5 (thème - fixer avant de passer)
@@ -95,3 +95,6 @@ sources: [ffr-cahier-edr-2026-2027]
 hypotheses:
   - Durée de séance de 75 min conseillée pour les M10 (hypothèse pédagogique, categories.yaml).
   - Ordre accueil, échauffement, situations, jeu, retour au calme, bilan (proche du plan de séance FFR des ateliers EDR, p. 11 du Cahier).
+relecture:
+  date: 2026-10-08
+  verdicts: { securite-jeunes: ok, reglement: ok, sources: ok, confidentialite: ok }
