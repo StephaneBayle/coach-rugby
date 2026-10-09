@@ -4,13 +4,14 @@
 //
 // Codes de sortie : 0 succès ; 1 erreurs dans les données ou la commande ;
 // 3 outillage indisponible (dépendance absente) → suivre le chemin B.
-import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
 import { exporterFeuillePresence, exporterMatch, exporterSeance, exporterSemaine } from '../lib/export.mjs';
 import { ecrireCsv, ecrireXlsx, tableauPresences, tableauProgres, tableauTempsDeJeu } from '../lib/tableur.mjs';
 import { absencesRepetees, lirePrenoms, prochainCode, synchroniserProteges, tauxDePresence } from '../lib/effectif.mjs';
 import { dureeTotale } from '../lib/match.mjs';
+import { bilanCharge } from '../lib/charge.mjs';
 import { lundiDe, proposerCycles, proposerSemaine } from '../lib/planification.mjs';
 import { attenteMax, bilanEquite, planifierRotation } from '../lib/temps-de-jeu.mjs';
 import { chargerCategories } from '../lib/categories.mjs';
@@ -55,6 +56,11 @@ Usage : node coach-rugby.mjs <commande> [options]
   presences <equipe> [--date AAAA-MM-JJ --presents J01,J02… [--excuses …] [--type seance]] [--bilan]
         Enregistre les présents d'une date, ou affiche les taux de présence
         et les absences répétées.
+  charge <equipe> --date AAAA-MM-JJ --duree N --rpe N [--type seance|match|salle…] [--par-code J01=7,J02=6]
+  charge <equipe> --bilan [--date AAAA-MM-JJ] [--json]
+        Charge réalisée (intensité ressentie de 0 à 10 × durée) ; RPE par
+        joueur seulement pour les 16 ans et plus. --bilan : semaine,
+        tendance, monotonie et repères (hypothèses, jamais médicaux).
   rotation <match.yaml> [--periode N] [--ecrire]
         Rotation équitable du temps de jeu (périodes de N minutes, 5 par
         défaut) entre les convoqués ; --ecrire l'enregistre dans match.yaml.
@@ -348,6 +354,45 @@ commandes.presences = (o) => {
     `Présences de ${o._[0]} sur ${presences.dates.length} date(s) :`,
     ...Object.entries(taux).map(([c, v]) => `  ${c} : ${v.presents}/${v.total}${v.taux !== null ? ` (${v.taux} %)` : ''}`),
     repetees.length ? `Absents aux 3 dernières dates : ${repetees.join(', ')}` : null,
+  ].filter(Boolean).join('\n'));
+};
+
+commandes.charge = (o) => {
+  const id = o._[0];
+  const { d } = chargerEffectif(id);
+  const fc = path.join(d, 'charge.yaml');
+  const charge = existsSync(fc) ? lireYaml(fc) : { equipe: id, entrees: [] };
+  if (o.rpe !== undefined || o.duree !== undefined) {
+    if (typeof o.date !== 'string' || o.duree === undefined || o.rpe === undefined) sortir(1, 'Indiquer --date AAAA-MM-JJ, --duree (minutes) et --rpe (0 à 10).');
+    const type = typeof o.type === 'string' ? o.type : 'seance';
+    const parCode = typeof o['par-code'] === 'string'
+      ? Object.fromEntries(o['par-code'].split(',').map((x) => x.trim().split('=')).map(([c, v]) => [c.toUpperCase(), Number(v)]))
+      : null;
+    const entree = { date: o.date, type, duree_min: Number(o.duree), rpe_groupe: Number(o.rpe), ...(parCode ? { par_code: parCode } : {}), source: 'coach' };
+    const avant = existsSync(fc) ? readFileSync(fc, 'utf8') : null;
+    charge.entrees = [...charge.entrees.filter((x) => !(String(x.date) === o.date && x.type === type)), entree].sort((a, b) => (String(a.date) < String(b.date) ? -1 : 1));
+    ecrireYaml(fc, charge, '# Charge réalisée (RPE × durée) — en codes, aucune donnée de santé.');
+    const erreurs = validerChemin(fc).flatMap((r) => r.erreurs);
+    if (erreurs.length) {
+      // Rien n'est gardé d'une saisie refusée.
+      if (avant === null) rmSync(fc);
+      else writeFileSync(fc, avant);
+      sortir(1, `Charge non enregistrée :\n${erreurs.map((e) => `  - ${e}`).join('\n')}`);
+    }
+    sortir(0, `Charge du ${o.date} (${type}) : ${entree.duree_min} min × ${entree.rpe_groupe} = ${entree.duree_min * entree.rpe_groupe}${parCode ? ` ; ${Object.keys(parCode).length} RPE individuel(s)` : ''}.`);
+  }
+  if (!charge.entrees.length) sortir(0, `Aucune charge notée pour ${id}.`);
+  const b = bilanCharge(charge, date(o));
+  if (o.json) {
+    const { semaines, ...reste } = b;
+    sortir(0, JSON.stringify(reste, null, 2));
+  }
+  sortir(0, [
+    `Charge de ${id}, semaine du ${b.lundi} : ${b.total} (${b.entrees} séance(s) ou match(s)).`,
+    b.reference !== null ? `Moyenne des ${b.semaines_reference} semaines précédentes : ${b.reference} (écart ${b.ecart_pct > 0 ? '+' : ''}${b.ecart_pct} %).` : `Pas encore assez de semaines notées pour une tendance (${b.semaines_reference}).`,
+    b.monotonie !== null ? `Monotonie : ${b.monotonie}.` : null,
+    ...b.alertes.map((a) => `→ ${a.message}`),
+    'Repères d\'entraînement (hypothèses), pas des indicateurs médicaux.',
   ].filter(Boolean).join('\n'));
 };
 

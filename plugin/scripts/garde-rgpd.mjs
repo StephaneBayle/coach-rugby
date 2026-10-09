@@ -48,6 +48,7 @@ const FICHIERS_INTERDITS = [
   { test: (f) => /(^|\/)progres[^/]*\.ya?ml$/i.test(f) && HORS_FICTIF(f), raison: 'progrès de joueurs' },
   { test: (f) => /(^|\/)\.coach-rugby\.yaml$/.test(f) && HORS_FICTIF(f), raison: 'configuration d\'un dossier saison réel' },
   { test: (f) => /(^|\/)(effectif|presences?)[^/]*\.(ya?ml|csv|xlsx?)$/i.test(f) && HORS_FICTIF(f), raison: 'effectif ou présences' },
+  { test: (f) => /(^|\/)(charge|tests)(\.ya?ml|[-_][^/]*\.(csv|xlsx?))$/i.test(f) && HORS_FICTIF(f), raison: 'charge ou tests physiques de joueurs' },
 ];
 
 function scannerDepot(dossier) {

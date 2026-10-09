@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:charge",
+  "title": "Charge réalisée (charge.yaml) — RPE × durée, en codes, sans aucune donnée de santé",
+  "type": "object",
+  "required": [
+    "equipe",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "equipe": {
+      "$ref": "cr:communs#/$defs/identifiant"
+    },
+    "entrees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "type",
+          "duree_min",
+          "rpe_groupe"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "$ref": "cr:communs#/$defs/date"
+          },
+          "type": {
+            "enum": [
+              "seance",
+              "match",
+              "plateau",
+              "tournoi",
+              "salle",
+              "autre"
+            ]
+          },
+          "duree_min": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 600
+          },
+          "rpe_groupe": {
+            "$ref": "#/$defs/rpe",
+            "description": "Intensité ressentie moyenne du groupe (0 à 10)."
+          },
+          "par_code": {
+            "type": "object",
+            "description": "RPE par joueur, seulement pour les 16 ans et plus (parametres-charge.yaml).",
+            "propertyNames": {
+              "pattern": "^J[0-9]{2,3}$"
+            },
+            "additionalProperties": {
+              "$ref": "#/$defs/rpe"
+            }
+          },
+          "source": {
+            "enum": [
+              "coach",
+              "joueurs"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "rpe": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    }
+  }
+}
