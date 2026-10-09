@@ -7,11 +7,13 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
-import { exporterFeuillePresence, exporterMatch, exporterSeance, exporterSemaine } from '../lib/export.mjs';
+import { exporterFeuillePresence, exporterMatch, exporterProgramme, exporterSeance, exporterSemaine } from '../lib/export.mjs';
+import { chargerProgrammes } from '../lib/programmes.mjs';
 import { ecrireCsv, ecrireXlsx, tableauPresences, tableauProgres, tableauTempsDeJeu } from '../lib/tableur.mjs';
 import { absencesRepetees, lirePrenoms, prochainCode, synchroniserProteges, tauxDePresence } from '../lib/effectif.mjs';
 import { dureeTotale } from '../lib/match.mjs';
 import { bilanCharge } from '../lib/charge.mjs';
+import { progression, referenceTests } from '../lib/tests-physiques.mjs';
 import { lundiDe, proposerCycles, proposerSemaine } from '../lib/planification.mjs';
 import { attenteMax, bilanEquite, planifierRotation } from '../lib/temps-de-jeu.mjs';
 import { chargerCategories } from '../lib/categories.mjs';
@@ -61,6 +63,10 @@ Usage : node coach-rugby.mjs <commande> [options]
         Charge réalisée (intensité ressentie de 0 à 10 × durée) ; RPE par
         joueur seulement pour les 16 ans et plus. --bilan : semaine,
         tendance, monotonie et repères (hypothèses, jamais médicaux).
+  tests <equipe> --date AAAA-MM-JJ --test <id> --resultats J01=3.12,J02=3.30
+  tests <equipe> --bilan [--json]
+        Tests physiques (16 ans et plus) : saisie en codes, puis progression
+        de chaque joueur d'un test à l'autre (jamais de classement).
   rotation <match.yaml> [--periode N] [--ecrire]
         Rotation équitable du temps de jeu (périodes de N minutes, 5 par
         défaut) entre les convoqués ; --ecrire l'enregistre dans match.yaml.
@@ -68,6 +74,9 @@ Usage : node coach-rugby.mjs <commande> [options]
         Fiches HTML (A4, téléphone) et, avec --pdf, PDF via Chrome. Pour une
         séance : schémas SVG et texte pour Mon Coach Assistant (clubs). Pour
         effectif.yaml : feuille de présence à imprimer (codes, prénom vide).
+  exporter programme <id> [--pdf]
+        Fiche d'un programme hors terrain (trêve, intersaison, salle), sans
+        donnée personnelle, à remettre aux joueurs.
   tableau presences|temps-de-jeu|progres <equipe> [--match AAAA-MM-JJ] [--format xlsx|csv]
         Tableau en codes (jamais de prénom) dans <equipe>/exports/. Le CSV
         est toujours produit ; l'Excel (xlsx, par défaut) en plus si possible.
@@ -192,6 +201,16 @@ commandes['index-bibliotheque'] = () => {
 };
 
 commandes.exporter = (o) => {
+  if (o._[0] === 'programme') {
+    const id = o._[1];
+    const ids = chargerProgrammes().programmes.map((p) => p.id);
+    if (!ids.includes(id)) sortir(1, `Usage : exporter programme <id>. Programmes : ${ids.join(', ')}`);
+    const formats = typeof o.formats === 'string' ? o.formats.split(',') : ['a4', 'telephone'];
+    const r = exporterProgramme(id, path.join(dossierSaison(), '_programmes', 'exports'), { pdf: Boolean(o.pdf), formats });
+    const lignes = [`Fiches du programme dans ${r.dossier} (sans donnée personnelle, à remettre aux joueurs) :`, ...r.fichiers.map((f) => `  - ${f}`)];
+    if (r.pdf.demande && !r.pdf.ok) lignes.push(`PDF non produit : ${r.pdf.raison}`);
+    sortir(0, lignes.join('\n'));
+  }
   const fichier = o._[0];
   if (!fichier) sortir(1, 'Usage : exporter <seance.yaml|semaine.yaml|match.yaml|effectif.yaml> [--pdf] [--formats a4,telephone]');
   const erreurs = validerChemin(path.resolve(fichier)).flatMap((r) => r.erreurs);
@@ -394,6 +413,41 @@ commandes.charge = (o) => {
     ...b.alertes.map((a) => `→ ${a.message}`),
     'Repères d\'entraînement (hypothèses), pas des indicateurs médicaux.',
   ].filter(Boolean).join('\n'));
+};
+
+commandes.tests = (o) => {
+  const id = o._[0];
+  const { d } = chargerEffectif(id);
+  const ft = path.join(d, 'tests.yaml');
+  const tests = existsSync(ft) ? lireYaml(ft) : { equipe: id, resultats: [] };
+  const ref = new Map(referenceTests().tests.map((t) => [t.id, t]));
+  if (o.resultats !== undefined) {
+    if (typeof o.date !== 'string' || typeof o.test !== 'string' || typeof o.resultats !== 'string') sortir(1, `Indiquer --date, --test (${[...ref.keys()].join(', ')}) et --resultats J01=…,J02=…`);
+    const nouveaux = o.resultats.split(',').map((x) => x.trim().split('=')).map(([c, v]) => ({ date: o.date, test: o.test, code: c.toUpperCase(), valeur: Number(String(v).replace(',', '.')) }));
+    const avant = existsSync(ft) ? readFileSync(ft, 'utf8') : null;
+    const cles = new Set(nouveaux.map((r) => `${r.code}`));
+    tests.resultats = [...tests.resultats.filter((r) => !(String(r.date) === o.date && r.test === o.test && cles.has(r.code))), ...nouveaux];
+    ecrireYaml(ft, tests, '# Tests physiques — en codes, 16 ans et plus, sans commentaire ni classement.');
+    const erreurs = validerChemin(ft).flatMap((r) => r.erreurs);
+    if (erreurs.length) {
+      if (avant === null) rmSync(ft);
+      else writeFileSync(ft, avant);
+      sortir(1, `Résultats non enregistrés :\n${erreurs.map((e) => `  - ${e}`).join('\n')}`);
+    }
+    sortir(0, `${nouveaux.length} résultat(s) au test « ${ref.get(o.test).libelle} » du ${o.date}.`);
+  }
+  if (!tests.resultats.length) sortir(0, `Aucun test noté pour ${id}.`);
+  const p = progression(tests);
+  if (o.json) sortir(0, JSON.stringify(p, null, 2));
+  const lignes = [`Progression de chaque joueur (pas de classement, pas de norme) :`];
+  for (const [test, codes] of Object.entries(p)) {
+    const t = ref.get(test);
+    lignes.push(`  ${t?.libelle || test} (${t?.unite || ''}) :`);
+    for (const [code, v] of Object.entries(codes).sort()) {
+      lignes.push(`    ${code} : ${v.premier.valeur} (${v.premier.date})${v.evolution === null ? '' : ` → ${v.dernier.valeur} (${v.dernier.date}), ${v.evolution > 0 ? '+' : ''}${v.evolution}${v.mieux === true ? ' — progrès' : v.mieux === false ? ' — en retrait' : ' — stable'}`}`);
+    }
+  }
+  sortir(0, lignes.join('\n'));
 };
 
 commandes.rotation = (o) => {

@@ -1,0 +1,40 @@
+id: renforcement-poids-du-corps
+titre: Circuit de renforcement au poids du corps
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: preparation-physique
+lieu: terrain
+charge_externe: aucune
+categories: [m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 20
+effectif: { min: 6, max: 30 }
+espace: { longueur: 20, largeur: 15 }
+materiel: [6 plots, chronomètre]
+but: Renforcer jambes, tronc et haut du corps sans matériel, en fin de séance ou pendant la trêve.
+organisation: "Six ateliers en cercle, 30 secondes d'effort et 30 secondes de récupération, deux tours : squats, fentes alternées, pompes, gainage face, pont fessier, gainage latéral."
+consignes:
+  - Mouvement lent et contrôlé avant de chercher la vitesse.
+  - Dos droit et genoux dans l'axe des pieds sur les squats et les fentes.
+  - Gainage sans creuser le dos ; arrêter avant de perdre la position.
+variables:
+  simplifier: [20 s d'effort, Pompes sur les genoux]
+  complexifier: [Trois tours, Fentes sautées (16 ans et plus)]
+criteres_reussite: [Technique propre à chaque atelier, Récupération respectée]
+securite: [Pas à J-2 ou moins d'un match, Arrêter un exercice qui fait mal]
+sources: [lloyd-2014-renforcement-jeunes]
+schema:
+  surface: { type: atelier, longueur: 20, largeur: 15 }
+  elements:
+    - { type: plot, x: 4, y: 3 }
+    - { type: plot, x: 10, y: 2 }
+    - { type: plot, x: 16, y: 3 }
+    - { type: plot, x: 16, y: 12 }
+    - { type: plot, x: 10, y: 13 }
+    - { type: plot, x: 4, y: 12 }
+    - { type: educateur, x: 10, y: 7.5, label: E }
+  trajets:
+    - { type: replacement, de: [4, 3], a: [10, 2] }
+    - { type: replacement, de: [10, 2], a: [16, 3] }
+relecture: { statut: a-relire }

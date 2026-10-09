@@ -127,6 +127,62 @@ sources:
     droits: résumer, citer
     statut: a-verifier
     note: Monotonie (moyenne journalière / écart-type) et contrainte de la semaine, utilisées au lot 4 comme repères.
+  - id: naughton-2021-fatigue-rugby
+    titre: "Quantifying Fatigue in the Rugby Codes: The Interplay Between Collision Characteristics and Neuromuscular Performance, Biochemical Measures, and Self-Reported Assessments of Fatigue"
+    auteurs: Mitchell Naughton, Scott McLean, Tannath J. Scott, Dan Weaving, Colin Solomon
+    editeur: Frontiers in Physiology, 12 (doi 10.3389/fphys.2021.711634)
+    url: https://www.frontiersin.org/articles/10.3389/fphys.2021.711634/full
+    publie_le: 2021-10-29
+    consulte_le: 2026-10-09
+    type: litterature
+    droits: CC BY (Frontiers) — résumer, citer
+    statut: consultee
+    note: "Revue (rugby à XV, à XIII, à 7) : après un match, performance neuromusculaire en baisse, marqueurs de dommages musculaires et douleurs en hausse, écarts les plus grands entre 12 et 36 h, retour le plus souvent entre 24 et 72 h. Appuie la séance de récupération à J+1 / J+2 et l'absence de gros contact juste après un match (lot 4, issue #27)."
+  - id: world-rugby-activate
+    titre: Activate — programme de préparation physique pour réduire le risque de blessure
+    editeur: World Rugby (Passport), programme conçu avec l'Université de Bath et la RFU
+    url: https://passport.world.rugby/injury-prevention-and-risk-management/activate/
+    consulte_le: 2026-10-09
+    type: world-rugby
+    droits: © World Rugby — résumer, renvoyer, ne pas reproduire
+    statut: consultee
+    note: Échauffement préventif en niveaux (au moins 6 à 8 semaines par niveau), versions jeunes et adultes, version jour de match ; efficacité annoncée surtout pour 3 séances ou plus par semaine. coach-rugby en reprend les principes (équilibre, renforcement, pliométrie, réceptions et changements d'appui) sans reproduire les exercices.
+  - id: hislop-2017-activate
+    titre: "Reducing musculoskeletal injury and concussion risk in schoolboy rugby players with a pre-activity movement control exercise programme: a cluster randomised controlled trial"
+    auteurs: Michael D. Hislop et al.
+    editeur: British Journal of Sports Medicine, 51(15), 1140-1146
+    publie_le: "2017"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: "Essai sur un échauffement de contrôle du mouvement chez des 14-18 ans (équilibre, renforcement, pliométrie, réceptions) ; effets plus nets avec une pratique régulière. Résultats discutés : présenter comme une piste, pas comme une garantie."
+  - id: lloyd-2014-renforcement-jeunes
+    titre: "Position statement on youth resistance training: the 2014 International Consensus"
+    auteurs: Rhodri S. Lloyd, Avery D. Faigenbaum, Michael H. Stone et al.
+    editeur: British Journal of Sports Medicine, 48(7), 498-505 (doi 10.1136/bjsports-2013-092952)
+    publie_le: "2014"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: Consensus international sur le renforcement musculaire des jeunes (encadrement qualifié, technique avant la charge, progression). Base des repères M14-M15 (apprentissage technique encadré).
+  - id: nsca-essentials-2016
+    titre: Essentials of Strength Training and Conditioning (4e édition)
+    auteurs: G. Gregory Haff, N. Travis Triplett (dir.)
+    editeur: NSCA, Human Kinetics
+    publie_le: "2016"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: Référence générale de musculation et de tests de terrain (sprint, saut, sécurité en salle). Repères de séries et répétitions en hypothèse.
+  - id: buchheit-2008-30-15
+    titre: "The 30-15 Intermittent Fitness Test: accuracy for individualizing interval training of young intermittent sport players"
+    auteurs: Martin Buchheit
+    editeur: Journal of Strength and Conditioning Research, 22, 365-374
+    publie_le: "2008"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: Test intermittent 30-15 (30 s de course, 15 s de récupération, vitesse croissante). Protocole résumé, bande-son non fournie.
   - id: bompa-haff-2009
     titre: "Periodization: Theory and Methodology of Training (5e édition)"
     auteurs: Tudor O. Bompa, G. Gregory Haff
@@ -135,4 +191,4 @@ sources:
     type: litterature
     droits: résumer, citer
     statut: a-verifier
-    note: Principes de périodisation (macrocycle, mésocycles, microcycles, affûtage) repris comme hypothèses dans planification.yaml.
+    note: "Principes de périodisation (macrocycle, mésocycles, microcycles, affûtage) repris comme hypothèses dans planification.yaml. Référence bibliographique vérifiée le 2026-10-09 (5e édition, Human Kinetics, 2009, ISBN 9780736074834 ; une 6e édition existe, avec C. A. Buzzichelli) ; contenu non relu pour ce projet."

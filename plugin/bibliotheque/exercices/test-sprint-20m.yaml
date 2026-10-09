@@ -1,0 +1,36 @@
+id: test-sprint-20m
+titre: "Test : sprint de 20 mètres"
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: test-physique
+lieu: terrain
+categories: [m19, seniors]
+niveau: intermediaire
+contact: aucun
+duree_min: 20
+effectif: { min: 2, max: 30 }
+espace: { longueur: 40, largeur: 10 }
+materiel: [4 plots, Chronomètre ou cellules, Mètre-ruban]
+but: Suivre la vitesse de chaque joueur d'un test à l'autre (début de saison, mi-saison), sans comparaison entre joueurs.
+organisation: "Après un échauffement complet, départ arrêté un pied devant, derrière la ligne ; course jusqu'au plot à 20 m, décélération sur 15 m. Deux essais, 2 à 3 minutes de récupération, on garde le meilleur temps."
+consignes:
+  - Même terrain, mêmes chaussures et même heure d'un test à l'autre.
+  - Le chronomètre démarre au premier mouvement du joueur.
+variables:
+  simplifier: [Un seul essai]
+  complexifier: [Temps intermédiaire à 10 m]
+criteres_reussite: [Conditions identiques d'un test à l'autre, "Résultat noté en code (J01), jamais affiché ni classé"]
+securite: [Échauffement complet avant le test, Pas par terrain glissant ou gelé, Zone de décélération dégagée]
+sources: [nsca-essentials-2016]
+schema:
+  surface: { type: atelier, longueur: 40, largeur: 10 }
+  elements:
+    - { type: plot, x: 3, y: 3 }
+    - { type: plot, x: 3, y: 7 }
+    - { type: plot, x: 23, y: 3 }
+    - { type: plot, x: 23, y: 7 }
+    - { type: attaquant, x: 2, y: 5, label: A1 }
+    - { type: educateur, x: 23, y: 9, label: E }
+  trajets:
+    - { type: course, de: [2, 5], a: [37, 5] }
+relecture: { statut: a-relire }

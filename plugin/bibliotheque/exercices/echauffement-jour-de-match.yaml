@@ -1,0 +1,37 @@
+id: echauffement-jour-de-match
+titre: Échauffement préventif court (jour de match)
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: prevention
+lieu: terrain
+categories: [m14, m15f, m16, m18f, m19, seniors]
+niveau: intermediaire
+contact: aucun
+duree_min: 10
+effectif: { min: 6, max: 30 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [6 plots, ballons]
+but: Version courte de l'échauffement préventif, sans fatigue, avant l'échauffement rugby d'avant-match.
+organisation: "Trois temps : mobilité en course (3 min), activation (fentes, gainage court, 5 sauts-réceptions) (4 min), trois accélérations avec changements d'appui (3 min)."
+consignes:
+  - Mobilité des hanches, des épaules et des chevilles en trottinant.
+  - "Activation : 6 fentes, 2 x 15 s de gainage, 5 sauts avec réception stable."
+  - Trois accélérations progressives avec un changement d'appui.
+variables:
+  simplifier: [Supprimer les sauts]
+  complexifier: [Accélérations au signal]
+criteres_reussite: [Joueurs prêts sans être fatigués]
+securite: [Pas de renforcement lourd le jour du match, Plus long par temps froid]
+sources: [world-rugby-activate]
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20 }
+  elements:
+    - { type: plot, x: 2, y: 5 }
+    - { type: plot, x: 28, y: 5 }
+    - { type: plot, x: 15, y: 15 }
+    - { type: attaquant, x: 3, y: 8, label: A1 }
+    - { type: attaquant, x: 3, y: 11, label: A2 }
+  trajets:
+    - { type: course, de: [3, 8], a: [27, 8] }
+    - { type: course, de: [3, 11], a: [15, 15] }
+relecture: { statut: a-relire }

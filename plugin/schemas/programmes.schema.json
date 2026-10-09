@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:programmes",
+  "title": "Programmes hors terrain (références) — génériques, sans donnée personnelle",
+  "type": "object",
+  "required": ["version_schema", "statut", "programmes"],
+  "additionalProperties": false,
+  "properties": {
+    "version_schema": { "const": 1 },
+    "statut": { "enum": ["hypothese", "a-verifier", "verifie"] },
+    "programmes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "titre", "categories", "lieu", "moment", "seances_par_semaine", "duree_min", "seances", "securite"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "cr:communs#/$defs/identifiant" },
+          "titre": { "type": "string" },
+          "categories": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "cr:communs#/$defs/categorie" } },
+          "lieu": { "enum": ["terrain", "salle", "domicile"] },
+          "moment": { "enum": ["treve", "intersaison", "saison", "toute-saison"] },
+          "seances_par_semaine": { "type": "integer", "minimum": 1, "maximum": 6 },
+          "duree_min": { "type": "integer", "minimum": 10, "maximum": 120 },
+          "seances": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["titre", "contenu"],
+              "additionalProperties": false,
+              "properties": { "titre": { "type": "string" }, "contenu": { "type": "array", "minItems": 1, "items": { "type": "string" } } }
+            }
+          },
+          "fiches": { "type": "array", "items": { "$ref": "cr:communs#/$defs/identifiant" } },
+          "securite": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "sources": { "type": "array", "items": { "$ref": "cr:communs#/$defs/refSource" } }
+        }
+      }
+    }
+  }
+}

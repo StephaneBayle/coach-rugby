@@ -15,6 +15,22 @@ comment c'est programmé. Format inspiré de
   des repères (semaine beaucoup plus chargée, semaine peu variée). Ce sont
   des repères d'entraînement, jamais des indicateurs médicaux. À partir de
   M14 ; l'intensité par joueur seulement pour les 16 ans et plus.
+- Prévention : quatre échauffements préventifs (école de rugby, jeunes,
+  adultes, jour de match), inspirés du programme Activate de World Rugby,
+  et des conseils pour adapter la séance à la chaleur, au froid, à un
+  terrain gelé ou gras.
+- Reprise après le feu vert du médecin : des étapes d'entraînement (sans
+  contact, contact contrôlé, contact plein, match), sans aucune durée ;
+  pour une commotion, renvoi au protocole de la FFR.
+- Préparation physique sur le terrain, à la maison ou en salle de
+  musculation : pas de salle avant M14 ; de M14 à M16, apprentissage des
+  mouvements toujours encadré par un adulte ; charges qui progressent à
+  partir de 16 ans. Indiquez si votre club a une salle, ou quels joueurs y
+  vont de leur côté (16 ans et plus).
+- Programmes à remettre aux joueurs (trêve, intersaison, salle), en fiche
+  A4 ou téléphone, sans aucune donnée personnelle.
+- Tests physiques (16 ans et plus) : sprint, saut, course intermittente ;
+  le plugin suit la progression de chacun, sans classement ni norme.
 
 ## [0.3.0] — 2026-10-08
 

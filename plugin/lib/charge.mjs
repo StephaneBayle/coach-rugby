@@ -109,6 +109,15 @@ export function controlerCharge(charge, { equipe = null, effectif = null } = {},
   return erreurs;
 }
 
+// `acces_salle` par joueur : seulement pour les 16 ans et plus.
+export function controlerAccesSalle(effectif, equipe, p = parametresCharge()) {
+  if (!equipe) return [];
+  const ref = chargerCategories();
+  return effectif.joueurs
+    .filter((j) => j.acces_salle && !p.publics.individuel.categories.includes(categorieDe(j.code, effectif, equipe, ref)))
+    .map((j) => `${j.code} : « accès salle » noté seulement pour les 16 ans et plus (${p.publics.individuel.categories.join(', ')})`);
+}
+
 // Jours écoulés depuis la dernière entrée (pour les relances).
 export const joursDepuisDerniere = (charge, date) => {
   const d = (charge?.entrees || []).map((e) => String(e.date)).sort().at(-1);

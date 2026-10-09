@@ -1,0 +1,97 @@
+# Programmes hors terrain — coach-rugby (CC BY-SA 4.0).
+# Génériques et SANS DONNÉE PERSONNELLE : la fiche se remet aux joueurs.
+# Repères de volume = HYPOTHÈSES PÉDAGOGIQUES, à adapter par le coach.
+# Charges en sensations (répétitions en réserve), jamais en kilos.
+version_schema: 1
+statut: hypothese
+programmes:
+  - id: treve-jeunes
+    titre: "Trêve : rester en forme (M14 à M19)"
+    categories: [m14, m15f, m16, m18f, m19]
+    lieu: domicile
+    moment: treve
+    seances_par_semaine: 2
+    duree_min: 30
+    seances:
+      - titre: Bouger en s'amusant
+        contenu: ["20 à 30 minutes de footing facile, de vélo ou d'un autre sport", "Finir par 5 minutes de mobilité"]
+      - titre: Renforcement à la maison
+        contenu: ["Circuit au poids du corps : squats, fentes, pompes, gainage face et côté, pont fessier", "2 tours de 30 s d'effort et 30 s de pause", "Mobilité et souplesse pour finir"]
+    fiches: [renforcement-poids-du-corps, mobilite-et-souplesse]
+    securite: ["Pas de douleur : on s'arrête et on en parle à un adulte", "Repos complet au moins quelques jours pendant la trêve", "Boire de l'eau"]
+    sources: [lloyd-2014-renforcement-jeunes]
+  - id: treve-adultes
+    titre: "Trêve : entretien (adultes)"
+    categories: [m19, seniors]
+    lieu: domicile
+    moment: treve
+    seances_par_semaine: 2
+    duree_min: 40
+    seances:
+      - titre: Course
+        contenu: ["10 minutes faciles", "8 à 10 fois 30 s rapide / 30 s facile", "10 minutes faciles"]
+      - titre: Renforcement et mobilité
+        contenu: ["Circuit au poids du corps, 3 tours de 30 s / 30 s", "Ischio-jambiers et gainage (version de l'échauffement préventif)", "10 minutes de mobilité"]
+    fiches: [renforcement-poids-du-corps, mobilite-et-souplesse, echauffement-preventif-adultes]
+    securite: ["Quelques jours de repos complet d'abord", "Pas de reprise brutale juste avant le retour au club"]
+    sources: [naughton-2021-fatigue-rugby]
+  - id: intersaison-adultes
+    titre: "Intersaison : préparer la reprise (adultes, 4 à 6 semaines)"
+    categories: [m19, seniors]
+    lieu: domicile
+    moment: intersaison
+    seances_par_semaine: 3
+    duree_min: 45
+    seances:
+      - titre: Endurance progressive
+        contenu: ["Semaines 1-2 : 25 à 35 minutes faciles", "Semaines 3-6 : ajouter des fractions courtes (15 s / 15 s, puis 30 s / 30 s)"]
+      - titre: Renforcement
+        contenu: ["Circuit au poids du corps ou séance en salle (voir le programme salle intersaison)", "Gainage et prévention ischio-jambiers"]
+      - titre: Vitesse et appuis
+        contenu: ["Après un échauffement complet : 6 à 8 accélérations de 20 m", "Changements d'appui"]
+    fiches: [renforcement-poids-du-corps, echauffement-preventif-adultes, test-sprint-20m]
+    securite: ["Augmenter le volume progressivement, semaine après semaine", "Douleur qui persiste : professionnel de santé"]
+    sources: [bompa-haff-2009]
+  - id: salle-technique-jeunes
+    titre: "Salle : apprendre les mouvements (M14 à M16, encadré)"
+    categories: [m14, m15f, m16, m18f]
+    lieu: salle
+    moment: toute-saison
+    seances_par_semaine: 1
+    duree_min: 45
+    seances:
+      - titre: Technique des mouvements de base
+        contenu: ["Échauffement de 10 minutes", "Squat, charnière de hanche, pousser, tirer, gainage : 2 à 3 séries de 8 à 10 répétitions lentes, à vide ou très léger", "On ajoute un peu de charge seulement si la technique est parfaite"]
+    fiches: [salle-apprentissage-mouvements]
+    securite: ["Toujours encadré par un adulte formé à la musculation", "Jamais de charge maximale ni de séries à l'échec", "Pas à J-2 ou moins d'un match"]
+    sources: [lloyd-2014-renforcement-jeunes]
+  - id: salle-force-intersaison
+    titre: "Salle : développer la force à l'intersaison (16 ans et plus)"
+    categories: [m19, seniors]
+    lieu: salle
+    moment: intersaison
+    seances_par_semaine: 3
+    duree_min: 60
+    seances:
+      - titre: Force jambes et tronc
+        contenu: ["Squat ou presse, soulevé de terre roumain, fentes", "3 à 4 séries de 4 à 8 répétitions, 2 ou 3 répétitions en réserve"]
+      - titre: Force haut du corps
+        contenu: ["Développé couché ou pompes lestées, tirage horizontal, tractions", "3 à 4 séries de 6 à 8 répétitions"]
+      - titre: Prévention et récupération
+        contenu: ["Ischio-jambiers et épaules", "Vélo ou rameur facile, 20 minutes"]
+    fiches: [salle-circuit-force-rugby, salle-prevention-ischios-epaules, salle-cardio-recuperation]
+    securite: ["Technique avant la charge, parade à la barre", "Augmenter la charge seulement quand toutes les séries sont propres"]
+    sources: [nsca-essentials-2016]
+  - id: salle-entretien-saison
+    titre: "Salle : entretien en saison (16 ans et plus)"
+    categories: [m19, seniors]
+    lieu: salle
+    moment: saison
+    seances_par_semaine: 1
+    duree_min: 45
+    seances:
+      - titre: Entretien de la force
+        contenu: ["Deux exercices jambes, deux exercices haut du corps", "2 à 3 séries, même intensité qu'à l'intersaison mais moins de séries", "Au plus tard à J-3 d'un match ; rien de lourd à J-2 ou moins"]
+    fiches: [salle-circuit-force-rugby, salle-prevention-ischios-epaules]
+    securite: ["Rien de lourd à J-2 ou moins d'un match", "Compter la séance dans la charge de la semaine"]
+    sources: [nsca-essentials-2016]

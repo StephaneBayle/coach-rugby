@@ -1,0 +1,17 @@
+# Tests physiques de terrain — coach-rugby (CC BY-SA 4.0).
+# 16 ans et plus seulement (parametres-charge.yaml, publics.individuel).
+# AUCUNE NORME : on suit la progression de chaque joueur, jamais une
+# comparaison ou un classement entre joueurs. Protocoles résumés dans les
+# fiches de la bibliothèque, sources à vérifier.
+version_schema: 1
+statut: hypothese
+tests:
+  - { id: sprint-20m, libelle: Sprint de 20 mètres, unite: s, meilleur: plus-petit, decimales: 2, ecart_notable: 0.03, fiche: test-sprint-20m, source: nsca-essentials-2016 }
+  - { id: saut-longueur, libelle: Saut en longueur sans élan, unite: cm, meilleur: plus-grand, decimales: 0, ecart_notable: 4, fiche: test-saut-longueur-sans-elan, source: nsca-essentials-2016 }
+  - { id: course-30-15, libelle: Course intermittente 30-15 (vitesse du dernier palier), unite: km/h, meilleur: plus-grand, decimales: 1, ecart_notable: 0.5, fiche: test-30-15-intermittent, source: buchheit-2008-30-15 }
+# ecart_notable : en dessous, on parle de résultat « stable » (marge de
+# mesure sur le terrain, hypothèse à vérifier).
+moments:
+  valeur: [reprise, mi-saison, fin-de-saison]
+  statut: hypothese
+  note: "Deux ou trois fois par saison suffisent ; jamais à moins de 3 jours d'un match pour la course 30-15."

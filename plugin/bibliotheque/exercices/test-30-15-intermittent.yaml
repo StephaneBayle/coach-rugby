@@ -1,0 +1,37 @@
+id: test-30-15-intermittent
+titre: "Test : course intermittente 30-15"
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: test-physique
+lieu: terrain
+categories: [m19, seniors]
+niveau: confirme
+contact: aucun
+duree_min: 35
+effectif: { min: 2, max: 20 }
+espace: { longueur: 40, largeur: 20 }
+materiel: [Plots tous les 3 m sur 40 m, Enceinte et bande-son officielle du test]
+but: Suivre l'endurance intermittente de chaque joueur (vitesse du dernier palier réussi) et en tirer des allures pour le fractionné.
+organisation: "Allers-retours sur 40 m : 30 secondes de course à une vitesse imposée par la bande-son, puis 15 secondes de marche ; la vitesse augmente à chaque palier. Le test s'arrête quand le joueur ne tient plus l'allure trois fois de suite."
+consignes:
+  - Utiliser la bande-son officielle du test (non fournie par coach-rugby) ; résumé du protocole ici, à vérifier dans la source.
+  - Noter la vitesse du dernier palier réussi.
+variables:
+  simplifier: [Faire passer le test en deux groupes]
+  complexifier: [Comparer avec le test précédent pour ajuster les allures]
+criteres_reussite: [Joueur arrêté dès qu'il ne tient plus l'allure, "Résultat noté en code, jamais affiché ni classé"]
+securite: [Test très exigeant ; pas à moins de 3 jours d'un match, Joueur qui se sent mal = arrêt immédiat, Eau à disposition]
+sources: [buchheit-2008-30-15]
+schema:
+  surface: { type: atelier, longueur: 40, largeur: 20 }
+  elements:
+    - { type: plot, x: 0, y: 5 }
+    - { type: plot, x: 20, y: 5 }
+    - { type: plot, x: 40, y: 5 }
+    - { type: attaquant, x: 1, y: 8, label: A1 }
+    - { type: attaquant, x: 1, y: 11, label: A2 }
+    - { type: educateur, x: 20, y: 16, label: E }
+  trajets:
+    - { type: course, de: [1, 8], a: [39, 8] }
+    - { type: replacement, de: [39, 11], a: [1, 11] }
+relecture: { statut: a-relire }

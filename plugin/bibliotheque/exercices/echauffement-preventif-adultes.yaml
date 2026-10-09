@@ -1,0 +1,42 @@
+id: echauffement-preventif-adultes
+titre: Échauffement préventif (adultes)
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: prevention
+lieu: terrain
+categories: [m19, seniors]
+niveau: intermediaire
+contact: aucun
+duree_min: 15
+effectif: { min: 6, max: 40 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [8 plots, ballons]
+but: Échauffement préventif à faire au moins trois fois par semaine (séances et match), qui ajoute au travail des jeunes un renforcement des ischio-jambiers et des épaules.
+organisation: "Même structure que la version jeunes, avec en plus un temps de renforcement par deux : ischio-jambiers (descente contrôlée à genoux, partenaire qui tient les chevilles) et épaules (pompes lentes, appuis bras tendus)."
+consignes:
+  - Course et mobilité, puis équilibre sur un pied avec passes.
+  - "Renforcement : fentes, pont fessier sur une jambe, gainage."
+  - "Ischio-jambiers par deux : descente lente vers l'avant, mains prêtes à amortir, 3 à 5 répétitions."
+  - "Épaules : pompes lentes, puis maintien bras tendus 20 s."
+  - Sauts et réceptions, puis changements d'appui à vitesse croissante.
+variables:
+  simplifier: [Descente des ischio-jambiers sur une petite amplitude, Pompes sur les genoux]
+  complexifier: [Réceptions sur un pied après un saut latéral, Changements d'appui avec ballon]
+criteres_reussite: [Descente contrôlée sans à-coup, Routine tenue toute la saison]
+securite: [Progresser sur plusieurs semaines pour les ischio-jambiers, Arrêter un exercice douloureux et en parler à un professionnel de santé, Pas à J-1 en version complète (voir la version jour de match)]
+sources: [world-rugby-activate]
+pour_aller_plus_loin:
+  - { source: world-rugby-activate, note: "Programme officiel en niveaux (adultes) ; les niveaux s'enchaînent toutes les 6 à 8 semaines." }
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20 }
+  elements:
+    - { type: plot, x: 2, y: 4 }
+    - { type: plot, x: 28, y: 4 }
+    - { type: attaquant, x: 8, y: 12, label: A1 }
+    - { type: attaquant, x: 10, y: 12, label: A2 }
+    - { type: attaquant, x: 18, y: 12, label: A3 }
+    - { type: attaquant, x: 20, y: 12, label: A4 }
+    - { type: educateur, x: 15, y: 18, label: E }
+  trajets:
+    - { type: course, de: [3, 7], a: [27, 7] }
+relecture: { statut: a-relire }

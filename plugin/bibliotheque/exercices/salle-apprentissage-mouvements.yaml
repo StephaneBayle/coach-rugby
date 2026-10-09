@@ -1,0 +1,40 @@
+id: salle-apprentissage-mouvements
+titre: "Salle : apprendre les mouvements de base (M14 à M16, encadré)"
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: preparation-physique
+lieu: salle
+charge_externe: legere
+categories: [m14, m15f, m16, m18f]
+niveau: decouverte
+contact: aucun
+duree_min: 30
+effectif: { min: 2, max: 12 }
+espace: { longueur: 12, largeur: 8 }
+materiel: [Bâtons ou barres à vide, Haltères légers, Tapis]
+but: Apprendre la technique des mouvements de base (s'accroupir, se pencher en avant dos droit, pousser, tirer, gainer) avant toute charge, sous l'œil d'un adulte formé.
+organisation: "Quatre ateliers de 6 minutes, 2 à 3 séries de 8 à 10 répétitions lentes : squat au bâton, charnière de hanche au bâton, pompes et tirage avec haltères légers, gainage. Un adulte par atelier ou un adulte qui corrige en continu."
+consignes:
+  - La technique d'abord ; on ajoute une petite charge seulement quand le mouvement est propre à chaque répétition.
+  - Dos neutre, genoux dans l'axe des pieds, mouvement contrôlé à la montée comme à la descente.
+  - On s'arrête quand la technique se dégrade, pas à l'échec.
+variables:
+  simplifier: [À vide seulement, Séries de 6]
+  complexifier: [Haltères un peu plus lourds si la technique reste parfaite]
+criteres_reussite: [Mouvement propre sur toutes les répétitions, Le joueur sait corriger sa position]
+securite: [Séance toujours encadrée par un adulte formé à la musculation, Pas de charge maximale ni de répétitions à l'échec, Matériel adapté à la taille des jeunes, Pas à J-2 ou moins d'un match]
+sources: [lloyd-2014-renforcement-jeunes]
+pour_aller_plus_loin:
+  - { source: lloyd-2014-renforcement-jeunes, note: "Consensus international : encadrement qualifié, technique avant la charge, progression prudente." }
+schema:
+  surface: { type: atelier, longueur: 12, largeur: 8 }
+  elements:
+    - { type: plot, x: 2, y: 2, label: S1 }
+    - { type: plot, x: 10, y: 2, label: S2 }
+    - { type: plot, x: 10, y: 6, label: S3 }
+    - { type: plot, x: 2, y: 6, label: S4 }
+    - { type: educateur, x: 6, y: 4, label: E }
+  trajets:
+    - { type: replacement, de: [2, 2], a: [10, 2] }
+    - { type: replacement, de: [10, 6], a: [2, 6] }
+relecture: { statut: a-relire }
