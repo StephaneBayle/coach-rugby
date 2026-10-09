@@ -11,7 +11,7 @@
 //       └── seances/<AAAA-MM-JJ>/  seance.yaml, relecture.md, exports/
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
-import { FICHIER_CONFIG, FICHIER_JOUEURS_PROTEGES, racineGit } from './chemins.mjs';
+import { depotPubliable, FICHIER_CONFIG, FICHIER_JOUEURS_PROTEGES } from './chemins.mjs';
 import { controlerExercice } from './bibliotheque.mjs';
 import { controlerEquipe, controlerSaison } from './controles.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
@@ -49,9 +49,9 @@ export function initialiser(dossier, { structure = 'club', nom } = {}) {
     mkdirSync(perso, { recursive: true });
     crees.push('_bibliotheque-perso/exercices/');
   }
-  const git = racineGit(dossier);
+  const git = depotPubliable(dossier);
   const alerte = git
-    ? `Attention : le dossier saison est dans un dépôt git (${git}). Vos données pourraient être publiées par erreur : choisissez un dossier hors de tout dépôt.`
+    ? `Attention : le dossier saison est dans un dépôt git relié à un serveur (${git}). Vos données pourraient être publiées par erreur : choisissez un dossier hors de tout dépôt.`
     : null;
   return { crees, alerte };
 }

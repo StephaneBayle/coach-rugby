@@ -9,7 +9,7 @@
 //      skills depuis ${user_config.dossier_saison}) ou
 //      CLAUDE_PLUGIN_OPTION_DOSSIER_SAISON (environnement des hooks) ;
 //   4. ~/Rugby-Saisons.
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { homedir } from 'node:os';
 import path from 'node:path';
 
@@ -35,6 +35,29 @@ export function dossierSaison({ cwd = process.cwd(), env = process.env } = {}) {
 
 export const fichierConfig = (dossier = dossierSaison()) => path.join(dossier, FICHIER_CONFIG);
 export const fichierJoueursProteges = (dossier = dossierSaison()) => path.join(dossier, FICHIER_JOUEURS_PROTEGES);
+
+// Racine git contenant `dossier` et reliée à un dépôt distant (donc dont le
+// contenu peut être publié), ou null. Un dépôt purement local ne publie rien ;
+// l'alerte réapparaît dès qu'un dépôt distant est ajouté (vérifiée à chaque
+// session).
+export function depotPubliable(dossier) {
+  const racine = racineGit(dossier);
+  if (!racine) return null;
+  try {
+    let git = path.join(racine, '.git');
+    if (statSync(git).isFile()) {
+      const cible = /gitdir:\s*(.+)/.exec(readFileSync(git, 'utf8'))?.[1]?.trim();
+      if (cible) git = path.resolve(racine, cible);
+    }
+    const config = path.join(git, 'config');
+    const commun = path.join(git, 'commondir');
+    const lire = (f) => (existsSync(f) ? readFileSync(f, 'utf8') : '');
+    const texte = lire(config) + (existsSync(commun) ? lire(path.join(path.resolve(git, lire(commun).trim()), 'config')) : '');
+    return /\[remote "/.test(texte) ? racine : null;
+  } catch {
+    return racine; // dans le doute, on prévient
+  }
+}
 
 // Racine git contenant `dossier`, ou null.
 export function racineGit(dossier) {

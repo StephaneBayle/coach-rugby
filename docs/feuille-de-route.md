@@ -27,7 +27,7 @@ un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans l
 | 3 | Garde RGPD : hooks et contrôle CI | fait |
 | 4 | Bibliothèque d'exercices et schémas de terrain | fait |
 | 5 | Séance et export (HTML, PDF, SVG, texte pour Mon Coach Assistant) | fait |
-| 6 | Relecteurs et évals | fait (évals écrites, non lancées : accès anticipé) |
+| 6 | Relecteurs et évals | fait (évals lancées pour la première fois le 2026-10-09) |
 | 7 | Publication de la version 0.1.0 | fait |
 
 ## Lot 2 — étapes
@@ -61,4 +61,4 @@ un point avec le mainteneur avant le lot suivant. Le suivi détaillé est dans l
 | 3 | Charge sur la fiche semaine, tableaux, relances | fait |
 | 4 | Skills `charge` et `prevention`, skills adaptés, évals | fait |
 | 5 | Deux playtests simulés et corrections ([synthèse](playtests/README.md)) | fait |
-| 6 | Publication de la version 0.4.0 | en cours |
+| 6 | Publication de la version 0.4.0 | fait |

@@ -1,7 +1,7 @@
 // Hook SessionStart : silencieux sans dossier, une ligne par équipe, alerte git.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cpSync, mkdirSync, mkdtempSync } from 'node:fs';
+import { cpSync, mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -33,6 +33,7 @@ test('une ligne par équipe avec phase, semaine et relances', () => {
 test('alerte si le dossier saison est dans un dépôt git', () => {
   const base = mkdtempSync(path.join(tmpdir(), 'cr-ss-git-'));
   mkdirSync(path.join(base, '.git'));
+  writeFileSync(path.join(base, '.git', 'config'), '[remote "origin"]\n\turl = https://example.org/x.git\n');
   const d = path.join(base, 'saisons');
   cpSync(path.join(racine, 'plugin', 'exemples', 'fictif-m10-les-ecureuils'), d, { recursive: true });
   const r = lancer({ COACH_RUGBY_DOSSIER: d, COACH_RUGBY_AUJOURDHUI: '2026-10-08' });

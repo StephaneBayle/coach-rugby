@@ -60,10 +60,11 @@ secours. Les hooks n'importent que des modules `node:*`.
 
 ## Évals
 
-`claude plugin eval` existe dans Claude Code 2.1.247, mais renvoie « currently
-in early access » sur le compte du mainteneur : les cas d'éval sont écrits au
-format documenté (`prompt.md` + `graders/*.md`) et seront lancés dès que
-l'accès est ouvert. Jamais en CI (pas de clé d'API sur GitHub).
+`claude plugin eval` fonctionne à partir de Claude Code 2.1.295 : en 2.1.247,
+il répondait « currently in early access », signe d'une version trop
+ancienne (et non d'un accès réservé au compte). Premier lancement le
+2026-10-09 (voir `docs/evals/resultats.md`). Jamais en CI (pas de clé d'API
+sur GitHub).
 
 ## Restant à vérifier sur une vraie installation
 

@@ -6,4 +6,4 @@ env:
   EVAL_COACH_RUGBY_AUJOURDHUI: "2026-10-14"
 ---
 
-Plateau samedi : j'emmène les 13 enfants de l'effectif, on aura 4 matchs de 10 minutes à 5 contre 5. Fais-les tourner équitablement et enregistre le match.
+(Nous sommes le mercredi 14 octobre 2026.) Plateau samedi : j'emmène les 13 enfants de l'effectif, on aura 4 matchs de 10 minutes à 5 contre 5. Fais-les tourner équitablement et enregistre le match.

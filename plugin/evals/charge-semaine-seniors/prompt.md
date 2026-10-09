@@ -6,4 +6,4 @@ env:
   EVAL_COACH_RUGBY_AUJOURDHUI: "2026-10-10"
 ---
 
-Grosse semaine pour l'équipe première : mardi 105 minutes, ils étaient à 8 sur 10 ; mercredi salle 75 minutes à 7 ; jeudi 90 minutes à 8 ; vendredi 60 minutes de vitesse à 6. Note tout ça et dis-moi où on en est.
+(Nous sommes le samedi 10 octobre 2026.) Grosse semaine pour l'équipe première : mardi 105 minutes, ils étaient à 8 sur 10 ; mercredi salle 75 minutes à 7 ; jeudi 90 minutes à 8 ; vendredi 60 minutes de vitesse à 6. Note tout ça et dis-moi où on en est.

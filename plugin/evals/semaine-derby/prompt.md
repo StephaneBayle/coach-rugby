@@ -6,4 +6,4 @@ env:
   EVAL_COACH_RUGBY_AUJOURDHUI: "2026-10-12"
 ---
 
-On joue le derby dimanche. Prépare-moi la semaine de l'équipe première et enregistre-la.
+(Nous sommes le lundi 12 octobre 2026.) On joue le derby dimanche. Prépare-moi la semaine de l'équipe première et enregistre-la.

@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, mkdirSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -27,11 +27,14 @@ test('init crée le dossier saison sans rien écraser', () => {
   assert.equal(lancer(['valider', d]).status, 0);
 });
 
-test('init prévient si le dossier saison est dans un dépôt git', () => {
+test('init prévient si le dossier saison est dans un dépôt git relié à un serveur, pas dans un dépôt local', () => {
   const base = mkdtempSync(path.join(tmpdir(), 'cr-git-'));
   mkdirSync(path.join(base, '.git'));
-  const r = lancer(['init'], { COACH_RUGBY_DOSSIER: path.join(base, 'saisons') });
-  assert.match(r.stdout, /dans un dépôt git/);
+  writeFileSync(path.join(base, '.git', 'config'), '[core]\n\tbare = false\n');
+  assert.doesNotMatch(lancer(['init'], { COACH_RUGBY_DOSSIER: path.join(base, 'saisons') }).stdout, /dépôt git/, 'dépôt local : rien ne peut être publié');
+  writeFileSync(path.join(base, '.git', 'config'), '[core]\n\tbare = false\n[remote "origin"]\n\turl = https://example.org/x.git\n');
+  const r = lancer(['init'], { COACH_RUGBY_DOSSIER: path.join(base, 'saisons2') });
+  assert.match(r.stdout, /dans un dépôt git relié à un serveur/);
 });
 
 test('statut sur un exemple fictif, à date fixée', () => {
