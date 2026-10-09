@@ -1,0 +1,27 @@
+# EXEMPLE FICTIF — tests physiques en codes (seniors), sans commentaire ni classement.
+equipe: seniors-f3
+resultats:
+  - { date: 2026-07-20, test: sprint-20m, code: J01, valeur: 3.31 }
+  - { date: 2026-07-20, test: sprint-20m, code: J09, valeur: 3.05 }
+  - { date: 2026-07-20, test: sprint-20m, code: J11, valeur: 2.98 }
+  - { date: 2026-07-20, test: sprint-20m, code: J15, valeur: 3.02 }
+  - { date: 2026-07-20, test: saut-longueur, code: J01, valeur: 221 }
+  - { date: 2026-07-20, test: saut-longueur, code: J09, valeur: 248 }
+  - { date: 2026-07-20, test: saut-longueur, code: J11, valeur: 255 }
+  - { date: 2026-07-20, test: saut-longueur, code: J15, valeur: 251 }
+  - { date: 2026-07-22, test: course-30-15, code: J01, valeur: 17.5 }
+  - { date: 2026-07-22, test: course-30-15, code: J09, valeur: 19.5 }
+  - { date: 2026-07-22, test: course-30-15, code: J11, valeur: 19.0 }
+  - { date: 2026-07-22, test: course-30-15, code: J15, valeur: 19.5 }
+  - { date: 2026-09-01, test: sprint-20m, code: J01, valeur: 3.24 }
+  - { date: 2026-09-01, test: sprint-20m, code: J09, valeur: 3.06 }
+  - { date: 2026-09-01, test: sprint-20m, code: J11, valeur: 2.95 }
+  - { date: 2026-09-01, test: sprint-20m, code: J15, valeur: 2.99 }
+  - { date: 2026-09-01, test: saut-longueur, code: J01, valeur: 228 }
+  - { date: 2026-09-01, test: saut-longueur, code: J09, valeur: 250 }
+  - { date: 2026-09-01, test: saut-longueur, code: J11, valeur: 254 }
+  - { date: 2026-09-01, test: saut-longueur, code: J15, valeur: 258 }
+  - { date: 2026-09-03, test: course-30-15, code: J01, valeur: 18.5 }
+  - { date: 2026-09-03, test: course-30-15, code: J09, valeur: 20.0 }
+  - { date: 2026-09-03, test: course-30-15, code: J11, valeur: 19.5 }
+  - { date: 2026-09-03, test: course-30-15, code: J15, valeur: 20.5 }

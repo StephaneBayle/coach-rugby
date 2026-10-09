@@ -17,7 +17,9 @@ import { controlerEquipe, controlerSaison } from './controles.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { valider } from './schemas.mjs';
 import { controlerCodes } from './effectif.mjs';
-import { controlerCharge } from './charge.mjs';
+import { controlerAccesSalle, controlerCharge } from './charge.mjs';
+import { controlerTests } from './tests-physiques.mjs';
+import { controlerProgrammes } from './programmes.mjs';
 import { controlerMatch } from './match.mjs';
 import { controlerCycles, controlerSemaine } from './planification.mjs';
 import { contexteSeance, controlerSeance } from './seance.mjs';
@@ -79,6 +81,8 @@ export function schemaDe(fichier) {
   if (base === 'competences.yaml') return 'competences';
   if (base === 'match.yaml') return 'match';
   if (base === 'charge.yaml') return 'charge';
+  if (base === 'tests.yaml') return 'tests';
+  if (base === 'programmes-hors-terrain.yaml') return 'programmes';
   if (base === 'seance.yaml') return 'seance';
   if (/[\\/]bibliotheque[\\/]exercices[\\/][^\\/]+\.yaml$/.test(fichier) || /[\\/]_bibliotheque-perso[\\/]exercices[\\/][^\\/]+\.yaml$/.test(fichier)) return 'exercice';
   return null;
@@ -123,6 +127,8 @@ function validerFichier(fichier) {
     if (schema === 'effectif') {
       const codes = donnees.joueurs.map((j) => j.code);
       erreurs = codes.filter((c, i) => codes.indexOf(c) !== i).map((c) => `code ${c} en double`);
+      const fe = path.join(path.dirname(fichier), 'equipe.yaml');
+      erreurs.push(...controlerAccesSalle(donnees, existsSync(fe) ? lireYaml(fe) : null));
       if (donnees.equipe !== path.basename(path.dirname(fichier))) erreurs.push(`équipe « ${donnees.equipe} » différente du dossier`);
     }
     if (schema === 'presences' || schema === 'progres') {
@@ -146,6 +152,13 @@ function validerFichier(fichier) {
       const d = path.dirname(fichier);
       const lire = (f) => (existsSync(path.join(d, f)) ? lireYaml(path.join(d, f)) : null);
       erreurs = controlerCharge(donnees, { equipe: lire('equipe.yaml'), effectif: lire('effectif.yaml') });
+      if (donnees.equipe !== path.basename(d)) erreurs.push(`équipe « ${donnees.equipe} » différente du dossier`);
+    }
+    if (schema === 'programmes') erreurs = controlerProgrammes(donnees, { sources: idsSources() });
+    if (schema === 'tests') {
+      const d = path.dirname(fichier);
+      const lire = (f) => (existsSync(path.join(d, f)) ? lireYaml(path.join(d, f)) : null);
+      erreurs = controlerTests(donnees, { equipe: lire('equipe.yaml'), effectif: lire('effectif.yaml') });
       if (donnees.equipe !== path.basename(d)) erreurs.push(`équipe « ${donnees.equipe} » différente du dossier`);
     }
     if (schema === 'match') {

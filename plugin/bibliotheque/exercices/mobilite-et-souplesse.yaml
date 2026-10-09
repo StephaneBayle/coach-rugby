@@ -1,0 +1,31 @@
+id: mobilite-et-souplesse
+titre: Mobilité et souplesse (après la séance ou à la maison)
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: preparation-physique
+lieu: domicile
+charge_externe: aucune
+categories: [m12, m14, m15f, m16, m18f, m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 12
+effectif: { min: 1, max: 40 }
+espace: { longueur: 10, largeur: 10 }
+materiel: [Tapis ou herbe sèche]
+but: Entretenir la mobilité des hanches, du dos et des épaules, sur le terrain en retour au calme ou seul à la maison.
+organisation: "Six positions tenues 30 à 45 secondes, en respirant calmement : fente basse, papillon, chat-vache, rotation du buste au sol, étirement des épaules contre un mur, accroupi profond."
+consignes:
+  - Aller jusqu'à une légère tension, jamais jusqu'à la douleur.
+  - Respirer lentement ; relâcher à l'expiration.
+variables:
+  simplifier: [Positions tenues 20 s]
+  complexifier: [Enchaîner les positions sans pause]
+criteres_reussite: [Respiration calme, Amplitude qui progresse d'une semaine à l'autre]
+securite: [Pas d'à-coups, Arrêter si une douleur apparaît]
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 10 }
+  elements:
+    - { type: attaquant, x: 3, y: 3, label: A1 }
+    - { type: attaquant, x: 7, y: 3, label: A2 }
+    - { type: attaquant, x: 5, y: 7, label: A3 }
+relecture: { statut: a-relire }

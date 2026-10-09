@@ -1,5 +1,7 @@
 // Contrôles métier, au-delà des schémas : cohérence des phases, des dates et
 // des identifiants. Chaque fonction renvoie une liste d'erreurs en français.
+import { categorieLaPlusJeune, chargerCategories } from './categories.mjs';
+import { parametresCharge } from './charge.mjs';
 import { ecartJours, lireDate } from './dates.mjs';
 
 export const PHASES_PAR_MODE = {
@@ -34,5 +36,13 @@ export function controlerSaison(saison) {
 export function controlerEquipe(equipe, nomDossier) {
   const erreurs = [];
   if (nomDossier && equipe.id !== nomDossier) erreurs.push(`id « ${equipe.id} » différent du nom du dossier « ${nomDossier} »`);
+  // Salle : pas avant M14, et toujours encadrée tant qu'il y a des moins de 16 ans.
+  if (equipe.salle?.disponible) {
+    const ref = chargerCategories();
+    const salle = parametresCharge().salle;
+    const jeune = categorieLaPlusJeune(equipe.categories, ref);
+    if (salle.poids_du_corps_seulement.categories.includes(jeune)) erreurs.push(`salle de musculation : pas avant M14 (${ref.categories[jeune].libelle} : poids du corps seulement)`);
+    else if (salle.technique.categories.includes(jeune) && !equipe.salle.encadrement) erreurs.push('salle avec des moins de 16 ans : indiquer qui encadre (salle.encadrement)');
+  }
   return erreurs;
 }

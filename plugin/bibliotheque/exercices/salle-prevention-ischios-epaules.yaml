@@ -1,0 +1,32 @@
+id: salle-prevention-ischios-epaules
+titre: "Salle : prévention ischio-jambiers et épaules"
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: prevention
+lieu: salle
+charge_externe: legere
+categories: [m19, seniors]
+niveau: intermediaire
+contact: aucun
+duree_min: 20
+effectif: { min: 2, max: 16 }
+espace: { longueur: 10, largeur: 8 }
+materiel: [Tapis, Élastiques, Haltères légers]
+but: Renforcer les ischio-jambiers et la stabilité des épaules, deux zones souvent sollicitées au rugby, en complément de l'échauffement préventif.
+organisation: "Quatre exercices, 2 à 3 séries : descente contrôlée des ischio-jambiers à genoux (partenaire aux chevilles), pont fessier sur une jambe, rotations d'épaule à l'élastique, appuis bras tendus avec déplacement des mains."
+consignes:
+  - Mouvements lents, surtout dans la phase où le muscle s'allonge.
+  - Progresser sur plusieurs semaines (amplitude, puis répétitions).
+variables:
+  simplifier: [Petite amplitude sur la descente des ischio-jambiers]
+  complexifier: [Élastique plus résistant, Appuis sur un ballon]
+criteres_reussite: [Descente contrôlée sans à-coup, Épaules stables pendant les appuis]
+securite: [Progression lente, Pas à J-1 ou J-2 d'un match en volume complet, Arrêter si douleur et en parler à un professionnel de santé]
+sources: [world-rugby-activate]
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 8 }
+  elements:
+    - { type: attaquant, x: 3, y: 3, label: A1 }
+    - { type: attaquant, x: 3, y: 5, label: A2 }
+    - { type: attaquant, x: 7, y: 4, label: A3 }
+relecture: { statut: a-relire }

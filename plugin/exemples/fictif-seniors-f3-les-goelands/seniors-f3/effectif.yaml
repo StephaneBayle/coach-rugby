@@ -4,13 +4,13 @@ joueurs:
   - { code: J01, postes: [pilier-gauche], disponible: true }
   - { code: J02, postes: [talonneur], disponible: true }
   - { code: J03, postes: [pilier-droit], disponible: true }
-  - { code: J04, postes: [deuxieme-ligne], disponible: true }
+  - { code: J04, postes: [deuxieme-ligne], disponible: true, acces_salle: true }
   - { code: J05, postes: [deuxieme-ligne], disponible: true }
   - { code: J06, postes: [troisieme-ligne-aile], disponible: true }
   - { code: J07, postes: [troisieme-ligne-aile], disponible: true }
   - { code: J08, postes: [troisieme-ligne-centre], disponible: true }
   - { code: J09, postes: [demi-de-melee], disponible: true }
-  - { code: J10, postes: [demi-d-ouverture], disponible: true }
+  - { code: J10, postes: [demi-d-ouverture], disponible: true, acces_salle: true }
   - { code: J11, postes: [ailier], disponible: true }
   - { code: J12, postes: [centre], disponible: true }
   - { code: J13, postes: [centre], disponible: true }
@@ -27,7 +27,7 @@ joueurs:
   - { code: J24, postes: [demi-de-melee], disponible: true }
   - { code: J25, postes: [demi-d-ouverture], disponible: true }
   - { code: J26, postes: [ailier], disponible: true }
-  - { code: J27, postes: [centre], disponible: true }
+  - { code: J27, postes: [centre], disponible: true, acces_salle: true }
   - { code: J28, postes: [centre], disponible: false }
   - { code: J29, postes: [ailier], disponible: true }
   - { code: J30, postes: [arriere], disponible: true }

@@ -47,6 +47,10 @@
             "type": "boolean",
             "default": true,
             "description": "false : a quitté l'équipe (le code n'est pas réattribué)."
+          },
+          "acces_salle": {
+            "type": "boolean",
+            "description": "Va en salle de son côté (16 ans et plus seulement) : pour lui proposer un programme. Aucun autre détail."
           }
         }
       }

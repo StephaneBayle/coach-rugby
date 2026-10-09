@@ -1,0 +1,41 @@
+id: salle-circuit-force-rugby
+titre: "Salle : circuit de force pour le rugby (16 ans et plus)"
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: preparation-physique
+lieu: salle
+charge_externe: progressive
+categories: [m19, seniors]
+niveau: confirme
+contact: aucun
+duree_min: 45
+effectif: { min: 2, max: 16 }
+espace: { longueur: 15, largeur: 10 }
+materiel: [Barres et disques, Haltères, Banc, Barre de traction ou poulie]
+but: Développer la force des jambes, du tronc et du haut du corps, en complément du terrain, avec une charge qui progresse sur plusieurs semaines.
+organisation: "Échauffement de 10 minutes (mobilité, séries légères), puis quatre exercices en binômes : squat ou presse, soulevé de terre roumain, développé couché ou pompes lestées, tirage horizontal ; gainage en fin de séance."
+consignes:
+  - "Repère (hypothèse) : 3 à 4 séries de 4 à 8 répétitions, en gardant 2 ou 3 répétitions en réserve."
+  - "Progression : augmenter la charge quand toutes les séries sont réussies avec une technique propre."
+  - "Intersaison : développement (plus de séries) ; en saison : entretien (moins de séries, même intensité)."
+variables:
+  simplifier: [Haltères à la place de la barre, Deux exercices seulement]
+  complexifier: [Exercices unilatéraux (fente bulgare), Travail de vitesse sous charge légère]
+criteres_reussite: [Technique stable sous charge, Progression notée en sensations (répétitions en réserve)]
+securite: [Parade sur les exercices à la barre, Technique avant la charge, Pas de séance lourde à J-2 ou moins d'un match, Aucune charge chiffrée propre à un joueur sur les fiches partagées]
+sources: [nsca-essentials-2016]
+pour_aller_plus_loin:
+  - { source: nsca-essentials-2016, note: "Référence générale : choix des exercices, progression, sécurité en salle." }
+schema:
+  surface: { type: atelier, longueur: 15, largeur: 10 }
+  elements:
+    - { type: plot, x: 3, y: 2, label: S1 }
+    - { type: plot, x: 12, y: 2, label: S2 }
+    - { type: plot, x: 12, y: 8, label: S3 }
+    - { type: plot, x: 3, y: 8, label: S4 }
+    - { type: attaquant, x: 4, y: 3, label: A1 }
+    - { type: attaquant, x: 2, y: 3, label: A2 }
+  trajets:
+    - { type: replacement, de: [3, 2], a: [12, 2] }
+    - { type: replacement, de: [12, 8], a: [3, 8] }
+relecture: { statut: a-relire }

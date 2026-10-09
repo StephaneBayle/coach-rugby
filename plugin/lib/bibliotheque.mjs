@@ -2,6 +2,7 @@
 // cohérence, compatibilité avec les règles du jour, index Markdown.
 import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
+import { parametresCharge } from './charge.mjs';
 import { chargerCategories, niveauContact } from './categories.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { controlerSchema } from './terrain.mjs';
@@ -18,6 +19,9 @@ export const THEMES = {
   defense: 'Placement défensif',
   'rugby-a-5': 'Rugby à 5 et loisir',
   'retour-au-calme': 'Retour au calme',
+  prevention: 'Prévention (échauffements préventifs)',
+  'preparation-physique': 'Préparation physique (terrain, salle, domicile)',
+  'test-physique': 'Tests physiques (16 ans et plus)',
 };
 
 export function chargerBibliotheque(dossier = DOSSIER_BIBLIOTHEQUE) {
@@ -62,6 +66,18 @@ export function controlerExercice(exercice, { ref = chargerCategories(), sources
   for (const c of exercice.categories) {
     for (const raison of incompatibilites(exercice, maximumDeSaison(c, ref), ref)) erreurs.push(`catégorie ${c} : ${raison} (sur toute la saison)`);
   }
+  // Salle et charges selon l'âge (references/parametres-charge.yaml, section salle).
+  const salle = parametresCharge().salle;
+  const ordre = (c) => ref.categories[c].ordre;
+  const minTechnique = Math.min(...salle.technique.categories.map(ordre));
+  for (const c of exercice.categories) {
+    if (exercice.lieu === 'salle' && ordre(c) < minTechnique) erreurs.push(`catégorie ${c} : pas de salle de musculation avant ${salle.technique.categories[0].toUpperCase()} (poids du corps seulement)`);
+    if (exercice.charge_externe === 'progressive' && !salle.charges.categories.includes(c)) erreurs.push(`catégorie ${c} : charges progressives réservées aux 16 ans et plus (${salle.charges.categories.join(', ')})`);
+    if (exercice.charge_externe === 'legere' && ordre(c) < minTechnique) erreurs.push(`catégorie ${c} : charges légères pas avant ${salle.technique.categories[0].toUpperCase()}`);
+  }
+  if ((exercice.lieu === 'salle' || exercice.charge_externe === 'legere') && exercice.categories.some((c) => salle.technique.categories.includes(c))
+      && !exercice.securite.some((s) => /encadr/i.test(s))) erreurs.push('salle ou charges avec des moins de 16 ans : la sécurité doit dire que la séance est encadrée par un adulte');
+  if (exercice.theme === 'test-physique' && exercice.categories.some((c) => !parametresCharge().publics.individuel.categories.includes(c))) erreurs.push('tests physiques réservés aux 16 ans et plus');
   const { longueur, largeur } = exercice.schema.surface;
   if (Math.abs(longueur - exercice.espace.longueur) > 0.01 || Math.abs(largeur - exercice.espace.largeur) > 0.01) {
     erreurs.push('les dimensions du schéma diffèrent de celles de l\'espace');

@@ -160,3 +160,22 @@ plugin ; `~/Rugby-Saisons`.
 
   Pas de RPE à l'école de rugby. Jamais de commentaire, de douleur ni de
   sommeil dans ce fichier.
+
+## `tests` — tests physiques (16 ans et plus)
+
+- **A** : `coach-rugby.mjs tests <equipe> --date AAAA-MM-JJ --test <id> --resultats J01=3.12,J02=3.30`,
+  ou `--bilan`.
+- **B** : ajouter dans `<equipe>/tests.yaml` une ligne par joueur et par
+  test (date, test, code, valeur), avec les tests de
+  `references/tests-physiques.yaml`. Pour la progression, comparer la
+  première et la dernière valeur **de chaque joueur** ; en dessous de
+  `ecart_notable`, dire « stable ». Jamais de classement ni de norme.
+
+## `exporter programme` — programmes hors terrain
+
+- **A** : `coach-rugby.mjs exporter programme <id> [--pdf]` produit la
+  fiche A4 et téléphone dans `<dossier saison>/_programmes/exports/`.
+- **B** : remplir `gabarits/fiche-programme.html` avec un programme de
+  `references/programmes-hors-terrain.yaml` (séances, sécurité, cases de
+  suivi). La fiche ne contient aucune donnée personnelle : elle se remet
+  aux joueurs.

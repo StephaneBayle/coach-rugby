@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- Gabarit de fiche programme coach-rugby (CC BY-SA 4.0). Même principe que
+     fiche-seance.html. Programme générique, sans donnée personnelle : la
+     fiche se remet aux joueurs. Deux formats : format-a4 et format-telephone. -->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{titre}}</title>
+<style>
+@page { {{{page}}} }
+:root { --encre: #111; --gris: #555; --fond: #f2f2f2; --trait: #bbb; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--encre); background: #fff; font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.4; }
+h1 { font-size: 1.35em; margin: 0 0 .2em; }
+h2 { font-size: 1.05em; margin: 1em 0 .4em; padding-bottom: .15em; border-bottom: 2px solid var(--encre); }
+ul { margin: .2em 0 .4em; padding-left: 1.2em; }
+li { margin: .15em 0; }
+.entete { display: grid; gap: .1em .8em; grid-template-columns: repeat(3, auto); font-size: .9em; color: var(--gris); }
+.entete b { color: var(--encre); }
+.cadre { background: var(--fond); border-left: 4px solid var(--encre); padding: .4em .6em; font-size: .9em; }
+.seance { break-inside: avoid; }
+.coche { display: inline-block; width: 1em; height: 1em; border: 1.5px solid var(--encre); margin-right: .3em; vertical-align: -.15em; }
+.suivi td { border: 1px solid var(--trait); height: 1.8em; text-align: center; font-size: .85em; }
+.suivi { border-collapse: collapse; width: 100%; }
+.notes { font-size: .85em; color: var(--gris); }
+footer { margin-top: 1em; font-size: .75em; color: var(--gris); border-top: 1px solid var(--trait); padding-top: .3em; }
+.format-a4 { font-size: 10.5pt; }
+.format-a4 main { max-width: 186mm; margin: 0 auto; }
+.format-telephone { font-size: 18px; padding: 12px 14px; }
+.format-telephone .entete { grid-template-columns: 1fr; }
+.format-telephone .masquer-tel { display: none; }
+@media screen and (min-width: 700px) { .format-a4 { padding: 12mm; background: #e9e9e9; } .format-a4 main { background: #fff; padding: 10mm; box-shadow: 0 1px 4px rgba(0,0,0,.2); } }
+</style>
+</head>
+<body class="format-{{format}}">
+<main>
+<header>
+  <h1>{{titre}}</h1>
+  <div class="entete">
+    <span><b>Pour</b> {{public}}</span>
+    <span><b>Où</b> {{lieu}}</span>
+    <span><b>Rythme</b> {{rythme}}</span>
+  </div>
+</header>
+
+<p class="cadre">{{intro}}</p>
+
+<!-- @repeter:seances --><section class="seance"><h2>{{titre_seance}}</h2><ul>{{{contenu}}}</ul></section>
+<!-- @fin:seances -->
+
+<h2>Sécurité</h2>
+<ul>{{{securite}}}</ul>
+
+<section class="masquer-tel">
+<h2>Mon suivi</h2>
+<table class="suivi"><tr>{{{cases}}}</tr></table>
+<p class="notes">Cocher une case par séance faite.</p>
+</section>
+
+{{{fiches}}}
+{{{sources}}}
+
+<footer>Préparé avec coach-rugby — sous licence CC BY-SA 4.0. Repères à adapter (hypothèses pédagogiques) ; ce n'est pas un avis médical. En cas de douleur qui persiste, consulter un professionnel de santé.</footer>
+</main>
+</body>
+</html>

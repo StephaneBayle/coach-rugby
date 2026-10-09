@@ -1,0 +1,32 @@
+id: salle-cardio-recuperation
+titre: "Salle : vélo ou rameur, entretien et récupération"
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: preparation-physique
+lieu: salle
+charge_externe: aucune
+categories: [m16, m18f, m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 30
+effectif: { min: 1, max: 20 }
+espace: { longueur: 10, largeur: 8 }
+materiel: [Vélos ou rameurs]
+but: Entretenir l'endurance sans chocs (trêve, joueur qui ne peut pas courir) ou récupérer le lendemain d'un match.
+organisation: "Récupération : 20 à 30 minutes à allure facile (on peut parler). Entretien : 10 minutes faciles, puis 6 à 10 fois 1 minute soutenue / 1 minute facile, puis 5 minutes faciles."
+consignes:
+  - Allure facile = respiration aisée, on peut tenir une conversation.
+  - Réglage du vélo ou du rameur avant de commencer.
+variables:
+  simplifier: [Récupération seulement]
+  complexifier: [Fractionné 30 s / 30 s]
+criteres_reussite: [Allure respectée, Sensation de récupération le lendemain]
+securite: [Moins de 16 ans en salle uniquement encadrés par un adulte, Hydratation, Pas de fractionné le lendemain d'un match]
+sources: [naughton-2021-fatigue-rugby]
+schema:
+  surface: { type: atelier, longueur: 10, largeur: 8 }
+  elements:
+    - { type: attaquant, x: 2, y: 2, label: A1 }
+    - { type: attaquant, x: 5, y: 2, label: A2 }
+    - { type: attaquant, x: 8, y: 2, label: A3 }
+relecture: { statut: a-relire }

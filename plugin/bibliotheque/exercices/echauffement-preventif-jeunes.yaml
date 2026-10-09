@@ -1,0 +1,45 @@
+id: echauffement-preventif-jeunes
+titre: Échauffement préventif (M14 à M19)
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: prevention
+lieu: terrain
+categories: [m14, m15f, m16, m18f, m19]
+niveau: intermediaire
+contact: aucun
+duree_min: 15
+effectif: { min: 6, max: 40 }
+espace: { longueur: 30, largeur: 20 }
+materiel: [8 plots, ballons]
+but: Échauffement de début de séance qui travaille l'équilibre, le gainage, les réceptions et les changements d'appui, à refaire à chaque séance pour en tirer le bénéfice.
+organisation: "Cinq temps sur un couloir de 30 mètres : course et mobilité (3 min), équilibre sur un pied (2 min), renforcement au poids du corps (4 min), sauts et réceptions (3 min), changements d'appui en course (3 min)."
+consignes:
+  - Course lente avec cercles de bras, ouverture des hanches, fentes marchées.
+  - Équilibre sur un pied, genou légèrement fléchi, en se passant un ballon par deux.
+  - "Renforcement : fentes avant, pont fessier, gainage face et côté (2 x 20 s)."
+  - "Sauts : sauts pieds joints puis sur un pied ; réception stable, genou dans l'axe du pied."
+  - Changements d'appui à 45 degrés sur trois plots, à vitesse croissante.
+variables:
+  simplifier: [Gainage 10 s, Sauts pieds joints seulement]
+  complexifier: [Réceptions sur un pied, Changements d'appui au signal]
+criteres_reussite: [Genou dans l'axe à la réception, Tronc gainé pendant les fentes, Même routine à chaque séance]
+securite: [Qualité avant vitesse, Arrêter un exercice qui fait mal et en parler à l'éducateur, Plus long par temps froid]
+sources: [world-rugby-activate, hislop-2017-activate]
+pour_aller_plus_loin:
+  - { source: world-rugby-activate, note: "Programme officiel en niveaux ; à consulter pour une progression complète (version jeunes)." }
+schema:
+  surface: { type: atelier, longueur: 30, largeur: 20 }
+  elements:
+    - { type: plot, x: 2, y: 4 }
+    - { type: plot, x: 28, y: 4 }
+    - { type: plot, x: 10, y: 14 }
+    - { type: plot, x: 15, y: 10 }
+    - { type: plot, x: 20, y: 14 }
+    - { type: attaquant, x: 3, y: 7, label: A1 }
+    - { type: attaquant, x: 3, y: 9, label: A2 }
+    - { type: educateur, x: 15, y: 18, label: E }
+  trajets:
+    - { type: course, de: [3, 7], a: [27, 7] }
+    - { type: course, de: [10, 14], a: [15, 10] }
+    - { type: course, de: [15, 10], a: [20, 14] }
+relecture: { statut: a-relire }

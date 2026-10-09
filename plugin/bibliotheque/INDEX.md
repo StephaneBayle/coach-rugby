@@ -2,7 +2,7 @@
 
 <!-- Fichier généré par « coach-rugby.mjs index-bibliotheque » : ne pas modifier à la main. -->
 
-27 fiches originales sous licence CC BY-SA 4.0. Chaque fiche
+40 fiches originales sous licence CC BY-SA 4.0. Chaque fiche
 précise les catégories visées et son niveau de contact ; la séance vérifie
 en plus les règles de jeu du mois (`references/categories.yaml`).
 
@@ -72,3 +72,31 @@ en plus les règles de jeu du mois (`references/categories.yaml`).
 |---|---|---|---|---|
 | [Cercle bilan](exercices/cercle-bilan.yaml) | M6, M8, M10, M12, M14, M15F, M16, M18F, M19, SENIORS | aucun | 5 min | 2–40 |
 | [Retour au calme et mobilité douce](exercices/retour-au-calme-mobilite.yaml) | M5, M6, M8, M10, M12, M14, M15F, M16, M18F, M19, SENIORS | aucun | 6 min | 1–40 |
+
+## Prévention (échauffements préventifs)
+
+| Fiche | Catégories | Contact | Durée | Joueurs |
+|---|---|---|---|---|
+| [Échauffement préventif court (jour de match)](exercices/echauffement-jour-de-match.yaml) | M14, M15F, M16, M18F, M19, SENIORS | aucun | 10 min | 6–30 |
+| [Échauffement préventif (adultes)](exercices/echauffement-preventif-adultes.yaml) | M19, SENIORS | aucun | 15 min | 6–40 |
+| [Échauffement préventif en jeux (école de rugby)](exercices/echauffement-preventif-edr.yaml) | M8, M10, M12 | aucun | 12 min | 6–24 |
+| [Échauffement préventif (M14 à M19)](exercices/echauffement-preventif-jeunes.yaml) | M14, M15F, M16, M18F, M19 | aucun | 15 min | 6–40 |
+| [Salle : prévention ischio-jambiers et épaules](exercices/salle-prevention-ischios-epaules.yaml) | M19, SENIORS | aucun | 20 min | 2–16 |
+
+## Préparation physique (terrain, salle, domicile)
+
+| Fiche | Catégories | Contact | Durée | Joueurs |
+|---|---|---|---|---|
+| [Mobilité et souplesse (après la séance ou à la maison)](exercices/mobilite-et-souplesse.yaml) | M12, M14, M15F, M16, M18F, M19, SENIORS | aucun | 12 min | 1–40 |
+| [Circuit de renforcement au poids du corps](exercices/renforcement-poids-du-corps.yaml) | M14, M15F, M16, M18F, M19, SENIORS | aucun | 20 min | 6–30 |
+| [Salle : apprendre les mouvements de base (M14 à M16, encadré)](exercices/salle-apprentissage-mouvements.yaml) | M14, M15F, M16, M18F | aucun | 30 min | 2–12 |
+| [Salle : vélo ou rameur, entretien et récupération](exercices/salle-cardio-recuperation.yaml) | M16, M18F, M19, SENIORS | aucun | 30 min | 1–20 |
+| [Salle : circuit de force pour le rugby (16 ans et plus)](exercices/salle-circuit-force-rugby.yaml) | M19, SENIORS | aucun | 45 min | 2–16 |
+
+## Tests physiques (16 ans et plus)
+
+| Fiche | Catégories | Contact | Durée | Joueurs |
+|---|---|---|---|---|
+| [Test : course intermittente 30-15](exercices/test-30-15-intermittent.yaml) | M19, SENIORS | aucun | 35 min | 2–20 |
+| [Test : saut en longueur sans élan](exercices/test-saut-longueur-sans-elan.yaml) | M19, SENIORS | aucun | 15 min | 2–30 |
+| [Test : sprint de 20 mètres](exercices/test-sprint-20m.yaml) | M19, SENIORS | aucun | 20 min | 2–30 |

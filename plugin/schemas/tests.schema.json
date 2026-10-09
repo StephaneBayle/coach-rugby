@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cr:tests",
+  "title": "Résultats de tests physiques (tests.yaml) — 16 ans et plus, en codes, sans commentaire",
+  "type": "object",
+  "required": [
+    "equipe",
+    "resultats"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "equipe": {
+      "$ref": "cr:communs#/$defs/identifiant"
+    },
+    "resultats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "test",
+          "code",
+          "valeur"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "$ref": "cr:communs#/$defs/date"
+          },
+          "test": {
+            "$ref": "cr:communs#/$defs/identifiant"
+          },
+          "code": {
+            "$ref": "cr:communs#/$defs/codeJoueur"
+          },
+          "valeur": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        }
+      }
+    }
+  }
+}

@@ -15,3 +15,9 @@ creneaux:
   - { jour: mardi, heure: "19:30", duree_min: 105, lieu: terrain }
   - { jour: jeudi, heure: "19:30", duree_min: 90, lieu: terrain }
 materiel: [ballons taille 5, boucliers, sacs de plaquage, plots, chasubles, ballons de touche]
+salle:
+  disponible: true
+  materiel: [barres et disques, haltères, bancs, vélos, rameurs, élastiques]
+  creneaux:
+    - { jour: mercredi, heure: "19:00", duree_min: 60 }
+  encadrement: preparateur-physique

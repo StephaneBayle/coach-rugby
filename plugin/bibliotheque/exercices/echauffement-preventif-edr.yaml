@@ -1,0 +1,43 @@
+id: echauffement-preventif-edr
+titre: Échauffement préventif en jeux (école de rugby)
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: prevention
+lieu: terrain
+categories: [m8, m10, m12]
+niveau: decouverte
+contact: aucun
+duree_min: 12
+effectif: { min: 6, max: 24 }
+espace: { longueur: 20, largeur: 20 }
+materiel: [8 plots, ballons]
+but: Préparer le corps en jouant (équilibre, sauts et réceptions, changements de direction) pour réduire le risque de blessure, sans fatigue.
+organisation: "Quatre petits jeux de trois minutes dans un carré de 20 mètres : la statue (équilibre), les kangourous (sauts et réceptions), le miroir (changements de direction), le pont (gainage à deux)."
+consignes:
+  - "La statue : on court, au signal on se fige sur un pied, bras écartés, trois secondes."
+  - "Les kangourous : petits sauts pieds joints, on atterrit genoux souples, sans bruit."
+  - "Le miroir : par deux, l'un change de direction, l'autre le suit en restant face à lui."
+  - "Le pont : en appui sur les avant-bras, on tient cinq secondes pendant que le partenaire fait rouler un ballon dessous."
+variables:
+  simplifier: [Équilibre sur deux pieds, Sauts sur place]
+  complexifier: [Statue sur un pied les yeux fermés, Sauts latéraux]
+criteres_reussite: [Réceptions silencieuses genoux fléchis, Équilibre tenu trois secondes]
+securite: [Surface sans trous ni objets, Pas de compétition sur les sauts, Eau à disposition]
+sources: [world-rugby-activate]
+pour_aller_plus_loin:
+  - { source: world-rugby-activate, note: "Principes d'un échauffement préventif (équilibre, renforcement, réceptions, changements d'appui), adaptés ici en jeux pour les enfants." }
+schema:
+  surface: { type: atelier, longueur: 20, largeur: 20 }
+  elements:
+    - { type: plot, x: 1, y: 1 }
+    - { type: plot, x: 19, y: 1 }
+    - { type: plot, x: 1, y: 19 }
+    - { type: plot, x: 19, y: 19 }
+    - { type: educateur, x: 10, y: 10, label: E }
+    - { type: attaquant, x: 5, y: 6, label: A1 }
+    - { type: attaquant, x: 14, y: 6, label: A2 }
+    - { type: attaquant, x: 6, y: 14, label: A3 }
+  trajets:
+    - { type: course, de: [5, 6], a: [9, 3] }
+    - { type: course, de: [14, 6], a: [17, 10] }
+relecture: { statut: a-relire }

@@ -1,0 +1,33 @@
+id: test-saut-longueur-sans-elan
+titre: "Test : saut en longueur sans élan"
+licence: CC-BY-SA-4.0
+auteurs: coach-rugby
+theme: test-physique
+lieu: terrain
+categories: [m19, seniors]
+niveau: decouverte
+contact: aucun
+duree_min: 15
+effectif: { min: 2, max: 30 }
+espace: { longueur: 6, largeur: 4 }
+materiel: [Mètre-ruban, Plot ou ligne de départ]
+but: Suivre la détente des jambes de chaque joueur d'un test à l'autre, sans comparaison entre joueurs.
+organisation: "Pieds derrière la ligne, élan des bras autorisé, saut vers l'avant et réception stable sur les deux pieds. Mesure de la ligne au talon le plus proche. Trois essais, on garde le meilleur."
+consignes:
+  - Un essai est refait si le joueur tombe en arrière ou pose une main.
+  - Même surface d'un test à l'autre.
+variables:
+  simplifier: [Deux essais]
+  complexifier: [Saut sur une jambe (droite et gauche)]
+criteres_reussite: [Réception stable, Mesure toujours prise au talon]
+securite: [Échauffement avec quelques sauts avant le test, Surface plane et non glissante]
+sources: [nsca-essentials-2016]
+schema:
+  surface: { type: atelier, longueur: 6, largeur: 4 }
+  elements:
+    - { type: plot, x: 1, y: 1 }
+    - { type: plot, x: 1, y: 3 }
+    - { type: attaquant, x: 0.5, y: 2, label: A1 }
+  trajets:
+    - { type: course, de: [0.5, 2], a: [3, 2] }
+relecture: { statut: a-relire }

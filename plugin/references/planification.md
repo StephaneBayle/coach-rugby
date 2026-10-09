@@ -6,12 +6,17 @@ valeurs sont dans `planification.yaml`.
 
 Sources :
 
-- principes de périodisation : `bompa-haff-2009`, à vérifier ;
+- principes de périodisation : `bompa-haff-2009` (référence vérifiée,
+  contenu à relire) ;
+- récupération après un match : `naughton-2021-fatigue-rugby`, consultée.
+  Après un match, la fatigue et les douleurs sont les plus marquées entre
+  12 et 36 h et s'estompent le plus souvent entre 24 et 72 h : d'où la
+  récupération à J+1 ou J+2 et pas de gros contact juste après un match ;
 - école de rugby : cycles d'initiation M6-M8 et séances atelier de la FFR
   (`ffr-formation-edr`), auxquels on renvoie sans les reproduire.
 
-La charge **mesurée** (RPE) arrive avec le lot 4. Ici, l'intensité est
-seulement **prévue**.
+Ici, l'intensité est seulement **prévue**. La charge **réalisée** (RPE ×
+durée) se note à part : `charge.yaml` et `parametres-charge.yaml`.
 
 ## Trois niveaux
 

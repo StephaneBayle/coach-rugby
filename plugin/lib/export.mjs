@@ -11,6 +11,8 @@ import { imprimerPdf, trouverChrome } from './chrome.mjs';
 import { lireDate } from './dates.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { dureeTotale } from './match.mjs';
+import { parametresCharge } from './charge.mjs';
+import { chargerProgrammes } from './programmes.mjs';
 import { publicDe } from './planification.mjs';
 import { contexteSeance } from './seance.mjs';
 import { minutesJouees } from './temps-de-jeu.mjs';
@@ -417,5 +419,45 @@ export function exporterFeuillePresence(dossierEquipe, { pdf = false, colonnes =
   writeFileSync(path.join(dossier, 'feuille-presence-a4.html'), html);
   const resultat = { dossier, fichiers: ['feuille-presence-a4.html'], pdf: { demande: pdf, ok: false, raison: null } };
   if (pdf) imprimerTout(dossier, ['feuille-presence-a4'], resultat);
+  return resultat;
+}
+
+// ---------------------------------------------------------------- programme
+// Programme hors terrain générique : aucune donnée personnelle, la fiche se
+// remet aux joueurs.
+const LIEUX = { domicile: 'à la maison ou dehors, sans matériel', terrain: 'sur le terrain', salle: 'en salle de musculation ou de fitness' };
+const MOMENTS = { treve: 'pendant la trêve', intersaison: "à l'intersaison", saison: 'en saison', 'toute-saison': 'toute la saison' };
+
+export function preparerProgramme(p) {
+  const biblio = new Map(chargerBibliotheque().map((f) => [f.id, f]));
+  const fiches = (p.fiches || []).map((f) => biblio.get(f)).filter(Boolean);
+  return {
+    titre: p.titre,
+    public: p.categories.map((c) => (c === 'seniors' ? 'seniors' : c.toUpperCase())).join(', '),
+    lieu: LIEUX[p.lieu],
+    rythme: `${p.seances_par_semaine} séance(s) par semaine, ${p.duree_min} min environ, ${MOMENTS[p.moment]}`,
+    intro: p.lieu === 'salle' && p.categories.some((c) => parametresCharge().salle.technique.categories.includes(c))
+      ? 'Programme à faire en salle, toujours avec un adulte formé qui encadre. La technique passe avant la charge.'
+      : 'Programme à faire seul ou à plusieurs. Écoutez votre corps : on progresse petit à petit, sans douleur.',
+    seances: p.seances.map((s) => ({ titre_seance: s.titre, contenu: listeHtml(s.contenu) })),
+    securite: listeHtml(p.securite),
+    cases: Array(Math.min(12, p.seances_par_semaine * 6)).fill('<td></td>').join(''),
+    fiches: fiches.length ? `<section class="notes"><h3>Exercices détaillés (fiches coach-rugby)</h3><ul>${fiches.map((f) => `<li>${echapper(f.titre)}</li>`).join('')}</ul></section>` : '',
+    sources: sourcesHtml(p.sources),
+  };
+}
+
+export function exporterProgramme(id, dossierSortie, { pdf = false, formats = ['a4', 'telephone'] } = {}) {
+  const p = chargerProgrammes().programmes.find((x) => x.id === id);
+  if (!p) throw new Error(`programme inconnu : ${id} (voir references/programmes-hors-terrain.yaml)`);
+  mkdirSync(dossierSortie, { recursive: true });
+  const g = readFileSync(path.join(RACINE_PLUGIN, 'gabarits', 'fiche-programme.html'), 'utf8').replace(/<!-- Gabarit[\s\S]*?-->\n/, '');
+  const donnees = preparerProgramme(p);
+  const resultat = { dossier: dossierSortie, fichiers: [], pdf: { demande: pdf, ok: false, raison: null } };
+  for (const f of formats) {
+    writeFileSync(path.join(dossierSortie, `programme-${id}-${f}.html`), remplir(g, { ...donnees, format: f, page: PAGES[f] }));
+    resultat.fichiers.push(`programme-${id}-${f}.html`);
+  }
+  if (pdf) imprimerTout(dossierSortie, formats.map((f) => `programme-${id}-${f}`), resultat);
   return resultat;
 }

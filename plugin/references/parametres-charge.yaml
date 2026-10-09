@@ -50,3 +50,21 @@ prevu_rpe:
     forte: [6, 9]
     affutage: [3, 5]
   statut: hypothese
+
+# Salle de musculation ou de fitness, selon l'âge (catégories FFR).
+salle:
+  technique:
+    categories: [m14, m15f, m16, m18f]
+    statut: hypothese
+    source: lloyd-2014-renforcement-jeunes
+    note: "Apprentissage des mouvements à vide ou avec charges légères, toujours encadré par un adulte formé ; technique avant la charge. M18F (joueuses de 15 à 17 ans) gardée ici par prudence."
+  charges:
+    categories: [m19, seniors]
+    statut: hypothese
+    source: nsca-essentials-2016
+    note: "Charges progressives à partir de 16 ans, après l'apprentissage technique. Charges exprimées en sensations (répétitions en réserve), jamais en kilos propres à un joueur."
+  poids_du_corps_seulement:
+    categories: [m5, m6, m8, m10, m12]
+    statut: hypothese
+    note: "Avant M14 : jeux, motricité, gainage au poids du corps, sur le terrain."
+  rien_de_lourd_avant_match_jours: { valeur: 2, statut: hypothese, note: "Pas de séance de force lourde à J-2 ou moins d'un match." }
