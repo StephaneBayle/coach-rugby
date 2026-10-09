@@ -1,6 +1,6 @@
 {
   "name": "coach-rugby",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Outillage optionnel du plugin coach-rugby (validation, état de saison, export). Les skills fonctionnent sans.",
   "type": "module",

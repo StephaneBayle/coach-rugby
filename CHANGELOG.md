@@ -5,7 +5,7 @@ comment c'est programmé. Format inspiré de
 [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions selon
 [SemVer](https://semver.org/lang/fr/).
 
-## [Non publié]
+## [0.4.0] — 2026-10-09
 
 ### Ajouté
 
@@ -31,9 +31,11 @@ comment c'est programmé. Format inspiré de
   adultes, jour de match), inspirés du programme Activate de World Rugby,
   et des conseils pour adapter la séance à la chaleur, au froid, à un
   terrain gelé ou gras.
-- Reprise après le feu vert du médecin : des étapes d'entraînement (sans
-  contact, contact contrôlé, contact plein, match), sans aucune durée ;
-  pour une commotion, renvoi au protocole de la FFR.
+- Reprise après le feu vert du médecin : le plugin vous demande ce que le
+  médecin a autorisé, prépare la séance pour cette étape (sans contact,
+  contact contrôlé, contact plein, match), vous dit quoi surveiller et
+  rappelle de prévenir les parents ; jamais de durée, et pour une commotion,
+  renvoi au protocole de la FFR.
 - Préparation physique sur le terrain, à la maison ou en salle de
   musculation : pas de salle avant M14 ; de M14 à M16, apprentissage des
   mouvements toujours encadré par un adulte ; charges qui progressent à
@@ -46,6 +48,11 @@ comment c'est programmé. Format inspiré de
   d'orage.
 - Tests physiques (16 ans et plus) : sprint, saut, course intermittente ;
   le plugin suit la progression de chacun, sans classement ni norme.
+
+### Corrigé
+
+- Du vendredi au dimanche, le rappel de planification propose la semaine
+  suivante, et non plus celle qui se termine.
 
 ## [0.3.0] — 2026-10-08
 
