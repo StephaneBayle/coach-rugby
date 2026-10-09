@@ -78,7 +78,16 @@ jeu, retour au calme, bilan.
 
 - À l'école de rugby (M8-M12), s'inspirer du plan de séance de la FFR (règle
   transverse `plan-de-seance-ffr-edr` de `categories.yaml`).
-- L'échauffement et le retour au calme sont obligatoires.
+- L'échauffement et le retour au calme sont obligatoires. L'échauffement
+  reprend la fiche **préventive** du bon âge (`echauffement-preventif-edr`,
+  `-jeunes`, `-adultes`, ou `echauffement-jour-de-match` à J-1), au moins en
+  partie : la régularité compte.
+- **Conditions** : si le coach parle de chaleur, de froid, de pluie ou d'un
+  terrain gelé, appliquer le tableau de
+  `${CLAUDE_PLUGIN_ROOT}/references/prevention.md` (terrain gelé : pas de
+  plaquage ni de jeu au sol) et l'écrire en point de vigilance.
+- **Joueur qui reprend après le feu vert du médecin** : ateliers sans
+  contact pour lui, sans le nommer (voir `/coach-rugby:prevention`).
 
 **Choix des exercices :**
 
@@ -153,4 +162,6 @@ reprise) et les **hypothèses** (choix non sourcés). Citer les **sources**
 5. Après la séance, proposer de noter le bilan : nombre de présents,
    ressenti, choses à reprendre. Si l'équipe a un effectif en codes,
    proposer de noter les présences et, au plus, trois compétences observées
-   (`/coach-rugby:effectif`).
+   (`/coach-rugby:effectif`). À partir de M14, proposer aussi de noter la
+   charge : durée réelle et intensité ressentie de 0 à 10
+   (`/coach-rugby:charge`).

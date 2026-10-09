@@ -15,6 +15,11 @@ comment c'est programmé. Format inspiré de
   des repères (semaine beaucoup plus chargée, semaine peu variée). Ce sont
   des repères d'entraînement, jamais des indicateurs médicaux. À partir de
   M14 ; l'intensité par joueur seulement pour les 16 ans et plus.
+- Deux nouvelles commandes : `/coach-rugby:charge` et
+  `/coach-rugby:prevention`. La séance commence par un échauffement
+  préventif adapté à l'âge et tient compte des conditions que vous
+  décrivez ; la semaine tient compte de la charge des semaines précédentes
+  et place le créneau en salle loin du match.
 - La fiche de la semaine montre la charge réalisée face au prévu et une
   petite courbe des six dernières semaines (valeurs du groupe seulement) ;
   tableaux Excel de la charge et des tests ; le point de situation donne la

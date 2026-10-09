@@ -26,6 +26,9 @@ Chaque critère de la section 1, **bloc par bloc**. En particulier :
 - contact sans progression ;
 - plaquage haut ;
 - échauffement absent ;
+- salle ou charges inadaptées à l'âge, ou sans encadrement ;
+- terrain gelé avec plaquage ou jeu au sol ;
+- reprise d'un joueur avec une durée, ou sans feu vert médical ;
 - avis médical.
 
 Ces cas sont **bloquants**.

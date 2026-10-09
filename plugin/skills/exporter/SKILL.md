@@ -45,7 +45,13 @@ COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN
 - **Une feuille de présence** : `exporter <equipe>/effectif.yaml --pdf`
   produit `<equipe>/exports/feuille-presence-a4.html` : codes, colonne
   « Prénom » vide à remplir à la main.
-- **Un tableau** (présences, temps de jeu, progrès) : voir
+- **Un programme hors terrain** (trêve, intersaison, salle) :
+  `exporter programme <id> --pdf`, fiche A4 et téléphone sans donnée
+  personnelle, à remettre aux joueurs (voir `/coach-rugby:prevention`).
+- **La fiche semaine** montre aussi la charge réalisée et sa courbe quand
+  l'équipe la suit (valeurs du groupe seulement).
+- **Un tableau** (présences, temps de jeu, progrès, charge ; tests avec
+  `--avec-tests`) : voir
   `/coach-rugby:effectif` et la commande `tableau`.
 
   **Jamais de prénom** dans une fiche ou un tableau, même si le coach le

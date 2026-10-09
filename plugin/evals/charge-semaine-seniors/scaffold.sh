@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# Dossier saison fictif (copie de exemples/fictif-seniors-f3-les-goelands, charge de 4 semaines).
+set -euo pipefail
+mkdir -p seniors-f3
+cat > .coach-rugby.yaml <<'FIN'
+# EXEMPLE FICTIF — dossier saison d'un club imaginaire (fixture de la CI).
+version_schema: 1
+structure:
+  type: club
+  nom: Les Goélands (club fictif)
+  libelles:
+    groupe: équipe
+    encadrant: entraîneur
+preferences:
+  formats: [a4, telephone]
+  utilise_mca: false
+FIN
+cat > seniors-f3/equipe.yaml <<'FIN'
+# EXEMPLE FICTIF — aucune donnée réelle. Effectif en nombre, staff en rôles.
+id: seniors-f3
+nom: Équipe première des Goélands
+type_groupe: equipe
+categories: [seniors]
+pratique: xv
+genre: masculin
+niveau: Fédérale 3
+effectif_habituel: 34
+staff:
+  - { role: entraineur-principal }
+  - { role: adjoint, nombre: 2 }
+  - { role: preparateur-physique }
+creneaux:
+  - { jour: mardi, heure: "19:30", duree_min: 105, lieu: terrain }
+  - { jour: jeudi, heure: "19:30", duree_min: 90, lieu: terrain }
+materiel: [ballons taille 5, boucliers, sacs de plaquage, plots, chasubles, ballons de touche]
+FIN
+cat > seniors-f3/saison.yaml <<'FIN'
+# EXEMPLE FICTIF — calendrier et adversaires inventés.
+saison: "2026-2027"
+mode: championnat
+debut: 2026-06-01
+fin: 2027-05-31
+phases:
+  - { id: intersaison-bilan, debut: 2026-06-01, fin: 2026-07-12 }
+  - { id: reprise-prepa, debut: 2026-07-13, fin: 2026-09-05, objectifs: [Remise en forme progressive, Lancements de jeu] }
+  - { id: phase-aller, debut: 2026-09-06, fin: 2026-12-13, objectifs: [Conquête solide, Défense en ligne] }
+  - { id: treve, debut: 2026-12-14, fin: 2027-01-03 }
+  - { id: phase-retour, debut: 2027-01-04, fin: 2027-04-11, objectifs: [Se qualifier] }
+  - { id: phases-finales, debut: 2027-04-12, fin: 2027-05-31 }
+calendrier:
+  - { date: 2026-09-13, type: match, domicile: true, adversaire: US Fictiveville, source: exemple-fictif }
+  - { date: 2026-09-20, type: match, domicile: false, adversaire: RC Imaginaire, source: exemple-fictif }
+  - { date: 2026-09-27, type: match, domicile: true, adversaire: Stade Chimère, source: exemple-fictif }
+  - { date: 2026-10-04, type: match, domicile: false, adversaire: AS Pseudoville, source: exemple-fictif }
+  - { date: 2026-10-18, type: match, domicile: true, importance: derby, adversaire: RC Voisinville, source: exemple-fictif }
+  - { date: 2026-10-25, type: match, domicile: false, adversaire: Olympique de Nullepart, source: exemple-fictif }
+  - { date: 2026-11-08, type: match, domicile: true, adversaire: SC Utopie, source: exemple-fictif }
+  - { date: 2026-11-15, type: match, domicile: false, adversaire: US Fictiveville, source: exemple-fictif }
+  - { date: 2026-11-29, type: match, domicile: true, adversaire: RC Imaginaire, source: exemple-fictif }
+  - { date: 2026-12-06, type: match, domicile: false, importance: haute, adversaire: Stade Chimère, source: exemple-fictif }
+  - { date: 2026-12-13, type: match, domicile: true, adversaire: AS Pseudoville, source: exemple-fictif }
+  - { date: 2027-01-10, type: match, domicile: false, adversaire: Olympique de Nullepart, source: exemple-fictif }
+  - { date: 2027-01-17, type: match, domicile: true, adversaire: SC Utopie, source: exemple-fictif }
+  - { date: 2027-02-21, type: match, domicile: false, importance: derby, adversaire: RC Voisinville, source: exemple-fictif }
+  - { date: 2027-03-07, type: match, domicile: true, adversaire: US Fictiveville, source: exemple-fictif }
+  - { date: 2027-04-11, type: match, domicile: false, adversaire: RC Imaginaire, source: exemple-fictif }
+  - { date: 2027-04-25, type: match, importance: haute, note: Barrage (fictif), source: exemple-fictif }
+FIN
+cat > seniors-f3/charge.yaml <<'FIN'
+# EXEMPLE FICTIF — charge réalisée, 4 semaines.
+equipe: seniors-f3
+entrees:
+  - { date: 2026-09-08, type: seance, duree_min: 105, rpe_groupe: 6, source: coach }
+  - { date: 2026-09-10, type: seance, duree_min: 90, rpe_groupe: 5, source: coach }
+  - { date: 2026-09-13, type: match, duree_min: 80, rpe_groupe: 8, source: coach }
+  - { date: 2026-09-15, type: seance, duree_min: 105, rpe_groupe: 6, source: coach }
+  - { date: 2026-09-17, type: seance, duree_min: 90, rpe_groupe: 5, source: coach }
+  - { date: 2026-09-20, type: match, duree_min: 80, rpe_groupe: 8, source: coach }
+  - { date: 2026-09-22, type: seance, duree_min: 105, rpe_groupe: 6, source: coach }
+  - { date: 2026-09-24, type: seance, duree_min: 90, rpe_groupe: 5, source: coach }
+  - { date: 2026-09-27, type: match, duree_min: 80, rpe_groupe: 8, source: coach }
+  - { date: 2026-09-29, type: seance, duree_min: 105, rpe_groupe: 6, source: coach }
+  - { date: 2026-10-01, type: seance, duree_min: 90, rpe_groupe: 5, source: coach }
+  - { date: 2026-10-04, type: match, duree_min: 80, rpe_groupe: 8, source: coach }
+FIN

@@ -42,6 +42,9 @@ Lire d'abord les règles du jour : `regles` dans la séance, à recouper avec
 | Chaque bloc a au moins un point de sécurité concret | a-revoir |
 | Bloc avec contact : rappel de la sortie définitive en cas de choc à la tête | a-revoir |
 | Durée totale et intensité raisonnables pour l'âge ; pauses d'hydratation | a-revoir |
+| Salle ou charges : pas avant M14 ; encadrement par un adulte et technique avant la charge jusqu'à M16 ; charges progressives seulement à 16 ans et plus ; rien de lourd à J-2 ou moins | bloquant |
+| Conditions décrites (chaleur, froid, terrain gelé) prises en compte ; terrain gelé : pas de plaquage ni de jeu au sol | bloquant |
+| Reprise d'un joueur : étapes d'entraînement sans durée, après feu vert médical, protocole FFR pour une commotion | bloquant |
 | Encadrement suffisant pour l'effectif et le nombre d'ateliers | a-revoir |
 | Aucun avis médical, diagnostic ni durée de reprise (voir `protocole-commotion.md`) | bloquant |
 
@@ -76,6 +79,7 @@ Lire d'abord les règles du jour : `regles` dans la séance, à recouper avec
 | Effectifs en nombres, joueurs en codes (A1, D1, J01) | a-revoir |
 | Aucun prénom de la table locale `.prenoms.yaml` (fiches, tableaux, match) | bloquant |
 | Aucun motif d'indisponibilité, aucun jugement sur un joueur (progrès en trois niveaux, débriefing sur le jeu de l'équipe) | bloquant |
+| Aucune donnée de forme ou de santé (douleur, sommeil, blessure) à côté d'un code ; RPE par joueur et tests seulement pour les 16 ans et plus ; aucun classement entre joueurs | bloquant |
 | Staff désigné par son rôle, pas par son nom | a-revoir |
 | Fichier hors de tout dépôt git (dossier saison) | a-revoir |
 
