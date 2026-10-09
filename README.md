@@ -3,10 +3,10 @@
 Assistant de saison pour **coachs et éducateurs de rugby amateur**, sous forme
 de plugin pour Claude (Cowork, Claude desktop et Claude Code).
 
-> **Version 0.3.0** — saison, cycles et semaines, séances, bibliothèque
-> d'exercices, effectif et matchs (temps de jeu équitable, fiche match,
-> débriefing), fiches imprimables et téléphone, tableaux Excel. La suite
-> (charge, communication) est dans la
+> **Version 0.4.0** — saison, cycles et semaines, séances, bibliothèque
+> d'exercices, effectif et matchs, charge d'entraînement, prévention et
+> préparation physique (terrain et salle), fiches imprimables et téléphone,
+> tableaux Excel. La suite (communication, formation) est dans la
 > [feuille de route](docs/feuille-de-route.md).
 
 ## À quoi ça sert
@@ -21,6 +21,12 @@ de plugin pour Claude (Cowork, Claude desktop et Claude Code).
   ordinateur) : présences, progrès, feuille de présence, tableaux Excel.
 - Préparer vos **matchs et plateaux** : convocation, composition, temps de
   jeu équitable chez les jeunes, causerie, puis débriefing.
+- Suivre la **charge d'entraînement** de votre groupe et adapter la
+  semaine, avec des repères simples (jamais médicaux).
+- **Prévenir les blessures** : échauffements préventifs, séance adaptée au
+  gel ou à la chaleur, préparation physique sur le terrain ou en salle selon
+  l'âge, programmes de trêve, tests physiques, reprise après le feu vert du
+  médecin.
 - Obtenir des **fiches imprimables** et lisibles sur téléphone au bord du
   terrain.
 - Être **relancé au bon moment** : affûtage avant un derby, préparation de la
