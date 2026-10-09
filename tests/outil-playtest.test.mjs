@@ -22,9 +22,9 @@ test("l'outil de playtest n'est pas livré dans le plugin", () => {
   assert.match(lire('.claude/skills/playtest/SKILL.md'), /^disable-model-invocation: true$/m);
 });
 
-test('six scénarios, chacun avec profil, départ, pièges et critères', () => {
+test('huit scénarios, chacun avec profil, départ, pièges et critères', () => {
   const scenarios = readdirSync(path.join(racine, 'playtests', 'scenarios')).filter((f) => f.endsWith('.md'));
-  assert.equal(scenarios.length, 6);
+  assert.equal(scenarios.length, 8);
   for (const s of scenarios) {
     const t = lire(path.join('playtests', 'scenarios', s));
     for (const section of ['## Profil du coach', '## Départ', '## Pièges à placer', '## Critères de réussite']) assert.ok(t.includes(section), `${s} : ${section}`);

@@ -54,9 +54,8 @@ test('bilan : alertes formulées comme des repères, jamais comme un risque méd
   const b = bilanCharge(charge, '2026-10-09');
   assert.deepEqual(b.alertes.map((a) => a.code), ['hausse']);
   for (const a of b.alertes) assert.match(a.message, /repère|hypothèse/);
-  // La seule mention de blessure est une négation.
-  assert.match(b.alertes[0].message, /pas un risque de blessure/);
-  assert.equal((b.alertes[0].message.match(/blessure/g) || []).length, 1);
+  // Aucun vocabulaire de risque ou de blessure, même à la forme négative.
+  for (const a of b.alertes) assert.doesNotMatch(a.message, /blessure|risque|danger|surentra/i);
 });
 
 test('prévu face au réalisé', () => {
@@ -96,7 +95,8 @@ test('exemple F3 valide ; entrées en double refusées', () => {
 
 test('CLI charge : saisie, bilan ; une saisie refusée ne laisse rien', () => {
   const d = copie();
-  const env = { COACH_RUGBY_DOSSIER: d };
+  const env = { COACH_RUGBY_DOSSIER: d, COACH_RUGBY_AUJOURDHUI: '2026-10-25' };
+  assert.match(cli(env, 'charge', 'seniors-f3', '--date', '2026-10-30', '--duree', '90', '--rpe', '3').stderr, /pas encore passé/);
   const ok = cli(env, 'charge', 'seniors-f3', '--date', '2026-10-20', '--duree', '90', '--rpe', '3', '--par-code', 'j01=4,J02=3');
   assert.equal(ok.status, 0, ok.stdout + ok.stderr);
   assert.match(ok.stdout, /90 min × 3 = 270 ; 2 RPE individuel/);

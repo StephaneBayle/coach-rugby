@@ -42,6 +42,13 @@ export function controlerSeance(seance, { equipe = null, dossierSaison = null, n
   const parties = seance.blocs.map((b) => b.partie);
   if (!parties.includes('echauffement')) erreurs.push('aucun bloc d\'échauffement');
   if (!parties.includes('retour-au-calme')) erreurs.push('aucun bloc de retour au calme');
+  // Terrain gelé : ni plaquage ni jeu au sol (consigne de sécurité, non négociable).
+  if ((seance.conditions || []).includes('gel')) {
+    seance.blocs.forEach((b, i) => {
+      if (['contact-progressif', 'plaquage', 'plein'].includes(b.contact)) erreurs.push(`bloc ${i + 1} (${b.titre}) : contact « ${b.contact} » sur terrain gelé — ni plaquage ni jeu au sol (prevention.md)`);
+    });
+  }
+  if ((seance.conditions || []).includes('orage')) erreurs.push('orage annoncé : séance à arrêter ou à reporter, tout le monde à l\'abri (prevention.md)');
   if (nomDossier && nomDossier !== seance.date) erreurs.push(`date « ${seance.date} » différente du nom du dossier « ${nomDossier} »`);
   if (equipe) {
     if (seance.equipe !== equipe.id) erreurs.push(`équipe « ${seance.equipe} » différente de celle du dossier « ${equipe.id} »`);

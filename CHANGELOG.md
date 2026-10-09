@@ -41,6 +41,9 @@ comment c'est programmé. Format inspiré de
   vont de leur côté (16 ans et plus).
 - Programmes à remettre aux joueurs (trêve, intersaison, salle), en fiche
   A4 ou téléphone, sans aucune donnée personnelle.
+- Terrain gelé ou orage : notez-le dans la séance ; le plugin refuse alors
+  tout contact au sol sur terrain gelé, et demande d'arrêter en cas
+  d'orage.
 - Tests physiques (16 ans et plus) : sprint, saut, course intermittente ;
   le plugin suit la progression de chacun, sans classement ni norme.
 

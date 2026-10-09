@@ -63,7 +63,7 @@ export function bilanCharge(charge, date, p = parametresCharge()) {
   const t = tendance(semaines, lundi, p);
   const m = monotonie(semaines[lundi], lundi);
   const alertes = [];
-  if (t.alerte) alertes.push({ code: 'hausse', message: `Charge de la semaine ${t.ecart_pct} % au-dessus de la moyenne des ${t.semaines_reference} semaines précédentes : repère pour envisager d'alléger (hypothèse, pas un risque de blessure).` });
+  if (t.alerte) alertes.push({ code: 'hausse', message: `Charge de la semaine ${t.ecart_pct} % au-dessus de la moyenne des ${t.semaines_reference} semaines précédentes : repère d'entraînement (hypothèse) pour envisager d'alléger.` });
   if (m !== null && m > p.monotonie.seuil.valeur) alertes.push({ code: 'monotonie', message: `Semaine peu variée (monotonie ${m}, repère ${p.monotonie.seuil.valeur}, à vérifier) : alterner séances dures et légères.` });
   return { lundi, ...t, monotonie: m, entrees: semaines[lundi]?.entrees || 0, alertes, semaines };
 }

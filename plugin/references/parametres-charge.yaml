@@ -35,7 +35,7 @@ publics:
 # Repères de suivi.
 tendance:
   semaines_reference: { valeur: 4, statut: hypothese }
-  alerte_hausse_pct: { valeur: 30, statut: hypothese, note: "Semaine à plus de 30 % au-dessus de la moyenne des 4 précédentes : repère pour envisager d'alléger, pas un risque de blessure." }
+  alerte_hausse_pct: { valeur: 30, statut: hypothese, note: "Semaine à plus de 30 % au-dessus de la moyenne des 4 précédentes : repère d'entraînement pour envisager d'alléger ; jamais présenté comme un risque." }
   semaines_minimum: { valeur: 3, statut: hypothese, note: "Pas de tendance tant qu'il n'y a pas au moins 3 semaines de référence." }
 monotonie:
   seuil: { valeur: 2, statut: a-verifier, source: foster-1998-monotonie, note: "Monotonie = moyenne journalière / écart-type sur 7 jours (jours sans séance comptés à 0). Au-dessus du seuil : semaine peu variée, varier les intensités." }

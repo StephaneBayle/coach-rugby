@@ -99,6 +99,21 @@
         "autre"
       ]
     },
+    "conditions": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Conditions décrites par le coach (references/prevention.md).",
+      "items": {
+        "enum": [
+          "gel",
+          "chaleur",
+          "froid",
+          "pluie",
+          "vent",
+          "orage"
+        ]
+      }
+    },
     "materiel": {
       "type": "array",
       "items": {
