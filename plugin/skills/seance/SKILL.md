@@ -82,10 +82,13 @@ jeu, retour au calme, bilan.
   reprend la fiche **préventive** du bon âge (`echauffement-preventif-edr`,
   `-jeunes`, `-adultes`, ou `echauffement-jour-de-match` à J-1), au moins en
   partie : la régularité compte.
-- **Conditions** : si le coach parle de chaleur, de froid, de pluie ou d'un
-  terrain gelé, appliquer le tableau de
-  `${CLAUDE_PLUGIN_ROOT}/references/prevention.md` (terrain gelé : pas de
-  plaquage ni de jeu au sol) et l'écrire en point de vigilance.
+- **Conditions** : si le coach parle de chaleur, de froid, de pluie, de vent,
+  d'orage ou d'un terrain gelé, appliquer le tableau de
+  `${CLAUDE_PLUGIN_ROOT}/references/prevention.md`, renseigner `conditions`
+  dans la séance (`valider` refuse alors tout contact au sol sur terrain
+  gelé) et dire **pourquoi** en une phrase. Terrain gelé et orage sont des
+  consignes de sécurité, pas un choix ; par grand froid, proposer une
+  séance plus courte.
 - **Joueur qui reprend après le feu vert du médecin** : ateliers sans
   contact pour lui, sans le nommer (voir `/coach-rugby:prevention`).
 

@@ -1,0 +1,85 @@
+# EXEMPLE FICTIF — séance produite pendant le playtest 8.
+equipe: m14
+date: 2026-12-09
+heure: "17:30"
+duree_min: 90
+phase: plateaux-automne
+semaine_saison: 16
+prochain_evenement: { type: plateau, date: 2026-12-12, j_moins: 3 }
+effectif_prevu: 22
+source_effectif: coach
+encadrants: 2
+terrain: terrain
+materiel: [ballons taille 5, plots, chasubles]
+regles:
+  categorie: m14
+  formes: [rugby-educatif-10-15]
+  contact_max: plein
+  statut: a-verifier
+  source: ffr-cahier-edr-2026-2027
+  saison: "2026-2027"
+objectifs:
+  - { texte: Passer et soutenir en mouvement, domaine: technique }
+  - { texte: Fixer un défenseur avant de passer, domaine: tactique }
+blocs:
+  - partie: accueil
+    duree_min: 5
+    titre: Accueil et consignes
+    contact: aucun
+    organisation: En cercle, en mouvement pour ne pas avoir froid.
+    consignes: [Vérifier gants, couches de vêtements et gourdes, Annoncer qu'il n'y aura ni plaquage ni jeu au sol à cause du gel]
+    securite: [Signaler toute douleur ou tout choc récent avant de commencer]
+  - partie: echauffement
+    duree_min: 20
+    titre: Échauffement préventif (version longue, temps froid)
+    exercice: echauffement-preventif-jeunes
+    contact: aucun
+    organisation: Couloir de 30 m ; on enlève une couche de vêtements au fil de l'échauffement.
+    consignes: [Course et mobilité plus longues que d'habitude, Sauts avec réception stable, sans glisser]
+    adaptations: [Temps froid - 20 minutes au lieu de 15, sauts sur la partie la moins dure du terrain]
+    securite: [Pas de sauts sur une zone verglacée, Arrêter un exercice qui fait mal]
+  - partie: corps
+    duree_min: 20
+    titre: Ligne de passes en avançant
+    exercice: ligne-de-passes-en-avancant
+    contact: aucun
+    organisation: Quatre lignes de 5 ou 6 sur 30 m ; rotations continues pour ne pas attendre au froid.
+    consignes: [Passe devant le receveur, Soutien à deux mètres]
+    securite: [Pas d'arrêt brusque sur sol dur]
+  - partie: corps
+    duree_min: 15
+    titre: Deux contre un au toucher
+    exercice: deux-contre-un
+    contact: toucher
+    organisation: Quatre couloirs de 20 × 10 m ; un éducateur pour deux couloirs.
+    consignes: [Cours vers le défenseur pour l'obliger à venir sur toi, Passe quand il s'engage]
+    adaptations: [Défense au toucher à deux mains à cause du terrain gelé]
+    securite: [Toucher à deux mains sans poussée, Aucun plaquage ni plongeon au sol]
+  - partie: jeu
+    duree_min: 20
+    titre: Match au toucher à 10 contre 10
+    contact: toucher
+    organisation: Deux terrains de 50 × 30 m, deux matchs de 11 contre 11 ou 10 contre 10.
+    consignes: [Toucher à deux mains, le porteur passe dans les 2 secondes]
+    adaptations: [Pas de ruck ni de plaquage aujourd'hui (terrain gelé)]
+    securite: [Arbitrage strict des contacts, "Choc à la tête : sortie immédiate et définitive, prévenir les parents, avis médical", Pause d'hydratation à la mi-temps]
+  - partie: retour-au-calme
+    duree_min: 5
+    titre: Retour au calme en marchant
+    exercice: retour-au-calme-mobilite
+    contact: aucun
+    consignes: [Marche et respiration, on remet sa veste tout de suite]
+    securite: [Pas d'étirements au sol sur terrain gelé]
+  - partie: bilan
+    duree_min: 5
+    titre: Cercle bilan
+    exercice: cercle-bilan
+    contact: aucun
+    consignes: ["Une chose réussie, une chose à retravailler", Rappel du plateau de samedi]
+    securite: [Vérifier que personne n'a de douleur à signaler]
+points_vigilance:
+  - Terrain gelé - aucun plaquage, aucun jeu au sol, pas de ruck.
+  - Plateau dans 3 jours - pas de fatigue inutile.
+sources: [ffr-cahier-edr-2026-2027, world-rugby-activate]
+hypotheses:
+  - Adaptation au terrain gelé d'après references/prevention.md (hypothèse pédagogique).

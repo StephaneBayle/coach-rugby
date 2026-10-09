@@ -50,22 +50,34 @@ vous préviens si une semaine sort de l'ordinaire. »
    (seulement pour les 16 ans et plus).
 
 **Jamais noté** : douleur, blessure, sommeil, humeur, fatigue d'un joueur,
-commentaire. Si le coach en parle : ne pas l'écrire ; pour une douleur ou une
-blessure, renvoyer vers un professionnel de santé (phrase type de
-`regles-d-usage.md`, section 3).
+commentaire. Si le coach en parle : ne pas l'écrire, et en donner **la
+raison en une phrase** dès le premier refus (« les informations de santé
+sont très protégées et le plugin n'est pas un dossier médical ; c'est le
+rôle du médecin ou du kiné du club ») ; pour une douleur ou une blessure,
+renvoyer vers un professionnel de santé (phrase type de
+`regles-d-usage.md`, section 3). Proposer une **trace neutre** :
+« J10 sans contact cette semaine » dans la séance, ou `disponible: false`
+sans motif (`/coach-rugby:effectif`).
 
 ## 3. Bilan de la semaine
 
-Lancer `charge <equipe> --bilan [--date]`, puis dire en trois lignes au plus :
+Lancer `charge <equipe> --bilan [--date]`, puis dire en trois lignes au plus
+(plus une ligne de calcul si le coach veut vérifier : « 105 × 8 = 840 ;
+… ») :
 
 - la charge de la semaine et l'écart avec les semaines précédentes ;
 - les **repères** : semaine nettement plus chargée, ou semaine peu variée ;
 - une piste concrète, **laissée au choix du coach** : « la prochaine séance
   peut être plus légère », « alterner une séance dure et une légère ».
 
-**Formulations imposées** : « repère », « à vous de voir ». **Jamais** :
-« risque de blessure », « surentraînement », « danger ». Un RPE élevé dit
-qu'une séance était dure, pas qu'un joueur va mal.
+**Formulations imposées** : « repère », « à vous de voir ». **Jamais**,
+même à la forme négative : « risque », « blessure », « surentraînement »,
+« danger ». Un RPE élevé dit qu'une séance était dure, pas qu'un joueur va
+mal.
+
+Les seuils (4 semaines de référence, +30 %, monotonie) sont des
+**hypothèses du plugin** : le dire dès le premier bilan, sans promettre de
+les changer pour l'équipe.
 
 Pas encore trois semaines notées : le dire (« la tendance viendra dans
 quelques semaines »).
@@ -78,7 +90,8 @@ Proposer en une ligne :
   sur `semaine.yaml`) ;
 - le tableau Excel (`tableau charge <equipe>`) ;
 - de préparer la semaine suivante en tenant compte du repère
-  (`/coach-rugby:semaine`).
+  (`/coach-rugby:semaine`) : **toujours** la proposer quand un repère de
+  hausse ressort ou qu'un match important approche.
 
 Ajouter une ligne datée dans `journal.md` (sans prénom). Ne rien enchaîner
 sans l'accord du coach.

@@ -25,15 +25,22 @@ n'est **jamais un avis médical**. Les repères ci-dessous sont des
 ## 2. Conditions de jeu (décrites par le coach)
 
 Le plugin ne consulte pas la météo : il adapte la séance à ce que le coach
-décrit.
+décrit, et note la condition dans la séance (`conditions` : gel, chaleur,
+froid, pluie, vent, orage).
+
+Deux consignes sont des **consignes de sécurité du plugin**, appliquées
+toujours, même si elles ne viennent pas d'une source : **terrain gelé = ni
+plaquage ni jeu au sol** ; **orage = arrêt et mise à l'abri**. `valider` les
+contrôle. On en donne la raison en une phrase, sans dire « c'est vous qui
+décidez ». Les autres lignes sont des adaptations proposées.
 
 | Situation | Adaptation proposée (hypothèses) |
 |---|---|
 | **Chaleur** | Séance aux heures les plus fraîches ; pause d'hydratation toutes les 15 à 20 minutes ; intensité et durée réduites ; zone d'ombre ; chacun a sa gourde |
-| **Froid** | Échauffement plus long ; couches de vêtements retirées au fil de l'échauffement ; pas d'attente immobile ; séance plus courte et plus continue |
-| **Terrain gelé ou dur** | **Pas de plaquage ni de jeu au sol** ; jeux au toucher, passes, déplacements ; ou séance reportée ou déplacée en gymnase |
+| **Froid** | Échauffement plus long ; couches de vêtements retirées au fil de l'échauffement ; pas d'attente immobile ; séance plus courte (par exemple 60 à 75 minutes au lieu de 90) et plus continue |
+| **Terrain gelé ou dur** | **Consigne de sécurité : pas de plaquage ni de jeu au sol** (chaque chute se termine sur un sol dur, les appuis glissent) ; jeux au toucher, passes, déplacements ; ou séance reportée ou déplacée en gymnase |
 | **Terrain gras ou pluie** | Moins de vitesse et de changements d'appui brusques ; crampons adaptés ; contacts réduits si les appuis sont mauvais ; ballons séchés |
-| **Orage** | Arrêter la séance et mettre tout le monde à l'abri |
+| **Orage** | **Consigne de sécurité** : arrêter la séance et mettre tout le monde à l'abri |
 | **Après un match** | Récupération à J+1 ou J+2, sans gros contact : la fatigue et les douleurs sont les plus marquées 12 à 36 h après un match et s'estompent le plus souvent entre 24 et 72 h (`naughton-2021-fatigue-rugby`) |
 
 En cas de malaise d'un joueur, appliquer `regles-d-usage.md`, section 3
@@ -53,7 +60,17 @@ d'entraînement**, rien de plus.
   `world-rugby-commotion`). Le plugin y renvoie, sans le reproduire ni le
   résumer en durées.
 
-Étapes d'entraînement proposées (hypothèse pédagogique) :
+- **Le plugin ne décide pas de l'étape** et ne dit jamais « il peut venir »
+  ou « c'est une bonne première étape ». Il demande **ce que le médecin a
+  autorisé** (reprise sans contact ? contact ? match ?) et adapte la séance
+  à cette étape. Pour un mineur, les **parents** sont informés de la reprise.
+- **Ce qu'il faut surveiller** à chaque séance : les signes de
+  `protocole-commotion.md` (sections 2 et 3 : maux de tête, vertiges,
+  nausées, fatigue anormale, trouble de l'équilibre, comportement
+  inhabituel…). Au moindre signe : arrêt, parents prévenus, médecin.
+
+Étapes d'entraînement proposées (hypothèse pédagogique), à suivre selon ce
+que le médecin a autorisé :
 
 1. **Sans contact** : course, passes, jeux au toucher, à intensité
    croissante.
@@ -66,12 +83,13 @@ On passe à l'étape suivante si l'étape en cours se passe **sans gêne**. Au
 moindre signe qui revient, on revient en arrière et on en parle au médecin.
 Phrase type :
 
-> Puisque le médecin a donné son feu vert, je vous propose de reprendre par
-> étapes : d'abord sans contact, puis avec un contact contrôlé, puis le
-> contact plein, et enfin le match. On passe à l'étape suivante seulement si
-> tout se passe bien ; au moindre doute, on revient en arrière et on en parle
-> au médecin. Pour une commotion, c'est le protocole de la FFR qui fixe les
-> étapes, sous contrôle médical.
+> Le médecin a donné son feu vert : qu'a-t-il autorisé exactement (reprise
+> sans contact, avec contact, match) ? Je prépare la séance pour cette
+> étape. La suite se fait par étapes : sans contact, contact contrôlé,
+> contact plein, puis match ; on n'avance que si tout se passe bien. Au
+> moindre signe (maux de tête, vertiges, fatigue inhabituelle…), on arrête,
+> on prévient les parents et on revoit le médecin. Pour une commotion, c'est
+> le protocole de la FFR qui fixe les étapes, sous contrôle médical.
 
 ## 4. Salle de musculation ou de fitness
 

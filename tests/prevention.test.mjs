@@ -109,3 +109,25 @@ test('CLI : export des programmes (aucun code de joueur) et saisie des tests (re
   assert.equal(refus.status, 1);
   assert.ok(!existsSync(path.join(d, 'm10', 'tests.yaml')));
 });
+
+test('playtest 8 : terrain gelé noté dans la séance, contact au sol refusé par valider ; orage = séance arrêtée', async () => {
+  const { controlerSeance } = await import('../plugin/lib/seance.mjs');
+  const seance = lireYaml(path.join(racine, 'docs', 'playtests', '2026-12-09-8-educateur-m14-treve-reprise', 'seance-produite.yaml'));
+  const gel = { ...seance, conditions: ['gel', 'froid'] };
+  assert.deepEqual(controlerSeance(gel).filter((e) => /gelé|orage/.test(e)), []);
+  const avecPlaquage = structuredClone(gel);
+  avecPlaquage.blocs[3].contact = 'plaquage';
+  assert.match(controlerSeance(avecPlaquage).join(), /bloc 4 .*terrain gelé — ni plaquage ni jeu au sol/);
+  assert.match(controlerSeance({ ...seance, conditions: ['orage'] }).join(), /orage annoncé/);
+});
+
+test('playtest 7 : le samedi, la relance propose la semaine suivante, pas celle qui se termine', async () => {
+  const { lirePlanification, suggestions } = await import('../plugin/lib/etat.mjs');
+  const equipe = lireYaml(path.join(f3, 'equipe.yaml'));
+  const saison = lireYaml(path.join(f3, 'saison.yaml'));
+  const plan = { ...lirePlanification(f3), semaines: {} };
+  const r = suggestions(saison, '2026-10-10', { equipe, planification: plan }).filter((x) => x.code === 'preparer-semaine');
+  assert.equal(r.length, 1);
+  assert.match(r[0].message, /semaine prochaine \(du 2026-10-12\)/);
+  assert.ok(!suggestions(saison, '2026-10-10', { equipe, planification: lirePlanification(f3) }).some((x) => x.code === 'preparer-semaine'), 'semaine suivante déjà planifiée');
+});

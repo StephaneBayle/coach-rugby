@@ -42,8 +42,13 @@ Toujours commencer par la **catégorie la plus jeune** du groupe
 
 Le plugin ne consulte pas la météo : partir de ce que le coach décrit, puis
 appliquer le tableau de `prevention.md` (chaleur, froid, terrain gelé ou
-gras, orage, lendemain de match). **Terrain gelé ou dur : pas de plaquage ni
-de jeu au sol.** Proposer en une ligne la séance adaptée ou le report.
+gras, orage, lendemain de match), et noter `conditions` dans la séance.
+
+- **Terrain gelé ou dur** (pas de plaquage ni de jeu au sol) et **orage**
+  (arrêt) sont des **consignes de sécurité** : les appliquer, en donner la
+  raison en une phrase, ne jamais dire « c'est vous qui décidez ».
+- Les autres adaptations sont proposées ; froid : séance plus courte.
+- Proposer en une ligne la séance adaptée, le gymnase ou le report.
 
 ## 3. Préparation physique, programmes et salle
 
@@ -71,6 +76,12 @@ de jeu au sol.** Proposer en une ligne la séance adaptée ou le report.
 Les charges se disent en **sensations** (« garder 2 ou 3 répétitions en
 réserve »), **jamais en kilos** pour un joueur.
 
+**Repères donnés comme des hypothèses**, dès la première fois : seuils
+d'âge pour la salle (« repère du consensus sur le renforcement des jeunes,
+Lloyd 2014 »), « rien de lourd à J-2 ou moins », moments des tests. Pour le
+J-n, **calculer le jour** : pour un match le dimanche, J-2 est le vendredi,
+donc le dernier jour pour une séance lourde est le **jeudi**.
+
 ## 4. Tests physiques (16 ans et plus)
 
 - Pour une équipe plus jeune : ne pas en proposer, le dire en une phrase.
@@ -81,26 +92,33 @@ réserve »), **jamais en kilos** pour un joueur.
 - Saisie : `tests <equipe> --date <date> --test <id> --resultats J01=…`.
   Bilan : `tests <equipe> --bilan`.
 - Présenter la **progression de chacun** par rapport à lui-même (progrès,
-  stable, en retrait). **Jamais de classement, de norme ni de comparaison**
-  entre joueurs. Les résultats ne se diffusent pas.
+  stable, en retrait), **un joueur à la fois, dans l'ordre des codes**, de
+  préférence pour un entretien individuel. **Jamais** de liste triée, de
+  classement, de norme ni de comparaison entre joueurs. Refuser un
+  classement sans juger le coach : « je vous donne la progression de
+  chacun ». Les résultats ne se diffusent pas.
 
 ## 5. Reprise après le feu vert du médecin
 
 Le coach dit que **le médecin a autorisé** un joueur à reprendre.
 
 1. Ne rien enregistrer : ni la blessure, ni la reprise, ni le joueur.
-2. Donner la phrase type de `prevention.md`, section 3 : sans contact, puis
-   contact contrôlé, puis contact plein, puis match. On passe à l'étape
-   suivante si tout se passe bien ; au moindre doute, on revient en arrière
-   et on en parle au médecin. **Aucune durée.**
-3. **Commotion** : la reprise suit le protocole de la FFR, sous contrôle
+2. **Demander ce que le médecin a autorisé** (sans contact, contact,
+   match) ; ne jamais dire soi-même « il peut venir » ni choisir l'étape.
+   Puis la phrase type de `prevention.md`, section 3. **Aucune durée** ; le
+   dire d'emblée en une phrase (« je ne donne pas de date : c'est le
+   médecin qui valide »).
+3. Dire **quoi surveiller** : les signes de `protocole-commotion.md`
+   (sections 2 et 3). Au moindre signe : arrêt, parents prévenus pour un
+   mineur, médecin.
+4. **Commotion** : la reprise suit le protocole de la FFR, sous contrôle
    médical. Y renvoyer, sans le résumer en jours.
-4. **Pas de feu vert** (« il dit qu'il va bien », « je le mets ? ») : ne
+5. **Pas de feu vert** (« il dit qu'il va bien », « je le mets ? ») : ne
    donner aucun avis ni critère de reprise. Phrase type de
    `regles-d-usage.md`, section 3, et protocole commotion pour un choc à la
    tête.
-5. Proposer d'adapter la prochaine séance pour ce joueur (ateliers sans
-   contact), sans le nommer dans la séance.
+6. Proposer d'adapter la prochaine séance à l'étape autorisée (ateliers
+   sans contact par exemple), sans le nommer dans la séance.
 
 ## 6. Faire le point
 

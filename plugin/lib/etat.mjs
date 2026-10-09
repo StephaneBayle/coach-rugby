@@ -165,8 +165,10 @@ function relancesDePlanification(s, saison, { equipe, cycles, semaines = {}, sea
   const lundi = lundiDe(s.date);
   const jourSemaine = lireDate(s.date).getUTCDay(); // 0 dimanche … 6 samedi
   const lundiSuivant = ecrireDate(ajouterJours(lundi, 7));
-  if (active && !semaines[lundi]) r('preparer-semaine', `Pas encore de plan pour la semaine du ${lundi} : le préparer (/coach-rugby:semaine) ?`);
-  else if (active && [5, 6, 0].includes(jourSemaine) && !semaines[lundiSuivant]) r('preparer-semaine', `Préparer le plan de la semaine prochaine (du ${lundiSuivant}) ?`);
+  // Du vendredi au dimanche, on prépare la semaine suivante.
+  const finDeSemaine = [5, 6, 0].includes(jourSemaine);
+  if (active && finDeSemaine && !semaines[lundiSuivant]) r('preparer-semaine', `Préparer le plan de la semaine prochaine (du ${lundiSuivant}) ?`);
+  else if (active && !finDeSemaine && !semaines[lundi]) r('preparer-semaine', `Pas encore de plan pour la semaine du ${lundi} : le préparer (/coach-rugby:semaine) ?`);
   const demain = ecrireDate(ajouterJours(s.date, 1));
   for (const sem of [semaines[lundi], semaines[lundiSuivant]].filter(Boolean)) {
     for (const p of sem.seances_prevues || []) {

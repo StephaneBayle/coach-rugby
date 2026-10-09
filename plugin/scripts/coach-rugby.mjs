@@ -398,6 +398,7 @@ commandes.charge = (o) => {
   const charge = existsSync(fc) ? lireYaml(fc) : { equipe: id, entrees: [] };
   if (o.rpe !== undefined || o.duree !== undefined) {
     if (typeof o.date !== 'string' || o.duree === undefined || o.rpe === undefined) sortir(1, 'Indiquer --date AAAA-MM-JJ, --duree (minutes) et --rpe (0 à 10).');
+    if (o.date > ecrireDate(aujourdhui())) sortir(1, `Le ${o.date} n'est pas encore passé : on note la charge après la séance.`);
     const type = typeof o.type === 'string' ? o.type : 'seance';
     const parCode = typeof o['par-code'] === 'string'
       ? Object.fromEntries(o['par-code'].split(',').map((x) => x.trim().split('=')).map(([c, v]) => [c.toUpperCase(), Number(v)]))

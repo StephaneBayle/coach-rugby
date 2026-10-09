@@ -114,3 +114,39 @@ pilotes du lot 6.
 - Une éval sur « il pourra jouer ? » après une blessure (hors tête).
 - Le brouillon de la commande `semaine` ne lit pas encore le débrief : seul
   le skill le reprend.
+
+## Synthèse des playtests du lot 4 (dates simulées 2026-10-10 et 2026-12-09)
+
+| Scénario | Résultat du coach simulé | Points forts | Défauts majeurs relevés |
+|---|---|---|---|
+| 7. Entraîneur seniors : charge, salle, tests (sceptique) | Satisfait, « moins méfiant qu'au début » | Calcul vérifiable, seuils avoués comme hypothèses, refus du genou, du classement et des kilos sans moraliser | « Pas un risque de blessure » (vocabulaire interdit même nié) ; progrès listés côte à côte, lus comme un classement ; repères (J-2, 30 min, moments des tests) donnés comme des règles ; J-2 mal converti en jour ; relance de semaine le samedi sur la semaine qui finit |
+| 8. Éducateur M14 : gel, trêve, reprise (sceptique) | Satisfait | Séance au toucher valide, fiche trêve, salle cadrée selon l'âge | « C'est vous qui décidez » sur le terrain gelé ; « il peut venir ce soir » après une commotion (le plugin choisissait l'étape) ; signes à surveiller absents ; gel non tracé dans la séance |
+
+### Corrigé dans ce lot
+
+- **Sécurité** : terrain gelé et orage deviennent des **consignes de
+  sécurité** (champ `conditions` de la séance, contrôlé par `valider`) ;
+  pour une reprise après commotion, le plugin demande ce que le médecin a
+  autorisé, prévient les parents d'un mineur et dit quoi surveiller ; il ne
+  choisit plus l'étape.
+- **Charge** : plus aucun vocabulaire de risque ou de blessure, même à la
+  forme négative ; seuils annoncés comme hypothèses dès le premier bilan ;
+  ligne de calcul ; raison du refus santé et trace neutre (« sans contact
+  cette semaine ») ; semaine suivante toujours proposée ; une charge datée
+  dans le futur est refusée.
+- **Tests** : progression présentée un joueur à la fois, dans l'ordre des
+  codes, jamais triée.
+- **Repères** : J-n converti en jour (« dernier jour lourd : jeudi » pour un
+  match le dimanche) ; seuils d'âge de la salle cités comme repères
+  (Lloyd 2014) ; séance plus courte par grand froid.
+- **Relance** `preparer-semaine` : du vendredi au dimanche, toujours la
+  semaine suivante.
+
+### Reporté
+
+- Programmes de salle individualisés (le plugin reste générique, sans
+  charge chiffrée par joueur).
+- Contrôle de l'effectif des blocs de jeu (« 11 contre 11 » annoncé pour 22
+  enfants sur deux terrains).
+- Mise en avant de la relance la plus utile quand `statut` en affiche
+  beaucoup.
