@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: reprise-apres-feu-vert
+description: Le médecin a autorisé J07 à reprendre après un coup à la tête ; le plugin propose des étapes d'entraînement, renvoie au protocole de la FFR, sans durée et sans rien noter sur la santé.
+tags: [lot-4, sante, commotion]
+context:
+  scaffold_script: scaffold.sh

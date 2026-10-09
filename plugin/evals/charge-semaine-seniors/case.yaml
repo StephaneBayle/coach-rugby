@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: charge-semaine-seniors
+description: Le coach donne les RPE d'une semaine chargée (seniors F3) ; le plugin note la charge, signale la hausse comme un repère et propose d'alléger sans l'imposer.
+tags: [lot-4, charge, securite]
+context:
+  scaffold_script: scaffold.sh

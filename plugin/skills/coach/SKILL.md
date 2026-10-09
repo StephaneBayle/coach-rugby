@@ -110,8 +110,13 @@ Proposer, avec une liste numérotée, ce qui a du sens maintenant :
    (convocation, composition, temps de jeu, causerie), puis le débriefer ;
 6. `/coach-rugby:effectif` — joueurs en codes, présences, progrès, feuille
    de présence et tableaux ;
-7. `/coach-rugby:exercices` — trouver ou adapter un exercice ;
-8. `/coach-rugby:relire` puis `/coach-rugby:exporter` — faire relire une
+7. `/coach-rugby:charge` — noter la charge des séances et faire le bilan de
+   la semaine (à partir de M14) ;
+8. `/coach-rugby:prevention` — échauffement préventif, conditions de jeu,
+   préparation physique (terrain, salle), programmes de trêve, tests,
+   reprise après le feu vert du médecin ;
+9. `/coach-rugby:exercices` — trouver ou adapter un exercice ;
+10. `/coach-rugby:relire` puis `/coach-rugby:exporter` — faire relire une
    séance, puis obtenir sa fiche imprimable ou téléphone.
 
 Mettre en avant la suggestion la plus utile d'après les relances.

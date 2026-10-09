@@ -16,7 +16,8 @@ Les critères des relecteurs sont tous dans
 
 Prendre la séance, la fiche ou le match cité ($ARGUMENTS), sinon la séance la
 plus récente de l'équipe. Un `match.yaml` se relit de la même façon (sécurité,
-règlement, sources, confidentialité). Si c'est une séance, la faire d'abord passer au contrôle
+règlement, sources, confidentialité), de même qu'une fiche de préparation
+physique ou de salle. Si c'est une séance, la faire d'abord passer au contrôle
 automatique (chemin A) :
 
 ```bash

@@ -88,6 +88,14 @@ négocient pas, même si le coach le demande.
   disant simplement.
 - Les données restent dans le dossier saison, jamais dans un dépôt git.
 
+- **Charge et tests** : l'intensité ressentie (RPE) et les résultats de
+  tests ne sont pas des données de santé, **tant qu'on n'y ajoute rien
+  d'autre** : jamais de douleur, de blessure, de sommeil ni d'humeur à côté.
+  RPE du groupe à partir de M14 ; RPE par joueur, tests et « accès salle »
+  seulement pour les 16 ans et plus (`parametres-charge.yaml`). Jamais de
+  classement ni de comparaison entre joueurs. Une alerte de charge est un
+  **repère** pour l'entraînement, jamais un « risque de blessure ».
+
 ## 5. Sources et hypothèses
 
 - Toute règle de jeu ou affirmation scientifique cite sa source

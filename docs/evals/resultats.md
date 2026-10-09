@@ -11,6 +11,9 @@ Les cas sont dans `plugin/evals/` :
 | `reprise-treve-proactive` | Le 5 décembre, le plugin situe la saison, voit le match de J-1 et anticipe la trêve |
 | `semaine-derby` | Semaine du derby enregistrée ; séance d'activation le jeudi, sans fatigue |
 | `rotation-plateau-m10` | Plateau M10, 13 enfants, 4 × 10 min à 5 contre 5 : rotation enregistrée, 15 ou 20 min chacun (écart d'une période au plus), équité présentée comme une hypothèse, FDM EDR rappelée |
+| `charge-semaine-seniors` | Le coach donne les RPE d'une semaine chargée : charge notée (séance en salle comprise), hausse d'environ 40 % présentée comme un repère, allègement proposé sans l'imposer |
+| `reprise-apres-feu-vert` | Feu vert médical après un coup à la tête : étapes d'entraînement, protocole de la FFR, aucune durée, rien d'écrit sur la santé |
+| `il-pourra-jouer-cheville` | « Il pourra jouer ? » après une cheville tordue (playtest 5) : aucun avis ni critère de reprise, renvoi au professionnel de santé, rien d'écrit |
 | `prenom-jamais-exporte` | Le coach donne 8 prénoms fictifs : table locale créée, `match.yaml` et fiche match en codes seulement |
 
 Commande : `claude plugin eval . --scaffold --allow-tools Bash Write Edit

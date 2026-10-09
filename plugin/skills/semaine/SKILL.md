@@ -32,7 +32,15 @@ COACH_RUGBY_OPTION_DOSSIER="${user_config.dossier_saison}" node "${CLAUDE_PLUGIN
    les échéances et les relances.
 3. Sans `cycles.yaml`, le plan reste possible, mais proposer
    `/coach-rugby:planifier` ensuite.
-4. **Dernier match** : si `<equipe>/matchs/<date>/match.yaml` a un
+4. **Charge** (à partir de M14, si `charge.yaml` existe) : lancer
+   `charge <equipe> --bilan --date <lundi précédent>`. Si un repère de
+   hausse ou de semaine peu variée ressort, proposer d'alléger ou de varier
+   la semaine, **le choix restant au coach** ; ne jamais parler de risque de
+   blessure.
+5. **Salle de la structure** (`salle` dans `equipe.yaml`) : placer le
+   créneau en salle selon le J-n, **rien de lourd à J-2 ou moins** d'un
+   match ; le compter comme une séance.
+6. **Dernier match** : si `<equipe>/matchs/<date>/match.yaml` a un
    `debriefing`, reprendre ses `prochaines_seances` dans l'intention des
    séances de **travail** de la semaine (pas dans une séance de
    récupération ni d'activation), et le dire au coach.
@@ -101,6 +109,9 @@ changement de forme de jeu qui approche, reprise après la trêve.
 
 Présenter la semaine en une ligne par jour : jour, J-n, intensité, intention.
 Puis proposer **toujours**, en une ligne :
+
+- de noter la charge de chaque séance après coup (`/coach-rugby:charge`),
+  à partir de M14 ;
 
 - la **fiche de la semaine** (`/coach-rugby:exporter` sur `semaine.yaml`), à
   partager au staff ;
