@@ -61,6 +61,8 @@ jobs:
           node plugin/scripts/coach-rugby.mjs tableau temps-de-jeu m10
           node plugin/scripts/coach-rugby.mjs tableau progres m10
           test -f plugin/exemples/fictif-m10-les-ecureuils/m10/exports/presences.xlsx
+          COACH_RUGBY_DOSSIER=plugin/exemples/fictif-seniors-f3-les-goelands node plugin/scripts/coach-rugby.mjs tableau charge seniors-f3
+          COACH_RUGBY_DOSSIER=plugin/exemples/fictif-seniors-f3-les-goelands node plugin/scripts/coach-rugby.mjs charge seniors-f3 --bilan --date 2026-10-09
       - name: Fiches d'exemple en artefact
         uses: actions/upload-artifact@v4
         with:

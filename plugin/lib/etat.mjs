@@ -6,6 +6,8 @@ import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { ajouterJours, ecartJours, ecrireDate, lireDate } from './dates.mjs';
 import { absencesRepetees } from './effectif.mjs';
+import { bilanCharge, parametresCharge } from './charge.mjs';
+import { categorieLaPlusJeune } from './categories.mjs';
 import { changementsDeForme, lundiDe, publicDe } from './planification.mjs';
 import { lireYaml } from './yaml.mjs';
 
@@ -57,7 +59,7 @@ export function lireMatchs(dossierEquipe) {
 // En codes seulement : la table des prénoms n'est jamais lue ici.
 export function lireSuivi(dossierEquipe) {
   const lire = (f) => (existsSync(path.join(dossierEquipe, f)) ? lireYaml(path.join(dossierEquipe, f)) : null);
-  return { effectif: lire('effectif.yaml'), presences: lire('presences.yaml'), progres: lire('progres.yaml'), matchs: lireMatchs(dossierEquipe) };
+  return { effectif: lire('effectif.yaml'), presences: lire('presences.yaml'), progres: lire('progres.yaml'), matchs: lireMatchs(dossierEquipe), charge: lire('charge.yaml'), tests: lire('tests.yaml') };
 }
 
 // Planification d'une équipe, pour les relances : cycles, semaines, séances faites.
@@ -139,6 +141,11 @@ export function suggestions(saison, date, { derniereSeance = null, equipe = null
     // Préparer le match couvre la logistique du plateau.
     if (relances.some((r) => r.code === 'preparer-match')) liste.splice(0, liste.length, ...liste.filter((x) => x.code !== 'logistique-plateau'));
     relances.forEach((r) => ajouter(r.code, r.message));
+    const charge = relancesDeCharge(s, saison, suivi, { equipe, planification });
+    charge.forEach((r) => ajouter(r.code, r.message));
+    // Le programme de trêve précise « préparer la trêve » : pas de doublon.
+    const treve = liste.find((x) => x.code === 'preparer-treve');
+    if (treve && charge.some((r) => r.code === 'programme-treve')) treve.message = treve.message.replace(" et un programme d'entretien", '');
   }
   if (planification) {
     const plan = relancesDePlanification(s, saison, { equipe, ...planification });
@@ -207,6 +214,40 @@ function relancesDeSuivi(s, saison, { effectif, presences, progres, matchs = {} 
     const derniere = progres.observations.map((o) => o.date).sort().at(-1);
     const depuis = ecartJours(derniere, s.date);
     if (depuis > 42) r('point-progres', `Progrès notés pour la dernière fois le ${derniere} (il y a ${Math.floor(depuis / 7)} semaines) : refaire un point sur deux ou trois compétences (/coach-rugby:effectif) ?`);
+  }
+  return liste;
+}
+
+// Relances de charge et de préparation physique (lot 4) : seulement pour les
+// équipes concernées (RPE à partir de M14, tests à 16 ans et plus).
+function relancesDeCharge(s, saison, { charge, tests, matchs = {} }, { equipe = null, planification = null } = {}) {
+  const liste = [];
+  const r = (code, message) => liste.push({ code, message });
+  const p = parametresCharge();
+  const jeune = equipe ? categorieLaPlusJeune(equipe.categories) : null;
+  const active = s.phase && PHASES_ACTIVES.has(s.phase.id);
+  if (charge?.entrees?.length && active) {
+    // Séance ou match des deux derniers jours sans charge notée.
+    const notees = new Set(charge.entrees.map((e) => String(e.date)));
+    const recents = [ecrireDate(ajouterJours(s.date, -1)), ecrireDate(ajouterJours(s.date, -2))];
+    const prevues = Object.values(planification?.semaines || {}).flatMap((sem) => (sem.seances_prevues || []).filter((x) => (x.statut || 'prevue') !== 'annulee').map((x) => String(x.date)));
+    const faites = [...(planification?.seances || [])];
+    const rencontres = (saison.calendrier || []).filter((e) => TYPES_MATCH.includes(e.type)).map((e) => String(e.date));
+    const aNoter = recents.filter((d) => !notees.has(d) && (prevues.includes(d) || faites.includes(d) || rencontres.includes(d) || matchs[d]));
+    if (aNoter.length) r('noter-charge', `Charge à noter pour le ${aNoter.sort().join(' et le ')} : durée et intensité ressentie du groupe, de 0 à 10 (/coach-rugby:charge) ?`);
+    const b = bilanCharge(charge, s.date);
+    const hausse = b.alertes.find((a) => a.code === 'hausse');
+    if (hausse) r('hausse-charge', `${hausse.message.replace(/\s*$/, '')} La prochaine séance peut être plus légère : à vous de voir.`);
+  }
+  const np = s.prochainePhase;
+  const programmes = jeune && p.publics.rpe_groupe.categories.includes(jeune);
+  if (programmes && np?.id === 'treve' && ecartJours(s.date, np.debut) <= 14 && s.phase?.id !== 'treve') {
+    r('programme-treve', `La trêve approche (${np.debut}) : remettre aux joueurs un programme d'entretien à faire chez eux (/coach-rugby:prevention) ?`);
+  }
+  if (tests?.resultats?.length && jeune && p.publics.individuel.categories.includes(jeune) && s.phase && ['reprise-prepa', 'phase-retour'].includes(s.phase.id)) {
+    const dansLaPhase = tests.resultats.some((x) => String(x.date) >= s.phase.debut && String(x.date) <= s.phase.fin);
+    const depuisDebut = ecartJours(s.phase.debut, s.date);
+    if (!dansLaPhase && depuisDebut >= 0 && depuisDebut <= 21) r('tests-physiques', `${s.phase.id === 'reprise-prepa' ? 'Reprise' : 'Début de la phase retour'} : moment possible pour refaire les tests physiques et suivre la progression de chacun (/coach-rugby:prevention) ?`);
   }
   return liste;
 }
