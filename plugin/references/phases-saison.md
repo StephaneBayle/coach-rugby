@@ -66,6 +66,10 @@ obligations :
 | `debriefer-match` | match, plateau ou tournoi passé depuis 1 à 7 jours, sans débriefing | statistiques et débriefing (match) ou bilan (plateau), thèmes des prochaines séances |
 | `absences-repetees` | un joueur de l'effectif absent aux 3 dernières dates de `presences.yaml` | prendre des nouvelles, sans demander de motif (codes ; le skill donne les prénoms au coach) |
 | `point-progres` | phase active, dernière observation de `progres.yaml` il y a plus de 6 semaines | refaire un point sur deux ou trois compétences |
+| `noter-charge` | l'équipe suit sa charge, et une séance ou un match des deux derniers jours n'a pas d'entrée dans `charge.yaml` | noter la durée et l'intensité ressentie |
+| `hausse-charge` | semaine à plus de 30 % de la moyenne des 4 précédentes (`parametres-charge.yaml`) | repère pour alléger, choix laissé au coach ; jamais un risque de blessure |
+| `programme-treve` | trêve dans 14 jours ou moins, équipe à partir de M14 | remettre un programme d'entretien (complète `preparer-treve`) |
+| `tests-physiques` | équipe de 16 ans et plus qui a déjà des tests, 21 premiers jours de la reprise ou de la phase retour, sans test dans la phase | refaire les tests, progression de chacun |
 
 Les relances liées aux cycles, aux semaines, à l'effectif et aux matchs
 n'apparaissent que si le dossier de l'équipe est lu (commande `statut`).

@@ -8,10 +8,10 @@ import path from 'node:path';
 import { chargerBibliotheque } from './bibliotheque.mjs';
 import { chargerCategories, reglesDuJour } from './categories.mjs';
 import { imprimerPdf, trouverChrome } from './chrome.mjs';
-import { lireDate } from './dates.mjs';
+import { ajouterJours, ecrireDate, lireDate } from './dates.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { dureeTotale } from './match.mjs';
-import { parametresCharge } from './charge.mjs';
+import { bilanCharge, parametresCharge, prevuVsRealise } from './charge.mjs';
 import { chargerProgrammes } from './programmes.mjs';
 import { publicDe } from './planification.mjs';
 import { contexteSeance } from './seance.mjs';
@@ -197,9 +197,44 @@ const INTENSITES = {
   affutage: { libelle: 'activation (affûtage)', picto: '◆' },
 };
 const JOURS_COURTS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'];
+const jourMoisCourt = (d) => new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'numeric', timeZone: 'UTC' }).format(lireDate(d));
 const jourMois = (d) => new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(lireDate(d));
 
-export function preparerSemaine(semaine, { equipe, saison, cycles }) {
+// Charge réalisée de la semaine (si l'équipe la suit) : réalisé face au
+// prévu, tendance, repères, courbe des 6 dernières semaines. Jamais de
+// valeur par joueur.
+const ECARTS = { conforme: 'comme prévu', 'plus-dure': 'plus dure que prévu', 'plus-legere': 'plus légère que prévu', 'non-notee': 'non notée' };
+
+export function courbeCharge(semaines, lundi, n = 6) {
+  const cles = Array.from({ length: n }, (_, i) => ecrireDate(ajouterJours(lundi, -7 * (n - 1 - i))));
+  const valeurs = cles.map((k) => semaines[k]?.total || 0);
+  const max = Math.max(1, ...valeurs);
+  const L = 300, H = 90, bas = 72, larg = L / n;
+  const barres = valeurs.map((v, i) => {
+    const h = Math.round((v / max) * 60);
+    const x = Math.round(i * larg + larg * 0.2);
+    const w = Math.round(larg * 0.6);
+    const courant = i === n - 1;
+    return `<rect x="${x}" y="${bas - h}" width="${w}" height="${h}" fill="${courant ? '#111' : '#fff'}" stroke="#111" stroke-width="1.5"/>`
+      + `<text x="${x + w / 2}" y="${bas - h - 4}" font-size="9" text-anchor="middle">${v || ''}</text>`
+      + `<text x="${x + w / 2}" y="${bas + 12}" font-size="8" text-anchor="middle">${jourMoisCourt(cles[i])}</text>`;
+  }).join('');
+  return `<svg class="courbe" viewBox="0 0 ${L} ${H}" role="img" aria-label="Charge des ${n} dernières semaines"><line x1="0" y1="${bas}" x2="${L}" y2="${bas}" stroke="#111"/>${barres}</svg>`;
+}
+
+function sectionCharge(semaine, charge) {
+  if (!charge?.entrees?.length) return '';
+  const b = bilanCharge(charge, semaine.debut);
+  const lignes = prevuVsRealise(semaine, charge).map((x) => `<tr><td>${echapper(jourMois(x.date))}</td><td>${echapper(INTENSITES[x.intensite]?.libelle || x.intensite)}</td><td>${x.rpe === null ? '—' : `${x.rpe}/10 × ${x.duree_min} min`}</td><td class="masquer-tel">${echapper(ECARTS[x.ecart])}</td></tr>`).join('');
+  const tendance = b.reference !== null ? `moyenne des ${b.semaines_reference} semaines précédentes : ${b.reference} (${b.ecart_pct > 0 ? '+' : ''}${b.ecart_pct} %)` : 'pas encore assez de semaines notées pour une tendance';
+  return `<section><h2>Charge réalisée</h2><p><b>Semaine : ${b.total}</b> (intensité ressentie × minutes) — ${tendance}.</p>`
+    + (lignes ? `<table><thead><tr><th>Séance</th><th>Prévu</th><th>Réalisé</th><th class="masquer-tel">Écart</th></tr></thead><tbody>${lignes}</tbody></table>` : '')
+    + courbeCharge(b.semaines, b.lundi)
+    + (b.alertes.length ? `<ul class="vigilance">${b.alertes.map((a) => `<li>${echapper(a.message)}</li>`).join('')}</ul>` : '')
+    + '<p class="notes">Repères d\'entraînement (hypothèses), pas des indicateurs médicaux. Valeurs du groupe seulement.</p></section>';
+}
+
+export function preparerSemaine(semaine, { equipe, saison, cycles, charge = null }) {
   const ref = chargerCategories();
   const debut = lireDate(semaine.debut);
   const echeances = semaine.echeances || [];
@@ -250,6 +285,7 @@ export function preparerSemaine(semaine, { equipe, saison, cycles }) {
     regles: regles ? `${regles.formes.map((f) => f.libelle).join(' ou ')} — contact maximal : ${regles.contact_max} — ${regles.statut === 'verifie' ? 'vérifié' : `à vérifier (saison ${regles.saison})`}.` : '—',
     hypotheses: sectionHtml('Hypothèses (choix non sourcés)', semaine.hypotheses),
     sources: sourcesHtml(semaine.sources),
+    charge: sectionCharge(semaine, charge),
   };
 }
 
@@ -257,7 +293,7 @@ export function exporterSemaine(fichier, { pdf = false, formats = ['a4', 'teleph
   const semaine = lireYaml(fichier);
   const d = path.resolve(path.dirname(fichier), '..', '..');
   const lire = (f) => (existsSync(path.join(d, f)) ? lireYaml(path.join(d, f)) : null);
-  const donnees = preparerSemaine(semaine, { equipe: lire('equipe.yaml'), saison: lire('saison.yaml'), cycles: lire('cycles.yaml') });
+  const donnees = preparerSemaine(semaine, { equipe: lire('equipe.yaml'), saison: lire('saison.yaml'), cycles: lire('cycles.yaml'), charge: lire('charge.yaml') });
   const dossier = path.join(path.dirname(fichier), 'exports');
   mkdirSync(dossier, { recursive: true });
   const g = readFileSync(path.join(RACINE_PLUGIN, 'gabarits', 'fiche-semaine.html'), 'utf8').replace(/<!-- Gabarit[\s\S]*?-->\n/, '');

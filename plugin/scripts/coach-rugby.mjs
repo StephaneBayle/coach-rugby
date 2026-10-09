@@ -9,7 +9,7 @@ import path from 'node:path';
 import { chargerBibliotheque, DOSSIER_BIBLIOTHEQUE, genererIndex } from '../lib/bibliotheque.mjs';
 import { exporterFeuillePresence, exporterMatch, exporterProgramme, exporterSeance, exporterSemaine } from '../lib/export.mjs';
 import { chargerProgrammes } from '../lib/programmes.mjs';
-import { ecrireCsv, ecrireXlsx, tableauPresences, tableauProgres, tableauTempsDeJeu } from '../lib/tableur.mjs';
+import { ecrireCsv, ecrireXlsx, tableauCharge, tableauPresences, tableauProgres, tableauTempsDeJeu, tableauTests } from '../lib/tableur.mjs';
 import { absencesRepetees, lirePrenoms, prochainCode, synchroniserProteges, tauxDePresence } from '../lib/effectif.mjs';
 import { dureeTotale } from '../lib/match.mjs';
 import { bilanCharge } from '../lib/charge.mjs';
@@ -22,7 +22,7 @@ import { ecrireYaml, lireYaml } from '../lib/yaml.mjs';
 import { RACINE_PLUGIN } from '../lib/deps.mjs';
 import { dossierSaison } from '../lib/chemins.mjs';
 import { reglesDuJour } from '../lib/categories.mjs';
-import { aujourdhui, ecrireDate, lireDate } from '../lib/dates.mjs';
+import { aujourdhui, ecartJours, ecrireDate, lireDate } from '../lib/dates.mjs';
 import { chargerEquipe, equipes, initialiser, validerChemin } from '../lib/dossier.mjs';
 import { avancement, lirePlanification, lireSuivi, seancesAvec, situer, suggestions } from '../lib/etat.mjs';
 
@@ -77,7 +77,7 @@ Usage : node coach-rugby.mjs <commande> [options]
   exporter programme <id> [--pdf]
         Fiche d'un programme hors terrain (trêve, intersaison, salle), sans
         donnée personnelle, à remettre aux joueurs.
-  tableau presences|temps-de-jeu|progres <equipe> [--match AAAA-MM-JJ] [--format xlsx|csv]
+  tableau presences|temps-de-jeu|progres|charge|tests <equipe> [--match AAAA-MM-JJ] [--format xlsx|csv] [--avec-tests]
         Tableau en codes (jamais de prénom) dans <equipe>/exports/. Le CSV
         est toujours produit ; l'Excel (xlsx, par défaut) en plus si possible.
 
@@ -130,6 +130,13 @@ const commandes = {
         r.situation = situer(saison, jour, { cycles: planification.cycles });
         r.suggestions = suggestions(saison, jour, { derniereSeance, equipe, planification, suivi: lireSuivi(d) });
         r.regles = reglesDuJour({ categories: equipe.categories, pratique: equipe.pratique, date: jour });
+        const fc = path.join(d, 'charge.yaml');
+        if (existsSync(fc)) {
+          const { semaines, ...bilan } = bilanCharge(lireYaml(fc), jour);
+          const derniere = lireYaml(fc).entrees.map((e) => String(e.date)).sort().at(-1);
+          // Rien de noté depuis plus de deux semaines : pas de bilan trompeur.
+          if (derniere && ecartJours(derniere, ecrireDate(jour)) <= 14) r.charge = { ...bilan, derniere_entree: derniere };
+        }
       }
       return r;
     });
@@ -146,6 +153,8 @@ const commandes = {
         const g = r.regles;
         lignes.push(`  Règles du moment : ${g.formes.map((f) => f.libelle).join(' ou ')} — contact max : ${g.contact_max} (${g.statut === 'verifie' ? 'vérifié' : `à vérifier, saison ${g.saison}`})`);
       }
+      if (r.charge && !r.charge.entrees) lignes.push(`  Charge : rien de noté cette semaine (dernière entrée le ${r.charge.derniere_entree})`);
+      else if (r.charge) lignes.push(`  Charge : semaine du ${r.charge.lundi} : ${r.charge.total}${r.charge.reference !== null ? ` (moyenne des semaines précédentes ${r.charge.reference}, ${r.charge.ecart_pct > 0 ? '+' : ''}${r.charge.ecart_pct} %)` : ''} — repère, pas un indicateur médical`);
       lignes.push(`  Avancement : ${r.avancement.map((e) => `${e.fait ? '✓' : '·'} ${e.id}`).join('  ')}`);
       for (const sg of r.suggestions || []) lignes.push(`  → ${sg.message}`);
     }
@@ -228,8 +237,11 @@ commandes.exporter = (o) => {
 
 commandes.tableau = async (o) => {
   const [quoi, id] = o._;
-  const usage = 'Usage : tableau presences|temps-de-jeu|progres <equipe> [--match AAAA-MM-JJ] [--format xlsx|csv]';
-  if (!['presences', 'temps-de-jeu', 'progres'].includes(quoi)) sortir(1, usage);
+  const usage = 'Usage : tableau presences|temps-de-jeu|progres|charge|tests <equipe> [--match AAAA-MM-JJ] [--format xlsx|csv] [--avec-tests]';
+  if (!['presences', 'temps-de-jeu', 'progres', 'charge', 'tests'].includes(quoi)) sortir(1, usage);
+  // Les résultats de tests sont des données individuelles : jamais dans un
+  // tableau sans le demander explicitement.
+  if (quoi === 'tests' && !o['avec-tests']) sortir(1, 'Les résultats de tests physiques sont des données personnelles : relancer avec --avec-tests pour confirmer, et ne pas diffuser le tableau.');
   const { d, effectif } = chargerEffectif(id);
   const lire = (f) => {
     if (!existsSync(path.join(d, f))) sortir(1, `${f} introuvable dans ${d}.`);
@@ -238,6 +250,8 @@ commandes.tableau = async (o) => {
   let feuilles;
   let nom = quoi;
   if (quoi === 'presences') feuilles = [tableauPresences(effectif, lire('presences.yaml'))];
+  else if (quoi === 'charge') feuilles = tableauCharge(lire('charge.yaml'));
+  else if (quoi === 'tests') feuilles = tableauTests(lire('tests.yaml'));
   else if (quoi === 'progres') feuilles = [tableauProgres(effectif, lire('progres.yaml'), lireYaml(path.join(RACINE_PLUGIN, 'references', 'competences.yaml')))];
   else {
     const dates = existsSync(path.join(d, 'matchs')) ? readdirSync(path.join(d, 'matchs')).filter((x) => existsSync(path.join(d, 'matchs', x, 'match.yaml'))).sort() : [];
@@ -251,7 +265,8 @@ commandes.tableau = async (o) => {
   mkdirSync(dossier, { recursive: true });
   const fichiers = [];
   feuilles.forEach((f, i) => {
-    const n = `${nom}${i ? `-${f.nom.toLowerCase().replace(/\s+/g, '-')}` : ''}.csv`;
+    const slug = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const n = `${nom}${i || quoi === 'tests' ? `-${slug(f.nom)}` : ''}.csv`;
     ecrireCsv(path.join(dossier, n), f);
     fichiers.push(n);
   });

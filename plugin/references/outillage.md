@@ -171,6 +171,16 @@ plugin ; `~/Rugby-Saisons`.
   première et la dernière valeur **de chaque joueur** ; en dessous de
   `ecart_notable`, dire « stable ». Jamais de classement ni de norme.
 
+## `tableau charge` et `tableau tests`
+
+- **A** : `coach-rugby.mjs tableau charge <equipe>` (par semaine, par
+  séance, et par joueur pour les 16 ans et plus) ;
+  `coach-rugby.mjs tableau tests <equipe> --avec-tests` (une feuille par
+  test). Les résultats de tests sont des données personnelles : le tableau
+  ne se diffuse pas.
+- **B** : CSV au séparateur « ; », colonnes reprises de la sortie `charge
+  --bilan` et `tests --bilan`, avec une colonne « Prénom » vide.
+
 ## `exporter programme` — programmes hors terrain
 
 - **A** : `coach-rugby.mjs exporter programme <id> [--pdf]` produit la

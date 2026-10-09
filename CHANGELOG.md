@@ -15,6 +15,13 @@ comment c'est programmé. Format inspiré de
   des repères (semaine beaucoup plus chargée, semaine peu variée). Ce sont
   des repères d'entraînement, jamais des indicateurs médicaux. À partir de
   M14 ; l'intensité par joueur seulement pour les 16 ans et plus.
+- La fiche de la semaine montre la charge réalisée face au prévu et une
+  petite courbe des six dernières semaines (valeurs du groupe seulement) ;
+  tableaux Excel de la charge et des tests ; le point de situation donne la
+  charge de la semaine.
+- Nouveaux rappels : noter la charge d'une séance ou d'un match, semaine
+  beaucoup plus chargée (repère pour alléger, à vous de voir), programme à
+  remettre avant la trêve, tests physiques à la reprise.
 - Prévention : quatre échauffements préventifs (école de rugby, jeunes,
   adultes, jour de match), inspirés du programme Activate de World Rugby,
   et des conseils pour adapter la séance à la chaleur, au froid, à un
