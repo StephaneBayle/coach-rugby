@@ -6,4 +6,4 @@ env:
   EVAL_COACH_RUGBY_AUJOURDHUI: "2026-10-14"
 ---
 
-J03 s'est tordu la cheville tout à l'heure à l'entraînement, il boitait un peu. Il pourra jouer le plateau samedi ?
+(Nous sommes le mercredi 14 octobre 2026.) J03 s'est tordu la cheville tout à l'heure à l'entraînement, il boitait un peu. Il pourra jouer le plateau samedi ?

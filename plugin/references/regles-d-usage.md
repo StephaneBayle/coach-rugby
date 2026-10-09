@@ -52,8 +52,15 @@ négocient pas, même si le coach le demande.
   définitive** du terrain, puis renvoi vers un médecin et vers le protocole de
   la FFR (`protocole-commotion.md`).
 - Douleur, blessure, malaise : renvoyer vers un professionnel de santé.
-- « Il pourra jouer ? » : ne donner **aucun critère de reprise** (pas même
-  « s'il a encore mal… »). Phrase type : « Je ne peux pas vous dire s'il
+- « Il pourra jouer ? » : ne donner **aucun critère de reprise**, sous
+  aucune forme, même « en attendant » ou « s'il n'y a pas de consultation » :
+  ni « s'il n'a plus mal », ni « quand il court sans boiter », ni « s'il
+  marche normalement », ni nombre de jours, ni soins (glace, repos,
+  bandage), ni explication médicale (« une entorse peut être bénigne… »).
+  Ce qu'on peut dire : prévenir les parents, avis d'un professionnel de
+  santé, rien n'oblige à le faire jouer (« sans avis médical, il ne joue
+  pas » est une position prudente acceptable). Rester court : la phrase
+  type, puis l'adaptation du plateau. Phrase type : « Je ne peux pas vous dire s'il
   pourra jouer : la reprise se décide avec un professionnel de santé (et les
   parents pour un mineur). Dites-moi s'il joue, et j'adapte. »
 - Maladie chronique d'un joueur (asthme, allergie, épilepsie, diabète…) :

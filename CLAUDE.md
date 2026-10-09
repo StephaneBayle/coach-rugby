@@ -97,8 +97,13 @@ Avant toute PR : `npm test` et `npm run valider` doivent passer.
 ## Évals
 
 `claude plugin eval` se lance **en local uniquement** (`npm run evals`), jamais
-en CI : aucune clé d'API sur GitHub. La commande est en accès anticipé (non disponible sur le compte du mainteneur au 2026-10-08) ; les
-résultats sont consignés dans `docs/evals/resultats.md`.
+en CI : aucune clé d'API sur GitHub. Il faut Claude Code 2.1.295 ou plus
+(les versions antérieures répondent « currently in early access ») et une
+session connectée (`claude auth login`). Le message « early access » vient
+d'une version trop ancienne, pas du compte. Le script lance un essai par cas
+avec un plafond de 3 $ ; les résultats sont consignés dans
+`docs/evals/resultats.md`. Écrire la date du jour dans le texte du prompt :
+`EVAL_COACH_RUGBY_AUJOURDHUI` n'agit que sur les commandes du plugin.
 
 ## Git
 

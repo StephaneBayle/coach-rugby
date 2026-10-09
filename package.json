@@ -12,7 +12,7 @@
     "test": "node --import ./tests/environnement.mjs --test \"tests/**/*.test.mjs\"",
     "valider": "claude plugin validate --strict plugin && claude plugin validate --strict .",
     "lint": "markdownlint-cli2",
-    "evals": "cd plugin && claude plugin eval . --scaffold --allow-tools Bash Write Edit --threshold 0.8 --max-cost-usd 3 --no-publish"
+    "evals": "cd plugin && claude plugin eval . --scaffold --allow-tools Bash Write Edit --runs 1 --threshold 0.8 --max-cost-usd 3 --no-publish"
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.23.3"

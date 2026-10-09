@@ -6,7 +6,7 @@
 //      les a pas mises à côté du plugin ;
 //   2. donne une ligne par équipe (phase, semaine, prochaine échéance), pour
 //      que Claude puisse relancer le coach au bon moment ;
-//   3. prévient si le dossier saison est dans un dépôt git.
+//   3. prévient si le dossier saison est dans un dépôt git relié à un serveur.
 //
 // N'importe QUE des modules node:* : l'outillage (yaml, ajv) n'est appelé que
 // par un sous-processus, dont l'échec est ignoré.
@@ -14,7 +14,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { copyFileSync, existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { dossierSaison, racineGit } from '../lib/chemins.mjs';
+import { depotPubliable, dossierSaison } from '../lib/chemins.mjs';
 import { synchroniserProteges } from '../lib/effectif.mjs';
 
 const racine = process.env.CLAUDE_PLUGIN_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -76,10 +76,10 @@ if (existsSync(path.join(dossier, '.coach-rugby.yaml'))) {
   }
 }
 
-// 3. Dossier saison dans un dépôt git.
-const git = existsSync(dossier) ? racineGit(dossier) : null;
+// 3. Dossier saison dans un dépôt git relié à un serveur (publiable).
+const git = existsSync(dossier) ? depotPubliable(dossier) : null;
 if (git) {
-  messages.push(`coach-rugby : attention, le dossier saison (${dossier}) est dans un dépôt git (${git}) — les données des joueurs pourraient être publiées par erreur. Proposer au coach de le déplacer.`);
+  messages.push(`coach-rugby : attention, le dossier saison (${dossier}) est dans un dépôt git relié à un serveur (${git}) — les données des joueurs pourraient être publiées par erreur. Proposer au coach de le déplacer.`);
 }
 
 if (messages.length) console.log(messages.join('\n'));
