@@ -17,6 +17,7 @@ import { controlerEquipe, controlerSaison } from './controles.mjs';
 import { RACINE_PLUGIN } from './deps.mjs';
 import { valider } from './schemas.mjs';
 import { controlerCodes } from './effectif.mjs';
+import { controlerCharge } from './charge.mjs';
 import { controlerMatch } from './match.mjs';
 import { controlerCycles, controlerSemaine } from './planification.mjs';
 import { contexteSeance, controlerSeance } from './seance.mjs';
@@ -77,6 +78,7 @@ export function schemaDe(fichier) {
   if (base === 'progres.yaml') return 'progres';
   if (base === 'competences.yaml') return 'competences';
   if (base === 'match.yaml') return 'match';
+  if (base === 'charge.yaml') return 'charge';
   if (base === 'seance.yaml') return 'seance';
   if (/[\\/]bibliotheque[\\/]exercices[\\/][^\\/]+\.yaml$/.test(fichier) || /[\\/]_bibliotheque-perso[\\/]exercices[\\/][^\\/]+\.yaml$/.test(fichier)) return 'exercice';
   return null;
@@ -139,6 +141,12 @@ function validerFichier(fichier) {
         const ids = new Set(lireYaml(path.join(RACINE_PLUGIN, 'references', 'competences.yaml')).competences.map((c) => c.id));
         for (const o of donnees.observations) if (!ids.has(o.competence)) erreurs.push(`compétence inconnue : ${o.competence}`);
       }
+    }
+    if (schema === 'charge') {
+      const d = path.dirname(fichier);
+      const lire = (f) => (existsSync(path.join(d, f)) ? lireYaml(path.join(d, f)) : null);
+      erreurs = controlerCharge(donnees, { equipe: lire('equipe.yaml'), effectif: lire('effectif.yaml') });
+      if (donnees.equipe !== path.basename(d)) erreurs.push(`équipe « ${donnees.equipe} » différente du dossier`);
     }
     if (schema === 'match') {
       const d = path.resolve(path.dirname(fichier), '..', '..');

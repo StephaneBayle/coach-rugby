@@ -1,0 +1,29 @@
+# EXEMPLE FICTIF — charge réalisée (RPE × durée), en codes, aucune donnée de santé.
+# Semaine du 5 octobre volontairement chargée (stage fictif), pour l'exemple
+# de repère « hausse » ; semaine du derby allégée.
+equipe: seniors-f3
+entrees:
+  - { date: 2026-09-08, type: seance, duree_min: 105, rpe_groupe: 6, source: coach }
+  - { date: 2026-09-10, type: seance, duree_min: 90, rpe_groupe: 5, source: coach }
+  - { date: 2026-09-13, type: match, duree_min: 80, rpe_groupe: 8, source: coach }
+  - { date: 2026-09-15, type: seance, duree_min: 105, rpe_groupe: 6, source: coach }
+  - { date: 2026-09-17, type: seance, duree_min: 90, rpe_groupe: 5, source: coach }
+  - { date: 2026-09-20, type: match, duree_min: 80, rpe_groupe: 8, source: coach }
+  - { date: 2026-09-22, type: seance, duree_min: 105, rpe_groupe: 6, source: coach }
+  - { date: 2026-09-24, type: seance, duree_min: 90, rpe_groupe: 5, source: coach }
+  - { date: 2026-09-27, type: match, duree_min: 80, rpe_groupe: 8, source: coach }
+  - { date: 2026-09-29, type: seance, duree_min: 105, rpe_groupe: 6, source: coach }
+  - { date: 2026-10-01, type: seance, duree_min: 90, rpe_groupe: 5, source: coach }
+  - { date: 2026-10-04, type: match, duree_min: 80, rpe_groupe: 8, source: coach }
+  - { date: 2026-10-06, type: seance, duree_min: 105, rpe_groupe: 8, source: coach }
+  - { date: 2026-10-07, type: salle, duree_min: 75, rpe_groupe: 7, source: coach }
+  - { date: 2026-10-08, type: seance, duree_min: 90, rpe_groupe: 8, source: coach }
+  - { date: 2026-10-10, type: autre, duree_min: 60, rpe_groupe: 6, source: coach }
+  - { date: 2026-10-13, type: seance, duree_min: 105, rpe_groupe: 5, source: coach }
+  - { date: 2026-10-15, type: seance, duree_min: 75, rpe_groupe: 4, source: coach }
+  - date: 2026-10-18
+    type: match
+    duree_min: 80
+    rpe_groupe: 9
+    par_code: { J01: 9, J02: 8, J09: 9, J10: 8, J15: 7 }
+    source: joueurs

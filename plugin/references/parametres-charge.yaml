@@ -1,0 +1,52 @@
+# Paramètres de la charge d'entraînement — coach-rugby (CC BY-SA 4.0).
+# HYPOTHÈSES PÉDAGOGIQUES ET PARAMÈTRES DATÉS : à confirmer par un
+# mainteneur avec une source datée. Aucun seuil n'est un seuil médical : la
+# charge sert à piloter l'entraînement, jamais à prédire une blessure.
+version_schema: 1
+statut: hypothese
+sources: [foster-2001-srpe, foster-1998-monotonie]
+
+# Échelle d'intensité ressentie (CR-10 modifiée par Foster). Libellés
+# originaux, en français simple.
+echelle:
+  - { valeur: 0, libelle: "Repos" }
+  - { valeur: 1, libelle: "Très, très facile" }
+  - { valeur: 2, libelle: "Facile" }
+  - { valeur: 3, libelle: "Modéré" }
+  - { valeur: 4, libelle: "Un peu dur" }
+  - { valeur: 5, libelle: "Dur" }
+  - { valeur: 7, libelle: "Très dur" }
+  - { valeur: 10, libelle: "Maximal" }
+question: "Comment était la séance pour toi, de 0 (repos) à 10 (maximal) ?"
+moment: { valeur: "Environ 30 minutes après la fin de la séance", statut: a-verifier, source: foster-2001-srpe }
+
+# Qui peut avoir un RPE. Catégories FFR : M16 = moins de 16 ans (14-15 ans),
+# M19 = 16 à 18 ans.
+publics:
+  rpe_groupe:
+    categories: [m14, m15f, m16, m18f, m19, seniors]
+    statut: hypothese
+    note: "Pas de RPE chiffré à l'école de rugby (M5 à M12) : on garde l'intensité prévue. Fiabilité du RPE chez les plus jeunes à sourcer."
+  individuel:
+    categories: [m19, seniors]
+    statut: hypothese
+    note: "RPE par code et tests physiques réservés aux 16 ans et plus. M18F compte des joueuses de 15 ans : exclue par prudence (charge du groupe seulement)."
+
+# Repères de suivi.
+tendance:
+  semaines_reference: { valeur: 4, statut: hypothese }
+  alerte_hausse_pct: { valeur: 30, statut: hypothese, note: "Semaine à plus de 30 % au-dessus de la moyenne des 4 précédentes : repère pour envisager d'alléger, pas un risque de blessure." }
+  semaines_minimum: { valeur: 3, statut: hypothese, note: "Pas de tendance tant qu'il n'y a pas au moins 3 semaines de référence." }
+monotonie:
+  seuil: { valeur: 2, statut: a-verifier, source: foster-1998-monotonie, note: "Monotonie = moyenne journalière / écart-type sur 7 jours (jours sans séance comptés à 0). Au-dessus du seuil : semaine peu variée, varier les intensités." }
+
+# Correspondance indicative entre l'intensité prévue d'une séance et le RPE
+# attendu, pour comparer le réalisé au prévu.
+prevu_rpe:
+  valeur:
+    recuperation: [1, 3]
+    legere: [2, 4]
+    moyenne: [4, 6]
+    forte: [6, 9]
+    affutage: [3, 5]
+  statut: hypothese

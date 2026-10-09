@@ -141,3 +141,22 @@ plugin ; `~/Rugby-Saisons`.
     dernière observation (à travailler, en cours, acquis).
 
   La colonne « Prénom » reste **vide** : jamais de prénom dans un fichier.
+
+## `charge` — charge réalisée
+
+- **A** : `coach-rugby.mjs charge <equipe> --date AAAA-MM-JJ --duree N --rpe N [--type seance|match|salle|autre] [--par-code J01=7,J02=6]`,
+  ou `--bilan [--date]`.
+- **B** :
+  - ajouter dans `<equipe>/charge.yaml` une entrée par séance ou par match :
+    date, type, durée réelle en minutes, intensité ressentie moyenne du
+    groupe de 0 à 10 (`rpe_groupe`) ; RPE par code seulement pour les
+    catégories « individuel » de `references/parametres-charge.yaml` ;
+  - charge = RPE × durée ; semaine = somme du lundi au dimanche ;
+  - tendance : comparer à la moyenne des 4 semaines précédentes qui ont des
+    entrées (au moins 3) ; au-delà de +30 %, repère pour envisager
+    d'alléger ;
+  - monotonie : moyenne des 7 jours (0 les jours sans séance) divisée par
+    leur écart-type.
+
+  Pas de RPE à l'école de rugby. Jamais de commentaire, de douleur ni de
+  sommeil dans ce fichier.

@@ -118,6 +118,15 @@ sources:
     droits: résumer, citer
     statut: a-verifier
     note: Charge de séance (sRPE = RPE × durée), utilisée au lot 4.
+  - id: foster-1998-monotonie
+    titre: Monitoring training in athletes with reference to overtraining syndrome
+    auteurs: Carl Foster
+    editeur: Medicine & Science in Sports & Exercise, 30(7)
+    publie_le: "1998"
+    type: litterature
+    droits: résumer, citer
+    statut: a-verifier
+    note: Monotonie (moyenne journalière / écart-type) et contrainte de la semaine, utilisées au lot 4 comme repères.
   - id: bompa-haff-2009
     titre: "Periodization: Theory and Methodology of Training (5e édition)"
     auteurs: Tudor O. Bompa, G. Gregory Haff

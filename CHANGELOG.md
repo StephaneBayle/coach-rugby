@@ -5,6 +5,17 @@ comment c'est programmé. Format inspiré de
 [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), versions selon
 [SemVer](https://semver.org/lang/fr/).
 
+## [Non publié]
+
+### Ajouté
+
+- Charge d'entraînement : après une séance ou un match, notez sa durée et
+  l'intensité ressentie par le groupe, de 0 à 10. Le plugin calcule la
+  charge de la semaine, la compare aux semaines précédentes et vous donne
+  des repères (semaine beaucoup plus chargée, semaine peu variée). Ce sont
+  des repères d'entraînement, jamais des indicateurs médicaux. À partir de
+  M14 ; l'intensité par joueur seulement pour les 16 ans et plus.
+
 ## [0.3.0] — 2026-10-08
 
 ### Ajouté
